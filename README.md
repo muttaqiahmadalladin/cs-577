@@ -1,6 +1,6 @@
 # CS 577 project: conversational power in ICSI meeting excerpts
 
-Krish Patel, Jiwon Kim, Muttaqi Ahmad Alladin (Purdue University)
+Muttaqi Ahmad Alladin, Krish Patel, Jiwon Kim (Purdue University)
 
 Report: [report/report.pdf](report/report.pdf)
 
