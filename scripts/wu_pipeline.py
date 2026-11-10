@@ -228,7 +228,13 @@ def main():
     OUT.mkdir(exist_ok=True)
     if {"gen", "zero", "llm"} & set(stages) and not os.environ.get("LLM_API_KEY"): sys.exit("Set LLM_API_KEY first.")
     if "jev" in stages and not os.environ.get("TYPESAFE_API_KEY"): sys.exit("Set TYPESAFE_API_KEY first.")
-    T = load_templates()
+    bundle = HERE / "wu_gen_claude.jsonl"   # arguments already written by Claude; unpack once so the gen stage is skipped
+    if bundle.exists() and args.cond == "fixed":
+        (OUT / "gen").mkdir(exist_ok=True)
+        for l in bundle.read_text().splitlines():
+            d = json.loads(l); p = OUT / "gen" / f"{d['id']}.json"
+            if not p.exists(): p.write_text(l)
+    T = load_templates() if {"gen", "llm"} & set(stages) else {}
     print(f"{len(recs)} snippets, LLM {LLM_MODEL} at {LLM_BASE}, {WORKERS} workers", flush=True)
     gen = lambda r: json.loads((OUT / "gen" / f"{r['id']}.json").read_text())
     have = lambda rs: [r for r in rs if (OUT / "gen" / f"{r['id']}.json").exists()]
