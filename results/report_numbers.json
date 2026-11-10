@@ -1,0 +1,529 @@
+{
+ "released_151": {
+  "Always A": {
+   "correct": 83,
+   "n": 151,
+   "accuracy": 55.0,
+   "vs_always_A": {
+    "wins": 0,
+    "losses": 0,
+    "mcnemar_p": 1.0
+   }
+  },
+  "XOR graph, cached GPT-3.5 scores": {
+   "correct": 82,
+   "n": 151,
+   "accuracy": 54.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 37,
+    "mcnemar_p": 1.0
+   }
+  },
+  "Jev, is X the professor": {
+   "correct": 72,
+   "n": 151,
+   "accuracy": 47.7,
+   "vs_always_A": {
+    "wins": 26,
+    "losses": 37,
+    "mcnemar_p": 0.20736789985685422
+   },
+   "auc": 0.433
+  },
+  "XOR graph, Jev scores": {
+   "correct": 76,
+   "n": 151,
+   "accuracy": 50.3,
+   "vs_always_A": {
+    "wins": 29,
+    "losses": 36,
+    "mcnemar_p": 0.4570207854105899
+   }
+  },
+  "Preference grounded, cached scores": {
+   "correct": 79,
+   "n": 151,
+   "accuracy": 52.3,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 48,
+    "mcnemar_p": 0.7546517496104993
+   }
+  },
+  "Preference grounded, Jev scores": {
+   "correct": 71,
+   "n": 151,
+   "accuracy": 47.0,
+   "vs_always_A": {
+    "wins": 27,
+    "losses": 39,
+    "mcnemar_p": 0.1752857944430353
+   }
+  },
+  "Typed-statement graph (Jev)": {
+   "correct": 77,
+   "n": 151,
+   "accuracy": 51.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 42,
+    "mcnemar_p": 0.5715867180030725
+   }
+  }
+ },
+ "released_150": {
+  "More words": {
+   "correct": 69,
+   "n": 150,
+   "accuracy": 46.0,
+   "vs_always_A": {
+    "wins": 31,
+    "losses": 45,
+    "mcnemar_p": 0.1353851052994308
+   },
+   "auc": 0.436
+  },
+  "Jev, professor": {
+   "correct": 72,
+   "n": 150,
+   "accuracy": 48.0,
+   "vs_always_A": {
+    "wins": 26,
+    "losses": 37,
+    "mcnemar_p": 0.20736789985685422
+   },
+   "auc": 0.436
+  },
+  "Jev, more power": {
+   "correct": 72,
+   "n": 150,
+   "accuracy": 48.0,
+   "vs_always_A": {
+    "wins": 25,
+    "losses": 36,
+    "mcnemar_p": 0.20003136851310316
+   },
+   "auc": 0.436
+  },
+  "Typed-statement graph": {
+   "correct": 77,
+   "n": 150,
+   "accuracy": 51.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 42,
+    "mcnemar_p": 0.5715867180030725
+   }
+  }
+ },
+ "rebuilt_fixed": {
+  "More words": {
+   "correct": 100,
+   "n": 150,
+   "accuracy": 66.7,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 29,
+    "mcnemar_p": 0.1006436775202357,
+    "meeting_bootstrap_95": [
+     -3.4,
+     22.3
+    ]
+   },
+   "auc": 0.72
+  },
+  "Longer turns": {
+   "correct": 102,
+   "n": 150,
+   "accuracy": 68.0,
+   "vs_always_A": {
+    "wins": 43,
+    "losses": 26,
+    "mcnemar_p": 0.053289363816513634,
+    "meeting_bootstrap_95": [
+     -1.4,
+     23.1
+    ]
+   },
+   "auc": 0.726
+  },
+  "Jev, professor": {
+   "correct": 107,
+   "n": 150,
+   "accuracy": 71.3,
+   "vs_always_A": {
+    "wins": 34,
+    "losses": 12,
+    "mcnemar_p": 0.0016414913408482334,
+    "meeting_bootstrap_95": [
+     6.7,
+     22.0
+    ]
+   },
+   "auc": 0.79,
+   "brier": 0.189,
+   "accuracy_most_confident_fifth": 93.3
+  },
+  "Jev, more power": {
+   "correct": 106,
+   "n": 150,
+   "accuracy": 70.7,
+   "vs_always_A": {
+    "wins": 33,
+    "losses": 12,
+    "mcnemar_p": 0.0024589003220967243,
+    "meeting_bootstrap_95": [
+     5.5,
+     22.1
+    ]
+   },
+   "auc": 0.774
+  },
+  "Typed-statement graph": {
+   "correct": 105,
+   "n": 150,
+   "accuracy": 70.0,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 24,
+    "mcnemar_p": 0.02052693371370707,
+    "meeting_bootstrap_95": [
+     0.9,
+     25.0
+    ]
+   }
+  },
+  "Wu graph, reasons only (Haiku scores)": {
+   "correct": 103,
+   "n": 150,
+   "accuracy": 68.7,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 28,
+    "mcnemar_p": 0.04739297550405179
+   }
+  },
+  "Wu graph, reasons + rebuttals (Haiku scores)": {
+   "correct": 101,
+   "n": 150,
+   "accuracy": 67.3,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 28,
+    "mcnemar_p": 0.07636915467183139
+   }
+  },
+  "Wu graph, all relations (Haiku scores)": {
+   "correct": 102,
+   "n": 150,
+   "accuracy": 68.0,
+   "vs_always_A": {
+    "wins": 45,
+    "losses": 28,
+    "mcnemar_p": 0.060370037339928545
+   }
+  },
+  "Sum of reason scores, no graph (Haiku scores)": {
+   "correct": 103,
+   "n": 150,
+   "accuracy": 68.7,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 28,
+    "mcnemar_p": 0.04739297550405179
+   },
+   "auc": 0.732
+  },
+  "Wu graph, reasons only (Jev scores)": {
+   "correct": 110,
+   "n": 150,
+   "accuracy": 73.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 11,
+    "mcnemar_p": 0.000346001140314911
+   }
+  },
+  "Wu graph, reasons + rebuttals (Jev scores)": {
+   "correct": 105,
+   "n": 150,
+   "accuracy": 70.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 16,
+    "mcnemar_p": 0.0077874363057435225
+   }
+  },
+  "Wu graph, all relations (Jev scores)": {
+   "correct": 105,
+   "n": 150,
+   "accuracy": 70.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 16,
+    "mcnemar_p": 0.0077874363057435225
+   }
+  },
+  "Sum of reason scores, no graph (Jev scores)": {
+   "correct": 110,
+   "n": 150,
+   "accuracy": 73.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 11,
+    "mcnemar_p": 0.000346001140314911
+   },
+   "auc": 0.801
+  },
+  "Haiku zero-shot": {
+   "correct": 102,
+   "n": 150,
+   "accuracy": 68.0,
+   "vs_always_A": {
+    "wins": 43,
+    "losses": 26,
+    "mcnemar_p": 0.053289363816513634
+   },
+   "auc": 0.757
+  },
+  "Sonnet zero-shot": {
+   "correct": 114,
+   "n": 150,
+   "accuracy": 76.0,
+   "vs_always_A": {
+    "wins": 53,
+    "losses": 24,
+    "mcnemar_p": 0.0012632268710478357
+   },
+   "auc": 0.872
+  }
+ },
+ "professors": {
+  "me013": {
+   "snippets": 110,
+   "jev_accuracy": 69.1
+  },
+  "me010": {
+   "snippets": 23,
+   "jev_accuracy": 78.3
+  },
+  "mn049": {
+   "snippets": 15,
+   "jev_accuracy": 73.3
+  },
+  "mn058": {
+   "snippets": 2,
+   "jev_accuracy": 100.0
+  }
+ },
+ "rebuilt_ctx15": {
+  "More words": {
+   "correct": 99,
+   "n": 150,
+   "accuracy": 66.0,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 32,
+    "mcnemar_p": 0.14053828626952244,
+    "meeting_bootstrap_95": [
+     -5.9,
+     23.1
+    ]
+   },
+   "auc": 0.74
+  },
+  "Longer turns": {
+   "correct": 104,
+   "n": 150,
+   "accuracy": 69.3,
+   "vs_always_A": {
+    "wins": 45,
+    "losses": 26,
+    "mcnemar_p": 0.03192716208321237,
+    "meeting_bootstrap_95": [
+     -0.7,
+     25.0
+    ]
+   },
+   "auc": 0.749
+  },
+  "Jev, professor": {
+   "correct": 127,
+   "n": 150,
+   "accuracy": 84.7,
+   "vs_always_A": {
+    "wins": 52,
+    "losses": 10,
+    "mcnemar_p": 5.713613733093065e-08,
+    "meeting_bootstrap_95": [
+     19.2,
+     36.3
+    ]
+   },
+   "auc": 0.911,
+   "brier": 0.131,
+   "accuracy_most_confident_fifth": 100.0
+  },
+  "Jev, more power": {
+   "correct": 119,
+   "n": 150,
+   "accuracy": 79.3,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 10,
+    "mcnemar_p": 3.385685953372075e-06,
+    "meeting_bootstrap_95": [
+     14.0,
+     30.5
+    ]
+   },
+   "auc": 0.88
+  },
+  "Typed-statement graph": {
+   "correct": 121,
+   "n": 150,
+   "accuracy": 80.7,
+   "vs_always_A": {
+    "wins": 53,
+    "losses": 17,
+    "mcnemar_p": 1.919969240032143e-05,
+    "meeting_bootstrap_95": [
+     12.7,
+     34.1
+    ]
+   }
+  }
+ },
+ "rebuilt_ctx60": {
+  "More words": {
+   "correct": 103,
+   "n": 150,
+   "accuracy": 68.7,
+   "vs_always_A": {
+    "wins": 45,
+    "losses": 27,
+    "mcnemar_p": 0.04437092000802569,
+    "meeting_bootstrap_95": [
+     -0.8,
+     23.3
+    ]
+   },
+   "auc": 0.767
+  },
+  "Longer turns": {
+   "correct": 100,
+   "n": 150,
+   "accuracy": 66.7,
+   "vs_always_A": {
+    "wins": 45,
+    "losses": 30,
+    "mcnemar_p": 0.10534226887460488,
+    "meeting_bootstrap_95": [
+     -3.4,
+     21.8
+    ]
+   },
+   "auc": 0.761
+  },
+  "Jev, professor": {
+   "correct": 134,
+   "n": 150,
+   "accuracy": 89.3,
+   "vs_always_A": {
+    "wins": 58,
+    "losses": 9,
+    "mcnemar_p": 6.811497890247056e-10,
+    "meeting_bootstrap_95": [
+     23.1,
+     41.3
+    ]
+   },
+   "auc": 0.957,
+   "brier": 0.095,
+   "accuracy_most_confident_fifth": 96.7
+  },
+  "Jev, more power": {
+   "correct": 132,
+   "n": 150,
+   "accuracy": 88.0,
+   "vs_always_A": {
+    "wins": 54,
+    "losses": 7,
+    "mcnemar_p": 4.32210722073334e-10,
+    "meeting_bootstrap_95": [
+     22.6,
+     39.6
+    ]
+   },
+   "auc": 0.942
+  },
+  "Typed-statement graph": {
+   "correct": 136,
+   "n": 150,
+   "accuracy": 90.7,
+   "vs_always_A": {
+    "wins": 58,
+    "losses": 7,
+    "mcnemar_p": 4.270521620792361e-11,
+    "meeting_bootstrap_95": [
+     24.8,
+     42.9
+    ]
+   }
+  }
+ },
+ "brier_base_rate": 0.246,
+ "paired": {
+  "Jev professor: rebuilt same span vs released": {
+   "wins": 52,
+   "losses": 17,
+   "mcnemar_p": 2.9304321745456655e-05
+  },
+  "Typed graph: rebuilt same span vs released": {
+   "wins": 53,
+   "losses": 25,
+   "mcnemar_p": 0.00203114037416273
+  },
+  "Jev professor: 15 extra vs same span": {
+   "wins": 30,
+   "losses": 10,
+   "mcnemar_p": 0.0022214337732293643
+  },
+  "Jev professor: 60 extra vs same span": {
+   "wins": 35,
+   "losses": 8,
+   "mcnemar_p": 4.1934157934520044e-05
+  },
+  "Typed graph vs Jev professor, same span": {
+   "wins": 21,
+   "losses": 23,
+   "mcnemar_p": 0.880395821280672
+  },
+  "Wu graph (Haiku scores, all) vs Haiku zero-shot": {
+   "wins": 8,
+   "losses": 8,
+   "mcnemar_p": 1.0
+  },
+  "Wu graph (Haiku scores): all relations vs reasons only": {
+   "wins": 6,
+   "losses": 7,
+   "mcnemar_p": 1.0
+  },
+  "Sonnet zero-shot vs Wu graph (Haiku scores, all)": {
+   "wins": 21,
+   "losses": 9,
+   "mcnemar_p": 0.04277394525706768
+  },
+  "Sonnet zero-shot vs Jev professor": {
+   "wins": 27,
+   "losses": 20,
+   "mcnemar_p": 0.38169339766321286
+  },
+  "Wu graph (Jev scores, all) vs Jev professor": {
+   "wins": 12,
+   "losses": 14,
+   "mcnemar_p": 0.8450189828872681
+  }
+ }
+}

@@ -25,7 +25,8 @@ import argparse, ast, json, math, os, re, sys, threading, time, urllib.error, ur
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+HERE = ROOT / "work"   # contexts.jsonl from build_dataset.py; all outputs go to work/wu_run/
 OUT = HERE / "wu_run"
 WU_RAW = "https://raw.githubusercontent.com/kandicew/social-reasoning/fed11b69765b4a398ce4a985adedfb65ec3098ab/"
 TEMPLATES = ["summary_template", "reason_template", "rebuttal_template", "validation_template", "grounding_template",
@@ -220,7 +221,7 @@ def run_stage(name, recs, fn, workers):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--stages", default="gen,zero,jev"); ap.add_argument("--limit", type=int)
-    ap.add_argument("--cond", default="fixed"); args = ap.parse_args(); stages = args.stages.split(",")
+    ap.add_argument("--cond", default="fixed"); ap.add_argument("--reuse-claude-arguments", action="store_true"); args = ap.parse_args(); stages = args.stages.split(",")
     recs = [json.loads(l) for l in (HERE / "contexts.jsonl").read_text().splitlines() if l.strip()]
     recs = [r for r in recs if r["cond"] == args.cond][: args.limit]
     global OUT
@@ -228,12 +229,10 @@ def main():
     OUT.mkdir(exist_ok=True)
     if {"gen", "zero", "llm"} & set(stages) and not os.environ.get("LLM_API_KEY"): sys.exit("Set LLM_API_KEY first.")
     if "jev" in stages and not os.environ.get("TYPESAFE_API_KEY"): sys.exit("Set TYPESAFE_API_KEY first.")
-    bundle = HERE / "wu_gen_claude.jsonl"   # arguments already written by Claude; unpack once so the gen stage is skipped
-    if bundle.exists() and args.cond == "fixed":
+    if args.reuse_claude_arguments and args.cond == "fixed":   # skip the gen stage by reusing the committed Claude arguments
         (OUT / "gen").mkdir(exist_ok=True)
-        for l in bundle.read_text().splitlines():
-            d = json.loads(l); p = OUT / "gen" / f"{d['id']}.json"
-            if not p.exists(): p.write_text(l)
+        for f in (ROOT / "results" / "wu_graph_claude" / "arguments").glob("*.json"):
+            if not (OUT / "gen" / f.name).exists(): (OUT / "gen" / f.name).write_text(f.read_text())
     T = load_templates() if {"gen", "llm"} & set(stages) else {}
     print(f"{len(recs)} snippets, LLM {LLM_MODEL} at {LLM_BASE}, {WORKERS} workers", flush=True)
     gen = lambda r: json.loads((OUT / "gen" / f"{r['id']}.json").read_text())

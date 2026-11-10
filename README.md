@@ -24,17 +24,18 @@ ICSI-rebuilt snippets (150, always answering A scores 56.7%):
 
 ## Documentation
 
+- [docs/REPRODUCE.md](docs/REPRODUCE.md): how to regenerate the data and every number, step by step.
 - [docs/DATA.md](docs/DATA.md): the dataset, its sources, how it is built, and its schema.
 - [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md): every run, method and script, with caveats.
 
 ## Quick start
 
 ```bash
-python3 scripts/build_dataset.py --download   # fetch the public sources and build the dataset
-python3 scripts/build_dataset.py --check      # confirm the committed dataset is reproduced exactly
+pip install -r requirements.txt
+python3 scripts/reproduce.py
 ```
 
-Both use only the Python standard library.
+This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 34 of 34 report values reproduced`). It calls no model and needs no API key.
 
 ## Repository layout
 
@@ -42,7 +43,7 @@ Both use only the Python standard library.
 | --- | --- |
 | `report/` | LaTeX source and PDF |
 | `data/` | `icsi_rebuilt_snippets.jsonl` |
-| `results/` | Every model answer and the computed numbers |
+| `results/` | Every model answer and the computed numbers (`report_numbers.json`) |
 | `scripts/` | Dataset builder, collection and analysis code |
 | `docs/` | Data and experiment documentation |
 

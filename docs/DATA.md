@@ -10,7 +10,7 @@
 | `icsi_mrt.zip` | Original MRT transcripts: one `<Segment>` per utterance with start time, participant ID and text | [ICSI_original_transcripts.zip](https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_original_transcripts.zip) |
 | `icsi_core_nxt.zip` | `ICSI/speakers.xml`: education level of each participant | [ICSI_core_NXT.zip](https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip) |
 
-`python3 scripts/build_dataset.py --download` fetches all three into `sources/` (ignored by git).
+`python3 scripts/get_sources.py` fetches these (and the two other released files used by the analysis) into `sources/`, which is ignored by git, and verifies each by SHA-256.
 
 ## How the two sources are combined
 

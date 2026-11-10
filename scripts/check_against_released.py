@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Align the released snippet text of Wu et al. (NAACL 2025) with ICSI participant IDs and print summary counts.
+"""Align the released snippet text with ICSI participant IDs and print summary counts. Standard library only.
 
-Put these three files next to this script, then run:  python3 check_against_released.py
-  meeting.csv            https://github.com/kandicew/social-reasoning/blob/main/data/meeting.csv  (Download raw file)
-  icsi_mrt.zip           https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_original_transcripts.zip
-  icsi_core_nxt.zip      https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip
+  python3 scripts/get_sources.py                       # once, to download the inputs into sources/
+  python3 scripts/check_against_released.py            # summary counts over all 151 released snippets
+  python3 scripts/check_against_released.py --show 0   # one snippet, line by line, next to the corpus
 
-  python3 check_against_released.py --show 0      # print snippet 0 next to the raw corpus
-Standard library only.
+For --show, each line of the released snippet is printed with the letter it is displayed under, the ICSI participant
+who said it, that participant's education level, and the text, plus the meeting ID, start time and line number in
+the .mrt file so the row can be checked against the raw transcript by hand.
 """
 import argparse, collections, csv, re, zipfile
 from pathlib import Path
-HERE = Path(__file__).resolve().parent
+HERE = Path(__file__).resolve().parent.parent / "sources"   # filled by get_sources.py
 
 def clean(t): return " ".join(re.sub(r"<[^>]+>", "", t).split())
 

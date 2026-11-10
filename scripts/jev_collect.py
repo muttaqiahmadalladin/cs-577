@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
-"""Collect TypeSafe Jev judgments for the CS 577 power-relations project.
+"""Collect TypeSafe Jev judgments. Standard library only.
 
-Standard library only. Reads snippets.jsonl (151 ICSI snippets + Wu's cached GPT-3.5 arguments),
-writes jev_arm1.jsonl (direct + atomic System 1 judgments) and jev_arm2.jsonl (argument scores).
-Resumable: finished snippets are skipped. Every request payload is saved in payloads/.
+  export TYPESAFE_API_KEY=...                     # never put the key in a file
+  python3 scripts/jev_collect.py --dry-run        # token estimate and a sample payload, no API call
+  python3 scripts/jev_collect.py --limit 3        # probe three snippets
+  python3 scripts/jev_collect.py --arms 1,2,3,4   # everything
 
-  export TYPESAFE_API_KEY=...        # never put the key in this file
-  python3 jev_collect.py --limit 3   # probe three snippets first
-  python3 jev_collect.py             # all 151
+Arms
+  1  released snippets: direct questions and eight cue questions, each for A and B    -> results/jev_arm1.jsonl
+  2  released snippets: scores for the 48 cached arguments of each snippet            -> results/jev_arm2.jsonl
+  3  released snippets: the 24 typed statements of the typed-statement factor graph   -> results/jev_arm3.jsonl
+  4  rebuilt snippets at three context lengths: direct questions and typed statements -> results/jev_arm4.jsonl
+
+One request per snippet (per context length in arm 4); all questions of a request share its state. Every request body
+is saved in work/payloads/ so any answer can be re-asked exactly. Finished snippets are skipped on rerun. A failed
+call stops the run; it is never recorded as an answer. All question wording is in the block below.
 """
 import argparse, json, os, re, sys, time, urllib.request, urllib.error
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+HERE = ROOT / "work"       # inputs: snippets.jsonl (convert_released_cache.py) and contexts.jsonl (build_dataset.py); payloads are saved here
+RESULTS = ROOT / "results"  # outputs: jev_arm1.jsonl ... jev_arm4.jsonl
 URL = os.environ.get("TYPESAFE_URL", "https://api.typesafe.ai/v1/systemone")
 MODEL = os.environ.get("JEV_MODEL", "jev-latest")   # the resolved version is recorded per response
 OTHER = {"A": "B", "B": "A"}
@@ -91,17 +100,6 @@ def arm3_questions(row):
                 q[f"{aspect}{j}_{x}"] = {"type": "noul", "instructions": text.format(x=x, o=OTHER[x])}
     return q
 
-ICSI = {"icsi_mrt.zip": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_original_transcripts.zip",
-        "icsi_core_nxt.zip": "https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip"}
-def fetch_icsi():
-    for name, url in ICSI.items():
-        dest = HERE / name
-        if dest.exists() and dest.stat().st_size > 1_000_000: print(f"{name}: already here"); continue
-        print(f"downloading {name} ...", flush=True)
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=300) as r, open(dest, "wb") as f:
-            while chunk := r.read(1 << 20): f.write(chunk)
-        print(f"{name}: {dest.stat().st_size / 1e6:.1f} MB")
 
 def arm4_questions(_row=None):
     """Direct questions plus the typed statements, for the corrected-speaker and longer-context states."""
@@ -115,7 +113,7 @@ def arm4_questions(_row=None):
 def run_arm4(key, limit):
     recs = [json.loads(l) for l in (HERE / "contexts.jsonl").read_text().splitlines() if l.strip()]
     if limit: recs = recs[: limit * 3]
-    out = HERE / "jev_arm4.jsonl"
+    out = RESULTS / "jev_arm4.jsonl"
     seen = {(json.loads(l)["id"], json.loads(l)["cond"]) for l in out.read_text().splitlines() if l.strip()} if out.exists() else set()
     for i, r in enumerate(recs):
         if (r["id"], r["cond"]) in seen: continue
@@ -152,8 +150,7 @@ def done_ids(path):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--limit", type=int); ap.add_argument("--dry-run", action="store_true")
-    ap.add_argument("--arms", default="1,2,3"); ap.add_argument("--fetch-icsi", action="store_true"); args = ap.parse_args()
-    if args.fetch_icsi: return fetch_icsi()
+    ap.add_argument("--arms", default="1,2,3"); args = ap.parse_args()
     rows = [json.loads(l) for l in (HERE / "snippets.jsonl").read_text().splitlines() if l.strip()][: args.limit]
     builders = {"1": arm1_questions, "2": arm2_questions, "3": arm3_questions}
     if args.dry_run:
@@ -168,7 +165,7 @@ def main():
     (HERE / "payloads").mkdir(exist_ok=True)
     for arm in args.arms.split(","):
         if arm == "4": run_arm4(key, args.limit); continue
-        out = HERE / f"jev_arm{arm}.jsonl"; seen = done_ids(out)
+        out = RESULTS / f"jev_arm{arm}.jsonl"; seen = done_ids(out)
         for i, r in enumerate(rows):
             if r["id"] in seen: continue
             payload = {"model": MODEL, "state": state(r), "questions": builders[arm](r)}

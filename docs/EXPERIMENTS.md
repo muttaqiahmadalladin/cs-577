@@ -89,20 +89,22 @@ The selected policy is ahead of the direct question in 133 of 500 splits (mean d
 
 ## Scripts
 
-| Script | Purpose |
-| --- | --- |
-| `scripts/build_dataset.py` | Builds the dataset and the work files (`rows.json`, `fixed_index.json`, `contexts.jsonl`) |
-| `scripts/jev_collect.py` | Sends the Jev requests for arms 1 to 4; reads `TYPESAFE_API_KEY` from the environment |
-| `scripts/final_analysis.py` | Accuracy, paired tests, bootstrap and calibration for the Jev runs; writes `results/results.json` |
-| `scripts/analyze_wu_graph_claude.py` | Runs the XOR graph over the Claude arguments and scores; writes `results/wu_graph_claude/results.json` |
-| `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations; standard library only |
-| `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting |
-| `scripts/wu_pipeline.py` | Call-by-call version of the Wu pipeline for any OpenAI-compatible API, with Jev or LLM scoring |
-| `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts |
-| `scripts/icsi.py` | MRT parsing helpers used by the analysis scripts |
-| `scripts/exploratory/` | Earlier runs on the released snippets |
+| Script | Purpose | Needs |
+| --- | --- | --- |
+| `scripts/reproduce.py` | Runs everything below that needs no API key, in order | numpy, PuLP |
+| `scripts/get_sources.py` | Downloads the five external inputs and verifies their SHA-256 | standard library |
+| `scripts/build_dataset.py` | Builds the dataset and the work files (`rows.json`, `fixed_index.json`, `contexts.jsonl`) | standard library |
+| `scripts/convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | numpy |
+| `scripts/factor_graph.py` | The XOR factor graph as an exact integer program | PuLP |
+| `scripts/analyze.py` | Recomputes every table, paired test, interval and calibration number in the report; `--check` compares with the report | numpy, PuLP |
+| `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations | standard library |
+| `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting | standard library |
+| `scripts/jev_collect.py` | Sends the Jev requests for arms 1 to 4 | `TYPESAFE_API_KEY` |
+| `scripts/wu_pipeline.py` | Call-by-call version of the original pipeline for any OpenAI-compatible API, with Jev or LLM scoring | API keys |
+| `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts | standard library |
+| `scripts/exploratory/` | Earlier runs on the released snippets. They read files from KrishMay05/nlp_research (`KRISH_REPO`) and are kept as a record, not as part of the reproduction | |
 
-The analysis scripts expect a working folder that contains the work files from `build_dataset.py`, the `jev_arm*.jsonl` files, and `data/snippets.jsonl` plus `data/rules.txt` produced by `scripts/setup.sh` in KrishMay05/nlp_research (set `KRISH_REPO` to that checkout, and `ICSI_DIR` to a folder with the two ICSI archives unzipped as `mrt/` and `nxt/`).
+Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.md).
 
 ## Caveats that apply to every number
 

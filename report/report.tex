@@ -218,7 +218,9 @@ Our numbers say only that the role is recoverable from these excerpts, and they 
 
 \section{Reproducibility}
 
-The repository contains the rebuilt snippets with corpus offsets, a builder that regenerates them byte for byte from three public files (the released \texttt{meeting.csv} and the two ICSI annotation archives), every model answer, and the analysis scripts.\footnote{\url{https://github.com/muttaqiahmadalladin/cs-577}}
+The repository contains the rebuilt snippets with corpus offsets, every model answer, and all code.\footnote{\url{https://github.com/muttaqiahmadalladin/cs-577}}
+One command downloads the five external inputs (the released \texttt{meeting.csv}, argument cache and rule file, and the two ICSI annotation archives), verifies each by SHA-256, regenerates the snippet set byte for byte, and recomputes every number in this report from the stored model answers without calling a model.
+The model answers themselves come from hosted models and cannot be regenerated exactly; the scripts and instructions used to collect them are included.
 The ICSI corpus is distributed under CC BY 4.0.
 
 \bibliography{references}
