@@ -1,79 +1,49 @@
-# CS 577 project: a speaker-attribution confound in a conversational power benchmark
+# CS 577 project: conversational power in ICSI meeting excerpts
 
 Krish Patel, Jiwon Kim, Muttaqi Ahmad Alladin (Purdue University)
 
 Report: [report/report.pdf](report/report.pdf)
 
-## Summary
+We revisit the multi-agent social reasoning method of Wu et al. (NAACL 2025), which predicts which of two speakers in a short ICSI meeting excerpt is the professor. We evaluate their factor graph, Dung's grounded extension, a System One decision model (Jev), and Claude models, on the released snippets and on a snippet set rebuilt from the ICSI corpus.
 
-Wu et al. (NAACL 2025) predict which of two speakers in a six-turn ICSI meeting snippet is the professor.
-On their 151 released snippets nothing we tried beats always answering A (55.0%).
-Matching every snippet back to the ICSI corpus shows that the released text and labels disagree about who is speaking:
-under the letter-to-person mapping that makes the labels correct, 57.6% of words are displayed under the other speaker's letter.
+## Results
 
-With the same words attributed to the people who said them (150 usable snippets, 56.7% majority baseline):
+Released snippets (151, always answering A scores 55.0%): the XOR factor graph reproduces the published 54.3%, and no method we tried scores higher than the base rate. Details are in the report.
 
-| Input | Jev: "is X the professor" | Typed-statement factor graph |
-| --- | ---: | ---: |
-| Released text and labels | 48.0% | 51.3% |
-| Corrected attribution, same words | 71.3% | 70.0% |
-| Corrected, 15 extra segments per side | 84.7% | 80.7% |
-| Corrected, 60 extra segments per side | 89.3% | 90.7% |
+ICSI-rebuilt snippets (150, always answering A scores 56.7%):
 
-Corrected same-span Jev against the majority label: 34 wins, 12 losses, exact McNemar p = 0.0016.
-All of this is exploratory work on a small test set with four professors; see the Limitations section of the report.
+| Method | Same span | 15 extra segments per side | 60 extra per side |
+| --- | ---: | ---: | ---: |
+| Wu factor graph, all relations (Claude Haiku arguments and scores) | 68.0% | | |
+| Claude Haiku zero-shot | 68.0% | | |
+| Typed-statement factor graph (Jev) | 70.0% | 80.7% | 90.7% |
+| Jev: "is X the professor" | 71.3% | 84.7% | 89.3% |
+| Claude Sonnet zero-shot | 76.0% | | |
 
-## Wu's factor graph on the corrected snippets (Claude run)
+## Documentation
 
-Arguments (four aspect summaries, three reasons per speaker per aspect, one rebuttal per reason) were written by Claude Haiku subagents from the corrected same-span text, then scored by separate Haiku subagents, all blind to the labels. Wu's rule file and weights do the inference. Files are in `results/wu_graph_claude/`.
+- [docs/DATA.md](docs/DATA.md): the dataset, its sources, how it is built, and its schema.
+- [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md): every run, method and script, with caveats.
 
-| Method (150 corrected snippets, same words) | Accuracy |
-| --- | ---: |
-| Always A | 56.7% |
-| Wu graph, reasons only | 68.7% |
-| Wu graph, reasons + rebuttals | 67.3% |
-| Wu graph, all relations | 68.0% |
-| Same scores summed, no graph | 68.7% |
-| Haiku zero-shot | 68.0% |
-| Jev direct | 71.3% |
-| Sonnet zero-shot | 76.0% |
-
-This is not a faithful rerun of the paper's pipeline: each snippet was generated in one pass by an agent, not by separate GPT-3.5 calls, and scores are stated probabilities, not token log-probabilities. `scripts/wu_pipeline.py` runs the call-by-call version against any OpenAI-compatible API.
-
-## Check the audit yourself
-
-`scripts/verify_wu_bug.py` uses only the Python standard library and three public files
-(Wu's `meeting.csv` and the two ICSI annotation archives; links are in the script header).
+## Quick start
 
 ```bash
-python3 scripts/verify_wu_bug.py            # the six audit numbers
-python3 scripts/verify_wu_bug.py --show 0   # snippet 0 next to the raw corpus
+python3 scripts/build_dataset.py --download   # fetch the public sources and build the dataset
+python3 scripts/build_dataset.py --check      # confirm the committed dataset is reproduced exactly
 ```
 
-## Contents
+Both use only the Python standard library.
 
-| Path | What it is |
+## Repository layout
+
+| Path | Contents |
 | --- | --- |
 | `report/` | LaTeX source and PDF |
-| `data/corrected_snippets.jsonl` | The 150 corrected snippets: corpus offsets, real speaker IDs, labels, and turns at three context lengths |
-| `results/jev_arm1.jsonl` | Jev direct and cue questions on the released snippets |
-| `results/jev_arm2.jsonl` | Jev scores for Wu's 7,248 cached arguments |
-| `results/jev_arm3.jsonl` | Typed statements on the released snippets |
-| `results/jev_arm4.jsonl` | Direct questions and typed statements on the corrected snippets (same span, 15, 60) |
-| `results/results.json` | Every number in the report's corrected-data section |
-| `scripts/build_corrected.py` | Locates the snippets in ICSI and rebuilds them with true speakers |
-| `scripts/jev_collect.py` | All Jev question wording and the collection code (`TYPESAFE_API_KEY` from the environment) |
-| `scripts/final_analysis.py` | Accuracy, paired tests, meeting-level bootstrap, calibration |
-| `scripts/exploratory/` | Earlier runs on the released snippets (grounded-extension variants, rescoring) |
+| `data/` | `icsi_rebuilt_snippets.jsonl` |
+| `results/` | Every model answer and the computed numbers |
+| `scripts/` | Dataset builder, collection and analysis code |
+| `docs/` | Data and experiment documentation |
 
-## Reproducing the analysis
+## Licences
 
-1. Clone [KrishMay05/nlp_research](https://github.com/KrishMay05/nlp_research) and run its `scripts/setup.sh`; this converts Wu's pinned release into `snippets.jsonl` and `rules.txt`. Set `KRISH_REPO` to that checkout.
-2. Unzip the ICSI archives into `$ICSI_DIR/mrt` and `$ICSI_DIR/nxt`.
-3. Put those two files in a working folder under `data/`, then run `build_corrected.py`, then `final_analysis.py` with the `results/jev_arm*.jsonl` files alongside.
-
-## Data and licences
-
-The ICSI Meeting Corpus and its annotations are distributed under CC BY 4.0 (Janin et al., 2003); the corrected snippets here are derived from it.
-The released snippets and cached arguments belong to [kandicew/social-reasoning](https://github.com/kandicew/social-reasoning) and are not redistributed here.
-Jev is a proprietary model from TypeSafe AI (`jev-1.14.0`).
+Code: MIT. The dataset is derived from the ICSI Meeting Corpus (CC BY 4.0). The released snippets of Wu et al. are downloaded at build time and not redistributed. Jev is a proprietary model from TypeSafe AI.

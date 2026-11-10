@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Independent check of speaker attribution in the Wu et al. (NAACL 2025) meeting test set.
+"""Align the released snippet text of Wu et al. (NAACL 2025) with ICSI participant IDs and print summary counts.
 
-Put these three files next to this script, then run:  python3 verify_wu_bug.py
+Put these three files next to this script, then run:  python3 check_against_released.py
   meeting.csv            https://github.com/kandicew/social-reasoning/blob/main/data/meeting.csv  (Download raw file)
   icsi_mrt.zip           https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_original_transcripts.zip
   icsi_core_nxt.zip      https://groups.inf.ed.ac.uk/ami/ICSICorpusAnnotations/ICSI_core_NXT.zip
 
-  python3 verify_wu_bug.py --show 0      # print snippet 0 next to the raw corpus
+  python3 check_against_released.py --show 0      # print snippet 0 next to the raw corpus
 Standard library only.
 """
 import argparse, collections, csv, re, zipfile
