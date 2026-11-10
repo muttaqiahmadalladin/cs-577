@@ -1,0 +1,22 @@
+{"id": "116", "aspects": {
+"style": {"summary": "style of A: A is fast and hurried, with repeated 'and' and self-corrections.\nstyle of B: B is short and hesitant, with 'um' and 'Right'.",
+"reasons": {"A": ["A's fast, hurried delivery sets the pace of the exchange.", "A's explanations give A's account the force of a clear narrative.", "A's self-corrections show A steering the wording toward A's meaning."],
+"B": ["B's brief 'Right' signals acknowledgement that B can withdraw.", "B's clarification sets B's current position as the reference.", "B's calm manner conveys a settled view."]},
+"rebuttals": {"A": ["A's hurried pace shows A losing the floor, which leaves B to hold the thread.", "A's narrative is undercut by B's statement of the current position.", "Self-corrections reveal A's uncertainty, which weakens A's standing."],
+"B": ["'Right' is an acknowledgement that does not decide the status of the material.", "B's clarification is brief and does not offer a counter-account, so A's explanation stands.", "A settled view is a reaction to A's framing."]}},
+"content": {"summary": "content of A: A explains why the material is coming as new and refers to B's hypothesis.\ncontent of B: B clarifies that the group is looking at the material now.",
+"reasons": {"A": ["A explains the reason the material is coming as new, which sets the account of events.", "A references B's hypothesis, which places B's work under A's framing.", "A's account of technical reasons determines what counts as new."],
+"B": ["B's clarification asserts B's current position on the material.", "B's statement that they are looking at it here controls the status of the work.", "B's control of the data context gives B the authority to decide what is new."]},
+"rebuttals": {"A": ["A's account of events can be overridden by B's statement that they are looking at it now.", "A's reference to B's hypothesis puts B's work at the centre, which gives B standing.", "A's technical reasons only matter if B accepts them."],
+"B": ["B's control of the context is only claimed, and A's account determines what counts as new.", "B's clarification is a single statement that does not settle the explanation.", "B's status depends on A's framing of the material."]}},
+"coordination": {"summary": "coordination of A: A dominates the turns and interrupts B's partial statements.\ncoordination of B: B has few turns and is cut off before finishing.",
+"reasons": {"A": ["A dominates the turns, which gives A control of the flow.", "A's interruptions of B's partial statements keep A in control of the exchange.", "A's long explanation sets the order of points."],
+"B": ["B's partial statements show B's willingness to frame the discussion.", "B's 'Right' closes a point and signals B's acceptance of the framing.", "B's short turns leave B ready to respond at any time."]},
+"rebuttals": {"A": ["A's dominance rests on B's partial statements, which show B losing the floor, not holding it.", "Interruptions show A cutting across B, which means B keeps the thread.", "A's order of points can be reordered by B's clarification."],
+"B": ["Partial statements are cut off, which shows B does not hold the floor.", "'Right' is a brief response that does not change who controls the turns.", "B's readiness depends on A letting B speak."]}},
+"engagement": {"summary": "engagement of A: A is engaged in explaining the situation and referring to B's work.\nengagement of B: B engages briefly, agreeing that the group is looking at the material.",
+"reasons": {"A": ["A's explanation of the situation shows deep engagement with the timing of the work.", "A's reference to B's hypothesis shows attention to B's contribution.", "A's effort to explain shows investment in the group's understanding."],
+"B": ["B's agreement that they are looking at the material shows B's engagement with the present work.", "B's brief engagement gives B a role in confirming the status.", "B's willingness to confirm the status makes B a participant in the decision."]},
+"rebuttals": {"A": ["Explaining the situation is an account that B can contest.", "Referring to B's hypothesis is a reference that B can reject.", "Effort to explain depends on B accepting the explanation."],
+"B": ["Agreeing briefly is a minimal form of engagement that does not change the account.", "Confirming status is a claim that A's framing can override.", "Participation is passive if A determines what is new."]}}
+}}

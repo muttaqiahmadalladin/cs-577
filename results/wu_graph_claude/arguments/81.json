@@ -1,0 +1,113 @@
+{
+ "id": "81",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A gives short backchannels such as 'Mmm.' and 'Yeah.'\nstyle of B: B is expository and enthusiastic, calling Fletcher's experiment a point where people started thinking 'wow this is interesting!'",
+   "reasons": {
+    "A": [
+     "A's short backchannels keep the register neutral and unopposed.",
+     "A's brevity does not invite the lecture, which keeps A's position open.",
+     "A's 'Yeah.' lets A agree without committing."
+    ],
+    "B": [
+     "B's enthusiasm sets an energetic and engaging tone.",
+     "B's historical reference to Fletcher gives the explanation authority.",
+     "B's 'So essentially' summary shows a firm command of the topic."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Neutral backchannels show A has no stake in the tone, which means B controls it.",
+     "A's open position is passive and leaves the frame to B.",
+     "Agreement without commitment does not give A influence."
+    ],
+    "B": [
+     "B's enthusiasm is a personal reaction, which is not control of the tone.",
+     "A historical reference is an appeal to another's authority, so the authority is Fletcher's.",
+     "A summary that is repeated with 'essentially' is hedged, which gives A room."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A asks for no detail and responds only with acknowledgments.\ncontent of B: B explains the masking curve, the critical band, Fletcher's experiment, and the effect of modulating the noise.",
+   "reasons": {
+    "A": [
+     "A's acknowledgments accept the frame without adding to it.",
+     "A's replies show A is receiving the content and not challenging it.",
+     "A's silence on the substance leaves the frame to B."
+    ],
+    "B": [
+     "B supplies the physical content of masking and critical bands.",
+     "B describes the modulation effect, which is the central finding.",
+     "B's historical reference adds context to the substance."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Receiving content is not shaping it.",
+     "Accepting the frame is passive and gives A no influence.",
+     "A's acknowledgment does not add to the substance."
+    ],
+    "B": [
+     "B's content is a lecture on a known result, so it is not a new frame.",
+     "Describing a finding is reporting, not deciding the topic.",
+     "The historical reference is a standard citation that anyone could give."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A yields the floor and gives short replies that leave the turn with B.\ncoordination of B: B holds a very long turn and carries the explanation through several steps.",
+   "reasons": {
+    "A": [
+     "A's short replies keep the exchange from being dominated by one speaker.",
+     "A's replies show A is ready to let B finish.",
+     "A's brevity keeps the coordination simple."
+    ],
+    "B": [
+     "B holds the very long turn, which shows control of the sequence.",
+     "B's steps through the masking effect set the order of the explanation.",
+     "B's 'So.' pause marks a transition that B decides."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Yielding the floor is passive rather than managing turn-taking.",
+     "A's short replies are default responses, not coordination.",
+     "Keeping the exchange simple gives B the lead."
+    ],
+    "B": [
+     "B's long turn gives A no room to shape the sequence.",
+     "B's steps are B's own framing, so they show B deciding the order.",
+     "B's 'So.' pause leaves A waiting, which means B sets the transition."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages minimally through backchannels.\nengagement of B: B engages by sharing a historical anecdote and expressing enthusiasm.",
+   "reasons": {
+    "A": [
+     "A's backchannels show A is listening.",
+     "A's 'Yeah.' shows acknowledgment of B's point.",
+     "A's replies keep the thread open."
+    ],
+    "B": [
+     "B's anecdote about Fletcher shows personal interest in the topic.",
+     "B's enthusiasm shows investment in the subject.",
+     "B's explanation invites A to appreciate the finding."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Backchannels show listening, not involvement.",
+     "Acknowledging a point is what any listener does.",
+     "Keeping the thread open is passive."
+    ],
+    "B": [
+     "An anecdote recounts a known experiment, which shows little personal stake.",
+     "Enthusiasm for a standard result is conventional, not deep investment.",
+     "Inviting appreciation is a one-sided prompt that A need not take up."
+    ]
+   }
+  }
+ }
+}

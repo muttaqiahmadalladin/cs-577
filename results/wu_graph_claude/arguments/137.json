@@ -1,0 +1,113 @@
+{
+ "id": "137",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A is tentative, using 'Well, I - I think' and 'Uh, w- i-' while asking a question.\nstyle of B: B is brief and describes the background, ending on 'It was -'.",
+   "reasons": {
+    "A": [
+     "A's question asks B to recall, which puts B on the spot.",
+     "A's memory prompt, 'maybe you remember this', shows A knows the history of the work.",
+     "A's question about whether the net helped sets the frame of the exchange."
+    ],
+    "B": [
+     "B's brief descriptions keep the register calm and reliable.",
+     "B's description of the background shows direct command of the scene.",
+     "B's 'It was -' shows B is ready to answer."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Tentative questions can look unsure and weaken A's position.",
+     "A memory prompt is a request, not a claim of authority.",
+     "Asking a question is a request that B can answer or decline."
+    ],
+    "B": [
+     "B's brevity and trailing answer show uncertainty, which gives A the lead.",
+     "Describing a scene is a report that does not establish control.",
+     "B's trailing answer leaves the claim unfinished, so A's framing holds."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A asks whether the neural net made things better and recalls the old experiments with the pure features.\ncontent of B: B describes the background: a stationary background with voices and speech over it.",
+   "reasons": {
+    "A": [
+     "A's question about the neural net and the pure features sets the substance.",
+     "A's recall of old experiments frames the comparison.",
+     "A's question determines what the answer must address."
+    ],
+    "B": [
+     "B describes the acoustic background, which is the substance of the scene.",
+     "B's account of stationary sources supplies the key facts.",
+     "B's description of voices over the background anchors the content."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A's question sets the topic, and B's description only responds.",
+     "A's comparison is the frame that B's answer must fit.",
+     "A's question decides which facts matter."
+    ],
+    "B": [
+     "B's description answers the question about the background, which is what was needed.",
+     "Describing a scene is reporting, not deciding the topic.",
+     "The background facts are B's own knowledge, which shows B supplies the substance."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A asks a question and then cuts across B's answer with a restart.\ncoordination of B: B gives a description and then starts an answer that is cut off.",
+   "reasons": {
+    "A": [
+     "A's question holds the floor and shapes the sequence.",
+     "A's restart shows A keeps control of the turn.",
+     "A's question leads B to the answer, which shows A coordinates the exchange."
+    ],
+    "B": [
+     "B's description holds the floor until the end of the turn.",
+     "B's answer shows B is ready to take the floor.",
+     "B's stopped answer hands back the turn in a clear way."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Asking a question is a request that B answers, so the floor is B's.",
+     "A restart is an overlap, not control of the sequence.",
+     "A's question leads to B's answer, so B drives the content."
+    ],
+    "B": [
+     "B's cut-off answer shows B lost the floor to A.",
+     "B's description is brief and does not hold the floor.",
+     "B's unfinished answer leaves A with the next move."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages by recalling shared past experiments and asking a direct question.\nengagement of B: B engages by describing the background and answering A's question.",
+   "reasons": {
+    "A": [
+     "A's recall of past experiments invites B's shared memory and shows involvement.",
+     "A's question engages B directly.",
+     "A's 'maybe you remember this' shows active interest in the shared work."
+    ],
+    "B": [
+     "B's description shows engagement with the acoustic detail.",
+     "B's answer shows willingness to engage with A's question.",
+     "B's account of the background shows attention to the work."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Recalling past work is a common prompt, not deep investment.",
+     "A question invites a reply, which is not evidence of A's own engagement.",
+     "Shared memory is a conventional opener."
+    ],
+    "B": [
+     "B's description is a report, which is expected in the exchange.",
+     "Answering a question is a duty, not investment.",
+     "Describing the background is routine, not personal interest."
+    ]
+   }
+  }
+ }
+}

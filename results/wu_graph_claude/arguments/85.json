@@ -1,0 +1,113 @@
+{
+ "id": "85",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A is minimal and receptive, replying 'Oh, O_K.' after each point.\nstyle of B: B is measured and self-justifying, saying 'It's not like everything is being pinned on the evaluation set'.",
+   "reasons": {
+    "A": [
+     "A's receptive replies keep A in a neutral position that is hard to argue against.",
+     "A's repeated 'Oh, O_K.' signals acceptance, which gives A quiet authority over the reception.",
+     "A's brevity avoids the defensiveness that B's justification shows."
+    ],
+    "B": [
+     "B's measured justification shows a composed register that defends the results.",
+     "B's framing of what the community cares about carries the more authoritative tone.",
+     "B's careful qualifications show control of how the results are presented."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Receptive replies are passive, so A has no real influence on the tone.",
+     "Acceptance is what a listener does, which gives B the authority to set the terms.",
+     "Brevity can look evasive, and B's composure is the more persuasive register."
+    ],
+    "B": [
+     "B's justification shows defensiveness, which weakens B's position.",
+     "Framing what the community cares about is B's claim that A can reject.",
+     "Qualifications on the results can read as hedging, which lets A hold the stronger ground."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A receives the information and asks for no detail.\ncontent of B: B supplies the numbers: the best development-set result, the best system's result, and the relative reduction in word error rate.",
+   "reasons": {
+    "A": [
+     "A's acceptance keeps the topic on B's terms, which is itself a framing choice.",
+     "A's receptive replies signal A is not contesting the substance.",
+     "A's acknowledgment of each figure shows A accepts the frame."
+    ],
+    "B": [
+     "B supplies the concrete numbers, which are the main content.",
+     "B distinguishes the development set from the evaluation set, which shapes the substance.",
+     "B compares with other systems, which places the results in context."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Accepting the frame is not the same as setting it.",
+     "Acknowledging figures is passive and adds no substance.",
+     "A's acknowledgment does not shape the figures B chose to report."
+    ],
+    "B": [
+     "B's figures are the speaker's own report, which is what the exchange needed.",
+     "Distinguishing datasets is a qualification B offers, not a new idea.",
+     "Comparing with other systems is a standard way to report results, so it is not B's control."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A stays in the listener role and gives short acknowledgments.\ncoordination of B: B holds long turns and sets the context before giving the numbers.",
+   "reasons": {
+    "A": [
+     "A's short acknowledgments avoid interruption and keep the turns clean.",
+     "A's replies show A waits for B to finish, which is good coordination.",
+     "A's timely 'Oh, O_K.' moves the exchange on at the right points."
+    ],
+    "B": [
+     "B holds the long turns and decides the order of the context and the numbers.",
+     "B's framing before the numbers controls how A hears the information.",
+     "B's comparison with other systems closes the turn in a way that shapes what comes next."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Listening is passive, so A has little control of the coordination.",
+     "Waiting to be finished does not mean A manages transitions.",
+     "A's acknowledgment moves nothing forward on its own."
+    ],
+    "B": [
+     "B's long turns leave A little room to shape the exchange.",
+     "B's framing is a choice that A cannot shape within the turn.",
+     "Closing a turn with a comparison means B decides what the listener hears next."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages mildly through acknowledgments that signal following along.\nengagement of B: B engages by explaining why the results matter to the community.",
+   "reasons": {
+    "A": [
+     "A's acknowledgments show A is following along.",
+     "A's replies signal interest without taking control.",
+     "A's acceptance indicates interest in the result."
+    ],
+    "B": [
+     "B's appeal to what the community cares about shows investment.",
+     "B's explanation of the significance shows engagement with the audience.",
+     "B's qualifications show care about how the results are received."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Acknowledgments are a minimum courtesy, not deep engagement.",
+     "A signal of following is not interest in the content.",
+     "Acceptance is a default and does not show real interest."
+    ],
+    "B": [
+     "B's explanation is a report of significance, which is what was expected.",
+     "Appealing to the audience is a conventional move, not evidence of personal investment.",
+     "Qualifications are a defensive habit that does not show engagement."
+    ]
+   }
+  }
+ }
+}

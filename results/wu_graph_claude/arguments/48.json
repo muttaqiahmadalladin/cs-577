@@ -1,0 +1,113 @@
+{
+ "id": "48",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A is explanatory and informal, speaking in a long, loosely structured monologue.\nstyle of B: B gives only 'Mm-hmm' backchannels and keeps a minimal register.",
+   "reasons": {
+    "A": [
+     "A's long explanation sets an authoritative and expert tone.",
+     "A's informal framing, 'Uh, The processing', shows a relaxed command of the subject.",
+     "A's account of the claims gives A the more confident register."
+    ],
+    "B": [
+     "B's backchannels are cooperative and leave room for A's register.",
+     "B's 'Mm-hmm' keeps the flow friendly.",
+     "B's minimal tone avoids conflict."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A long monologue can overwhelm, and B's cooperative listening is more persuasive.",
+     "An informal framing can sound unsure, so A's register is weaker than it seems.",
+     "Confidence claimed in a monologue is not control of the exchange."
+    ],
+    "B": [
+     "B's backchannels only confirm A's account, so B has no influence on the tone.",
+     "Leaving room is passive and gives A the register.",
+     "Minimal tone means B has little say in how the subject is presented."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A supplies the substance: the deep conceptual basis, the goals and containers, input and output processing, and the claim of deep semantics.\ncontent of B: B gives backchannels with no substantive content.",
+   "reasons": {
+    "A": [
+     "A supplies the substance of the whole exchange.",
+     "A's account of deep conceptual basis sets the content.",
+     "A's announcement of Nancy's talk on how children learn sets the agenda."
+    ],
+    "B": [
+     "B's backchannels keep the content open for A to define.",
+     "B's acceptance lets the substance stand as A states it.",
+     "B's silence on the substance avoids any shaping of the content."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A holds all the substance, so A controls the content.",
+     "A's account is A's framing of the research.",
+     "A's agenda setting is A's choice."
+    ],
+    "B": [
+     "B's silence is an abdication, not a decision, so it does not show control.",
+     "Keeping content open is passive and does not give B influence.",
+     "Letting A define the substance is not B's framing."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A holds the floor for the entire turn and moves the agenda to Nancy's talk.\ncoordination of B: B is passive and gives backchannel responses only.",
+   "reasons": {
+    "A": [
+     "A holds the floor throughout, which shows control of the turn.",
+     "A's move to Nancy's talk reallocates the agenda, showing coordination.",
+     "A's long turn sets the transitions between ideas."
+    ],
+    "B": [
+     "B gives A the space to finish, which keeps the turn order simple.",
+     "B's 'Mm-hmm' signals readiness for the next point.",
+     "B lets A finish the thought, which shows deference."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Holding the floor by default is not managing the turns.",
+     "Moving to Nancy's talk is a transition that A produces alone, not coordination.",
+     "A long turn gives B no means to shape the sequence."
+    ],
+    "B": [
+     "B's deference is a choice to cede the floor, so it does not show A's control.",
+     "A 'Mm-hmm' is a signal that B is waiting for the next point, not following A.",
+     "Letting A finish means B has no part in the transitions."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages by explaining the research in detail and introducing a colleague's talk.\nengagement of B: B engages minimally through backchannels.",
+   "reasons": {
+    "A": [
+     "A's detailed explanation shows strong involvement in the research.",
+     "A's introduction of Nancy's talk shows investment in the group's work.",
+     "A's account of the claims shows active engagement."
+    ],
+    "B": [
+     "B's 'Mm-hmm' shows B is following the explanation.",
+     "B's repeated backchannels show attention.",
+     "B's acknowledgment of the talk shows interest."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Detail on the research is what the speaker is expected to give.",
+     "Introducing a colleague is routine, not a sign of deep personal investment.",
+     "Explaining a claim is a standard form of talk, not clear engagement."
+    ],
+    "B": [
+     "Backchannels show listening, not involvement.",
+     "Repeating an acknowledgment is a minimal response.",
+     "Acknowledging a talk is a polite reply, not interest."
+    ]
+   }
+  }
+ }
+}

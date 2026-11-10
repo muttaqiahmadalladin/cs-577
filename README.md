@@ -23,6 +23,23 @@ With the same words attributed to the people who said them (150 usable snippets,
 Corrected same-span Jev against the majority label: 34 wins, 12 losses, exact McNemar p = 0.0016.
 All of this is exploratory work on a small test set with four professors; see the Limitations section of the report.
 
+## Wu's factor graph on the corrected snippets (Claude run)
+
+Arguments (four aspect summaries, three reasons per speaker per aspect, one rebuttal per reason) were written by Claude Haiku subagents from the corrected same-span text, then scored by separate Haiku subagents, all blind to the labels. Wu's rule file and weights do the inference. Files are in `results/wu_graph_claude/`.
+
+| Method (150 corrected snippets, same words) | Accuracy |
+| --- | ---: |
+| Always A | 56.7% |
+| Wu graph, reasons only | 68.7% |
+| Wu graph, reasons + rebuttals | 67.3% |
+| Wu graph, all relations | 68.0% |
+| Same scores summed, no graph | 68.7% |
+| Haiku zero-shot | 68.0% |
+| Jev direct | 71.3% |
+| Sonnet zero-shot | 76.0% |
+
+This is not a faithful rerun of the paper's pipeline: each snippet was generated in one pass by an agent, not by separate GPT-3.5 calls, and scores are stated probabilities, not token log-probabilities. `scripts/wu_pipeline.py` runs the call-by-call version against any OpenAI-compatible API.
+
 ## Check the audit yourself
 
 `scripts/verify_wu_bug.py` uses only the Python standard library and three public files

@@ -1,0 +1,22 @@
+{"id": "66", "aspects": {
+"style": {"summary": "style of A: A is discursive and technical, with fillers and 'um', and uses 'our' to frame the project.\nstyle of B: B is brief and affirming, with 'Yeah' and a light correction about a term.",
+"reasons": {"A": ["A's discursive delivery takes up the most space and sets the tone of the technical plan.", "A's use of 'our' frames the plan as shared while A defines it.", "A's technical register positions A as the author of the design."],
+"B": ["B's brief affirmations show acceptance that B can withhold at any point.", "B's correction of a term shows B tracking the vocabulary.", "B's calm tone reads as a settled judgement on what is approved."]},
+"rebuttals": {"A": ["Saying 'our' does not make the plan shared, and B's approval is what makes it binding.", "Technical register describes the design, but B decides whether it is adopted.", "A's discursive delivery depends on B's continued attention."],
+"B": ["Affirmations are passive, so B's acceptance does not shape the design.", "A light correction is minor and depends on A's naming choice.", "A settled judgement is a response to A's plan, so A sets its content."]}},
+"content": {"summary": "content of A: A lays out the plan to write down constructions in a Constructicon and replace the rules with a Bayes-net that decides which construction is activated.\ncontent of B: B makes a terminology point about the word 'approach'.",
+"reasons": {"A": ["A lays out the design of replacing rules with a Bayes-net, which sets the direction of the project.", "A's plan to write down constructions defines the substance of the work.", "A's description of the activation decision determines how the system behaves."],
+"B": ["B's terminology point shapes how the design is named.", "B's remark about 'approach' ties the discussion to what A said before.", "B's acceptance of the label gives B a say over the vocabulary."]},
+"rebuttals": {"A": ["A's design is a proposal that B can approve or reject, so the decision belongs to B.", "The substance of the work is only real once B accepts the plan.", "The activation decision depends on the Bayes-net B is invited to evaluate."],
+"B": ["B's terminology point is minor and depends on A's naming choice.", "Tying the discussion to A's words means B is responding to A's framing.", "Accepting the label is a formality given that A has already defined the design."]}},
+"coordination": {"summary": "coordination of A: A holds the floor for the planning and moves to new topics.\ncoordination of B: B interjects with a correction and affirms in short turns.",
+"reasons": {"A": ["A holds the floor for the planning, which gives A control over the content.", "A moves the discussion to the next design element, which sets the transitions.", "A's long turns make B's contributions secondary."],
+"B": ["B's interjection with a correction shows B able to interrupt A's flow.", "B's affirmation closes the exchange on B's terms.", "B's short turns keep B ready to re-engage."]},
+"rebuttals": {"A": ["A holds the floor only because B allows it, so B controls the turns.", "A's transitions are proposals that B can accept or resist.", "A's long turns depend on B's silence and can be cut short."],
+"B": ["Interjection is a small move that A can ignore.", "Closing an exchange with affirmation does not change the agenda.", "B's readiness depends on A continuing to speak."]}},
+"engagement": {"summary": "engagement of A: A is committed to the design and describes the work in detail.\nengagement of B: B engages with the terminology and gives approval.",
+"reasons": {"A": ["A's detailed description shows commitment to the design.", "A's investment in the approach makes A the most engaged party.", "A's attention to how the parts fit together shows a stake in the project's success."],
+"B": ["B's attention to terminology shows careful engagement with the wording.", "B's approval gives the design the backing it needs.", "B's engagement makes B the reviewer of the work."]},
+"rebuttals": {"A": ["Commitment to a design means little unless B approves it.", "Investment depends on B's acceptance, so B decides whether the stake matters.", "Attention to parts is undone if B rejects the overall approach."],
+"B": ["Attention to terminology is a small form of engagement that does not change the design.", "Approval is passive and depends on A's plan being presented first.", "Reviewing the work depends on A providing it."]}}
+}}

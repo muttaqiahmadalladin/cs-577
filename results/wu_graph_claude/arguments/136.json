@@ -1,0 +1,113 @@
+{
+ "id": "136",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A is direct and opinionated, saying high-order MFCCs are 'just way too much'.\nstyle of B: B responds only with a minimal 'Yeah.' and keeps a neutral register.",
+   "reasons": {
+    "A": [
+     "A's direct judgment that the features are too much makes A's tone authoritative.",
+     "A's confident assertion, 'You won't be able to look at it', closes the question.",
+     "A's proposal of alternatives signals a firm view of what works."
+    ],
+    "B": [
+     "B's agreement is cooperative and does not contest A's view.",
+     "B's brief replies leave room for others to set the register.",
+     "B's 'Yeah.' keeps the exchange moving without friction."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Directness can sound overbearing, and B's cooperative register is easier to trust.",
+     "A's assertion is one view that B does not dispute, so it is not settled authority.",
+     "Confident statements leave no space for disagreement, which weakens A's position."
+    ],
+    "B": [
+     "B's agreement only confirms A's view, so it does not give B influence over the tone.",
+     "Leaving room for others is passive and does not set the register.",
+     "A friction-free 'Yeah' gives A the last word on the register."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A makes a substantive claim about high-order MFCCs, the classifier, and one or two dimensional displays.\ncontent of B: B agrees and offers no substantive content of their own.",
+   "reasons": {
+    "A": [
+     "A introduces the substantive claim about dimensionality and display.",
+     "A's comparison of a classifier with simple displays frames the technical content.",
+     "A's proposal of alternatives sets the subject of the exchange."
+    ],
+    "B": [
+     "B's agreement keeps the subject open for A to define.",
+     "B confirms the points A raised, which keeps the content in play.",
+     "B's acceptance lets A build the case without challenge."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A's claim is the only substance, so A controls the content.",
+     "A's comparison is A's own framing of the trade-off.",
+     "A's alternatives are A's proposal, which sets the subject."
+    ],
+    "B": [
+     "B's confirmation adds nothing that A did not already say.",
+     "Keeping the subject open is passive and gives A the content.",
+     "Letting A build the case means B is not shaping the argument."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A holds almost all the floor, and B only gives 'Yeah.' in response.\ncoordination of B: B is passive and gives A room to speak.",
+   "reasons": {
+    "A": [
+     "A holds the floor for almost the whole exchange, which shows control of the turns.",
+     "A moves from the classifier to the displays in one continuous turn.",
+     "A's long turn sets the sequence of ideas."
+    ],
+    "B": [
+     "B yields the floor, which keeps the turn order simple.",
+     "B's 'Yeah.' gives A a clear signal to continue.",
+     "B lets A finish, which avoids interruption."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Holding the floor by default is not the same as managing the turns.",
+     "A's continuous turn gives B no chance to shape the sequence.",
+     "A's long turn is a monologue, which is passive for the other speaker."
+    ],
+    "B": [
+     "B's yielding gives up any chance to influence the sequence.",
+     "A 'Yeah.' is a signal that A can take as permission to keep going.",
+     "Letting A finish is a choice to cede the floor, not a neutral act."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages by proposing an alternative display and inviting a reaction.\nengagement of B: B engages only minimally through backchannel responses.",
+   "reasons": {
+    "A": [
+     "A's proposal of one or two dimensional displays invites a response.",
+     "A's assessment of the classifier shows active involvement.",
+     "A's comparison engages with the practical choice."
+    ],
+    "B": [
+     "B's 'Yeah.' shows B is listening.",
+     "B's brief backchannel keeps the exchange going.",
+     "B's agreement shows willingness to follow A's thought."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A proposal that asks no question does not invite much of a reply.",
+     "Assessing a classifier is ordinary analysis, not clear investment.",
+     "A comparison is a standard point that anyone could make."
+    ],
+    "B": [
+     "A backchannel shows only that B is listening, not that B is involved.",
+     "A repeated 'Yeah.' gives little to build on.",
+     "Agreement without content does not show engagement."
+    ]
+   }
+  }
+ }
+}
