@@ -66,6 +66,27 @@ The preference relation is preference-based argumentation in the sense of Amgoud
 
 The preference relation with Jev scores is level with the direct Jev question (13 wins to 10 losses, exact McNemar p = 0.68). Full numbers are in `results/wu_graph_claude/grounded_results.json`.
 
+## Grounded extension: policy search
+
+`scripts/grounded_policy_search.py` asks whether any score-aware attack policy does better. It evaluates 288 policies built from the Jev scores already collected:
+
+| Choice | Options |
+| --- | --- |
+| Reason strength | P(valid) x P(grounded), P(grounded), P(valid) |
+| Rebuttal strength | P(counters) x P(grounded), P(counters), P(grounded) |
+| When a rebuttal attacks | preference (at least as strong as its reason), or its strength clears 0.3, 0.5 or 0.7 |
+| Cross-side attacks | none; stronger reason defeats any opposing reason; the same within an aspect only; only pairs Jev judges similar |
+| Decision | count of IN reasons, or summed strength of IN reasons |
+
+To avoid choosing a policy on the snippets it is scored on, meetings are split at random into a development half and a test half; the best development policy is scored on the test half, next to the direct Jev question on the same half. Over 500 splits:
+
+| | Mean test accuracy |
+| --- | ---: |
+| Selected grounded policy | 69.7% |
+| Jev direct | 71.5% |
+
+The selected policy is ahead of the direct question in 133 of 500 splits (mean difference -1.8 points, middle 95% of splits -11.2 to +3.8). On all 150 snippets the policies range from 82 to 111 correct (median 99) against 107 for the direct question; the 111 is the optimistic, same-data maximum. Output: `results/wu_graph_claude/grounded_policy_search.json`.
+
 ## Scripts
 
 | Script | Purpose |
@@ -75,6 +96,7 @@ The preference relation with Jev scores is level with the direct Jev question (1
 | `scripts/final_analysis.py` | Accuracy, paired tests, bootstrap and calibration for the Jev runs; writes `results/results.json` |
 | `scripts/analyze_wu_graph_claude.py` | Runs the XOR graph over the Claude arguments and scores; writes `results/wu_graph_claude/results.json` |
 | `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations; standard library only |
+| `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting |
 | `scripts/wu_pipeline.py` | Call-by-call version of the Wu pipeline for any OpenAI-compatible API, with Jev or LLM scoring |
 | `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts |
 | `scripts/icsi.py` | MRT parsing helpers used by the analysis scripts |

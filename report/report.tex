@@ -184,6 +184,8 @@ The grounded extension behaves on the rebuilt snippets as it did on the released
 Under the proposed relation no reason is ever \textsc{in}, so all 150 decisions are made by the tie-break, and the 68.7\% (Haiku scores) and 73.3\% (Jev scores) are simply the sums of reason strengths.
 The preference relation gives a real decision: with Jev scores every snippet is decided by \textsc{in} counts (1,517 of 3,600 reasons \textsc{in}) and accuracy is 73.3\%, level with the direct Jev question (13 wins to 10 losses, $p=0.68$).
 With the coarser Haiku scores it reaches 64.7\%.
+We also searched 288 grounded policies that vary the strength definitions, the rule for when a rebuttal attacks (preference or a threshold on Jev's judgment that it counters its reason), the cross-side rule, and the decision rule.
+Choosing the best policy on a development half of the meetings and scoring it on the other half, over 500 random splits, gives 69.7\% on average against 71.5\% for the direct Jev question on the same halves, so no policy in this family improves on asking directly.
 
 The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
 It is a cheaper way to run the method and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.
