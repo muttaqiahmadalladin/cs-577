@@ -24,7 +24,7 @@ It runs the seven steps below in order and stops at the first failure. On a lapt
 | 2 | `build_dataset.py --check` | The committed dataset is regenerated exactly from the sources | `committed dataset reproduced exactly` |
 | 3 | `build_dataset.py` | Writes `work/rows.json`, `work/fixed_index.json`, `work/contexts.jsonl` | `wrote ... icsi_rebuilt_snippets.jsonl and work files ...` |
 | 4 | `convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | `wrote ... snippets.jsonl and ... rules.txt` |
-| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 38 of 38 report values reproduced` |
+| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 46 of 46 report values reproduced` |
 | 6 | `grounded_extension.py` | The grounded extension results | four result lines |
 | 7 | `grounded_policy_search.py` | The 288-policy search with held-out selection | `chosen in ... splits` lines |
 
@@ -58,7 +58,7 @@ python3 scripts/grounded_extension.py
 python3 scripts/grounded_policy_search.py
 ```
 
-`analyze.py` reads the model answers in `results/` and recomputes the report's tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it compares 38 values with the ones printed in the report.
+`analyze.py` reads the model answers in `results/` and recomputes the report's tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it compares 46 values with the ones printed in the report.
 
 Fixed seeds: the meeting-level bootstrap uses seed 2026 with 10,000 resamples, and the policy search uses seed 2026 with 500 splits. The integer programs are solved exactly, so the graph predictions do not depend on solver randomness.
 

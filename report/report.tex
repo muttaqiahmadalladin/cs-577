@@ -25,7 +25,8 @@
 \citet{wu2025power} predict which of two speakers in a six-turn meeting excerpt is the professor, with a factor graph over LLM-written reasons and rebuttals.
 We proposed to improve the graph with quote-checked arguments and Dung's grounded extension.
 On the 151 released snippets neither change helps, and no method we tried scores above the majority label.
-We then rebuilt the snippets from the ICSI Meeting Corpus, taking speaker turns from the corpus itself.
+Tracing every snippet back to the ICSI Meeting Corpus shows that the released text and labels disagree about who is speaking: under the reading of the speaker letters that makes the labels correct, 57.6\% of the words are displayed under the other speaker's letter.
+We rebuilt the snippets from the corpus, taking speaker turns from the corpus itself.
 On the 150 rebuilt snippets a System One decision model (Jev) identifies the professor in 71.3\% of cases against a 56.7\% majority baseline, and in 89.3\% when it also sees 60 segments of meeting on each side.
 Their factor graph, rerun call by call with arguments from GPT-6.1 Terra and scores from Jev, reaches 72.0\%, level with asking Terra directly (72.7\%).
 A factor graph built from typed yes/no statements, with no generated arguments, matches the direct question at every context length.
@@ -39,7 +40,7 @@ In the label file they released, speaker A is the higher-power speaker in 83 of 
 
 Our proposal kept their cached arguments and changed three things: a quote check on every argument, a rebuttal prompt that shows the rebuttal, and Dung's grounded extension \citep{dung1995acceptability} in place of their XOR program.
 Section~\ref{sec:released} reports those experiments on the released snippets.
-Section~\ref{sec:data} is reserved for the description of our data.
+Section~\ref{sec:data} traces the released snippets back to the corpus, shows that their displayed speakers and their labels disagree, and describes a snippet set rebuilt from the corpus.
 Section~\ref{sec:rebuilt} reports the same task on snippets rebuilt from the corpus, with the original factor graph, a decision model, zero-shot LLMs, and longer context.
 
 \section{The released snippets}
@@ -86,20 +87,76 @@ Rescoring all arguments with Jev, including the corrected rebuttal question on a
 \section{Data}
 \label{sec:data}
 
-\emph{This section is intentionally left incomplete in this draft.}
-It will describe the rebuilt snippet set and how it relates to the released file.
-The construction procedure is summarized at the start of Section~\ref{sec:rebuilt} and documented step by step, with code that rebuilds the data from its public sources, in the project repository.
+\paragraph{Sources.}
+The released test set is the file \texttt{meeting.csv} of \citet{wu2025power}: 151 rows, each with a conversation between speakers A and B and a label naming the higher-power speaker.\footnote{\url{https://github.com/kandicew/social-reasoning}, commit \texttt{fed11b6}, \texttt{data/meeting.csv}.}
+The snippets come from the ICSI Meeting Corpus \citep{janin2003icsi}.
+We use its original MRT transcripts, in which every segment carries a start time, a participant ID and the transcribed text, and its participant metadata, which records each participant's education level.\footnote{\url{https://groups.inf.ed.ac.uk/ami/icsi/download}: \texttt{ICSI\_original\_transcripts.zip} and \texttt{ICSI\_core\_NXT.zip} (\texttt{speakers.xml}), distributed under CC BY 4.0.}
+
+\paragraph{Locating the released snippets.}
+After removing transcript markup, the non-empty lines of a released snippet are a run of consecutive corpus segments.
+Matching on that sequence finds all 151 snippets, each in exactly one place, across 45 meetings.
+This step uses only the released text.
+It gives, for every line of every snippet, the participant who said it.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lll}
+\toprule
+Shown & Said by & Text \\
+\midrule
+A & professor & Uh, maybe you have to\ldots \\
+A & other & Mm-hmm. \\
+B & professor & but - \\
+A & other & Yeah, I guess. \\
+B & professor & Yeah. \\
+A & professor & do you have any way of\ldots \\
+A & other & Mmm. \\
+B & other & No, we don't. \\
+B & professor & Yeah. \\
+\bottomrule
+\end{tabular}
+\caption{Released snippet 0 (meeting Bro025, starting at 1273.5\,s, abridged). ``Shown'' is the letter the line appears under in the released text. ``Said by'' is from the corpus participant IDs. The released label is B.}
+\label{tab:example}
+\end{table}
+
+\paragraph{Displayed speakers against corpus speakers.}
+In the released text each displayed turn ends with the first segment of the next corpus speaker, as in Table~\ref{tab:example}: the turn shown under A contains the professor's remarks and then the other participant's ``Mm-hmm.''
+A letter therefore does not stand for one participant throughout a snippet, and there are two ways to read it.
+
+If each letter is read as the speaker of the last line of its turns, the letters map one-to-one onto the two participants in 128 snippets with exactly one professor, and the released label names the professor in 128 of those 128.
+Under that reading, 7,596 of the 13,185 words in those snippets (57.6\%) are displayed under the other participant's letter, and in 73 of the 128 snippets more than half of the words are.
+
+If instead each letter is read as whoever says most of the words shown under it, the text is mostly attributed correctly, and the released label names the letter that carries most of the professor's words in only 69 of the 128 snippets.
+
+Under either reading the text and the labels disagree: the letter that a reader sees doing the professor's talking is, in about half of the snippets, not the letter the label rewards.
+The remaining 23 snippets have a third speaker, no single professor, or a letter that maps to two participants.
+
+\paragraph{What we can and cannot conclude.}
+The cached GPT-3.5 arguments in the release were generated from this text: the conversation stored with each cached snippet is identical to the corresponding row of \texttt{meeting.csv} for all 151.
+The code that built the snippets from the corpus is not in the public repository, so we cannot say which step produced the mismatch.
+We do not know whether the human judges of \citet{wu2025power} saw the same text, or whether the numbers in their paper were computed from this file.
+We have not yet confirmed these observations with the authors.
+
+\paragraph{Consequence for the task.}
+A reader or model that judges the displayed text will, in many snippets, credit the professor's behaviour to the other letter.
+This is consistent with Section~\ref{sec:released}, where every method is at or slightly below the majority rate, and with the near-chance human and LLM accuracies reported by \citet{wu2025power}.
+It also predicts that the same judgments should become accurate once speech is attributed to the people who said it, which Section~\ref{sec:rebuilt} tests.
+
+\paragraph{The rebuilt set.}
+We rebuilt each snippet from the located corpus segments.
+Speakers are the corpus participant IDs, consecutive segments by one participant form a turn, and the professor is the participant whose education level in \texttt{speakers.xml} is Professor.
+A snippet is kept if it has exactly one professor and at least two speakers, which drops one snippet and leaves 150.
+In the 128 snippets above, the letters follow the last-line reading, so the released labels carry over unchanged; in the other 22, the first of the two speakers to talk is A.
+In total 142 of the 150 labels equal the released label, and the professor is A in 85 (a 56.7\% base rate).
+Three snippets include a third participant, shown as C.
+Each snippet is rendered at three lengths: its own segments, and 15 or 60 further corpus segments on each side, with other participants shown as C, D, and so on.
+The other speaker's education level is PhD in 117 snippets, Grad in 30 and Postdoc in 3, so ``student'' follows the usage of \citet{wu2025power}.
+The builder is deterministic and regenerates the set byte for byte from the three source files.
 
 \section{Snippets rebuilt from the corpus}
 \label{sec:rebuilt}
 
-\paragraph{Construction.}
-We located each released snippet in the original ICSI transcripts by exact match on its sequence of segment texts.
-All 151 snippets match exactly one place in the corpus.
-We then rebuilt each snippet from those corpus segments: speakers are the corpus participant IDs, consecutive segments by one participant form a turn, and the professor is the participant whose education level in the corpus metadata is Professor.
-One snippet contains a single speaker and is dropped, leaving 150, with the professor as A in 85 (a 56.7\% base rate).
-For longer context we add 15 or 60 corpus segments on each side, with other participants shown as C, D, and so on.
-The released and rebuilt inputs differ in how turns are segmented and assigned to speakers; we defer discussion of that difference to Section~\ref{sec:data}.
+All experiments in this section use the rebuilt set of Section~\ref{sec:data}: 150 snippets with speakers taken from the corpus, at the same span as the released snippet and with 15 or 60 extra segments on each side.
 
 \paragraph{Jev.}
 Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the rebuilt snippets were fixed before that data was built.}
@@ -196,7 +253,7 @@ Its Brier score is 0.189 at the same span and 0.095 at $\pm$60, against 0.246 fo
 \section{Limitations}
 
 The order of work was exploratory.
-The rebuilt set was constructed after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
+The mismatch in the released file was found, and the rebuilt set constructed, after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
 The questions used on the rebuilt snippets were written before that data existed, and each run was made once.
 
 Neither rerun of the factor graph uses the original model.
@@ -206,7 +263,6 @@ In both, each rebuttal is judged against its own reason and grounded on its own 
 
 The rebuilt set has four professors, and one of them is the professor in 110 of the 150 snippets.
 Jev's accuracy for that professor is 69.1\% at the same span, and 73.3 to 100\% for the others, so the result is not carried by one person, but the meeting-level bootstrap is the more honest interval.
-Most of the non-professors hold a PhD, so ``student'' follows \citet{wu2025power} and not the metadata.
 With 60 extra segments a model can use cues that a six-turn excerpt lacks, including how others address the two speakers.
 
 We did not rerun GPT-3.5, Gemma, or a human study on the rebuilt snippets.

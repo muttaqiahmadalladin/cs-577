@@ -10,6 +10,8 @@ We revisit the multi-agent social reasoning method of Wu et al. (NAACL 2025), wh
 
 Released snippets (151, always answering A scores 55.0%): the XOR factor graph reproduces the published 54.3%, and no method we tried scores higher than the base rate. Details are in the report.
 
+Tracing each released snippet back to the ICSI corpus shows that its displayed speaker letters and its label disagree: under the reading of the letters that makes the labels correct, 57.6% of the words appear under the other speaker's letter. The evidence and its limits are in the report's Data section and in [docs/DATA.md](docs/DATA.md). We therefore rebuilt the snippets with speakers taken from the corpus.
+
 ICSI-rebuilt snippets (150, always answering A scores 56.7%):
 
 | Method | Same span | 15 extra segments per side | 60 extra per side |
@@ -40,7 +42,7 @@ pip install -r requirements.txt
 python3 scripts/reproduce.py
 ```
 
-This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 38 of 38 report values reproduced`). It calls no model and needs no API key.
+This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 46 of 46 report values reproduced`). It calls no model and needs no API key.
 
 ## Repository layout
 

@@ -6,6 +6,7 @@
 
 Inputs
   work/snippets.jsonl, work/rules.txt        from convert_released_cache.py (released snippets, cached arguments, rules)
+  work/rows.json, sources/                   from build_dataset.py and get_sources.py (where each released snippet sits in the corpus)
   data/icsi_rebuilt_snippets.jsonl           from build_dataset.py
   results/jev_arm1..4.jsonl                  Jev answers (see docs/EXPERIMENTS.md)
   results/wu_graph_terra/                    arguments written call by call by GPT-6.1 Terra, their Jev scores, Terra zero-shot answers
@@ -105,6 +106,29 @@ def main():
     record("released_151", "Typed-statement graph (Jev)", np.array([xor(typed_arguments(A3[i]), [], rules) == "A" for i in rid]), g1)
     print("  (Grounded extension as proposed, the quote filter and Gemma 4 zero-shot are results of KrishMay05/nlp_research.)")
 
+    # ---------------------------------------------------------------- Data section: released text against corpus speakers
+    print("\nData section. Released text against ICSI participant IDs")
+    from build_dataset import load_corpus, load_education, released_turns
+    src = ROOT / "sources"; M = load_corpus(src); edu = load_education(src); rows = json.load(open(ROOT / "work" / "rows.json"))
+    n_cons = lab_ok = wrong = total = heavy = maj_ok = 0
+    for r, x in zip(R, rows):
+        if not (x["consistent"] and len(x["profs"]) == 1): continue        # each letter is one participant, and exactly one is a professor
+        n_cons += 1; turns, lines = released_turns(r["transcript"]); spk = [g[1] for g in M[x["meeting"]][x["start"]:x["start"] + x["n"]]]
+        who = {"A": x["mapA"], "B": x["mapB"]}; prof = x["profs"][0]
+        lab_ok += ("A" if who["A"] == prof else "B") == r["label"]             # reading 1: a letter is the speaker of the last line of its turns
+        w_bad = w_all = 0; prof_words = {"A": 0, "B": 0}
+        for letter, idx in turns:
+            for k in idx:
+                n = len(lines[k].split()); w_all += n; w_bad += n * (spk[k] != who[letter])
+                if spk[k] == prof: prof_words[letter] += n
+        wrong += w_bad; total += w_all; heavy += w_bad / w_all > 0.5
+        maj_ok += ("A" if prof_words["A"] >= prof_words["B"] else "B") == r["label"]   # reading 2: a letter is whoever says most of its words
+    OUT["data_audit"] = dict(released_snippets=len(R), located_exactly_once=len(rows), meetings=len({x["meeting"] for x in rows}), one_to_one_with_one_professor=n_cons,
+                             label_names_professor_under_last_line_reading=lab_ok, words_under_other_letter=wrong, words_total=total,
+                             percent_words_under_other_letter=round(100 * wrong / total, 1), snippets_majority_of_words_under_other_letter=heavy,
+                             label_names_letter_with_most_professor_words=maj_ok)
+    for k, v in OUT["data_audit"].items(): print(f"  {k}: {v}")
+
     # ---------------------------------------------------------------- Table 2: the 150 rebuilt snippets
     D = jsonl(ROOT / "data" / "icsi_rebuilt_snippets.jsonl"); ids = [d["id"] for d in D]
     gold = np.array([d["professor"] == "A" for d in D]); rel_gold = np.array([d["released_label"] == "A" for d in D]); meet = np.array([d["meeting"] for d in D])
@@ -197,11 +221,15 @@ def main():
                   ("wu_graph", "Wu graph, reasons only (Haiku arguments, Jev scores)"): 110, ("wu_graph", "Wu graph, reasons + rebuttals (Haiku arguments, Jev scores)"): 105, ("wu_graph", "Wu graph, all relations (Haiku arguments, Jev scores)"): 105,
                   ("wu_graph", "Wu graph, reasons only (Haiku arguments, Haiku scores)"): 103, ("wu_graph", "Wu graph, reasons + rebuttals (Haiku arguments, Haiku scores)"): 101, ("wu_graph", "Wu graph, all relations (Haiku arguments, Haiku scores)"): 102,
                   ("wu_graph", "Terra zero-shot"): 109, ("wu_graph", "Haiku zero-shot"): 102, ("wu_graph", "Sonnet zero-shot"): 114}
+        audit_expect = dict(located_exactly_once=151, meetings=45, one_to_one_with_one_professor=128, label_names_professor_under_last_line_reading=128, words_under_other_letter=7596,
+                            words_total=13185, snippets_majority_of_words_under_other_letter=73, label_names_letter_with_most_professor_words=69)
         bad = [(k, v, OUT[k[0]][k[1]]["correct"]) for k, v in expect.items() if OUT[k[0]][k[1]]["correct"] != v]
         e = OUT["rebuilt_fixed"]["Jev, professor"]
         if e["vs_always_A"]["meeting_bootstrap_95"] != [6.7, 22.0] or e["brier"] != 0.189 or e["accuracy_most_confident_fifth"] != 93.3: bad.append(("Jev professor interval/Brier/top fifth", "[6.7, 22.0] 0.189 93.3", (e["vs_always_A"]["meeting_bootstrap_95"], e["brier"], e["accuracy_most_confident_fifth"])))
+        bad += [(k, v, OUT["data_audit"][k]) for k, v in audit_expect.items() if OUT["data_audit"][k] != v]
+        n = len(expect) + 1 + len(audit_expect)
         for k, v, got in bad: print("MISMATCH", k, "report:", v, "recomputed:", got)
-        print(f"check: {len(expect) + 1 - len(bad)} of {len(expect) + 1} report values reproduced"); sys.exit(1 if bad else 0)
+        print(f"check: {n - len(bad)} of {n} report values reproduced"); sys.exit(1 if bad else 0)
 
 
 if __name__ == "__main__":

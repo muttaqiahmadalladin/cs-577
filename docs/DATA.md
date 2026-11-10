@@ -20,6 +20,27 @@
 4. **Letters.** Where the released file's letters map one-to-one onto the two participants (reading each letter as the speaker of the last line of its turns), that mapping is kept, so labels remain comparable with the released file: 128 snippets. For the other 22, the first of the two speakers to talk is A. Any further participant is C, D, and so on (three snippets have a third speaker).
 5. **Turns and context.** Consecutive segments by the same participant are merged into one turn. Each snippet is rendered at three windows: its own segments, and 15 or 60 additional corpus segments on each side (clipped at meeting boundaries).
 
+## How the released text relates to the corpus
+
+Step 2 gives, for every line of every released snippet, the ICSI participant who said it. Comparing that with the letters the lines are displayed under:
+
+- In the released text each displayed turn ends with the first segment of the next corpus speaker. A letter therefore does not stand for one participant throughout a snippet.
+- **Reading 1: a letter is the speaker of the last line of its turns.** The letters then map one-to-one onto the two participants in 128 snippets with exactly one professor, and the released label names the professor in 128 of 128. Under this reading 7,596 of 13,185 words (57.6%) are displayed under the other participant's letter, and in 73 of the 128 snippets more than half of the words are.
+- **Reading 2: a letter is whoever says most of the words shown under it.** The text is then mostly attributed correctly, and the released label names the letter carrying most of the professor's words in 69 of the 128 snippets.
+- Under either reading the displayed text and the labels disagree in about half of the snippets.
+- The other 23 snippets have a third speaker, no single professor, or a letter that maps to two participants.
+
+What this does and does not establish:
+
+- The cached GPT-3.5 arguments in the release were generated from this text: the conversation stored with each cached snippet equals the corresponding row of `meeting.csv` for all 151 (`convert_released_cache.py` asserts this).
+- The code that built the snippets is not in the public repository, so the step that produced the mismatch is unknown.
+- We do not know whether the paper's human judges saw this text, or whether the paper's numbers were computed from this file.
+- These observations have not yet been confirmed with the authors of the released file.
+
+Every number above is recomputed by `python3 scripts/analyze.py --check` (the "Data section" block) and can be inspected row by row with `python3 scripts/check_against_released.py --show <row>`. Example, row 0 (meeting Bro025, line 1858 of `Bro025.mrt`): the professor's question "do you have any way of assessing how well or how poorly the noise estimation is currently doing?" is displayed under A, and the released label is B.
+
+The rebuilt set uses reading 1 for its letters (step 4), which is why 142 of its 150 labels equal the released labels.
+
 ## Schema
 
 One JSON object per line:

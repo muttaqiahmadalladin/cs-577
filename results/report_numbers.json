@@ -72,6 +72,18 @@
    }
   }
  },
+ "data_audit": {
+  "released_snippets": 151,
+  "located_exactly_once": 151,
+  "meetings": 45,
+  "one_to_one_with_one_professor": 128,
+  "label_names_professor_under_last_line_reading": 128,
+  "words_under_other_letter": 7596,
+  "words_total": 13185,
+  "percent_words_under_other_letter": 57.6,
+  "snippets_majority_of_words_under_other_letter": 73,
+  "label_names_letter_with_most_professor_words": 69
+ },
  "released_150": {
   "More words": {
    "correct": 69,
