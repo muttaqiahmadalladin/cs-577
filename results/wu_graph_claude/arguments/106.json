@@ -1,0 +1,22 @@
+{"id": "106", "aspects": {
+"style": {"summary": "style of A: A is direct, asking a pointed question and following up on it.\nstyle of B: B is hesitant, with 'uh' and 'Mm-hmm' that deflect the question.",
+"reasons": {"A": ["A's direct questions put B on the spot, which gives A the initiative.", "A's follow-up keeps the pressure on B to account for the work.", "A's pointed framing sets the standard B must meet."],
+"B": ["B's calm acknowledgement signals agreement that lets B's view carry.", "B's reference to what B has been doing claims the initiative for B's own work.", "B's hesitance does not reveal much, which keeps B's position open."]},
+"rebuttals": {"A": ["A's direct question has force only if B accepts the assignment, so B decides whether the work is redone.", "A's follow-up depends on B's answer, which B can deflect.", "The standard A sets is one B chooses how and when to meet."],
+"B": ["B's hesitance is a sign of being put on the back foot, which weakens B's position.", "Describing other work is a deflection that gives A the question.", "'Mm-hmm' is a passive signal, so it does not carry B's view."]}},
+"content": {"summary": "content of A: A raises the normalization question and asks whether the PLP analysis will be redone with the mel cepstrum method.\ncontent of B: B admits the redo has not happened and starts describing other work.",
+"reasons": {"A": ["A's question sets the agenda by asking whether the normalization will be redone.", "A's reference to the mel cepstrum fixes the standard for the redo.", "A's question determines what the discussion is about."],
+"B": ["B's admission of the gap shows B owns the status of the work.", "B's description of other work sets the direction if the redo is deferred.", "B's account of the work defines what the group is discussing."]},
+"rebuttals": {"A": ["A's question is answered by B's admission, so B controls what happens next.", "A's standard depends on B's agreement to meet it.", "A's topic is one B can move away from by describing other work."],
+"B": ["B's admission concedes that A's question is pressing the point.", "The unexplained other work gives B no real content to defend.", "B's account only defines the discussion if A accepts the shift."]}},
+"coordination": {"summary": "coordination of A: A asks the question and waits, pushing for an answer.\ncoordination of B: B trails off with 'uh', not finishing the thought.",
+"reasons": {"A": ["A asks the question and waits, which puts the next turn on B.", "A's 'OK' closes the topic and frames B's answer as incomplete.", "A keeps the pressure on, which controls the pace."],
+"B": ["B trails off, which leaves the thread open for B to return to.", "B's partial answer shows B controls how much is said.", "B's hesitation delays the transition until B is ready."]},
+"rebuttals": {"A": ["A's waiting is effective only if B responds, so B decides the timing.", "A's 'OK' is an acknowledgement that does not end the discussion.", "A's pace depends on B continuing to answer."],
+"B": ["Trailing off shows B losing the thread, which gives A the next move.", "A partial answer does not control the topic, since A can press for the rest.", "Delay is a sign that A's question has forced B to pause."]}},
+"engagement": {"summary": "engagement of A: A presses for follow-through, which shows investment in the work.\nengagement of B: B admits the gap but leaves the work unexplained.",
+"reasons": {"A": ["A's push for follow-through shows A is invested in the outcome.", "A's specific reference to the method shows careful attention.", "A's pressing keeps the discussion anchored on the work."],
+"B": ["B's candour about the gap shows honesty about the state of the work.", "B's mention of other work shows B is busy and engaged elsewhere.", "B's acknowledgement shows B takes the point seriously."]},
+"rebuttals": {"A": ["Investment in follow-through is a demand that B can meet or refuse.", "Careful attention is only useful if B accepts the method A names.", "Pressing depends on B continuing to respond."],
+"B": ["Candour about a gap is a concession that weakens B's standing.", "Being busy with other work is a reason for the gap, not a sign of control.", "Taking the point seriously is passive and does not change the outcome."]}}
+}}

@@ -1,0 +1,104 @@
+{
+ "Wu graph, reasons only (Haiku args, Haiku scores)": {
+  "correct": 103,
+  "acc": 68.7,
+  "wins": 46,
+  "losses": 28,
+  "p": 0.04739297550405176,
+  "boot": [
+   0.7,
+   23.6
+  ]
+ },
+ "Wu graph, reasons + rebuttals (Haiku args, Haiku scores)": {
+  "correct": 101,
+  "acc": 67.3,
+  "wins": 44,
+  "losses": 28,
+  "p": 0.07636915467183139,
+  "boot": [
+   -0.8,
+   22.4
+  ]
+ },
+ "Wu graph, all relations (Haiku args, Haiku scores)": {
+  "correct": 102,
+  "acc": 68.0,
+  "wins": 45,
+  "losses": 28,
+  "p": 0.060370037339928545,
+  "boot": [
+   0.0,
+   22.9
+  ]
+ },
+ "sum of reason scores, no graph": {
+  "correct": 103,
+  "acc": 68.7,
+  "wins": 46,
+  "losses": 28,
+  "p": 0.04739297550405176,
+  "boot": [
+   0.7,
+   23.6
+  ]
+ },
+ "zero-shot haiku": {
+  "correct": 102,
+  "acc": 68.0,
+  "wins": 43,
+  "losses": 26,
+  "p": 0.05328936381651365,
+  "boot": [
+   -0.7,
+   23.2
+  ]
+ },
+ "zero-shot sonnet": {
+  "correct": 114,
+  "acc": 76.0,
+  "wins": 53,
+  "losses": 24,
+  "p": 0.0012632268710478355,
+  "boot": [
+   9.6,
+   29.8
+  ]
+ },
+ "Jev direct (for reference)": {
+  "correct": 107,
+  "acc": 71.3,
+  "wins": 34,
+  "losses": 12,
+  "p": 0.0016414913408482334,
+  "boot": [
+   6.8,
+   22.0
+  ]
+ },
+ "Wu graph, reasons only (Haiku args, Jev scores)": {
+  "correct": 110,
+  "acc": 73.3,
+  "wins": 36,
+  "losses": 11,
+  "p": 0.00034600114031491097
+ },
+ "Wu graph, reasons + rebuttals (Haiku args, Jev scores)": {
+  "correct": 105,
+  "acc": 70.0,
+  "wins": 36,
+  "losses": 16,
+  "p": 0.0077874363057435225
+ },
+ "Wu graph, all relations (Haiku args, Jev scores)": {
+  "correct": 105,
+  "acc": 70.0,
+  "wins": 36,
+  "losses": 16,
+  "p": 0.0077874363057435225
+ },
+ "sum of reason scores, no graph (Jev scores)": {
+  "correct": 110,
+  "acc": 73.3
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "id": "27",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A asks for a reminder and reformulates the terms as questions, sounding deferential and unsure.\nstyle of B: B answers quickly and corrects A's wording, speaking with the confidence of someone who knows the terms.",
+   "reasons": {
+    "A": [
+     "A's direct request for a definition makes A the one steering what gets explained.",
+     "A's echo of B's terms, such as 'Close mike training', shows A shaping the vocabulary.",
+     "A's 'Uh, sorry?' gets B to restate, which gives A control over the pace."
+    ],
+    "B": [
+     "B supplies the definitions and corrections, which makes B the authority on the terminology.",
+     "B's quick correction of A's phrasing sets the standard for the terms.",
+     "B's completion of the list of conditions gives B the last word on the content."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Asking for a reminder shows A is following B's explanation, so the steering belongs to B.",
+     "Echoing terms back is repetition that gives A no authority over the vocabulary.",
+     "Asking B to restate shows A depends on B for the answer."
+    ],
+    "B": [
+     "B's corrections are minor and A's question forced B to explain, so the steering was A's.",
+     "B's correction of wording is reactive, so it does not establish authority over the terms.",
+     "B's list is interrupted by A's question, which shows A set the pace."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A asks what the term 'highly mismatched' means and reflects back the training conditions.\ncontent of B: B defines the training conditions, clean and close-microphone against distant microphone, and the speed.",
+   "reasons": {
+    "A": [
+     "A's question introduces the term the exchange turns on.",
+     "A's reflection of 'close mike training' confirms the content A wants to pin down.",
+     "A's question sets the subject matter of the conversation."
+    ],
+    "B": [
+     "B supplies the actual definitions of the training conditions, which carry the substance.",
+     "B adds the detail about distant microphones and high speed, widening the information exchanged.",
+     "B's answer is the factual content that resolves A's question."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A's question only requests a definition, and B's answer supplies the substance.",
+     "Reflecting a term back adds no information, so the content is B's.",
+     "A question about a term shows A lacks the information B holds."
+    ],
+    "B": [
+     "B's definitions are recall that A asked for, so A's question set the content.",
+     "Adding a detail corrects what A missed rather than introducing a topic B chose.",
+     "An answer to a question is reactive and does not give B control of the subject."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A stops to ask for clarification and yields the floor to B for the explanation.\ncoordination of B: B takes the floor twice and finishes the explanation before trailing off.",
+   "reasons": {
+    "A": [
+     "A's interruption to ask for clarification shows A manages the flow of the exchange.",
+     "A's repeated term gives B room to continue, which shows balanced turn-taking.",
+     "A's request lets B complete the explanation, so A controls when it ends."
+    ],
+    "B": [
+     "B holds the floor for the full explanation, which gives B control of the turn sequence.",
+     "B's second turn corrects A and then continues, so B decides the sequence.",
+     "B's trailing 'Well -' invites A to continue, which signals B controls the pause."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A's question is an interruption that gives up the floor rather than managing it.",
+     "Repeating a term is an attempt to confirm, which is a passive move.",
+     "A's request depends on B's answer, so the sequence is B's."
+    ],
+    "B": [
+     "B's long turn was possible only because A allowed it.",
+     "B's correction reacts to A's wrong term, so B responds rather than controls.",
+     "B's 'Well -' is a stall that gives A the next move."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages by asking for clarification and echoing the terms back to check understanding.\nengagement of B: B engages by supplying the missing terms and leaving a pause that invites A to continue.",
+   "reasons": {
+    "A": [
+     "A's clarification request shows active interest in understanding the terms.",
+     "A's echo of the terms checks understanding, a sign of involvement.",
+     "A's question keeps the topic going."
+    ],
+    "B": [
+     "B supplies missing terms, which shows B is invested in the exchange.",
+     "B's correction shows attention to precision.",
+     "B's trailing pause invites A to continue, which signals engagement."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A's question asks for basic information, which is shallow engagement.",
+     "Echoing terms can be a habit rather than real involvement.",
+     "Keeping a topic going by asking for a definition is passive."
+    ],
+    "B": [
+     "B's answers are the minimum needed to respond to A's question.",
+     "A correction of wording is a narrow form of attention, not deep involvement.",
+     "A trailing pause is a stall, not an invitation."
+    ]
+   }
+  }
+ }
+}

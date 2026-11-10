@@ -1,0 +1,113 @@
+{
+ "id": "126",
+ "aspects": {
+  "style": {
+   "summary": "style of A: A is explanatory and casual, with a long turn that moves from channel width to normalization.\nstyle of B: B gives only 'Uh-huh' and 'Yeah' backchannels.",
+   "reasons": {
+    "A": [
+     "A's long explanatory turn sets an expert tone.",
+     "A's casual 'Oh, and suddenly' shows a relaxed command of the topic.",
+     "A's proposal of normalization on test data shows authority over the method."
+    ],
+    "B": [
+     "B's backchannels are cooperative and leave A's register in place.",
+     "B's 'Yeah' keeps the exchange friendly.",
+     "B's acknowledgment shows deference that keeps the mood calm."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A long explanation can be one-sided, and B's cooperative listening is more persuasive.",
+     "A casual tone can sound unsure, which weakens A's claim.",
+     "Proposing a method is an offer that B could question."
+    ],
+    "B": [
+     "B's backchannels only confirm, so B has no influence over the tone.",
+     "Deference is passive and gives A the stronger register.",
+     "A 'Yeah' does not challenge A's authority."
+    ]
+   }
+  },
+  "content": {
+   "summary": "content of A: A describes the channel going to four thousand hertz, the improvement it gave, and vocal tract length normalization on test data versus both.\ncontent of B: B gives backchannels with no substantive content.",
+   "reasons": {
+    "A": [
+     "A supplies the substance: the channel bandwidth and the normalization options.",
+     "A's expectation about the gains from test-only versus both sets the content.",
+     "A's description of the improvement frames the outcome."
+    ],
+    "B": [
+     "B's acknowledgments keep the content open for A to define.",
+     "B's silence on the detail avoids shaping the content.",
+     "B's acceptance lets the substance stand as A states it."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "A holds the substance, so A controls the content.",
+     "A's expectation is A's own framing.",
+     "A's description of the gains sets what matters."
+    ],
+    "B": [
+     "B's silence is an abdication, not a decision.",
+     "Keeping content open is passive.",
+     "Letting A define the substance is not B's framing."
+    ]
+   }
+  },
+  "coordination": {
+   "summary": "coordination of A: A holds long turns and moves between ideas in one continuous stream.\ncoordination of B: B gives short backchannels and leaves the turns with A.",
+   "reasons": {
+    "A": [
+     "A holds the floor through several ideas, which shows control of the turn.",
+     "A moves from channel width to normalization without a break, showing command of the sequence.",
+     "A's long turn sets the order of the points."
+    ],
+    "B": [
+     "B's short replies keep the turns clean.",
+     "B's 'Yeah' signals readiness for the next point.",
+     "B lets A finish, which keeps the exchange moving."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Holding the floor by default is not managing the turns.",
+     "A continuous stream gives B no chance to shape the order.",
+     "A long turn is a monologue, which is passive for the listener."
+    ],
+    "B": [
+     "B's short replies give A the floor, so B has ceded the sequence.",
+     "A 'Yeah' signals waiting, which means B is following.",
+     "Letting A finish means B has no part in the order of points."
+    ]
+   }
+  },
+  "engagement": {
+   "summary": "engagement of A: A engages in detail, explaining the method and what to expect from it.\nengagement of B: B engages minimally through backchannels.",
+   "reasons": {
+    "A": [
+     "A's detailed explanation shows strong involvement in the method.",
+     "A's expectations about the gains show engagement with the outcome.",
+     "A's casual remarks show investment in the work."
+    ],
+    "B": [
+     "B's 'Uh-huh' shows B is following closely.",
+     "B's 'Yeah' signals active listening.",
+     "B's acknowledgments show attention to the detail."
+    ]
+   },
+   "rebuttals": {
+    "A": [
+     "Detail on a method is what the speaker is expected to give.",
+     "Expecting gains is a routine remark, not deep investment.",
+     "Casual remarks are a style, not evidence of personal stake."
+    ],
+    "B": [
+     "Backchannels show listening, not involvement.",
+     "Acknowledgment is a minimal response.",
+     "Attention shown through a backchannel is passive."
+    ]
+   }
+  }
+ }
+}

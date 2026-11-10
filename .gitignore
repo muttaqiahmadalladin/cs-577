@@ -1,0 +1,10 @@
+__pycache__/
+*.aux
+*.log
+*.blg
+*.out
+icsi/
+sources/
+work/
+*.zip
+payloads/

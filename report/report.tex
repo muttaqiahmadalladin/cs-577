@@ -1,0 +1,204 @@
+\documentclass[11pt]{article}
+
+\usepackage[preprint]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title{Revisiting Multi-Agent Social Reasoning for Conversational Power:\\Factor Graphs, Decision Models, and Context}
+
+\author{Krish Patel \\
+  Purdue University \And
+  Jiwon Kim \\
+  Purdue University \And
+  Muttaqi Ahmad Alladin \\
+  Purdue University}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\citet{wu2025power} predict which of two speakers in a six-turn meeting excerpt is the professor, with a factor graph over LLM-written reasons and rebuttals.
+We proposed to improve the graph with quote-checked arguments and Dung's grounded extension.
+On the 151 released snippets neither change helps, and no method we tried scores above the majority label.
+We then rebuilt the snippets from the ICSI Meeting Corpus, taking speaker turns from the corpus itself.
+On the 150 rebuilt snippets a System One decision model (Jev) identifies the professor in 71.3\% of cases against a 56.7\% majority baseline, and in 89.3\% when it also sees 60 segments of meeting on each side.
+The factor graph of \citet{wu2025power}, run with arguments written and scored by Claude Haiku, reaches 68.0\%, the same as asking Haiku directly.
+A factor graph built from typed yes/no statements, with no generated arguments, matches the direct question at every context length.
+\end{abstract}
+
+\section{Introduction}
+
+\citet{wu2025power} study professor-student exchanges of six turns from the ICSI Meeting Corpus \citep{janin2003icsi} and take the professor to hold more power.
+They report 46.3\% for six PhD judges, 49.0\% for GPT-3.5 on the snippet alone, and 54.3\% for a factor graph over LLM-written reasons and rebuttals solved with AD3 \citep{martins2011augmented}.
+In the label file they released, speaker A is the higher-power speaker in 83 of 151 rows, so always answering A scores 55.0\%.
+
+Our proposal kept their cached arguments and changed three things: a quote check on every argument, a rebuttal prompt that shows the rebuttal, and Dung's grounded extension \citep{dung1995acceptability} in place of their XOR program.
+Section~\ref{sec:released} reports those experiments on the released snippets.
+Section~\ref{sec:data} is reserved for the description of our data.
+Section~\ref{sec:rebuilt} reports the same task on snippets rebuilt from the corpus, with the original factor graph, a decision model, zero-shot LLMs, and longer context.
+
+\section{The released snippets}
+\label{sec:released}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrr}
+\toprule
+Method & Correct & Acc. \\
+\midrule
+Always A & 83 & 55.0 \\
+XOR graph, cached GPT-3.5 scores & 82 & 54.3 \\
+Grounded extension, as proposed & 69 & 45.7 \\
+XOR graph with quote filter & 64 & 42.4 \\
+Gemma 4 zero-shot & 66 & 43.7 \\
+Jev, ``is X the professor'' & 72 & 47.7 \\
+XOR graph, Jev scores & 76 & 50.3 \\
+Preference grounded, cached scores & 79 & 52.3 \\
+Preference grounded, Jev scores & 71 & 47.0 \\
+Typed-statement graph (Jev) & 77 & 51.0 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy on the 151 released snippets. Beating the 55.0\% base rate at $p<0.05$ needs 94 correct.}
+\label{tab:released}
+\end{table}
+
+Table~\ref{tab:released} lists the runs.
+Our reimplementation of the XOR graph as an integer program reproduces the published 54.3\% exactly (82 of 151).
+The quote filter kept 33.8\% of the 7,248 arguments and lowered accuracy.
+
+\paragraph{The grounded extension is degenerate as we specified it.}
+Every reason has one paired rebuttal and nothing attacks a rebuttal, so every rebuttal is \textsc{in} and all 3,624 reasons are \textsc{out}.
+All 151 decisions fall to the tie-break.
+Removing weak rebuttals does not help, because we also made each reason for A and each reason for B attack each other, and under grounded semantics a mutual attack leaves both arguments undecided.
+A preference-based framework, where an attack succeeds only when the attacker scores at least as high as its target, removes both problems and gives a decision from \textsc{in} counts on every snippet.
+It is well behaved and no more accurate (79 of 151 with cached scores).
+
+\paragraph{Rescoring does not help.}
+A logistic regression fit to the cached validity and grounding scores, evaluated leave-one-out, reaches 53.0 to 57.0\%.
+Rescoring all arguments with Jev, including the corrected rebuttal question on all 3,624 rebuttals, gives 50.3\% under the XOR graph.
+
+\section{Data}
+\label{sec:data}
+
+\emph{This section is intentionally left incomplete in this draft.}
+It will describe the rebuilt snippet set and how it relates to the released file.
+The construction procedure is summarized at the start of Section~\ref{sec:rebuilt} and documented step by step, with code that rebuilds the data from its public sources, in the project repository.
+
+\section{Snippets rebuilt from the corpus}
+\label{sec:rebuilt}
+
+\paragraph{Construction.}
+We located each released snippet in the original ICSI transcripts by exact match on its sequence of segment texts.
+All 151 snippets match exactly one place in the corpus.
+We then rebuilt each snippet from those corpus segments: speakers are the corpus participant IDs, consecutive segments by one participant form a turn, and the professor is the participant whose education level in the corpus metadata is Professor.
+One snippet contains a single speaker and is dropped, leaving 150, with the professor as A in 85 (a 56.7\% base rate).
+For longer context we add 15 or 60 corpus segments on each side, with other participants shown as C, D, and so on.
+The released and rebuilt inputs differ in how turns are segmented and assigned to speakers; we defer discussion of that difference to Section~\ref{sec:data}.
+
+\paragraph{Jev.}
+Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the rebuilt snippets were fixed before that data was built.}
+The direct question is ``Is speaker X the professor?'', asked for A and for B, and we predict the speaker with the higher probability.
+
+\paragraph{The factor graph of Wu et al.}
+We ran their method on the rebuilt snippets with arguments from a current model.
+Following their prompts, Claude Haiku wrote four aspect summaries, three reasons per speaker per aspect, and one rebuttal per reason.
+A separate Haiku instance scored validity and grounding for each argument and similarity and contradiction for reason pairs.
+No instance saw labels.
+Their rule file and weights (reason 20, rebuttal 18) do the inference, in the three variants of the paper.
+We also scored the same arguments with Jev, one call per snippet.
+
+\paragraph{Typed-statement factor graph.}
+We also keep their graph and replace the generated text.
+For each of their four aspects we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
+Jev's probability for a statement about X is the weight of a reason for X, in the manner of \citet{kassner2023rationality}, and the same statement about the other speaker is its rebuttal.
+One call with 24 questions replaces the generation and scoring calls for 48 arguments per snippet.
+Unlike the argumentation scoring studied by \citet{sanayei2025debates}, no model is asked to reason over the graph.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrr}
+\toprule
+ & Rel. & Rebuilt & $\pm$15 & $\pm$60 \\
+\midrule
+More words & 46.0 & 66.7 & 66.0 & 68.7 \\
+Longer turns & & 68.0 & 69.3 & 66.7 \\
+\midrule
+Wu graph, reasons only & & 68.7 & & \\
+Wu graph, + rebuttals & & 67.3 & & \\
+Wu graph, all relations & & 68.0 & & \\
+Wu graph (Jev), reasons only & & 73.3 & & \\
+Wu graph (Jev), + rebuttals & & 70.0 & & \\
+Wu graph (Jev), all relations & & 70.0 & & \\
+Haiku zero-shot & & 68.0 & & \\
+Sonnet zero-shot & & 76.0 & & \\
+\midrule
+Jev, professor & 48.0 & 71.3 & 84.7 & 89.3 \\
+Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
+Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph rows use Claude Haiku arguments, scored by Haiku or, where marked, by Jev. Blank cells were not run.}
+\label{tab:rebuilt}
+\end{table}
+
+\paragraph{Results.}
+Table~\ref{tab:rebuilt} gives accuracy by input.
+On the rebuilt snippets at the same span, the direct Jev question identifies the professor in 107 of 150 cases.
+Against always answering A this is 34 wins and 12 losses (exact McNemar $p=0.0016$), and a bootstrap that resamples whole meetings gives a 95\% interval of 6.7 to 22.0 points for the difference.
+The same question on the released text scores 72 of 150, and the paired contrast between the two inputs is 52 wins to 17 losses ($p<0.0001$).
+Context helps further: $\pm$15 segments against the same span is 30 wins to 10 losses ($p=0.002$).
+The word-count rules reach 66.7\% and 68.0\%, but their paired tests against the majority label are not significant ($p=0.10$ and $p=0.053$).
+
+The factor graph of \citet{wu2025power} reaches 68.0\% with all relations.
+That equals Haiku asked directly (68.0\%, 8 wins to 8 losses) and a plain sum of the same reason scores with no graph (68.7\%).
+Rebuttals and relations do not add accuracy: the full graph against reasons only is 6 wins to 7 losses.
+A stronger model asked directly does better than the graph (Sonnet 76.0\%, 21 wins to 9 losses, $p=0.043$).
+Sonnet and Jev are not distinguishable at the same span (27 to 20, $p=0.38$).
+
+Scoring the same Haiku arguments with Jev instead of Haiku raises the graph to 73.3\% with reasons only and 70.0\% with rebuttals or all relations.
+The full graph with Jev scores is again level with the direct Jev question (12 wins to 14 losses, $p=0.85$), and a plain sum of the Jev reason scores also gives 73.3\%.
+
+The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
+It is a cheaper way to run the method and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.
+
+Jev's probabilities are informative on the rebuilt snippets.
+Its Brier score is 0.189 at the same span and 0.095 at $\pm$60, against 0.246 for the base rate, and its most confident fifth of answers is 93.3\% correct at the same span.
+
+\section{Limitations}
+
+The order of work was exploratory.
+The rebuilt set was constructed after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
+The questions used on the rebuilt snippets were written before that data existed, and each run was made once.
+
+The Claude run is not a call-by-call rerun of the pipeline of \citet{wu2025power}.
+Each snippet's arguments were written in one pass, so reasons were written with the conversation in view, and the scores are stated probabilities with about 15 distinct values, not token probabilities.
+The model is Claude Haiku, not GPT-3.5.
+The repository includes a script for the call-by-call version.
+
+The rebuilt set has four professors, and one of them is the professor in 110 of the 150 snippets.
+Jev's accuracy for that professor is 69.1\% at the same span, and 73.3 to 100\% for the others, so the result is not carried by one person, but the meeting-level bootstrap is the more honest interval.
+Most of the non-professors hold a PhD, so ``student'' follows \citet{wu2025power} and not the metadata.
+With 60 extra segments a model can use cues that a six-turn excerpt lacks, including how others address the two speakers.
+
+We did not rerun GPT-3.5, Gemma, or a human study on the rebuilt snippets.
+Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed.
+The 40-item human audit from our proposal was not completed.
+
+Earlier work predicts power from word choice and thread structure with supervised models \citep{danescu2012echoes,prabhakaran2014power}, and \citet{ziems2024css} find that LLMs often trail such models.
+Our numbers say only that the role is recoverable from these excerpts, and they are not a comparison with that line of work.
+
+\section{Reproducibility}
+
+The repository contains the rebuilt snippets with corpus offsets, a builder that regenerates them byte for byte from three public files (the released \texttt{meeting.csv} and the two ICSI annotation archives), every model answer, and the analysis scripts.\footnote{\url{https://github.com/muttaqiahmadalladin/cs-577}}
+The ICSI corpus is distributed under CC BY 4.0.
+
+\bibliography{references}
+
+\end{document}

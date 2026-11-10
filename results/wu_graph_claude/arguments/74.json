@@ -1,0 +1,22 @@
+{"id": "74", "aspects": {
+  "style": {"summary": "style of A: A is minimal, with Yeah and Mm-hmm, and makes a brief proposal.\nstyle of B: B is casual and conditional, with I mean, uh, if you can fit it in, and a trailing reveal.",
+    "reasons": {"A": ["A's brief proposal keeps the options simple, which lets A define the scope.", "A's minimal responses avoid committing A to B's assessment.", "A's Yeah and Mm-hmm show agreement on A's terms."],
+      "B": ["B's conditional phrasing gives B the final say on whether the proposal can happen.", "B's casual tone makes B's assessment sound authoritative in a relaxed way.", "B's trailing reveal holds B's most important point back."]},
+    "rebuttals": {"A": ["A's proposal depends on B's condition, so B decides whether it happens.", "A's minimal responses are cheap, and B's endorsement is what counts.", "A's scope is subject to B's condition, so B sets the boundary."],
+      "B": ["B's condition is hedged, and A can insist on the proposal, so A keeps the initiative.", "B's casual tone does not establish authority, since A's proposal is what is being evaluated.", "B's trailing reveal is never shared, so A's proposal is the substance on the table."]}},
+  "content": {"summary": "content of A: A proposes putting one single K_L_T at the end.\ncontent of B: B evaluates the cost as low maintenance and reveals another piece of information.",
+    "reasons": {"A": ["A's proposal sets the option under consideration.", "A's suggestion defines the technical approach the content is built on.", "A's proposal gives the content a concrete starting point."],
+      "B": ["B's evaluation of low maintenance supplies the key judgement on the content.", "B's additional information is content A does not have.", "B's assessment of fit makes the content depend on B's view."]},
+    "rebuttals": {"A": ["A's approach is only a suggestion, so B's evaluation determines whether it becomes content.", "A's starting point is a single option, and B's judgement of its cost is what matters.", "A's proposal can be refined in response to B's fit condition, which means B shapes the content."],
+      "B": ["B's low maintenance verdict is B's own view, and A's proposal is what that verdict is about, so A sets the question.", "B's extra information is never disclosed, so it does not form content.", "B's fit assessment is conditional, and A's proposal is the more concrete content."]}},
+  "coordination": {"summary": "coordination of A: A gives short turns and yields.\ncoordination of B: B takes the closing turn and leaves a hanging thought.",
+    "reasons": {"A": ["A's short turns keep the floor available for A to retake.", "A's yielding lets A choose when to re-enter.", "A's quick responses keep the sequence moving in A's favour."],
+      "B": ["B takes the closing turn, which gives B the last word.", "B's hanging thought holds the next move open for B.", "B's control of how the exchange ends gives B influence."]},
+    "rebuttals": {"A": ["A's option to retake the floor is limited by B's extended turns.", "A's yielding is followed by B's closing, so the ending is B's.", "A's quick responses do not change B's control of the sequence."],
+      "B": ["B's last word is answered by A's proposal, which keeps the exchange open.", "B's hanging thought is unresolved, so A can take the next move.", "B's ending does not control A's option to continue."]}},
+  "engagement": {"summary": "engagement of A: A is engaged in proposing.\nengagement of B: B is engaged and holds back information.",
+    "reasons": {"A": ["A's proposal shows A is invested in the technical solution.", "A's proposal invites B to respond, which keeps A central.", "A's engagement is directed at a concrete plan."],
+      "B": ["B's holding back of information shows B is strategic about what to share.", "B's evaluation shows B is actively assessing the plan.", "B's engagement lets B decide when to disclose more."]},
+    "rebuttals": {"A": ["A's investment is in a plan that B must still approve, so B's engagement is what counts.", "A's invitation is answered by B's conditional, so the engagement is B's to shape.", "A's concrete plan depends on B's fit, so B holds the decision."],
+      "B": ["B's holding back is unexplained, so A can ask for the information directly.", "B's assessment is brief and not developed, so A's proposal is what is engaged.", "B's control of disclosure is not used, so the engagement belongs to A."]}}
+}}
