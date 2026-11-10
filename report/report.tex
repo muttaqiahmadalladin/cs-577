@@ -113,6 +113,15 @@ No instance saw labels.
 Their rule file and weights (reason 20, rebuttal 18) do the inference, in the three variants of the paper.
 We also scored the same arguments with Jev, one call per snippet.
 
+\paragraph{Grounded extension.}
+We also ran the aggregator from our proposal on the same arguments.
+The framework has 48 arguments per snippet, 24 reasons and their 24 rebuttals.
+A reason has strength $P(\textrm{valid})\cdot P(\textrm{grounded})$ and a rebuttal has strength $P(\textrm{counters its reason})\cdot P(\textrm{grounded})$.
+In the \emph{proposed} relation every rebuttal attacks its reason, and every reason for A and every reason for B attack each other.
+In the \emph{preference} relation an attack succeeds only if the attacker is at least as strong as its target: a rebuttal defeats its reason when it is no weaker, and a reason defeats an opposing reason when it is strictly stronger.
+The grounded labelling marks an argument \textsc{in} when all its attackers are \textsc{out} and \textsc{out} when some attacker is \textsc{in}.
+The speaker with more \textsc{in} reasons is predicted, with ties going to the larger sum of reason strengths and then to A.
+
 \paragraph{Typed-statement factor graph.}
 We also keep their graph and replace the generated text.
 For each of their four aspects we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
@@ -136,6 +145,12 @@ Wu graph, all relations & & 68.0 & & \\
 Wu graph (Jev), reasons only & & 73.3 & & \\
 Wu graph (Jev), + rebuttals & & 70.0 & & \\
 Wu graph (Jev), all relations & & 70.0 & & \\
+\midrule
+Grounded, proposed & & 68.7 & & \\
+Grounded, preference & & 64.7 & & \\
+Grounded (Jev), proposed & & 73.3 & & \\
+Grounded (Jev), preference & & 73.3 & & \\
+\midrule
 Haiku zero-shot & & 68.0 & & \\
 Sonnet zero-shot & & 76.0 & & \\
 \midrule
@@ -144,7 +159,7 @@ Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
 Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
 \bottomrule
 \end{tabular}
-\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph rows use Claude Haiku arguments, scored by Haiku or, where marked, by Jev. Blank cells were not run.}
+\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph and grounded rows use Claude Haiku arguments, scored by Haiku or, where marked, by Jev. Blank cells were not run.}
 \label{tab:rebuilt}
 \end{table}
 
@@ -164,6 +179,11 @@ Sonnet and Jev are not distinguishable at the same span (27 to 20, $p=0.38$).
 
 Scoring the same Haiku arguments with Jev instead of Haiku raises the graph to 73.3\% with reasons only and 70.0\% with rebuttals or all relations.
 The full graph with Jev scores is again level with the direct Jev question (12 wins to 14 losses, $p=0.85$), and a plain sum of the Jev reason scores also gives 73.3\%.
+
+The grounded extension behaves on the rebuilt snippets as it did on the released ones.
+Under the proposed relation no reason is ever \textsc{in}, so all 150 decisions are made by the tie-break, and the 68.7\% (Haiku scores) and 73.3\% (Jev scores) are simply the sums of reason strengths.
+The preference relation gives a real decision: with Jev scores every snippet is decided by \textsc{in} counts (1,517 of 3,600 reasons \textsc{in}) and accuracy is 73.3\%, level with the direct Jev question (13 wins to 10 losses, $p=0.68$).
+With the coarser Haiku scores it reaches 64.7\%.
 
 The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
 It is a cheaper way to run the method and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.

@@ -30,9 +30,41 @@ Jev is TypeSafe AI's decision model (`jev-1.14.0` in every response). Every ques
 - **Direct question.** Predict the speaker with the higher Jev probability for "Is speaker X the professor?".
 - **XOR factor graph.** The factor graph of Wu et al.: their rule file, reason weight 20, rebuttal weight 18, solved exactly as an integer program (PuLP with CBC). The implementation is `quote_power.inference.xor` in KrishMay05/nlp_research.
 - **Typed-statement factor graph.** The same graph with the generated text replaced by 12 fixed yes/no statements, three per aspect. Jev's probability for a statement about X weights a reason for X; the same statement about the other speaker is its rebuttal. Relation variables are unused.
-- **Grounded extension.** Dung's grounded labelling over reasons and rebuttals, as in the proposal, and a preference-based variant in which an attack succeeds only if the attacker scores at least as high as its target (`scripts/exploratory/`).
+- **Grounded extension.** Dung's grounded labelling over reasons and rebuttals. See the section below. On the rebuilt snippets it is `scripts/grounded_extension.py`; the earlier runs on the released snippets are in `scripts/exploratory/`.
 - **Wu graph with Claude arguments.** The XOR factor graph over the Claude-written arguments and scores, in the three variants of the paper: reasons only, reasons plus rebuttals, all relations.
 - **Word-count rules.** "Whoever says more words" and "whoever has longer turns" is the professor.
+
+## Grounded extension: method
+
+**Arguments.** Each snippet has 48 arguments: for each of the four aspects, three reasons that A is the professor, three reasons that B is, and one rebuttal for every reason. A reason for X supports the claim "X is the professor".
+
+**Strengths.** A reason has strength P(valid) x P(grounded). A rebuttal has strength P(counters its reason) x P(grounded). The probabilities come from the Haiku scores or from the Jev scores.
+
+**Attack relations.** Two are evaluated.
+
+| Relation | Rebuttal against its reason | Reason for A against reason for B (and the reverse) |
+| --- | --- | --- |
+| Proposed | Always attacks | Always attack each other |
+| Preference | Attacks only if its strength is at least the reason's | Attacks only if strictly stronger |
+
+The preference relation is preference-based argumentation in the sense of Amgoud and Cayrol: an attack from a weaker argument on a stronger one does not succeed.
+
+**Labelling.** The grounded labelling is the least fixed point of: an argument is IN when every attacker is OUT (so an unattacked argument is IN), OUT when at least one attacker is IN, and UNDECIDED otherwise. It is computed by iterating those two rules from the empty labelling until nothing changes.
+
+**Decision.** Predict the speaker with more IN reasons. Ties go to the speaker with the larger sum of reason strengths, then to A. Both tie rules come from the proposal.
+
+**Why the proposed relation is degenerate.** No argument attacks a rebuttal, so every rebuttal is IN and every reason is OUT. Even if weak rebuttals are removed, a reason for A and a reason for B that attack each other form a two-cycle, which the grounded labelling leaves UNDECIDED. Either way no reason is IN, and the decision is made entirely by the tie-break, that is, by the sum of reason strengths. The preference relation breaks both problems because at most one direction of each attack succeeds.
+
+**Results on the 150 rebuilt snippets (same span).**
+
+| Relation | Scores | Accuracy | Snippets decided by IN count | Reasons IN |
+| --- | --- | ---: | ---: | ---: |
+| Proposed | Haiku | 68.7% | 0 | 0 of 3,600 |
+| Preference | Haiku | 64.7% | 141 | 849 of 3,600 |
+| Proposed | Jev | 73.3% | 0 | 0 of 3,600 |
+| Preference | Jev | 73.3% | 150 | 1,517 of 3,600 |
+
+The preference relation with Jev scores is level with the direct Jev question (13 wins to 10 losses, exact McNemar p = 0.68). Full numbers are in `results/wu_graph_claude/grounded_results.json`.
 
 ## Scripts
 
@@ -42,6 +74,7 @@ Jev is TypeSafe AI's decision model (`jev-1.14.0` in every response). Every ques
 | `scripts/jev_collect.py` | Sends the Jev requests for arms 1 to 4; reads `TYPESAFE_API_KEY` from the environment |
 | `scripts/final_analysis.py` | Accuracy, paired tests, bootstrap and calibration for the Jev runs; writes `results/results.json` |
 | `scripts/analyze_wu_graph_claude.py` | Runs the XOR graph over the Claude arguments and scores; writes `results/wu_graph_claude/results.json` |
+| `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations; standard library only |
 | `scripts/wu_pipeline.py` | Call-by-call version of the Wu pipeline for any OpenAI-compatible API, with Jev or LLM scoring |
 | `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts |
 | `scripts/icsi.py` | MRT parsing helpers used by the analysis scripts |
