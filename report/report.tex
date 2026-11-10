@@ -1,0 +1,209 @@
+\documentclass[11pt]{article}
+
+\usepackage[preprint]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title{A Speaker-Attribution Confound in a Conversational Power Benchmark}
+
+\author{Krish Patel \\
+  Purdue University \And
+  Jiwon Kim \\
+  Purdue University \And
+  Muttaqi Ahmad Alladin \\
+  Purdue University}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Wu et al.\ predict which of two speakers in a six-turn meeting snippet is the professor, and report that people, GPT-3.5, and their factor graph all score near 50\%.
+We proposed to improve their graph with quote-checked arguments and Dung's grounded extension.
+Neither helped, and no method we tried on the 151 released snippets beat the majority label.
+Tracing every snippet back to the ICSI Meeting Corpus shows why.
+In the released file the text and the labels disagree about who is speaking: under the letter-to-person mapping that makes the labels correct, 57.6\% of the words are displayed under the other speaker's letter.
+With the same words attributed to the speakers who said them, a System One decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, and in 89.3\% when it also sees 60 segments of meeting on each side.
+A factor graph built from typed yes/no statements, with no generated arguments, matches these numbers.
+\end{abstract}
+
+\section{Introduction}
+
+\citet{wu2025power} study professor-student exchanges of six turns from the ICSI Meeting Corpus \citep{janin2003icsi} and take the professor to hold more power.
+They report 46.3\% for six PhD judges, 49.0\% for GPT-3.5 on the snippet alone, and 54.3\% for a factor graph over LLM-written reasons and rebuttals solved with AD3 \citep{martins2011augmented}.
+In the label file they released, speaker A is the higher-power speaker in 83 of 151 rows, so always answering A scores 55.0\%.
+
+Our proposal kept their cached arguments and changed three things: a quote check on every argument, a rebuttal prompt that shows the rebuttal, and Dung's grounded extension \citep{dung1995acceptability} in place of their XOR program.
+This report has three parts.
+Section~\ref{sec:released} shows that none of this, and nothing else we tried, beats the majority label on the released file.
+Section~\ref{sec:audit} shows that the released snippets misattribute speech, which accounts for those failures.
+Section~\ref{sec:corrected} reruns the task with correct attribution and with longer context.
+
+\section{The released snippets}
+\label{sec:released}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrr}
+\toprule
+Method & Correct & Acc. \\
+\midrule
+Always A & 83 & 55.0 \\
+XOR graph, cached GPT-3.5 scores & 82 & 54.3 \\
+Grounded extension, as proposed & 69 & 45.7 \\
+XOR graph with quote filter & 64 & 42.4 \\
+Gemma 4 zero-shot & 66 & 43.7 \\
+Jev, ``is X the professor'' & 72 & 47.7 \\
+XOR graph, Jev scores & 76 & 50.3 \\
+Preference grounded, cached scores & 79 & 52.3 \\
+Preference grounded, Jev scores & 71 & 47.0 \\
+Typed-statement graph (Jev) & 77 & 51.0 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy on the 151 released snippets. Beating the 55.0\% base rate at $p<0.05$ needs 94 correct.}
+\label{tab:released}
+\end{table}
+
+Table~\ref{tab:released} lists the runs.
+Our reimplementation of the XOR graph as an integer program reproduces the published 54.3\% exactly (82 of 151).
+The quote filter kept 33.8\% of the 7,248 arguments and lowered accuracy.
+
+\paragraph{The grounded extension is degenerate as we specified it.}
+Every reason has one paired rebuttal and nothing attacks a rebuttal, so every rebuttal is \textsc{in} and all 3,624 reasons are \textsc{out}.
+All 151 decisions fall to the tie-break.
+Removing weak rebuttals does not help, because we also made each reason for A and each reason for B attack each other, and under grounded semantics a mutual attack leaves both arguments undecided.
+A preference-based framework, where an attack succeeds only when the attacker scores at least as high as its target, removes both problems and gives a decision from \textsc{in} counts on every snippet.
+It is well behaved and no more accurate (79 of 151 with cached scores).
+
+\paragraph{The scores carry no signal.}
+A logistic regression fit to the cached validity and grounding scores, evaluated leave-one-out, reaches 53.0 to 57.0\%.
+Rescoring all arguments with Jev, including the corrected rebuttal question on all 3,624 rebuttals, gives 50.3\% under the XOR graph.
+
+\paragraph{Judges agree with each other and not with the labels.}
+Jev and Gemma 4 agree on 63\% of snippets ($\kappa=0.30$), and each agrees 70\% with the rule ``whoever says more words has more power'' ($\kappa=0.40$).
+Against the labels the same three score 48\%, 44\%, and 46\% ($\kappa$ from $-0.06$ to $-0.09$).
+\citet{wu2025power} report the same pattern for people: 63\% agreement between judges and 46.3\% accuracy.
+A consistent reading of the text that is unrelated to the labels suggests a problem with the pairing of text and labels.
+
+\section{Attribution audit}
+\label{sec:audit}
+
+We located each released snippet in the original ICSI transcripts by exact match on the sequence of segment texts.
+All 151 snippets match exactly one place in the corpus.
+Each matched segment carries a participant ID, and the corpus metadata gives each participant's education level.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lll}
+\toprule
+Shown & Said by & Text \\
+\midrule
+A & professor & Uh, maybe you have to\ldots \\
+A & other & Mm-hmm. \\
+B & professor & but - \\
+A & other & Yeah, I guess. \\
+B & professor & Yeah. \\
+A & professor & do you have any way of\ldots \\
+A & other & Mmm. \\
+B & other & No, we don't. \\
+B & professor & Yeah. \\
+\bottomrule
+\end{tabular}
+\caption{Released snippet 0 (meeting Bro025, abridged). The label says B holds more power. The professor's long turns appear under A.}
+\label{tab:example}
+\end{table}
+
+In the released text, each displayed turn ends with the first segment of the next speaker (Table~\ref{tab:example}).
+If each letter is read as the speaker of the last line of its turns, then in the 128 snippets where that mapping is consistent and one speaker is a professor, the released label names the professor in 128 of 128.
+Under that mapping, 7,596 of 13,185 words (57.6\%) are displayed under the other person's letter, and in 73 of the 128 snippets more than half the words are.
+Read the other way, with each letter standing for whoever says most of its words, the text is mostly right and the label names the professor's letter in only 69 of 128.
+Either way, the letter a reader sees doing the professor's talking is often not the letter the label rewards.
+The snippet construction code is not in the public repository, so we cannot say which step produced this.
+The cached GPT-3.5 arguments were generated from this text.
+We do not know whether the human judges saw the same text.
+
+\section{Corrected snippets}
+\label{sec:corrected}
+
+We rebuilt each snippet from the same corpus segments, merged consecutive segments by the same participant into a turn, and labeled the professor from the metadata.
+One snippet contains a single real speaker and is dropped, leaving 150 (85 with the professor as A, a 56.7\% base rate).
+The letters follow the released mapping where it is consistent, and 142 of 150 labels are unchanged.
+Three snippets include a third speaker, shown as C.
+For longer context we add 15 or 60 corpus segments on each side, with other participants shown as C, D, and so on.
+
+\paragraph{Jev.}
+Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the corrected snippets were fixed before the corrected data was built.}
+The direct question is ``Is speaker X the professor?'', asked for A and for B, and we predict the speaker with the higher probability.
+
+\paragraph{Typed-statement factor graph.}
+We keep the factor graph of \citet{wu2025power}, its rule file, and its weights (reason 20, rebuttal 18), and replace the generated text.
+For each of their four aspects (style, content, coordination, engagement) we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
+Jev's probability for a statement about X is the weight of a reason for X, in the manner of \citet{kassner2023rationality}, and the same statement about the other speaker is its rebuttal.
+One call with 24 questions replaces the generation and scoring calls for 48 arguments per snippet.
+Unlike the argumentation scoring studied by \citet{sanayei2025debates}, no model is asked to reason over the graph.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrr}
+\toprule
+ & Released & Corrected & $\pm$15 & $\pm$60 \\
+\midrule
+More words & 46.0 & 66.7 & 66.0 & 68.7 \\
+Longer turns & n/a & 68.0 & 69.3 & 66.7 \\
+Jev, professor & 48.0 & 71.3 & 84.7 & 89.3 \\
+Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
+Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy (\%) on the 150 usable snippets. ``Released'' uses the released text and labels. The other columns use corrected attribution with the same words and with 15 or 60 extra segments per side. Always answering A scores 56.7\%.}
+\label{tab:corrected}
+\end{table}
+
+\paragraph{Results.}
+Table~\ref{tab:corrected} gives accuracy by input.
+On the same words with correct attribution, the direct Jev question identifies the professor in 107 of 150 snippets.
+Against always answering A this is 34 wins and 12 losses (exact McNemar $p=0.0016$), and a bootstrap that resamples whole meetings gives a 95\% interval of 6.7 to 22.0 points for the difference.
+The same question on the released text scores 72 of 150, and the paired contrast between corrected and released is 52 wins to 17 losses ($p<0.0001$).
+Context helps further: $\pm$15 segments against the same span is 30 wins to 10 losses ($p=0.002$).
+The word-count rules also recover, to 66.7\% and 68.0\%, but their paired tests against the majority label are not significant ($p=0.10$ and $p=0.053$).
+
+The typed-statement graph tracks the direct question at every input (70.0\% against 71.3\% on the same span, 21 wins to 23 losses, $p=0.88$).
+It is a cheaper way to run the method of \citet{wu2025power} and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.
+
+With correct attribution Jev's probabilities become informative.
+Its Brier score is 0.189 on the same span and 0.095 at $\pm$60, against 0.246 for the base rate, and its most confident fifth of answers is 93.3\% correct on the same span.
+On the released text the most confident fifth was 47\% correct.
+
+\section{Limitations}
+
+The order of work was exploratory.
+We found the attribution problem after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
+The corrected-data questions were written before the corrected data existed, and were run once.
+
+The corrected set has four professors, and one of them is the professor in 110 of the 150 snippets.
+Accuracy for that professor is 69.1\% on the same span, and 73.3 to 100\% for the others, so the result is not carried by one person, but the meeting-level bootstrap is the more honest interval.
+Most of the non-professors hold a PhD, so ``student'' follows \citet{wu2025power} and not the metadata.
+With 60 extra segments a model can use cues that a six-turn excerpt lacks, including how others address the two speakers.
+
+Only Jev was run on the corrected snippets.
+We did not rerun GPT-3.5, Gemma, the generated-argument graph, or a human study, and the generated arguments would have to be regenerated from corrected text.
+Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed.
+The 40-item human audit from our proposal was not completed.
+
+Earlier work predicts power from word choice and thread structure with supervised models \citep{danescu2012echoes,prabhakaran2014power}, and \citet{ziems2024css} find that LLMs often trail such models.
+Our corrected numbers say only that the role is recoverable from these excerpts, and they are not a comparison with that line of work.
+
+\section{Reproducibility}
+
+The repository contains the corrected snippets with corpus offsets, every Jev answer, the analysis scripts, and a standalone script that reproduces the audit from three public files: the released \texttt{meeting.csv} and the two ICSI annotation archives.
+The ICSI corpus is distributed under CC BY 4.0.
+
+\bibliography{references}
+
+\end{document}
