@@ -1,0 +1,86 @@
+{
+ "proposed, Terra arguments, Jev scores": {
+  "correct": 100,
+  "accuracy": 66.7,
+  "vs_always_A": {
+   "wins": 32,
+   "losses": 17,
+   "mcnemar_p": 0.04438416098714981
+  },
+  "decided_by_in_count": 0,
+  "correct_among_those": 0,
+  "reasons_in": 0,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ },
+ "preference, Terra arguments, Jev scores": {
+  "correct": 105,
+  "accuracy": 70.0,
+  "vs_always_A": {
+   "wins": 33,
+   "losses": 13,
+   "mcnemar_p": 0.004533861582189047
+  },
+  "decided_by_in_count": 150,
+  "correct_among_those": 105,
+  "reasons_in": 1504,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ },
+ "proposed, Haiku arguments, Jev scores": {
+  "correct": 110,
+  "accuracy": 73.3,
+  "vs_always_A": {
+   "wins": 36,
+   "losses": 11,
+   "mcnemar_p": 0.000346001140314911
+  },
+  "decided_by_in_count": 0,
+  "correct_among_those": 0,
+  "reasons_in": 0,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ },
+ "preference, Haiku arguments, Jev scores": {
+  "correct": 110,
+  "accuracy": 73.3,
+  "vs_always_A": {
+   "wins": 35,
+   "losses": 10,
+   "mcnemar_p": 0.00024708778460080794
+  },
+  "decided_by_in_count": 150,
+  "correct_among_those": 110,
+  "reasons_in": 1517,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ },
+ "proposed, Haiku arguments, Haiku scores": {
+  "correct": 103,
+  "accuracy": 68.7,
+  "vs_always_A": {
+   "wins": 46,
+   "losses": 28,
+   "mcnemar_p": 0.04739297550405179
+  },
+  "decided_by_in_count": 0,
+  "correct_among_those": 0,
+  "reasons_in": 0,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ },
+ "preference, Haiku arguments, Haiku scores": {
+  "correct": 97,
+  "accuracy": 64.7,
+  "vs_always_A": {
+   "wins": 46,
+   "losses": 34,
+   "mcnemar_p": 0.2185180394787037
+  },
+  "decided_by_in_count": 141,
+  "correct_among_those": 92,
+  "reasons_in": 849,
+  "reasons_undecided": 0,
+  "reasons_total": 3600
+ }
+}

@@ -1,0 +1,7 @@
+{
+  "initial": "Codex exec, ephemeral, read-only, tools disabled",
+  "resumed": "same, with shell_snapshot disabled and supports_websockets false; prompts/model/reasoning/schema unchanged",
+  "workers_initial": 24,
+  "workers_resumed": 16,
+  "cash_cap_usd": 0.5
+}

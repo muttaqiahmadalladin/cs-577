@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the Wu et al. (NAACL 2025) argument pipeline on the corrected snippets.
+"""Run the Wu et al. (NAACL 2025) argument pipeline on the rebuilt snippets.
 
 Stages (all resumable; rerun the same command after an interruption):
   gen     an LLM writes aspect summaries, 3 reasons per speaker and one rebuttal per reason,

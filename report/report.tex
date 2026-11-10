@@ -27,7 +27,7 @@ We proposed to improve the graph with quote-checked arguments and Dung's grounde
 On the 151 released snippets neither change helps, and no method we tried scores above the majority label.
 We then rebuilt the snippets from the ICSI Meeting Corpus, taking speaker turns from the corpus itself.
 On the 150 rebuilt snippets a System One decision model (Jev) identifies the professor in 71.3\% of cases against a 56.7\% majority baseline, and in 89.3\% when it also sees 60 segments of meeting on each side.
-The factor graph of \citet{wu2025power}, run with arguments written and scored by Claude Haiku, reaches 68.0\%, the same as asking Haiku directly.
+Their factor graph, rerun call by call with arguments from GPT-6.1 Terra and scores from Jev, reaches 72.0\%, level with asking Terra directly (72.7\%).
 A factor graph built from typed yes/no statements, with no generated arguments, matches the direct question at every context length.
 \end{abstract}
 
@@ -106,12 +106,12 @@ Jev is a decision model that returns a probability for each typed yes/no questio
 The direct question is ``Is speaker X the professor?'', asked for A and for B, and we predict the speaker with the higher probability.
 
 \paragraph{The factor graph of Wu et al.}
-We ran their method on the rebuilt snippets with arguments from a current model.
-Following their prompts, Claude Haiku wrote four aspect summaries, three reasons per speaker per aspect, and one rebuttal per reason.
-A separate Haiku instance scored validity and grounding for each argument and similarity and contradiction for reason pairs.
-No instance saw labels.
+We ran their method on the rebuilt snippets with arguments from current models, in two ways.
+In the first, GPT-6.1 Terra wrote the arguments call by call with their prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet), with tools disabled and no access to labels.
+In the second, Claude Haiku wrote all arguments for a snippet in one pass.
+Jev scored both sets: validity and grounding of each argument, whether each rebuttal counters its reason, and similarity and contradiction of reason pairs.
+A separate Haiku instance also scored the Haiku arguments.
 Their rule file and weights (reason 20, rebuttal 18) do the inference, in the three variants of the paper.
-We also scored the same arguments with Jev, one call per snippet.
 
 \paragraph{Grounded extension.}
 We also ran the aggregator from our proposal on the same arguments.
@@ -138,53 +138,53 @@ Unlike the argumentation scoring studied by \citet{sanayei2025debates}, no model
 \midrule
 More words & 46.0 & 66.7 & 66.0 & 68.7 \\
 Longer turns & & 68.0 & 69.3 & 66.7 \\
-\midrule
-Wu graph, reasons only & & 68.7 & & \\
-Wu graph, + rebuttals & & 67.3 & & \\
-Wu graph, all relations & & 68.0 & & \\
-Wu graph (Jev), reasons only & & 73.3 & & \\
-Wu graph (Jev), + rebuttals & & 70.0 & & \\
-Wu graph (Jev), all relations & & 70.0 & & \\
-\midrule
-Grounded, proposed & & 68.7 & & \\
-Grounded, preference & & 64.7 & & \\
-Grounded (Jev), proposed & & 73.3 & & \\
-Grounded (Jev), preference & & 73.3 & & \\
-\midrule
-Haiku zero-shot & & 68.0 & & \\
-Sonnet zero-shot & & 76.0 & & \\
-\midrule
 Jev, professor & 48.0 & 71.3 & 84.7 & 89.3 \\
 Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
 Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
 \bottomrule
 \end{tabular}
-\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph and grounded rows use Claude Haiku arguments, scored by Haiku or, where marked, by Jev. Blank cells were not run.}
+\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The blank cell was not run.}
 \label{tab:rebuilt}
 \end{table}
 
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrrrr}
+\toprule
+Args. & Scores & Dir. & Reas. & +Reb. & All & Gr. \\
+\midrule
+Terra & Jev & 72.7 & 66.7 & 72.0 & 72.0 & 70.0 \\
+Haiku & Jev & 68.0 & 73.3 & 70.0 & 70.0 & 73.3 \\
+Haiku & Haiku & 68.0 & 68.7 & 67.3 & 68.0 & 64.7 \\
+\bottomrule
+\end{tabular}
+\caption{Argument-based methods on the rebuilt snippets at the same span (accuracy, \%). Rows give who wrote and who scored the arguments. ``Dir.''\ is the argument-writing model asked directly. ``Reas.'', ``+Reb.''\ and ``All'' are the three variants of the factor graph of \citet{wu2025power}. ``Gr.''\ is the grounded extension with the preference relation. For comparison, the direct Jev question scores 71.3\% and Claude Sonnet asked directly scores 76.0\%.}
+\label{tab:graph}
+\end{table}
+
 \paragraph{Results.}
-Table~\ref{tab:rebuilt} gives accuracy by input.
+Table~\ref{tab:rebuilt} gives accuracy by input for the methods that need no generated arguments.
 On the rebuilt snippets at the same span, the direct Jev question identifies the professor in 107 of 150 cases.
 Against always answering A this is 34 wins and 12 losses (exact McNemar $p=0.0016$), and a bootstrap that resamples whole meetings gives a 95\% interval of 6.7 to 22.0 points for the difference.
 The same question on the released text scores 72 of 150, and the paired contrast between the two inputs is 52 wins to 17 losses ($p<0.0001$).
 Context helps further: $\pm$15 segments against the same span is 30 wins to 10 losses ($p=0.002$).
 The word-count rules reach 66.7\% and 68.0\%, but their paired tests against the majority label are not significant ($p=0.10$ and $p=0.053$).
 
-The factor graph of \citet{wu2025power} reaches 68.0\% with all relations.
-That equals Haiku asked directly (68.0\%, 8 wins to 8 losses) and a plain sum of the same reason scores with no graph (68.7\%).
-Rebuttals and relations do not add accuracy: the full graph against reasons only is 6 wins to 7 losses.
-A stronger model asked directly does better than the graph (Sonnet 76.0\%, 21 wins to 9 losses, $p=0.043$).
-Sonnet and Jev are not distinguishable at the same span (27 to 20, $p=0.38$).
-
-Scoring the same Haiku arguments with Jev instead of Haiku raises the graph to 73.3\% with reasons only and 70.0\% with rebuttals or all relations.
-The full graph with Jev scores is again level with the direct Jev question (12 wins to 14 losses, $p=0.85$), and a plain sum of the Jev reason scores also gives 73.3\%.
+Table~\ref{tab:graph} gives the argument-based methods.
+With Terra's arguments and Jev's scores the full factor graph of \citet{wu2025power} reaches 72.0\%.
+That is level with Terra asked directly (72.7\%, 14 wins to 15 losses) and with the direct Jev question (14 to 13).
+With Haiku's arguments it reaches 70.0\% under Jev's scores and 68.0\% under Haiku's, against 68.0\% for Haiku asked directly.
+The parts of the graph do not behave consistently across the two sets of arguments.
+Rebuttals add 5.3 points with Terra's arguments (11 wins to 3 losses, $p=0.057$) and cost 3.3 points with Haiku's under the same scorer, and adding the relations changes accuracy in neither Jev-scored run.
+A plain sum of reason scores with no graph equals the reasons-only graph in all three rows.
+The best single result at this span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$).
 
 The grounded extension behaves on the rebuilt snippets as it did on the released ones.
-Under the proposed relation no reason is ever \textsc{in}, so all 150 decisions are made by the tie-break, and the 68.7\% (Haiku scores) and 73.3\% (Jev scores) are simply the sums of reason strengths.
-The preference relation gives a real decision: with Jev scores every snippet is decided by \textsc{in} counts (1,517 of 3,600 reasons \textsc{in}) and accuracy is 73.3\%, level with the direct Jev question (13 wins to 10 losses, $p=0.68$).
+Under the proposed relation no reason is ever \textsc{in} in any run, so all 150 decisions are made by the tie-break and the accuracy is that of the sum of reason strengths.
+The preference relation gives a real decision: with Jev scores every snippet is decided by \textsc{in} counts, and accuracy is 70.0\% with Terra's arguments and 73.3\% with Haiku's, the latter level with the direct Jev question (13 wins to 10 losses, $p=0.68$).
 With the coarser Haiku scores it reaches 64.7\%.
-We also searched 288 grounded policies that vary the strength definitions, the rule for when a rebuttal attacks (preference or a threshold on Jev's judgment that it counters its reason), the cross-side rule, and the decision rule.
+We also searched 288 grounded policies over the Haiku arguments and Jev scores, varying the strength definitions, the rule for when a rebuttal attacks (preference or a threshold on Jev's judgment that it counters its reason), the cross-side rule, and the decision rule.
 Choosing the best policy on a development half of the meetings and scoring it on the other half, over 500 random splits, gives 69.7\% on average against 71.5\% for the direct Jev question on the same halves, so no policy in this family improves on asking directly.
 
 The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
@@ -199,10 +199,10 @@ The order of work was exploratory.
 The rebuilt set was constructed after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
 The questions used on the rebuilt snippets were written before that data existed, and each run was made once.
 
-The Claude run is not a call-by-call rerun of the pipeline of \citet{wu2025power}.
-Each snippet's arguments were written in one pass, so reasons were written with the conversation in view, and the scores are stated probabilities with about 15 distinct values, not token probabilities.
-The model is Claude Haiku, not GPT-3.5.
-The repository includes a script for the call-by-call version.
+Neither rerun of the factor graph uses the original model.
+The Terra run follows the pipeline call by call, but the text comes from GPT-6.1 Terra and the scores from Jev, because the command-line interface we used does not expose token probabilities.
+The Haiku run wrote each snippet's arguments in one pass, so reasons were written with the conversation in view, and its Haiku scores are stated probabilities with about 15 distinct values.
+In both, each rebuttal is judged against its own reason and grounded on its own text.
 
 The rebuilt set has four professors, and one of them is the professor in 110 of the 150 snippets.
 Jev's accuracy for that professor is 69.1\% at the same span, and 73.3 to 100\% for the others, so the result is not carried by one person, but the meeting-level bootstrap is the more honest interval.

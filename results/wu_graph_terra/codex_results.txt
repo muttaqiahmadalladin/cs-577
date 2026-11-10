@@ -1,0 +1,37 @@
+Wu factor graph on 150 repaired ICSI snippets
+Terra (Codex subscription) generated the arguments; Jev-1.14.0 scored them.
+
+Direct baselines
+  Always choose A:        85/150 (56.7%)
+  Terra, who has power:  109/150 (72.7%)
+  Jev, who has power:    106/150 (70.7%)
+  Jev, who is professor: 107/150 (71.3%)
+
+Graph scoring                 Reasons only    + Rebuttals     + All relations
+Product (primary)             101/150 (67.3%) 108/150 (72.0%) 108/150 (72.0%)
+Two-score rebuttals           same as primary 108/150 (72.0%) 108/150 (72.0%)
+Paper-described averaging     102/150 (68.0%) 110/150 (73.3%) 110/150 (73.3%)
+Released logit transform      103/150 (68.7%) 109/150 (72.7%) 109/150 (72.7%)
+
+Primary full graph versus Terra direct: -1 correct.
+On the same snippets: 14 graph-only correct, 15 Terra-only correct.
+95% meeting-cluster bootstrap interval for accuracy difference: -8.3 to +7.0 points.
+
+Usage: 5,546 logged Codex requests; 150 Jev scoring calls.
+Estimated Jev charge: $0.061. Terra used the Codex subscription.
+
+Method: four aspects, three reasons per speaker per aspect, one rebuttal per reason.
+Wu’s released rule files and weight scales were used. Jev evaluates each rebuttal against its
+own reason and grounds it on its own text. The CLI does not provide native token probabilities.
+The primary scoring uses products; the paper describes averaging, evaluated separately above.
+The solver matches the cached original full-graph result of 82/151. All new results above
+use the same 150 corrected excerpts. This is a rerun with a new generator and scorer.
+Paper: https://aclanthology.org/2025.naacl-short.72/
+
+Per-case predictions, objective ties, matched comparisons, and usage are in evaluation.json.
+
+Interpretation: Adding rebuttals improved graph accuracy under every weighting scheme.
+Adding similarity and contradiction factors did not improve accuracy in any of these runs.
+The best observed graph (averaging) got one more snippet right than Terra alone; its
+95% meeting-cluster interval for that difference was -6.1 to +7.7 points.
+This does not establish an accuracy advantage for the graph.

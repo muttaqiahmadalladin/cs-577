@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Dung's grounded extension over the reasons and rebuttals of each rebuilt snippet. Standard library only.
 
-Arguments   24 reasons (3 per speaker per aspect) and 24 rebuttals (one per reason), from
-            results/wu_graph_claude/arguments/. A reason for X supports "X is the professor".
+Arguments   24 reasons (3 per speaker per aspect) and 24 rebuttals (one per reason), written by GPT-6.1 Terra
+            (results/wu_graph_terra/) or Claude Haiku (results/wu_graph_claude/). A reason for X supports "X is the professor".
 Strengths   reason   s = P(valid) * P(grounded)
             rebuttal s = P(counters its reason) * P(grounded)
-            taken from the Haiku scores (scores/) or the Jev scores (jev_scores.jsonl).
+            taken from the Jev scores (jev_scores.jsonl in each folder) or, for the Haiku arguments, the Haiku scores (scores/).
 
 Two attack relations are evaluated:
 
@@ -88,10 +88,13 @@ def mcnemar(wins, losses):
 
 def main():
     gold = {d["id"]: d["professor"] for d in map(json.loads, open(ROOT / "data" / "icsi_rebuilt_snippets.jsonl"))}
-    jev = {d["id"]: d["answers"] for d in map(json.loads, open(RUN / "jev_scores.jsonl"))}
+    terra = ROOT / "results" / "wu_graph_terra"
+    jev_haiku = {d["id"]: d["answers"] for d in map(json.loads, open(RUN / "jev_scores.jsonl"))}
+    jev_terra = {d["id"]: d["answers"] for d in map(json.loads, open(terra / "jev_scores.jsonl"))}
     ids = list(gold); out = {}
     print(f"{len(ids)} snippets; always A is correct in {sum(v == 'A' for v in gold.values())}")
-    for scorer, get in (("Haiku scores", strengths_haiku), ("Jev scores", lambda i: strengths_jev(jev[i]))):
+    runs = (("Terra arguments, Jev scores", lambda i: strengths_jev(jev_terra[i])), ("Haiku arguments, Jev scores", lambda i: strengths_jev(jev_haiku[i])), ("Haiku arguments, Haiku scores", strengths_haiku))
+    for scorer, get in runs:
         S = {i: get(i) for i in ids}
         for relation in ("proposed", "preference"):
             res = {i: decide(S[i], relation) for i in ids}
@@ -102,9 +105,9 @@ def main():
                        decided_by_in_count=len(by_count), correct_among_those=sum(res[i][0] == gold[i] for i in by_count),
                        reasons_in=sum(r[2] for r in res.values()), reasons_undecided=sum(r[3] for r in res.values()), reasons_total=24 * len(ids))
             out[f"{relation}, {scorer}"] = row
-            print(f"{relation:10s} {scorer:12s} {correct}/{len(ids)} = {row['accuracy']}%  vs always A +{wins}/-{losses} p={row['vs_always_A']['mcnemar_p']:.3g}  "
+            print(f"{relation:10s} {scorer:30s} {correct}/{len(ids)} = {row['accuracy']}%  vs always A +{wins}/-{losses} p={row['vs_always_A']['mcnemar_p']:.3g}  "
                   f"decided by IN count: {len(by_count)} (correct {row['correct_among_those']})  reasons IN {row['reasons_in']}/{row['reasons_total']}, undecided {row['reasons_undecided']}")
-    json.dump(out, open(RUN / "grounded_results.json", "w"), indent=1)
+    json.dump(out, open(RUN.parent / "grounded_results.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

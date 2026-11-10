@@ -8,7 +8,8 @@ Inputs
   work/snippets.jsonl, work/rules.txt        from convert_released_cache.py (released snippets, cached arguments, rules)
   data/icsi_rebuilt_snippets.jsonl           from build_dataset.py
   results/jev_arm1..4.jsonl                  Jev answers (see docs/EXPERIMENTS.md)
-  results/wu_graph_claude/                   Claude-written arguments, Haiku scores, Jev scores, zero-shot answers
+  results/wu_graph_terra/                    arguments written call by call by GPT-6.1 Terra, their Jev scores, Terra zero-shot answers
+  results/wu_graph_claude/                   arguments written by Claude Haiku, Haiku scores, Jev scores, Haiku and Sonnet zero-shot answers
 
 Statistics
   accuracy            share of snippets where the predicted letter is the gold letter
@@ -138,41 +139,49 @@ def main():
             OUT["professors"] = {str(q): dict(snippets=int((prof_of == q).sum()), jev_accuracy=round(100 * float(ok["fixed_prof"][prof_of == q].mean()), 1)) for q in sorted(set(prof_of), key=lambda q: -(prof_of == q).sum())}
     OUT["brier_base_rate"] = round(float(np.mean((gold.mean() - gold) ** 2)), 3)
 
-    # ---------------------------------------------------------------- Claude arguments on the rebuilt same-span text
-    print("\nTable 2. Wu factor graph on the rebuilt same-span text (Claude Haiku arguments)")
-    SC = {i: json.load(open(RUN / "scores" / f"{i}.json"))["aspects"] for i in ids}; JV = {d["id"]: d["answers"] for d in jsonl(RUN / "jev_scores.jsonl")}
-    def claude_rows(i, scorer, mode):
-        args, rels = [], []
+    # ---------------------------------------------------------------- Table 3: the Wu factor graph on the rebuilt same-span text
+    print("\nTable 3. Wu factor graph on the rebuilt same-span text, by who wrote and who scored the arguments")
+    TR = ROOT / "results" / "wu_graph_terra"
+    HAIKU = {i: json.load(open(RUN / "scores" / f"{i}.json"))["aspects"] for i in ids}
+    JEV = {"haiku": {d["id"]: d["answers"] for d in jsonl(RUN / "jev_scores.jsonl")}, "terra": {d["id"]: d["answers"] for d in jsonl(TR / "jev_scores.jsonl")}}
+    def graph_rows(i, writer, scorer, mode):
+        """Reason weight: P(valid) * P(grounded). Rebuttal weight: P(counters its reason) * P(grounded) (Jev) or P(valid) * P(grounded) (Haiku)."""
+        args, rels = [], []; J = JEV[writer][i]
         for ai, a in enumerate(ASPECTS):
             base = 2 + 24 * ai
             for si, s in enumerate("AB"):
                 for j in range(3):
-                    v, g = SC[i][a]["reason"][s][j] if scorer == "haiku" else (JV[i][f"{a}|rv|{s}{j}"], JV[i][f"{a}|rg|{s}{j}"])
+                    v, g = HAIKU[i][a]["reason"][s][j] if scorer == "haiku" else (J[f"{a}|rv|{s}{j}"], J[f"{a}|rg|{s}{j}"])
                     args.append(dict(variable=base + 3 * si + j, kind="reason", side=s, validity=L(v), grounding=L(g)))
                     if mode != "reasons":
-                        v, g = SC[i][a]["rebuttal"][s][j] if scorer == "haiku" else (JV[i][f"{a}|ba|{s}{j}"], JV[i][f"{a}|bg|{s}{j}"])
+                        v, g = HAIKU[i][a]["rebuttal"][s][j] if scorer == "haiku" else (J[f"{a}|ba|{s}{j}"], J[f"{a}|bg|{s}{j}"])
                         args.append(dict(variable=base + 6 + 3 * si + j, kind="rebuttal", side=s, validity=L(v), grounding=L(g)))
             if mode == "all":
-                if scorer == "haiku": sc = [x / 5 for x in SC[i][a]["similar"] + SC[i][a]["contra_A"] + SC[i][a]["contra_B"]]
-                else: sc = [JV[i][f"{a}|sim|{p}{q}"] for p in range(3) for q in range(p, 3)] + [JV[i][f"{a}|cA|{pq}"] for pq in ("01", "02", "12")] + [JV[i][f"{a}|cB|{pq}"] for pq in ("01", "02", "12")]
+                if scorer == "haiku": sc = [x / 5 for x in HAIKU[i][a]["similar"] + HAIKU[i][a]["contra_A"] + HAIKU[i][a]["contra_B"]]
+                else: sc = [J[f"{a}|sim|{p}{q}"] for p in range(3) for q in range(p, 3)] + [J[f"{a}|cA|{pq}"] for pq in ("01", "02", "12")] + [J[f"{a}|cB|{pq}"] for pq in ("01", "02", "12")]
                 rels += [dict(variable=base + 12 + k, score=v) for k, v in enumerate(sc)]
         return args, rels
-    for scorer, tag in (("haiku", "Haiku scores"), ("jev", "Jev scores")):
+    for writer, scorer, tag in (("terra", "jev", "Terra arguments, Jev scores"), ("haiku", "jev", "Haiku arguments, Jev scores"), ("haiku", "haiku", "Haiku arguments, Haiku scores")):
         for mode, nm in (("reasons", "reasons only"), ("rr", "reasons + rebuttals"), ("all", "all relations")):
-            ok[f"{scorer}_{mode}"] = record("rebuilt_fixed", f"Wu graph, {nm} ({tag})", np.array([xor(*claude_rows(i, scorer, mode), rules) == "A" for i in ids]), gold)
-        s = np.array([sum(math.exp(a["validity"] + a["grounding"]) * (1 if a["side"] == "A" else -1) for a in claude_rows(i, scorer, "reasons")[0]) for i in ids])
-        record("rebuilt_fixed", f"Sum of reason scores, no graph ({tag})", s >= 0, gold, s)
+            ok[f"{writer}_{scorer}_{mode}"] = record("wu_graph", f"Wu graph, {nm} ({tag})", np.array([xor(*graph_rows(i, writer, scorer, mode), rules) == "A" for i in ids]), gold)
+        s = np.array([sum(math.exp(a["validity"] + a["grounding"]) * (1 if a["side"] == "A" else -1) for a in graph_rows(i, writer, scorer, "reasons")[0]) for i in ids])
+        record("wu_graph", f"Sum of reason scores, no graph ({tag})", s >= 0, gold, s)
+    Zt = {d["id"]: d["prediction"] for d in jsonl(TR / "zero_shot.jsonl")}
+    ok["zero_terra"] = record("wu_graph", "Terra zero-shot", np.array([Zt[i] == "A" for i in ids]), gold)
     for m in ("haiku", "sonnet"):
         Z = {}
         for k in range(3): Z.update(json.load(open(RUN / f"zero_{m}" / f"zero_{k}.json")))
-        ok["zero_" + m] = record("rebuilt_fixed", f"{m.capitalize()} zero-shot", np.array([Z[i]["answer"] == "A" for i in ids]), gold, np.array([float(Z[i]["p_A"]) for i in ids]))
+        ok["zero_" + m] = record("wu_graph", f"{m.capitalize()} zero-shot", np.array([Z[i]["answer"] == "A" for i in ids]), gold, np.array([float(Z[i]["p_A"]) for i in ids]))
 
     print("\nPaired comparisons (wins / losses for the first method, exact McNemar p)")
     pairs = [("fixed_prof", "rel_prof", "Jev professor: rebuilt same span vs released"), ("fixed_graph", "rel_graph", "Typed graph: rebuilt same span vs released"),
              ("ctx15_prof", "fixed_prof", "Jev professor: 15 extra vs same span"), ("ctx60_prof", "fixed_prof", "Jev professor: 60 extra vs same span"),
-             ("fixed_graph", "fixed_prof", "Typed graph vs Jev professor, same span"), ("haiku_all", "zero_haiku", "Wu graph (Haiku scores, all) vs Haiku zero-shot"),
-             ("haiku_all", "haiku_reasons", "Wu graph (Haiku scores): all relations vs reasons only"), ("zero_sonnet", "haiku_all", "Sonnet zero-shot vs Wu graph (Haiku scores, all)"),
-             ("zero_sonnet", "fixed_prof", "Sonnet zero-shot vs Jev professor"), ("jev_all", "fixed_prof", "Wu graph (Jev scores, all) vs Jev professor")]
+             ("fixed_graph", "fixed_prof", "Typed graph vs Jev professor, same span"),
+             ("terra_jev_all", "zero_terra", "Wu graph (Terra, Jev; all) vs Terra zero-shot"), ("terra_jev_all", "terra_jev_reasons", "Wu graph (Terra, Jev): all relations vs reasons only"),
+             ("terra_jev_all", "fixed_prof", "Wu graph (Terra, Jev; all) vs Jev professor"), ("zero_terra", "fixed_prof", "Terra zero-shot vs Jev professor"),
+             ("haiku_jev_all", "fixed_prof", "Wu graph (Haiku, Jev; all) vs Jev professor"), ("haiku_jev_all", "haiku_jev_reasons", "Wu graph (Haiku, Jev): all relations vs reasons only"),
+             ("haiku_haiku_all", "zero_haiku", "Wu graph (Haiku, Haiku; all) vs Haiku zero-shot"), ("haiku_haiku_all", "haiku_haiku_reasons", "Wu graph (Haiku, Haiku): all relations vs reasons only"),
+             ("zero_sonnet", "haiku_haiku_all", "Sonnet zero-shot vs Wu graph (Haiku, Haiku; all)"), ("zero_sonnet", "fixed_prof", "Sonnet zero-shot vs Jev professor"), ("zero_sonnet", "zero_terra", "Sonnet zero-shot vs Terra zero-shot")]
     for a, b, name in pairs:
         wn, ls, p = mcnemar(ok[a], ok[b]); OUT.setdefault("paired", {})[name] = dict(wins=wn, losses=ls, mcnemar_p=p); print(f"  {name:58s} +{wn}/-{ls}  p={p:.2g}")
     json.dump(OUT, open(RES / "report_numbers.json", "w"), indent=1); print("\nwrote results/report_numbers.json")
@@ -184,9 +193,10 @@ def main():
                   ("rebuilt_fixed", "More words"): 100, ("rebuilt_fixed", "Longer turns"): 102, ("rebuilt_fixed", "Jev, professor"): 107, ("rebuilt_fixed", "Jev, more power"): 106, ("rebuilt_fixed", "Typed-statement graph"): 105,
                   ("rebuilt_ctx15", "More words"): 99, ("rebuilt_ctx15", "Longer turns"): 104, ("rebuilt_ctx15", "Jev, professor"): 127, ("rebuilt_ctx15", "Jev, more power"): 119, ("rebuilt_ctx15", "Typed-statement graph"): 121,
                   ("rebuilt_ctx60", "More words"): 103, ("rebuilt_ctx60", "Longer turns"): 100, ("rebuilt_ctx60", "Jev, professor"): 134, ("rebuilt_ctx60", "Jev, more power"): 132, ("rebuilt_ctx60", "Typed-statement graph"): 136,
-                  ("rebuilt_fixed", "Wu graph, reasons only (Haiku scores)"): 103, ("rebuilt_fixed", "Wu graph, reasons + rebuttals (Haiku scores)"): 101, ("rebuilt_fixed", "Wu graph, all relations (Haiku scores)"): 102,
-                  ("rebuilt_fixed", "Wu graph, reasons only (Jev scores)"): 110, ("rebuilt_fixed", "Wu graph, reasons + rebuttals (Jev scores)"): 105, ("rebuilt_fixed", "Wu graph, all relations (Jev scores)"): 105,
-                  ("rebuilt_fixed", "Haiku zero-shot"): 102, ("rebuilt_fixed", "Sonnet zero-shot"): 114}
+                  ("wu_graph", "Wu graph, reasons only (Terra arguments, Jev scores)"): 100, ("wu_graph", "Wu graph, reasons + rebuttals (Terra arguments, Jev scores)"): 108, ("wu_graph", "Wu graph, all relations (Terra arguments, Jev scores)"): 108,
+                  ("wu_graph", "Wu graph, reasons only (Haiku arguments, Jev scores)"): 110, ("wu_graph", "Wu graph, reasons + rebuttals (Haiku arguments, Jev scores)"): 105, ("wu_graph", "Wu graph, all relations (Haiku arguments, Jev scores)"): 105,
+                  ("wu_graph", "Wu graph, reasons only (Haiku arguments, Haiku scores)"): 103, ("wu_graph", "Wu graph, reasons + rebuttals (Haiku arguments, Haiku scores)"): 101, ("wu_graph", "Wu graph, all relations (Haiku arguments, Haiku scores)"): 102,
+                  ("wu_graph", "Terra zero-shot"): 109, ("wu_graph", "Haiku zero-shot"): 102, ("wu_graph", "Sonnet zero-shot"): 114}
         bad = [(k, v, OUT[k[0]][k[1]]["correct"]) for k, v in expect.items() if OUT[k[0]][k[1]]["correct"] != v]
         e = OUT["rebuilt_fixed"]["Jev, professor"]
         if e["vs_always_A"]["meeting_bootstrap_95"] != [6.7, 22.0] or e["brier"] != 0.189 or e["accuracy_most_confident_fifth"] != 93.3: bad.append(("Jev professor interval/Brier/top fifth", "[6.7, 22.0] 0.189 93.3", (e["vs_always_A"]["meeting_bootstrap_95"], e["brier"], e["accuracy_most_confident_fifth"])))

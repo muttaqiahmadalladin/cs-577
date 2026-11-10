@@ -193,110 +193,6 @@
      25.0
     ]
    }
-  },
-  "Wu graph, reasons only (Haiku scores)": {
-   "correct": 103,
-   "n": 150,
-   "accuracy": 68.7,
-   "vs_always_A": {
-    "wins": 46,
-    "losses": 28,
-    "mcnemar_p": 0.04739297550405179
-   }
-  },
-  "Wu graph, reasons + rebuttals (Haiku scores)": {
-   "correct": 101,
-   "n": 150,
-   "accuracy": 67.3,
-   "vs_always_A": {
-    "wins": 44,
-    "losses": 28,
-    "mcnemar_p": 0.07636915467183139
-   }
-  },
-  "Wu graph, all relations (Haiku scores)": {
-   "correct": 102,
-   "n": 150,
-   "accuracy": 68.0,
-   "vs_always_A": {
-    "wins": 45,
-    "losses": 28,
-    "mcnemar_p": 0.060370037339928545
-   }
-  },
-  "Sum of reason scores, no graph (Haiku scores)": {
-   "correct": 103,
-   "n": 150,
-   "accuracy": 68.7,
-   "vs_always_A": {
-    "wins": 46,
-    "losses": 28,
-    "mcnemar_p": 0.04739297550405179
-   },
-   "auc": 0.732
-  },
-  "Wu graph, reasons only (Jev scores)": {
-   "correct": 110,
-   "n": 150,
-   "accuracy": 73.3,
-   "vs_always_A": {
-    "wins": 36,
-    "losses": 11,
-    "mcnemar_p": 0.000346001140314911
-   }
-  },
-  "Wu graph, reasons + rebuttals (Jev scores)": {
-   "correct": 105,
-   "n": 150,
-   "accuracy": 70.0,
-   "vs_always_A": {
-    "wins": 36,
-    "losses": 16,
-    "mcnemar_p": 0.0077874363057435225
-   }
-  },
-  "Wu graph, all relations (Jev scores)": {
-   "correct": 105,
-   "n": 150,
-   "accuracy": 70.0,
-   "vs_always_A": {
-    "wins": 36,
-    "losses": 16,
-    "mcnemar_p": 0.0077874363057435225
-   }
-  },
-  "Sum of reason scores, no graph (Jev scores)": {
-   "correct": 110,
-   "n": 150,
-   "accuracy": 73.3,
-   "vs_always_A": {
-    "wins": 36,
-    "losses": 11,
-    "mcnemar_p": 0.000346001140314911
-   },
-   "auc": 0.801
-  },
-  "Haiku zero-shot": {
-   "correct": 102,
-   "n": 150,
-   "accuracy": 68.0,
-   "vs_always_A": {
-    "wins": 43,
-    "losses": 26,
-    "mcnemar_p": 0.053289363816513634
-   },
-   "auc": 0.757
-  },
-  "Sonnet zero-shot": {
-   "correct": 114,
-   "n": 150,
-   "accuracy": 76.0,
-   "vs_always_A": {
-    "wins": 53,
-    "losses": 24,
-    "mcnemar_p": 0.0012632268710478357
-   },
-   "auc": 0.872
   }
  },
  "professors": {
@@ -474,6 +370,163 @@
   }
  },
  "brier_base_rate": 0.246,
+ "wu_graph": {
+  "Wu graph, reasons only (Terra arguments, Jev scores)": {
+   "correct": 100,
+   "n": 150,
+   "accuracy": 66.7,
+   "vs_always_A": {
+    "wins": 32,
+    "losses": 17,
+    "mcnemar_p": 0.04438416098714981
+   }
+  },
+  "Wu graph, reasons + rebuttals (Terra arguments, Jev scores)": {
+   "correct": 108,
+   "n": 150,
+   "accuracy": 72.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 13,
+    "mcnemar_p": 0.001402688503695515
+   }
+  },
+  "Wu graph, all relations (Terra arguments, Jev scores)": {
+   "correct": 108,
+   "n": 150,
+   "accuracy": 72.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 13,
+    "mcnemar_p": 0.001402688503695515
+   }
+  },
+  "Sum of reason scores, no graph (Terra arguments, Jev scores)": {
+   "correct": 100,
+   "n": 150,
+   "accuracy": 66.7,
+   "vs_always_A": {
+    "wins": 32,
+    "losses": 17,
+    "mcnemar_p": 0.04438416098714981
+   },
+   "auc": 0.754
+  },
+  "Wu graph, reasons only (Haiku arguments, Jev scores)": {
+   "correct": 110,
+   "n": 150,
+   "accuracy": 73.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 11,
+    "mcnemar_p": 0.000346001140314911
+   }
+  },
+  "Wu graph, reasons + rebuttals (Haiku arguments, Jev scores)": {
+   "correct": 105,
+   "n": 150,
+   "accuracy": 70.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 16,
+    "mcnemar_p": 0.0077874363057435225
+   }
+  },
+  "Wu graph, all relations (Haiku arguments, Jev scores)": {
+   "correct": 105,
+   "n": 150,
+   "accuracy": 70.0,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 16,
+    "mcnemar_p": 0.0077874363057435225
+   }
+  },
+  "Sum of reason scores, no graph (Haiku arguments, Jev scores)": {
+   "correct": 110,
+   "n": 150,
+   "accuracy": 73.3,
+   "vs_always_A": {
+    "wins": 36,
+    "losses": 11,
+    "mcnemar_p": 0.000346001140314911
+   },
+   "auc": 0.801
+  },
+  "Wu graph, reasons only (Haiku arguments, Haiku scores)": {
+   "correct": 103,
+   "n": 150,
+   "accuracy": 68.7,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 28,
+    "mcnemar_p": 0.04739297550405179
+   }
+  },
+  "Wu graph, reasons + rebuttals (Haiku arguments, Haiku scores)": {
+   "correct": 101,
+   "n": 150,
+   "accuracy": 67.3,
+   "vs_always_A": {
+    "wins": 44,
+    "losses": 28,
+    "mcnemar_p": 0.07636915467183139
+   }
+  },
+  "Wu graph, all relations (Haiku arguments, Haiku scores)": {
+   "correct": 102,
+   "n": 150,
+   "accuracy": 68.0,
+   "vs_always_A": {
+    "wins": 45,
+    "losses": 28,
+    "mcnemar_p": 0.060370037339928545
+   }
+  },
+  "Sum of reason scores, no graph (Haiku arguments, Haiku scores)": {
+   "correct": 103,
+   "n": 150,
+   "accuracy": 68.7,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 28,
+    "mcnemar_p": 0.04739297550405179
+   },
+   "auc": 0.732
+  },
+  "Terra zero-shot": {
+   "correct": 109,
+   "n": 150,
+   "accuracy": 72.7,
+   "vs_always_A": {
+    "wins": 46,
+    "losses": 22,
+    "mcnemar_p": 0.004903382516355933
+   }
+  },
+  "Haiku zero-shot": {
+   "correct": 102,
+   "n": 150,
+   "accuracy": 68.0,
+   "vs_always_A": {
+    "wins": 43,
+    "losses": 26,
+    "mcnemar_p": 0.053289363816513634
+   },
+   "auc": 0.757
+  },
+  "Sonnet zero-shot": {
+   "correct": 114,
+   "n": 150,
+   "accuracy": 76.0,
+   "vs_always_A": {
+    "wins": 53,
+    "losses": 24,
+    "mcnemar_p": 0.0012632268710478357
+   },
+   "auc": 0.872
+  }
+ },
  "paired": {
   "Jev professor: rebuilt same span vs released": {
    "wins": 52,
@@ -500,17 +553,47 @@
    "losses": 23,
    "mcnemar_p": 0.880395821280672
   },
-  "Wu graph (Haiku scores, all) vs Haiku zero-shot": {
+  "Wu graph (Terra, Jev; all) vs Terra zero-shot": {
+   "wins": 14,
+   "losses": 15,
+   "mcnemar_p": 1.0
+  },
+  "Wu graph (Terra, Jev): all relations vs reasons only": {
+   "wins": 11,
+   "losses": 3,
+   "mcnemar_p": 0.057373046875
+  },
+  "Wu graph (Terra, Jev; all) vs Jev professor": {
+   "wins": 14,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  },
+  "Terra zero-shot vs Jev professor": {
+   "wins": 24,
+   "losses": 22,
+   "mcnemar_p": 0.8829959121223965
+  },
+  "Wu graph (Haiku, Jev; all) vs Jev professor": {
+   "wins": 12,
+   "losses": 14,
+   "mcnemar_p": 0.8450189828872681
+  },
+  "Wu graph (Haiku, Jev): all relations vs reasons only": {
+   "wins": 3,
+   "losses": 8,
+   "mcnemar_p": 0.2265625
+  },
+  "Wu graph (Haiku, Haiku; all) vs Haiku zero-shot": {
    "wins": 8,
    "losses": 8,
    "mcnemar_p": 1.0
   },
-  "Wu graph (Haiku scores): all relations vs reasons only": {
+  "Wu graph (Haiku, Haiku): all relations vs reasons only": {
    "wins": 6,
    "losses": 7,
    "mcnemar_p": 1.0
   },
-  "Sonnet zero-shot vs Wu graph (Haiku scores, all)": {
+  "Sonnet zero-shot vs Wu graph (Haiku, Haiku; all)": {
    "wins": 21,
    "losses": 9,
    "mcnemar_p": 0.04277394525706768
@@ -520,10 +603,10 @@
    "losses": 20,
    "mcnemar_p": 0.38169339766321286
   },
-  "Wu graph (Jev scores, all) vs Jev professor": {
-   "wins": 12,
-   "losses": 14,
-   "mcnemar_p": 0.8450189828872681
+  "Sonnet zero-shot vs Terra zero-shot": {
+   "wins": 15,
+   "losses": 10,
+   "mcnemar_p": 0.42435622215270996
   }
  }
 }

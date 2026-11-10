@@ -24,7 +24,7 @@ It runs the seven steps below in order and stops at the first failure. On a lapt
 | 2 | `build_dataset.py --check` | The committed dataset is regenerated exactly from the sources | `committed dataset reproduced exactly` |
 | 3 | `build_dataset.py` | Writes `work/rows.json`, `work/fixed_index.json`, `work/contexts.jsonl` | `wrote ... icsi_rebuilt_snippets.jsonl and work files ...` |
 | 4 | `convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | `wrote ... snippets.jsonl and ... rules.txt` |
-| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 34 of 34 report values reproduced` |
+| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 38 of 38 report values reproduced` |
 | 6 | `grounded_extension.py` | The grounded extension results | four result lines |
 | 7 | `grounded_policy_search.py` | The 288-policy search with held-out selection | `chosen in ... splits` lines |
 
@@ -58,7 +58,7 @@ python3 scripts/grounded_extension.py
 python3 scripts/grounded_policy_search.py
 ```
 
-`analyze.py` reads the model answers in `results/` and recomputes the report's tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it compares 34 values with the ones printed in the report.
+`analyze.py` reads the model answers in `results/` and recomputes the report's tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it compares 38 values with the ones printed in the report.
 
 Fixed seeds: the meeting-level bootstrap uses seed 2026 with 10,000 resamples, and the policy search uses seed 2026 with 500 splits. The integer programs are solved exactly, so the graph predictions do not depend on solver randomness.
 
@@ -101,7 +101,19 @@ These were produced by Claude subagents (Haiku for arguments and scores, Haiku a
 
 Snippets were shuffled with seed 577 before batching. Each output was checked for shape (three reasons and three rebuttals per speaker per aspect, probabilities in range). This run is not deterministic and is not a call-by-call rerun of the original pipeline.
 
-### The original pipeline, call by call
+### The Terra run (the original pipeline, call by call, through the Codex command line)
+
+`scripts/wu_codex_pipeline.py` produced `results/wu_graph_terra/`. It needs the Codex CLI signed in with a ChatGPT account and `TYPESAFE_API_KEY`. Put it in a folder next to `contexts.jsonl` (from `work/`) and run:
+
+```bash
+export TYPESAFE_API_KEY=...
+python3 wu_codex_pipeline.py --limit 2      # probe
+python3 wu_codex_pipeline.py                # stages gen, zero, jev
+```
+
+Each prompt is sent as its own `codex exec` session, ephemeral, read-only and with tools disabled, in an empty directory, using the prompt templates downloaded from the pinned commit of the original repository. Our run used model `gpt-6.1-terra` with no reasoning effort, 5,546 requests, and `jev-1.14.0` for scoring. The settings and hashes of that run are in `results/wu_graph_terra/manifest.json`, `transport_settings.json` and `provenance.json`. Hosted models are not deterministic, so a rerun will not give identical text.
+
+### The same pipeline against any OpenAI-compatible API
 
 ```bash
 export LLM_API_KEY=...                  # any OpenAI-compatible chat API

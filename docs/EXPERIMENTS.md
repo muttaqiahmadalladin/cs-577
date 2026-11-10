@@ -18,6 +18,9 @@ All accuracy numbers are for the task "which of A and B is the professor". Paire
 | Jev arm 2 | Released text. For each of the 7,248 cached arguments: supported by the transcript, valid as evidence, and (rebuttals) does it counter its reason | `results/jev_arm2.jsonl` |
 | Jev arm 3 | Released text. The 24 typed statements used by the typed-statement factor graph | `results/jev_arm3.jsonl` |
 | Jev arm 4 | Rebuilt text at all three windows. The two direct questions plus the 24 typed statements | `results/jev_arm4.jsonl` |
+| Terra arguments | Rebuilt same-span text. The original pipeline call by call with GPT-6.1 Terra through the Codex command line: one independent request per aspect summary, per list of three reasons and per rebuttal (36 per snippet), tools disabled, no labels | `results/wu_graph_terra/arguments.jsonl` |
+| Terra zero-shot | Rebuilt same-span text. "Who has more power", one request per snippet | `results/wu_graph_terra/zero_shot.jsonl` |
+| Jev scores for Terra arguments | Validity and grounding for each argument, whether each rebuttal counters its reason, similarity and contradiction for reason pairs (168 questions per snippet) | `results/wu_graph_terra/jev_scores.jsonl` |
 | Claude arguments | Rebuilt same-span text. Four aspect summaries, three reasons per speaker per aspect, one rebuttal per reason, written by Claude Haiku subagents | `results/wu_graph_claude/arguments/` |
 | Claude scores | Validity and grounding for every argument, similarity and contradiction for reason pairs, by separate Haiku subagents | `results/wu_graph_claude/scores/` |
 | Jev scores for Claude arguments | Rebuilt same-span text. Validity and grounding for each Claude-written argument, whether each rebuttal counters its reason, similarity and contradiction for reason pairs (168 questions per snippet) | `results/wu_graph_claude/jev_scores.jsonl` |
@@ -31,7 +34,7 @@ Jev is TypeSafe AI's decision model (`jev-1.14.0` in every response). Every ques
 - **XOR factor graph.** The factor graph of Wu et al.: their rule file, reason weight 20, rebuttal weight 18, solved exactly as an integer program (PuLP with CBC). The implementation is `quote_power.inference.xor` in KrishMay05/nlp_research.
 - **Typed-statement factor graph.** The same graph with the generated text replaced by 12 fixed yes/no statements, three per aspect. Jev's probability for a statement about X weights a reason for X; the same statement about the other speaker is its rebuttal. Relation variables are unused.
 - **Grounded extension.** Dung's grounded labelling over reasons and rebuttals. See the section below. On the rebuilt snippets it is `scripts/grounded_extension.py`; the earlier runs on the released snippets are in `scripts/exploratory/`.
-- **Wu graph with Claude arguments.** The XOR factor graph over the Claude-written arguments and scores, in the three variants of the paper: reasons only, reasons plus rebuttals, all relations.
+- **Wu graph on the rebuilt snippets.** The XOR factor graph over generated arguments, in the three variants of the paper: reasons only, reasons plus rebuttals, all relations. Three combinations are reported: Terra arguments with Jev scores, Haiku arguments with Jev scores, and Haiku arguments with Haiku scores. A reason's weight uses P(valid) x P(grounded). A rebuttal's weight uses P(counters its reason) x P(grounded) under Jev, and P(valid) x P(grounded) under Haiku.
 - **Word-count rules.** "Whoever says more words" and "whoever has longer turns" is the professor.
 
 ## Grounded extension: method
@@ -57,18 +60,20 @@ The preference relation is preference-based argumentation in the sense of Amgoud
 
 **Results on the 150 rebuilt snippets (same span).**
 
-| Relation | Scores | Accuracy | Snippets decided by IN count | Reasons IN |
-| --- | --- | ---: | ---: | ---: |
-| Proposed | Haiku | 68.7% | 0 | 0 of 3,600 |
-| Preference | Haiku | 64.7% | 141 | 849 of 3,600 |
-| Proposed | Jev | 73.3% | 0 | 0 of 3,600 |
-| Preference | Jev | 73.3% | 150 | 1,517 of 3,600 |
+| Arguments | Scores | Relation | Accuracy | Snippets decided by IN count | Reasons IN |
+| --- | --- | --- | ---: | ---: | ---: |
+| Terra | Jev | Proposed | 66.7% | 0 | 0 of 3,600 |
+| Terra | Jev | Preference | 70.0% | 150 | 1,504 of 3,600 |
+| Haiku | Jev | Proposed | 73.3% | 0 | 0 of 3,600 |
+| Haiku | Jev | Preference | 73.3% | 150 | 1,517 of 3,600 |
+| Haiku | Haiku | Proposed | 68.7% | 0 | 0 of 3,600 |
+| Haiku | Haiku | Preference | 64.7% | 141 | 849 of 3,600 |
 
-The preference relation with Jev scores is level with the direct Jev question (13 wins to 10 losses, exact McNemar p = 0.68). Full numbers are in `results/wu_graph_claude/grounded_results.json`.
+With Haiku arguments and Jev scores the preference relation is level with the direct Jev question (13 wins to 10 losses, exact McNemar p = 0.68). Full numbers are in `results/grounded_results.json`.
 
 ## Grounded extension: policy search
 
-`scripts/grounded_policy_search.py` asks whether any score-aware attack policy does better. It evaluates 288 policies built from the Jev scores already collected:
+`scripts/grounded_policy_search.py` asks whether any score-aware attack policy does better. It evaluates 288 policies built from the Jev scores of the Haiku arguments:
 
 | Choice | Options |
 | --- | --- |
@@ -100,6 +105,7 @@ The selected policy is ahead of the direct question in 133 of 500 splits (mean d
 | `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations | standard library |
 | `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting | standard library |
 | `scripts/jev_collect.py` | Sends the Jev requests for arms 1 to 4 | `TYPESAFE_API_KEY` |
+| `scripts/wu_codex_pipeline.py` | The script that produced the Terra run: the original pipeline call by call through the Codex command line, then Jev scoring | Codex CLI signed in, `TYPESAFE_API_KEY` |
 | `scripts/wu_pipeline.py` | Call-by-call version of the original pipeline for any OpenAI-compatible API, with Jev or LLM scoring | API keys |
 | `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts | standard library |
 | `scripts/exploratory/` | Earlier runs on the released snippets. They read files from KrishMay05/nlp_research (`KRISH_REPO`) and are kept as a record, not as part of the reproduction | |
@@ -110,6 +116,7 @@ Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.m
 
 - The released file has no development split, and the runs on it were exploratory.
 - The questions used on the rebuilt snippets were fixed before that data was built, and each run was made once.
-- Only Jev and Claude models were run on the rebuilt snippets. GPT-3.5, Gemma and a human study were not.
-- The Claude run is not a call-by-call rerun of the paper's pipeline: each snippet's arguments were written in one pass, and scores are stated probabilities with about 15 distinct values, not token probabilities.
+- Only Jev, GPT-6.1 Terra and Claude models were run on the rebuilt snippets. GPT-3.5, Gemma and a human study were not.
+- The Terra run is call by call but its scores come from Jev, since the Codex command line does not expose token probabilities. Codex's own evaluation of that run (`results/wu_graph_terra/codex_results.txt`) reports 101 correct for the reasons-only graph where `analyze.py` gets 100; the other variants agree.
+- The Haiku run is not call by call: each snippet's arguments were written in one pass, and the Haiku scores are stated probabilities with about 15 distinct values.
 - Four professors appear in the 150 snippets, and one of them in 110.

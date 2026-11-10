@@ -1,0 +1,13 @@
+{
+  "cli_version": "codex-cli 0.167.0-alpha.3.2",
+  "generation_pipeline_sha256": "73b9fcdae6627ed92c986313fef484fd6d54f9aa2c9b3033cde022cae7072233",
+  "evaluation_sha256": "91601d9a7dc225a23b8e888ab120f90906c46b9f0f410c986630e982a23de11d",
+  "verified_gold_sha256": "9783353e5f36cbc77f2e0e6fcb74f93f5b31dfab59206f90978d25f0d53eb68d",
+  "preflight_tests": "6 passed; new full-graph solver independently reproduced82/151; reason-only optimizer matched20 analytical checks",
+  "progress": "All 150 gen/zero/jev cases complete and validated",
+  "codex_weekly_usage_display": {
+    "before_percent": 12,
+    "after_percent": 15,
+    "scope": "Account-wide; not an isolated usage measure for this run."
+  }
+}
