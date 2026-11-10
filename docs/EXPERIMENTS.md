@@ -20,6 +20,7 @@ All accuracy numbers are for the task "which of A and B is the professor". Paire
 | Jev arm 4 | Rebuilt text at all three windows. The two direct questions plus the 24 typed statements | `results/jev_arm4.jsonl` |
 | Claude arguments | Rebuilt same-span text. Four aspect summaries, three reasons per speaker per aspect, one rebuttal per reason, written by Claude Haiku subagents | `results/wu_graph_claude/arguments/` |
 | Claude scores | Validity and grounding for every argument, similarity and contradiction for reason pairs, by separate Haiku subagents | `results/wu_graph_claude/scores/` |
+| Jev scores for Claude arguments | Rebuilt same-span text. Validity and grounding for each Claude-written argument, whether each rebuttal counters its reason, similarity and contradiction for reason pairs (168 questions per snippet) | `results/wu_graph_claude/jev_scores.jsonl` |
 | Claude zero-shot | "Which of A or B has more power", with a stated probability, by Haiku and by Sonnet subagents | `results/wu_graph_claude/zero_haiku/`, `zero_sonnet/` |
 
 Jev is TypeSafe AI's decision model (`jev-1.14.0` in every response). Every question's wording is in one block at the top of `scripts/jev_collect.py`. The instructions given to the Claude subagents are the three `INSTRUCTIONS_*.md` files in `results/wu_graph_claude/`; none of the subagents had access to labels.

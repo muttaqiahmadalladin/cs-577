@@ -75,5 +75,30 @@
    6.8,
    22.0
   ]
+ },
+ "Wu graph, reasons only (Haiku args, Jev scores)": {
+  "correct": 110,
+  "acc": 73.3,
+  "wins": 36,
+  "losses": 11,
+  "p": 0.00034600114031491097
+ },
+ "Wu graph, reasons + rebuttals (Haiku args, Jev scores)": {
+  "correct": 105,
+  "acc": 70.0,
+  "wins": 36,
+  "losses": 16,
+  "p": 0.0077874363057435225
+ },
+ "Wu graph, all relations (Haiku args, Jev scores)": {
+  "correct": 105,
+  "acc": 70.0,
+  "wins": 36,
+  "losses": 16,
+  "p": 0.0077874363057435225
+ },
+ "sum of reason scores, no graph (Jev scores)": {
+  "correct": 110,
+  "acc": 73.3
  }
 }

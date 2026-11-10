@@ -111,6 +111,7 @@ Following their prompts, Claude Haiku wrote four aspect summaries, three reasons
 A separate Haiku instance scored validity and grounding for each argument and similarity and contradiction for reason pairs.
 No instance saw labels.
 Their rule file and weights (reason 20, rebuttal 18) do the inference, in the three variants of the paper.
+We also scored the same arguments with Jev, one call per snippet.
 
 \paragraph{Typed-statement factor graph.}
 We also keep their graph and replace the generated text.
@@ -132,6 +133,9 @@ Longer turns & & 68.0 & 69.3 & 66.7 \\
 Wu graph, reasons only & & 68.7 & & \\
 Wu graph, + rebuttals & & 67.3 & & \\
 Wu graph, all relations & & 68.0 & & \\
+Wu graph (Jev), reasons only & & 73.3 & & \\
+Wu graph (Jev), + rebuttals & & 70.0 & & \\
+Wu graph (Jev), all relations & & 70.0 & & \\
 Haiku zero-shot & & 68.0 & & \\
 Sonnet zero-shot & & 76.0 & & \\
 \midrule
@@ -140,7 +144,7 @@ Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
 Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
 \bottomrule
 \end{tabular}
-\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph rows use Claude Haiku arguments and scores. Blank cells were not run.}
+\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The Wu graph rows use Claude Haiku arguments, scored by Haiku or, where marked, by Jev. Blank cells were not run.}
 \label{tab:rebuilt}
 \end{table}
 
@@ -157,6 +161,9 @@ That equals Haiku asked directly (68.0\%, 8 wins to 8 losses) and a plain sum of
 Rebuttals and relations do not add accuracy: the full graph against reasons only is 6 wins to 7 losses.
 A stronger model asked directly does better than the graph (Sonnet 76.0\%, 21 wins to 9 losses, $p=0.043$).
 Sonnet and Jev are not distinguishable at the same span (27 to 20, $p=0.38$).
+
+Scoring the same Haiku arguments with Jev instead of Haiku raises the graph to 73.3\% with reasons only and 70.0\% with rebuttals or all relations.
+The full graph with Jev scores is again level with the direct Jev question (12 wins to 14 losses, $p=0.85$), and a plain sum of the Jev reason scores also gives 73.3\%.
 
 The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
 It is a cheaper way to run the method and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.

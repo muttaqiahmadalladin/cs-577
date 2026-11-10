@@ -16,6 +16,7 @@ ICSI-rebuilt snippets (150, always answering A scores 56.7%):
 | --- | ---: | ---: | ---: |
 | Wu factor graph, all relations (Claude Haiku arguments and scores) | 68.0% | | |
 | Claude Haiku zero-shot | 68.0% | | |
+| Wu factor graph, all relations (Haiku arguments, Jev scores) | 70.0% | | |
 | Typed-statement factor graph (Jev) | 70.0% | 80.7% | 90.7% |
 | Jev: "is X the professor" | 71.3% | 84.7% | 89.3% |
 | Claude Sonnet zero-shot | 76.0% | | |
