@@ -28,7 +28,7 @@ Step 2 gives, for every line of every released snippet, the ICSI participant who
 - **Reading 1: a letter is the speaker of the last line of its turns.** The letters then map one-to-one onto the two participants in 128 snippets with exactly one professor, and the released label names the professor in 128 of 128. Under this reading 7,596 of 13,185 words (57.6%) are displayed under the other participant's letter, and in 73 of the 128 snippets more than half of the words are.
 - **Reading 2: a letter is whoever says most of the words shown under it.** The text is then mostly attributed correctly, and the released label names the letter carrying most of the professor's words in 69 of the 128 snippets.
 - Under either reading the displayed text and the labels disagree in about half of the snippets.
-- The other 23 snippets have a third speaker, no single professor, or a letter that maps to two participants.
+- In the other 23 snippets a letter covers two participants (22) or only one participant speaks (1).
 
 What this does and does not establish:
 
@@ -40,6 +40,24 @@ What this does and does not establish:
 Every number above is recomputed by `python3 scripts/analyze.py --check` (the "Data section" block) and can be inspected row by row with `python3 scripts/check_against_released.py --show <row>`. Example, row 0 (meeting Bro025, line 1858 of `Bro025.mrt`): the professor's question "do you have any way of assessing how well or how poorly the noise estimation is currently doing?" is displayed under A, and the released label is B.
 
 The rebuilt set uses reading 1 for its letters (step 4), which is why 142 of its 150 labels equal the released labels.
+
+### Per-snippet differences
+
+`data/released_vs_rebuilt.csv` (written by `scripts/data_differences.py`, and printed as the report's appendix) has one row per released snippet:
+
+| Column | Meaning |
+| --- | --- |
+| `id` | Row index in the released `meeting.csv` |
+| `meeting`, `start` | ICSI meeting ID and start time in seconds of the first corpus segment |
+| `segments`, `words` | Corpus segments and words in the snippet |
+| `speakers` | Distinct corpus participants in the snippet |
+| `misplaced` | Words displayed under the other participant's letter under reading 1; empty when the letters do not map one-to-one |
+| `released` | The released label |
+| `rebuilt` | The professor's letter in the rebuilt set; empty if the snippet was dropped |
+| `letters` | `kept` or `reassigned` (step 4) |
+| `note` | Why a snippet was reassigned or dropped |
+
+Totals: 150 of 151 snippets are in the rebuilt set; letters are kept in 128 and reassigned in 22; the label differs from the released one in 8; one snippet has a single participant and is dropped. Of the 128 with a one-to-one mapping, 121 have at least one misplaced word and 7 have none; the median share of misplaced words is 55%.
 
 ## Schema
 

@@ -16,7 +16,7 @@ pip install -r requirements.txt
 python3 scripts/reproduce.py
 ```
 
-It runs the seven steps below in order and stops at the first failure. On a laptop it takes a few minutes, most of it in the integer programs of step 5.
+It runs the eight steps below in order and stops at the first failure. On a laptop it takes a few minutes, most of it in the integer programs of step 5.
 
 | Step | Command | What it proves | Expected last line |
 | --- | --- | --- | --- |
@@ -27,6 +27,7 @@ It runs the seven steps below in order and stops at the first failure. On a lapt
 | 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 46 of 46 report values reproduced` |
 | 6 | `grounded_extension.py` | The grounded extension results | four result lines |
 | 7 | `grounded_policy_search.py` | The 288-policy search with held-out selection | `chosen in ... splits` lines |
+| 8 | `data_differences.py` | The per-snippet differences in `data/released_vs_rebuilt.csv` and the report's appendix table | `151 released snippets; 150 in the rebuilt set; ...` |
 
 ## Level 1: the data, from public sources
 

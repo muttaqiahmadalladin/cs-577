@@ -12,6 +12,7 @@ Steps
   5. analyze.py --check        recompute every table and paired test and compare with the values in the report
   6. grounded_extension.py     Dung's grounded extension on the rebuilt snippets
   7. grounded_policy_search.py the 288-policy search with selection on held-out meetings
+  8. data_differences.py       the per-snippet list of differences between the released file and the rebuilt set
 
 No step calls a model. Model outputs are read from results/. Exit status is non-zero if any step fails.
 """
@@ -20,7 +21,7 @@ from pathlib import Path
 
 S = Path(__file__).resolve().parent
 STEPS = [["get_sources.py"], ["build_dataset.py", "--check"], ["build_dataset.py"], ["convert_released_cache.py"],
-         ["analyze.py", "--check"], ["grounded_extension.py"], ["grounded_policy_search.py"]]
+         ["analyze.py", "--check"], ["grounded_extension.py"], ["grounded_policy_search.py"], ["data_differences.py"]]
 for i, step in enumerate(STEPS, 1):
     print(f"\n=== step {i} of {len(STEPS)}: {' '.join(step)} ===", flush=True)
     if subprocess.run([sys.executable, str(S / step[0]), *step[1:]], cwd=S).returncode: sys.exit(f"step {i} failed")

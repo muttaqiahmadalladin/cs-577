@@ -1,6 +1,8 @@
 # CS 577 project: conversational power in ICSI meeting excerpts
 
-Muttaqi Ahmad Alladin, Krish Patel, Jiwon Kim (Purdue University)
+Muttaqi Ahmad Alladin\*, Krish Patel\*, Jiwon Kim\* (Purdue University)
+
+\* These authors contributed equally.
 
 Report: [report/report.pdf](report/report.pdf)
 
@@ -49,7 +51,7 @@ This downloads the public sources and checks their SHA-256, rebuilds the dataset
 | Path | Contents |
 | --- | --- |
 | `report/` | LaTeX source and PDF |
-| `data/` | `icsi_rebuilt_snippets.jsonl` |
+| `data/` | `icsi_rebuilt_snippets.jsonl`, and `released_vs_rebuilt.csv` (every released snippet against the rebuilt set) |
 | `results/` | Every model answer and the computed numbers (`report_numbers.json`) |
 | `scripts/` | Dataset builder, collection and analysis code |
 | `docs/` | Data and experiment documentation |

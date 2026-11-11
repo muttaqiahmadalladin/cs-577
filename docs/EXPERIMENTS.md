@@ -104,6 +104,7 @@ The selected policy is ahead of the direct question in 133 of 500 splits (mean d
 | `scripts/analyze.py` | Recomputes every table, paired test, interval and calibration number in the report; `--check` compares with the report | numpy, PuLP |
 | `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations | standard library |
 | `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting | standard library |
+| `scripts/data_differences.py` | Writes `data/released_vs_rebuilt.csv` and the report's appendix table: every released snippet against the rebuilt set | standard library |
 | `scripts/jev_collect.py` | Sends the Jev requests for arms 1 to 4 | `TYPESAFE_API_KEY` |
 | `scripts/wu_codex_pipeline.py` | The script that produced the Terra run: the original pipeline call by call through the Codex command line, then Jev scoring | Codex CLI signed in, `TYPESAFE_API_KEY` |
 | `scripts/wu_pipeline.py` | Call-by-call version of the original pipeline for any OpenAI-compatible API, with Jev or LLM scoring | API keys |

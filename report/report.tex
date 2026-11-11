@@ -8,18 +8,20 @@
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{longtable}
 
 \title{Revisiting Multi-Agent Social Reasoning for Conversational Power:\\Factor Graphs, Decision Models, and Context}
 
-\author{Muttaqi Ahmad Alladin \\
+\author{Muttaqi Ahmad Alladin$^{*}$ \\
   Purdue University \And
-  Krish Patel \\
+  Krish Patel$^{*}$ \\
   Purdue University \And
-  Jiwon Kim \\
+  Jiwon Kim$^{*}$ \\
   Purdue University}
 
 \begin{document}
 \maketitle
+\begingroup\renewcommand{\thefootnote}{$*$}\footnotetext{These authors contributed equally.}\endgroup
 
 \begin{abstract}
 \citet{wu2025power} predict which of two speakers in a six-turn meeting excerpt is the professor, with a factor graph over LLM-written reasons and rebuttals.
@@ -129,7 +131,8 @@ Under that reading, 7,596 of the 13,185 words in those snippets (57.6\%) are dis
 If instead each letter is read as whoever says most of the words shown under it, the text is mostly attributed correctly, and the released label names the letter that carries most of the professor's words in only 69 of the 128 snippets.
 
 Under either reading the text and the labels disagree: the letter that a reader sees doing the professor's talking is, in about half of the snippets, not the letter the label rewards.
-The remaining 23 snippets have a third speaker, no single professor, or a letter that maps to two participants.
+In the remaining 23 snippets a letter covers two participants (22) or only one participant speaks (1).
+Appendix~\ref{sec:appendix} lists every snippet.
 
 \paragraph{What we can and cannot conclude.}
 The cached GPT-3.5 arguments in the release were generated from this text: the conversation stored with each cached snippet is identical to the corresponding row of \texttt{meeting.csv} for all 151.
@@ -280,5 +283,41 @@ The model answers themselves come from hosted models and cannot be regenerated e
 The ICSI corpus is distributed under CC BY 4.0.
 
 \bibliography{references}
+
+\appendix
+\onecolumn
+\section{Differences between the released file and the rebuilt set, by snippet}
+\label{sec:appendix}
+
+Table~\ref{tab:appendix} has one row for each of the 151 released snippets.
+\textbf{ID} is the row index in the released \texttt{meeting.csv}.
+\textbf{Meeting} and \textbf{Start} give the ICSI meeting and the start time in seconds of the snippet's first corpus segment.
+\textbf{Seg.}\ and \textbf{Words} are the numbers of corpus segments and words in the snippet.
+\textbf{Misplaced} is the number of words displayed under the other participant's letter when each released letter is read as the speaker of the last line of its turns, and \textbf{\%} is that number as a share of the snippet's words; both are blank when the letters do not map one-to-one onto two participants.
+\textbf{Rel.}\ is the released label and \textbf{Reb.}\ is the professor's letter in the rebuilt set, marked $\dagger$ where the two differ.
+\textbf{Letters} says whether the rebuilt letters follow the released ones (kept) or the first of the two speakers to talk was made A (reassigned).
+
+In total, 150 of the 151 snippets are in the rebuilt set.
+Letters are kept in 128 and reassigned in 22, and the label differs from the released label in 8.
+Over the 128 snippets with a one-to-one mapping, 7,596 of 13,185 words are misplaced; 121 of them have at least one misplaced word, 7 have none, and the median share is 55\%.
+The same rows are in \texttt{data/released\_vs\_rebuilt.csv} in the repository.
+
+{\small
+\setlength{\tabcolsep}{4.5pt}
+\begin{longtable}{rlrrrrrcclp{3.9cm}}
+\caption{Every released snippet against the rebuilt set.}\label{tab:appendix}\\
+\toprule
+ID & Meeting & Start & Seg. & Words & Misplaced & \% & Rel. & Reb. & Letters & Note \\
+\midrule
+\endfirsthead
+\toprule
+ID & Meeting & Start & Seg. & Words & Misplaced & \% & Rel. & Reb. & Letters & Note \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\input{appendix_table}
+\end{longtable}
+}
 
 \end{document}
