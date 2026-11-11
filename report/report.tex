@@ -10,7 +10,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 
-\title{Revisiting Multi-Agent Social Reasoning for Conversational Power:\\Factor Graphs, Decision Models, and Context}
+\title{Who Said What? Speaker Attribution in a Conversational Power Benchmark}
 
 \author{Muttaqi Ahmad Alladin$^{*}$ \\
   Purdue University \And
@@ -24,77 +24,58 @@
 \begingroup\renewcommand{\thefootnote}{$*$}\footnotetext{These authors contributed equally.}\endgroup
 
 \begin{abstract}
-\citet{wu2025power} predict which of two speakers in a six-turn meeting excerpt is the professor, with a factor graph over LLM-written reasons and rebuttals.
-We proposed to improve the graph with quote-checked arguments and Dung's grounded extension.
-On the 151 released snippets neither change helps, and no method we tried scores above the majority label.
-Tracing every snippet back to the ICSI Meeting Corpus shows that the released text and labels disagree about who is speaking: under the reading of the speaker letters that makes the labels correct, 57.6\% of the words are displayed under the other speaker's letter.
-We rebuilt the snippets from the corpus, taking speaker turns from the corpus itself.
-On the 150 rebuilt snippets a System One decision model (Jev) identifies the professor in 71.3\% of cases against a 56.7\% majority baseline, and in 89.3\% when it also sees 60 segments of meeting on each side.
-Their factor graph, rerun call by call with arguments from GPT-6.1 Terra and scores from Jev, reaches 72.0\%, level with asking Terra directly (72.7\%).
-A factor graph built from typed yes/no statements, with no generated arguments, matches the direct question at every context length.
+\citet{wu2025power} ask which of two speakers in a six-turn meeting excerpt is the professor, and report that people, GPT-3.5, and a factor graph over LLM-written arguments all score near 50\%.
+We trace all 151 released test snippets back to the ICSI Meeting Corpus and find that their displayed speaker letters and their labels disagree: under the reading of the letters that makes the labels correct, 57.6\% of the words are shown under the other speaker's letter.
+We rebuild the snippets with speakers taken from the corpus.
+On the same words, a decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, where it scored 48.0\% on the released text, and it reaches 89.3\% with 60 segments of surrounding meeting.
+With the data rebuilt we revisit the method.
+The factor graph, rerun call by call with a current LLM, reaches 72.0\%, level with asking that LLM directly (72.7\%), and neither rebuttals, relation factors, nor Dung's grounded extension improve on a direct answer.
+Code, data and every model output are released, and one command regenerates the data and all reported numbers.
 \end{abstract}
 
 \section{Introduction}
 
-\citet{wu2025power} study professor-student exchanges of six turns from the ICSI Meeting Corpus \citep{janin2003icsi} and take the professor to hold more power.
-They report 46.3\% for six PhD judges, 49.0\% for GPT-3.5 on the snippet alone, and 54.3\% for a factor graph over LLM-written reasons and rebuttals solved with AD3 \citep{martins2011augmented}.
-In the label file they released, speaker A is the higher-power speaker in 83 of 151 rows, so always answering A scores 55.0\%.
+Can a model tell who holds power in a conversation from a few turns?
+\citet{wu2025power} study this with professor-student exchanges of six turns from the ICSI Meeting Corpus \citep{janin2003icsi}, taking the professor to be the higher-power speaker.
+They report 46.3\% accuracy for six PhD judges, 49.0\% for GPT-3.5 on the excerpt alone, and 54.3\% for their method, a factor graph over LLM-written reasons and rebuttals.
+The picture is of a task that is close to impossible at this length, on which structured argumentation gives a small gain.
 
-Our proposal kept their cached arguments and changed three things: a quote check on every argument, a rebuttal prompt that shows the rebuttal, and Dung's grounded extension \citep{dung1995acceptability} in place of their XOR program.
-Section~\ref{sec:released} reports those experiments on the released snippets.
-Section~\ref{sec:data} traces the released snippets back to the corpus, shows that their displayed speakers and their labels disagree, and describes a snippet set rebuilt from the corpus.
-Section~\ref{sec:rebuilt} reports the same task on snippets rebuilt from the corpus, with the original factor graph, a decision model, zero-shot LLMs, and longer context.
+This project began as an attempt to improve that method.
+We proposed quote-checked arguments and Dung's grounded extension \citep{dung1995acceptability} in place of the factor graph, and found that neither helped and that nothing we tried on the released test set beat the majority label.
+Looking for the reason, we traced the released snippets back to the corpus.
+Our contributions are:
 
-\section{The released snippets}
-\label{sec:released}
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item \textbf{A data finding.} In the released test file the displayed speakers and the labels disagree (Section~\ref{sec:data}). Under the reading of the speaker letters that makes the labels correct, 57.6\% of words are shown under the other speaker's letter.
+\item \textbf{A rebuilt test set.} We rebuild the 150 usable snippets from the corpus, at the original span and with longer context, with a builder that regenerates them from public sources (Section~\ref{sec:rebuilt}).
+\item \textbf{The task is feasible.} On the rebuilt snippets a decision model and two LLMs identify the professor in 71 to 76\% of cases from the same words, and in 89\% with more context (Section~\ref{sec:results}).
+\item \textbf{The argument graph does not add accuracy.} With clean data, the factor graph, its rebuttals and relations, and the grounded extension all land within about two points of a direct answer (Section~\ref{sec:graph}).
+\end{itemize}
 
-\begin{table}[t]
-\centering\small
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{lrr}
-\toprule
-Method & Correct & Acc. \\
-\midrule
-Always A & 83 & 55.0 \\
-XOR graph, cached GPT-3.5 scores & 82 & 54.3 \\
-Grounded extension, as proposed & 69 & 45.7 \\
-XOR graph with quote filter & 64 & 42.4 \\
-Gemma 4 zero-shot & 66 & 43.7 \\
-Jev, ``is X the professor'' & 72 & 47.7 \\
-XOR graph, Jev scores & 76 & 50.3 \\
-Preference grounded, cached scores & 79 & 52.3 \\
-Preference grounded, Jev scores & 71 & 47.0 \\
-Typed-statement graph (Jev) & 77 & 51.0 \\
-\bottomrule
-\end{tabular}
-\caption{Accuracy on the 151 released snippets. Beating the 55.0\% base rate at $p<0.05$ needs 94 correct.}
-\label{tab:released}
-\end{table}
+\section{Background}
 
-Table~\ref{tab:released} lists the runs.
-Our reimplementation of the XOR graph as an integer program reproduces the published 54.3\% exactly (82 of 151).
-The quote filter kept 33.8\% of the 7,248 arguments and lowered accuracy.
+\paragraph{The method of Wu et al.}
+For each of four aspects (style, content, coordination, engagement) an LLM summarizes the conversation, writes three reasons why A has more power and three why B does, and writes a rebuttal to each reason.
+The LLM's yes/no token probabilities score each argument for validity and grounding, in the manner of \citet{kassner2023rationality}.
+A factor graph then chooses one speaker: a reason and its rebuttal cannot both hold, a speaker has power exactly when one of their reasons holds, and exactly one speaker has power.
+Inference uses AD3 \citep{martins2011augmented}.
+The paper suggests abstract argumentation \citep{dung1995acceptability} as a later formalization.
 
-\paragraph{The grounded extension is degenerate as we specified it.}
-Every reason has one paired rebuttal and nothing attacks a rebuttal, so every rebuttal is \textsc{in} and all 3,624 reasons are \textsc{out}.
-All 151 decisions fall to the tie-break.
-Removing weak rebuttals does not help, because we also made each reason for A and each reason for B attack each other, and under grounded semantics a mutual attack leaves both arguments undecided.
-A preference-based framework, where an attack succeeds only when the attacker scores at least as high as its target, removes both problems and gives a decision from \textsc{in} counts on every snippet.
-It is well behaved and no more accurate (79 of 151 with cached scores).
+\paragraph{Related work.}
+Earlier work predicts power from word choice, accommodation and thread structure with supervised models \citep{danescu2012echoes,prabhakaran2014power}, and \citet{ziems2024css} find that zero-shot LLMs often trail such models on social science tasks, power among them.
+\citet{sanayei2025debates} find that LLMs only moderately match argumentation-theoretic semantics when asked to judge debate graphs.
 
-\paragraph{Rescoring does not help.}
-A logistic regression fit to the cached validity and grounding scores, evaluated leave-one-out, reaches 53.0 to 57.0\%.
-Rescoring all arguments with Jev, including the corrected rebuttal question on all 3,624 rebuttals, gives 50.3\% under the XOR graph.
-
-\section{Data}
+\section{The released test set}
 \label{sec:data}
 
 \paragraph{Sources.}
 The released test set is the file \texttt{meeting.csv} of \citet{wu2025power}: 151 rows, each with a conversation between speakers A and B and a label naming the higher-power speaker.\footnote{\url{https://github.com/kandicew/social-reasoning}, commit \texttt{fed11b6}, \texttt{data/meeting.csv}.}
-The snippets come from the ICSI Meeting Corpus \citep{janin2003icsi}.
+Speaker A is the label in 83 rows, so always answering A scores 55.0\%.
+The snippets come from the ICSI Meeting Corpus.
 We use its original MRT transcripts, in which every segment carries a start time, a participant ID and the transcribed text, and its participant metadata, which records each participant's education level.\footnote{\url{https://groups.inf.ed.ac.uk/ami/icsi/download}: \texttt{ICSI\_original\_transcripts.zip} and \texttt{ICSI\_core\_NXT.zip} (\texttt{speakers.xml}), distributed under CC BY 4.0.}
 
-\paragraph{Locating the released snippets.}
+\paragraph{Locating the snippets.}
 After removing transcript markup, the non-empty lines of a released snippet are a run of consecutive corpus segments.
 Matching on that sequence finds all 151 snippets, each in exactly one place, across 45 meetings.
 This step uses only the released text.
@@ -122,7 +103,8 @@ B & professor & Yeah. \\
 \end{table}
 
 \paragraph{Displayed speakers against corpus speakers.}
-In the released text each displayed turn ends with the first segment of the next corpus speaker, as in Table~\ref{tab:example}: the turn shown under A contains the professor's remarks and then the other participant's ``Mm-hmm.''
+In the released text each displayed turn ends with the first segment of the next corpus speaker.
+In Table~\ref{tab:example} the turn shown under A contains the professor's remarks and then the other participant's ``Mm-hmm.''
 A letter therefore does not stand for one participant throughout a snippet, and there are two ways to read it.
 
 If each letter is read as the speaker of the last line of its turns, the letters map one-to-one onto the two participants in 128 snippets with exactly one professor, and the released label names the professor in 128 of those 128.
@@ -140,54 +122,61 @@ The code that built the snippets from the corpus is not in the public repository
 We do not know whether the human judges of \citet{wu2025power} saw the same text, or whether the numbers in their paper were computed from this file.
 We have not yet confirmed these observations with the authors.
 
-\paragraph{Consequence for the task.}
+\paragraph{Consequence.}
 A reader or model that judges the displayed text will, in many snippets, credit the professor's behaviour to the other letter.
-This is consistent with Section~\ref{sec:released}, where every method is at or slightly below the majority rate, and with the near-chance human and LLM accuracies reported by \citet{wu2025power}.
-It also predicts that the same judgments should become accurate once speech is attributed to the people who said it, which Section~\ref{sec:rebuilt} tests.
+On the released file that is what we observe: the rule ``whoever says more words is the professor'' scores 46.0\%, the direct Jev question 48.0\%, and no method we ran exceeds the majority rate (Appendix~\ref{sec:released}).
+It also predicts that the same judgments become accurate once speech is attributed to the people who said it.
 
-\paragraph{The rebuilt set.}
+\section{The rebuilt test set}
+\label{sec:rebuilt}
+
 We rebuilt each snippet from the located corpus segments.
 Speakers are the corpus participant IDs, consecutive segments by one participant form a turn, and the professor is the participant whose education level in \texttt{speakers.xml} is Professor.
 A snippet is kept if it has exactly one professor and at least two speakers, which drops one snippet and leaves 150.
 In the 128 snippets above, the letters follow the last-line reading, so the released labels carry over unchanged; in the other 22, the first of the two speakers to talk is A.
 In total 142 of the 150 labels equal the released label, and the professor is A in 85 (a 56.7\% base rate).
 Three snippets include a third participant, shown as C.
-Each snippet is rendered at three lengths: its own segments, and 15 or 60 further corpus segments on each side, with other participants shown as C, D, and so on.
+
+Each snippet is rendered at three lengths: its own segments (the same words as the released snippet), and 15 or 60 further corpus segments on each side, with other participants shown as C, D, and so on.
 The other speaker's education level is PhD in 117 snippets, Grad in 30 and Postdoc in 3, so ``student'' follows the usage of \citet{wu2025power}.
 The builder is deterministic and regenerates the set byte for byte from the three source files.
 
-\section{Snippets rebuilt from the corpus}
-\label{sec:rebuilt}
+\section{Methods}
 
-All experiments in this section use the rebuilt set of Section~\ref{sec:data}: 150 snippets with speakers taken from the corpus, at the same span as the released snippet and with 15 or 60 extra segments on each side.
-
-\paragraph{Jev.}
+\paragraph{Direct questions.}
 Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the rebuilt snippets were fixed before that data was built.}
-The direct question is ``Is speaker X the professor?'', asked for A and for B, and we predict the speaker with the higher probability.
+We ask ``Is speaker X the professor?'' for A and for B and predict the speaker with the higher probability.
+We also ask three LLMs which speaker has more power: GPT-6.1 Terra, Claude Haiku and Claude Sonnet.
+Two rules need no model: the speaker with more words, or with longer turns, is the professor.
 
 \paragraph{The factor graph of Wu et al.}
-We ran their method on the rebuilt snippets with arguments from current models, in two ways.
+We ran their method on the rebuilt snippets in two ways.
 In the first, GPT-6.1 Terra wrote the arguments call by call with their prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet), with tools disabled and no access to labels.
 In the second, Claude Haiku wrote all arguments for a snippet in one pass.
 Jev scored both sets: validity and grounding of each argument, whether each rebuttal counters its reason, and similarity and contradiction of reason pairs.
 A separate Haiku instance also scored the Haiku arguments.
-Their rule file and weights (reason 20, rebuttal 18) do the inference, in the three variants of the paper.
-
-\paragraph{Grounded extension.}
-We also ran the aggregator from our proposal on the same arguments.
-The framework has 48 arguments per snippet, 24 reasons and their 24 rebuttals.
-A reason has strength $P(\textrm{valid})\cdot P(\textrm{grounded})$ and a rebuttal has strength $P(\textrm{counters its reason})\cdot P(\textrm{grounded})$.
-In the \emph{proposed} relation every rebuttal attacks its reason, and every reason for A and every reason for B attack each other.
-In the \emph{preference} relation an attack succeeds only if the attacker is at least as strong as its target: a rebuttal defeats its reason when it is no weaker, and a reason defeats an opposing reason when it is strictly stronger.
-The grounded labelling marks an argument \textsc{in} when all its attackers are \textsc{out} and \textsc{out} when some attacker is \textsc{in}.
-The speaker with more \textsc{in} reasons is predicted, with ties going to the larger sum of reason strengths and then to A.
+Their rule file and weights (reason 20, rebuttal 18) do the inference, solved exactly as an integer program, in the three variants of the paper: reasons only, with rebuttals, and with all relations.
+The same solver reproduces the published 54.3\% on the released cache (82 of 151).
 
 \paragraph{Typed-statement factor graph.}
 We also keep their graph and replace the generated text.
-For each of their four aspects we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
-Jev's probability for a statement about X is the weight of a reason for X, in the manner of \citet{kassner2023rationality}, and the same statement about the other speaker is its rebuttal.
+For each aspect we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
+Jev's probability for a statement about X is the weight of a reason for X, and the same statement about the other speaker is its rebuttal.
 One call with 24 questions replaces the generation and scoring calls for 48 arguments per snippet.
-Unlike the argumentation scoring studied by \citet{sanayei2025debates}, no model is asked to reason over the graph.
+
+\paragraph{Grounded extension.}
+Over the same 24 reasons and 24 rebuttals we compute Dung's grounded labelling, in which an argument is \textsc{in} when all its attackers are \textsc{out} and \textsc{out} when some attacker is \textsc{in}, and predict the speaker with more \textsc{in} reasons.
+A reason has strength $P(\textrm{valid})\cdot P(\textrm{grounded})$ and a rebuttal $P(\textrm{counters its reason})\cdot P(\textrm{grounded})$.
+In the relation of our proposal every rebuttal attacks its reason and opposing reasons attack each other.
+In a preference-based relation an attack succeeds only if the attacker is at least as strong as its target.
+Appendix~\ref{sec:grounded} gives details.
+
+\paragraph{Statistics.}
+Paired comparisons use the exact McNemar test.
+Intervals come from a bootstrap that resamples whole meetings.
+
+\section{Results}
+\label{sec:results}
 
 \begin{table}[t]
 \centering\small
@@ -196,6 +185,7 @@ Unlike the argumentation scoring studied by \citet{sanayei2025debates}, no model
 \toprule
  & Rel. & Rebuilt & $\pm$15 & $\pm$60 \\
 \midrule
+Always A & 55.3 & 56.7 & 56.7 & 56.7 \\
 More words & 46.0 & 66.7 & 66.0 & 68.7 \\
 Longer turns & & 68.0 & 69.3 & 66.7 \\
 Jev, professor & 48.0 & 71.3 & 84.7 & 89.3 \\
@@ -203,9 +193,30 @@ Jev, more power & 48.0 & 70.7 & 79.3 & 88.0 \\
 Typed-statement graph & 51.3 & 70.0 & 80.7 & 90.7 \\
 \bottomrule
 \end{tabular}
-\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. The other columns use the rebuilt text at the same span and with 15 or 60 extra segments per side. Always answering A scores 56.7\%. The blank cell was not run.}
+\caption{Accuracy (\%) on the 150 snippets. ``Rel.''\ uses the released text and labels for the same snippets. ``Rebuilt'' uses the same words with speakers from the corpus. The last two columns add 15 or 60 corpus segments per side. The blank cell was not run.}
 \label{tab:rebuilt}
 \end{table}
+
+\subsection{Attribution}
+
+Table~\ref{tab:rebuilt} compares the released and rebuilt inputs.
+On the rebuilt snippets at the original span, the direct Jev question identifies the professor in 107 of 150 cases.
+Against always answering A this is 34 wins and 12 losses ($p=0.0016$), and the meeting-level bootstrap gives a 95\% interval of 6.7 to 22.0 points for the difference.
+The same question on the released text scores 72 of 150, and the paired contrast between the two inputs is 52 wins to 17 losses ($p<0.0001$).
+The words are the same in both conditions; only who is shown saying them differs.
+The word-count rules move the same way, from 46.0\% to 66.7\%, though their paired tests against the majority label on the rebuilt set are not significant ($p=0.10$ and $p=0.053$).
+
+Jev's probabilities also become informative.
+Its Brier score is 0.189 at the original span against 0.246 for the base rate, and its most confident fifth of answers is 93.3\% correct.
+
+\subsection{Context}
+
+More context helps.
+With 15 extra segments per side Jev reaches 84.7\% (30 wins to 10 losses against the original span, $p=0.002$), and with 60 it reaches 89.3\% with a Brier score of 0.095.
+The word-count rules do not improve with context, so the gain is not explained by the professor simply talking more.
+
+\subsection{Does the argument graph help?}
+\label{sec:graph}
 
 \begin{table}[t]
 \centering\small
@@ -219,68 +230,65 @@ Haiku & Jev & 68.0 & 73.3 & 70.0 & 70.0 & 73.3 \\
 Haiku & Haiku & 68.0 & 68.7 & 67.3 & 68.0 & 64.7 \\
 \bottomrule
 \end{tabular}
-\caption{Argument-based methods on the rebuilt snippets at the same span (accuracy, \%). Rows give who wrote and who scored the arguments. ``Dir.''\ is the argument-writing model asked directly. ``Reas.'', ``+Reb.''\ and ``All'' are the three variants of the factor graph of \citet{wu2025power}. ``Gr.''\ is the grounded extension with the preference relation. For comparison, the direct Jev question scores 71.3\% and Claude Sonnet asked directly scores 76.0\%.}
+\caption{Argument-based methods on the rebuilt snippets at the original span (accuracy, \%). Rows give who wrote and who scored the arguments. ``Dir.''\ is the argument-writing model asked directly. ``Reas.'', ``+Reb.''\ and ``All'' are the three variants of the factor graph of \citet{wu2025power}. ``Gr.''\ is the grounded extension with the preference relation. For comparison, the direct Jev question scores 71.3\% and Claude Sonnet asked directly scores 76.0\%.}
 \label{tab:graph}
 \end{table}
 
-\paragraph{Results.}
-Table~\ref{tab:rebuilt} gives accuracy by input for the methods that need no generated arguments.
-On the rebuilt snippets at the same span, the direct Jev question identifies the professor in 107 of 150 cases.
-Against always answering A this is 34 wins and 12 losses (exact McNemar $p=0.0016$), and a bootstrap that resamples whole meetings gives a 95\% interval of 6.7 to 22.0 points for the difference.
-The same question on the released text scores 72 of 150, and the paired contrast between the two inputs is 52 wins to 17 losses ($p<0.0001$).
-Context helps further: $\pm$15 segments against the same span is 30 wins to 10 losses ($p=0.002$).
-The word-count rules reach 66.7\% and 68.0\%, but their paired tests against the majority label are not significant ($p=0.10$ and $p=0.053$).
-
 Table~\ref{tab:graph} gives the argument-based methods.
-With Terra's arguments and Jev's scores the full factor graph of \citet{wu2025power} reaches 72.0\%.
+With Terra's arguments and Jev's scores the full factor graph reaches 72.0\%.
 That is level with Terra asked directly (72.7\%, 14 wins to 15 losses) and with the direct Jev question (14 to 13).
 With Haiku's arguments it reaches 70.0\% under Jev's scores and 68.0\% under Haiku's, against 68.0\% for Haiku asked directly.
+
 The parts of the graph do not behave consistently across the two sets of arguments.
 Rebuttals add 5.3 points with Terra's arguments (11 wins to 3 losses, $p=0.057$) and cost 3.3 points with Haiku's under the same scorer, and adding the relations changes accuracy in neither Jev-scored run.
 A plain sum of reason scores with no graph equals the reasons-only graph in all three rows.
-The best single result at this span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$).
+The typed-statement graph tracks the direct Jev question at every context length (Table~\ref{tab:rebuilt}; 21 wins to 23 losses at the original span, $p=0.88$).
 
-The grounded extension behaves on the rebuilt snippets as it did on the released ones.
-Under the proposed relation no reason is ever \textsc{in} in any run, so all 150 decisions are made by the tie-break and the accuracy is that of the sum of reason strengths.
-The preference relation gives a real decision: with Jev scores every snippet is decided by \textsc{in} counts, and accuracy is 70.0\% with Terra's arguments and 73.3\% with Haiku's, the latter level with the direct Jev question (13 wins to 10 losses, $p=0.68$).
-With the coarser Haiku scores it reaches 64.7\%.
-We also searched 288 grounded policies over the Haiku arguments and Jev scores, varying the strength definitions, the rule for when a rebuttal attacks (preference or a threshold on Jev's judgment that it counters its reason), the cross-side rule, and the decision rule.
-Choosing the best policy on a development half of the meetings and scoring it on the other half, over 500 random splits, gives 69.7\% on average against 71.5\% for the direct Jev question on the same halves, so no policy in this family improves on asking directly.
+The grounded extension tells the same story.
+Under the relation of our proposal no reason is ever \textsc{in}, so every decision is made by the tie-break.
+The preference relation gives a real decision on every snippet with Jev scores, at 70.0\% with Terra's arguments and 73.3\% with Haiku's.
+A search over 288 grounded policies, with the policy chosen on half of the meetings and scored on the other half, averages 69.7\% against 71.5\% for the direct question on the same halves (Appendix~\ref{sec:grounded}).
 
-The typed-statement graph tracks the direct Jev question at every input (70.0\% against 71.3\% at the same span, 21 wins to 23 losses, $p=0.88$).
-It is a cheaper way to run the method and exposes which statements drive a decision, and we do not claim it is more accurate than asking directly.
+The best single result at the original span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$).
+We find no evidence that structured argumentation over generated reasons adds accuracy on this task.
+With 150 snippets a difference of a few points would not be detectable.
 
-Jev's probabilities are informative on the rebuilt snippets.
-Its Brier score is 0.189 at the same span and 0.095 at $\pm$60, against 0.246 for the base rate, and its most confident fifth of answers is 93.3\% correct at the same span.
+\subsection{Robustness}
+
+The rebuilt set has four professors, and one of them is the professor in 110 of the 150 snippets.
+On the 40 snippets with the other three professors, Jev scores 77.5\%, 85.0\% and 85.0\% at the three context lengths, Terra 77.5\% and Sonnet 70.0\%, so the result does not depend on the most frequent professor.
+None of these models is trained on the task.
+
+The first of the two speakers to talk is the professor in 83 of 150 snippets, so turn order alone is no better than the majority label.
+
+Jev favours the letter A at the original span: it is correct in 85.9\% of the snippets where the professor is A and in 52.3\% where the professor is B.
+Its balanced accuracy is therefore 69.1\%, a little below the 71.3\% headline, and its AUC is 0.79.
+The asymmetry disappears with context (89.4\% and 89.2\% at $\pm$60).
+Sonnet shows the opposite, smaller asymmetry (71.8\% and 81.5\%).
 
 \section{Limitations}
 
 The order of work was exploratory.
-The mismatch in the released file was found, and the rebuilt set constructed, after many runs on the released file, and every number in Section~\ref{sec:released} was computed on test data with no development split.
+The mismatch in the released file was found, and the rebuilt set constructed, after many runs on the released file, which has no development split.
 The questions used on the rebuilt snippets were written before that data existed, and each run was made once.
+
+Our observations about the released file have not been confirmed with its authors, and we cannot tell from public materials whether the experiments in \citet{wu2025power} used the released text.
+We did not run a human study, so we cannot say how people perform on the rebuilt snippets.
 
 Neither rerun of the factor graph uses the original model.
 The Terra run follows the pipeline call by call, but the text comes from GPT-6.1 Terra and the scores from Jev, because the command-line interface we used does not expose token probabilities.
-The Haiku run wrote each snippet's arguments in one pass, so reasons were written with the conversation in view, and its Haiku scores are stated probabilities with about 15 distinct values.
-In both, each rebuttal is judged against its own reason and grounded on its own text.
+The Haiku run wrote each snippet's arguments in one pass, and its Haiku scores are stated probabilities with about 15 distinct values.
+We did not rerun GPT-3.5 or the quote-filter experiments on the rebuilt snippets.
 
-The rebuilt set has four professors, and one of them is the professor in 110 of the 150 snippets.
-Jev's accuracy for that professor is 69.1\% at the same span, and 73.3 to 100\% for the others, so the result is not carried by one person, but the meeting-level bootstrap is the more honest interval.
+The test set is small and comes from one corpus of research meetings with four professors.
 With 60 extra segments a model can use cues that a six-turn excerpt lacks, including how others address the two speakers.
-
-We did not rerun GPT-3.5, Gemma, or a human study on the rebuilt snippets.
-Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed.
-The 40-item human audit from our proposal was not completed.
-
-Earlier work predicts power from word choice and thread structure with supervised models \citep{danescu2012echoes,prabhakaran2014power}, and \citet{ziems2024css} find that LLMs often trail such models.
-Our numbers say only that the role is recoverable from these excerpts, and they are not a comparison with that line of work.
+Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed; the two LLM baselines give similar accuracy at the original span.
 
 \section{Reproducibility}
 
 The repository contains the rebuilt snippets with corpus offsets, every model answer, and all code.\footnote{\url{https://github.com/muttaqiahmadalladin/cs-577}}
 One command downloads the five external inputs (the released \texttt{meeting.csv}, argument cache and rule file, and the two ICSI annotation archives), verifies each by SHA-256, regenerates the snippet set byte for byte, and recomputes every number in this report from the stored model answers without calling a model.
 The model answers themselves come from hosted models and cannot be regenerated exactly; the scripts and instructions used to collect them are included.
-The ICSI corpus is distributed under CC BY 4.0.
 
 \bibliography{references}
 
@@ -319,5 +327,83 @@ ID & Meeting & Start & Seg. & Words & Misplaced & \% & Rel. & Reb. & Letters & N
 \input{appendix_table}
 \end{longtable}
 }
+
+\section{Experiments on the released snippets}
+\label{sec:released}
+
+Table~\ref{tab:released} lists what we ran on the 151 released snippets before the rebuilt set existed.
+Our reimplementation of the XOR graph as an integer program reproduces the published 54.3\% exactly (82 of 151).
+The quote check from our proposal, in which an argument is kept only if a model can quote a supporting span of the snippet verbatim, kept 33.8\% of the 7,248 cached arguments and lowered accuracy.
+A logistic regression fit to the cached validity and grounding scores, evaluated leave-one-out, reaches 53.0 to 57.0\%.
+Rescoring all cached arguments with Jev, including a rebuttal question that shows the rebuttal next to its reason, gives 50.3\% under the XOR graph.
+The first three rows after the baseline, the quote filter and the Gemma 4 run are from our earlier implementation.\footnote{\url{https://github.com/KrishMay05/nlp_research}}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrr}
+\toprule
+Method & Correct & Accuracy (\%) \\
+\midrule
+Always A & 83 & 55.0 \\
+XOR graph, cached GPT-3.5 scores & 82 & 54.3 \\
+Grounded extension, as proposed & 69 & 45.7 \\
+XOR graph with quote filter & 64 & 42.4 \\
+Gemma 4 zero-shot & 66 & 43.7 \\
+Jev, ``is X the professor'' & 72 & 47.7 \\
+XOR graph, Jev scores & 76 & 50.3 \\
+Preference-based grounded extension, cached scores & 79 & 52.3 \\
+Preference-based grounded extension, Jev scores & 71 & 47.0 \\
+Typed-statement graph (Jev) & 77 & 51.0 \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy on the 151 released snippets. Beating the 55.0\% base rate at $p<0.05$ needs 94 correct.}
+\label{tab:released}
+\end{table}
+
+\section{Grounded extension: details}
+\label{sec:grounded}
+
+\paragraph{Framework.}
+Each snippet has 48 arguments: 24 reasons, three per speaker per aspect, and one rebuttal for every reason.
+A reason for X supports the claim that X is the professor.
+A reason has strength $P(\textrm{valid})\cdot P(\textrm{grounded})$ and a rebuttal has strength $P(\textrm{counters its reason})\cdot P(\textrm{grounded})$.
+The grounded labelling is the least fixed point of two rules: an argument is \textsc{in} when every attacker is \textsc{out}, so an unattacked argument is \textsc{in}, and \textsc{out} when at least one attacker is \textsc{in}; any other argument is undecided.
+The speaker with more \textsc{in} reasons is predicted, with ties going to the larger sum of reason strengths and then to A.
+
+\paragraph{The proposed relation is degenerate.}
+In our proposal every rebuttal attacks its reason, and every reason for A and every reason for B attack each other.
+Nothing attacks a rebuttal, so every rebuttal is \textsc{in} and every reason is \textsc{out}.
+Removing weak rebuttals does not help, because two opposing reasons that attack each other form a cycle, which the grounded labelling leaves undecided.
+In every run, on released and rebuilt snippets alike, no reason is \textsc{in} and all decisions fall to the tie-break, that is, to the sum of reason strengths.
+
+\paragraph{The preference relation.}
+Following preference-based argumentation, an attack succeeds only if the attacker is at least as strong as its target: a rebuttal defeats its reason when it is no weaker, and a reason defeats an opposing reason when it is strictly stronger.
+At most one direction of each attack succeeds, which removes both problems.
+Table~\ref{tab:grounded} gives the results on the rebuilt snippets.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lllrrr}
+\toprule
+Arguments & Scores & Relation & Accuracy (\%) & Decided by \textsc{in} count & Reasons \textsc{in} \\
+\midrule
+Terra & Jev & proposed & 66.7 & 0 of 150 & 0 of 3,600 \\
+Terra & Jev & preference & 70.0 & 150 of 150 & 1,504 of 3,600 \\
+Haiku & Jev & proposed & 73.3 & 0 of 150 & 0 of 3,600 \\
+Haiku & Jev & preference & 73.3 & 150 of 150 & 1,517 of 3,600 \\
+Haiku & Haiku & proposed & 68.7 & 0 of 150 & 0 of 3,600 \\
+Haiku & Haiku & preference & 64.7 & 141 of 150 & 849 of 3,600 \\
+\bottomrule
+\end{tabular}
+\caption{Grounded extension on the 150 rebuilt snippets at the original span.}
+\label{tab:grounded}
+\end{table}
+
+\paragraph{Policy search.}
+To ask whether some other score-aware policy does better, we evaluated 288 policies over the Haiku arguments and Jev scores.
+They vary the strength of a reason (three definitions) and of a rebuttal (three definitions), the rule for when a rebuttal attacks (preference, or a threshold of 0.3, 0.5 or 0.7 on its strength), the cross-side rule (none, stronger reason defeats any opposing reason, the same within an aspect only, or only between reasons Jev judges similar), and the decision rule (count or summed strength of \textsc{in} reasons).
+Meetings were split at random into a development half and a test half; the best development policy was scored on the test half next to the direct Jev question on the same half.
+Over 500 splits the selected policy averages 69.7\% and the direct question 71.5\%; the selected policy is ahead in 133 of 500 splits (mean difference $-1.8$ points, middle 95\% of splits $-11.2$ to $+3.8$).
+On all 150 snippets the policies range from 82 to 111 correct with a median of 99, against 107 for the direct question.
 
 \end{document}

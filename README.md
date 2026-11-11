@@ -44,7 +44,7 @@ pip install -r requirements.txt
 python3 scripts/reproduce.py
 ```
 
-This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 46 of 46 report values reproduced`). It calls no model and needs no API key.
+This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 60 of 60 report values reproduced`). It calls no model and needs no API key.
 
 ## Repository layout
 

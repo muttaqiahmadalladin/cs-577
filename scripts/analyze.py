@@ -197,6 +197,18 @@ def main():
         for k in range(3): Z.update(json.load(open(RUN / f"zero_{m}" / f"zero_{k}.json")))
         ok["zero_" + m] = record("wu_graph", f"{m.capitalize()} zero-shot", np.array([Z[i]["answer"] == "A" for i in ids]), gold, np.array([float(Z[i]["p_A"]) for i in ids]))
 
+    # ---------------------------------------------------------------- Robustness checks on the rebuilt snippets
+    print("\nRobustness. Rebuilt snippets")
+    prof_of = np.array([d["speakers"][d["professor"]] for d in D]); top = max(set(prof_of), key=lambda q: (prof_of == q).sum()); rest = prof_of != top
+    first = np.array([next(t["speaker"] for t in d["turns_same_span"] if t["speaker"] in "AB") == "A" for d in D])
+    rb = dict(most_frequent_professor_snippets=int((~rest).sum()), other_professors_snippets=int(rest.sum()), other_professors_A_share=round(100 * float(gold[rest].mean()), 1),
+              first_speaker_is_professor=int((first == gold).sum()), professor_is_A=int(gold.sum()), professor_is_B=int((~gold).sum()))
+    for key, name in (("fixed_prof", "jev_same_span"), ("ctx15_prof", "jev_pm15"), ("ctx60_prof", "jev_pm60"), ("zero_sonnet", "sonnet_same_span"), ("zero_terra", "terra_same_span"), ("terra_jev_all", "wu_graph_terra_jev_same_span")):
+        rb[name] = dict(most_frequent_professor=round(100 * float(ok[key][~rest].mean()), 1), other_professors=round(100 * float(ok[key][rest].mean()), 1), other_professors_correct=int(ok[key][rest].sum()),
+                        when_professor_is_A=round(100 * float(ok[key][gold].mean()), 1), when_professor_is_B=round(100 * float(ok[key][~gold].mean()), 1))
+    OUT["robustness"] = rb
+    for k, v in rb.items(): print(f"  {k}: {v}")
+
     print("\nPaired comparisons (wins / losses for the first method, exact McNemar p)")
     pairs = [("fixed_prof", "rel_prof", "Jev professor: rebuilt same span vs released"), ("fixed_graph", "rel_graph", "Typed graph: rebuilt same span vs released"),
              ("ctx15_prof", "fixed_prof", "Jev professor: 15 extra vs same span"), ("ctx60_prof", "fixed_prof", "Jev professor: 60 extra vs same span"),
@@ -227,7 +239,16 @@ def main():
         e = OUT["rebuilt_fixed"]["Jev, professor"]
         if e["vs_always_A"]["meeting_bootstrap_95"] != [6.7, 22.0] or e["brier"] != 0.189 or e["accuracy_most_confident_fifth"] != 93.3: bad.append(("Jev professor interval/Brier/top fifth", "[6.7, 22.0] 0.189 93.3", (e["vs_always_A"]["meeting_bootstrap_95"], e["brier"], e["accuracy_most_confident_fifth"])))
         bad += [(k, v, OUT["data_audit"][k]) for k, v in audit_expect.items() if OUT["data_audit"][k] != v]
-        n = len(expect) + 1 + len(audit_expect)
+        rb, rb_expect = OUT["robustness"], {("most_frequent_professor_snippets",): 110, ("first_speaker_is_professor",): 83, ("jev_same_span", "other_professors"): 77.5,
+                                            ("jev_pm15", "other_professors"): 85.0, ("jev_pm60", "other_professors"): 85.0, ("jev_same_span", "when_professor_is_A"): 85.9,
+                                            ("jev_same_span", "when_professor_is_B"): 52.3, ("jev_pm60", "when_professor_is_A"): 89.4, ("jev_pm60", "when_professor_is_B"): 89.2,
+                                            ("sonnet_same_span", "other_professors"): 70.0, ("terra_same_span", "other_professors"): 77.5,
+                                            ("sonnet_same_span", "when_professor_is_A"): 71.8, ("sonnet_same_span", "when_professor_is_B"): 81.5}
+        for k, v in rb_expect.items():
+            got = rb[k[0]] if len(k) == 1 else rb[k[0]][k[1]]
+            if got != v: bad.append(("robustness " + " ".join(k), v, got))
+        if OUT["rebuilt_fixed"]["Jev, professor"]["auc"] != 0.79: bad.append(("Jev professor AUC", 0.79, OUT["rebuilt_fixed"]["Jev, professor"]["auc"]))
+        n = len(expect) + 1 + len(audit_expect) + len(rb_expect) + 1
         for k, v, got in bad: print("MISMATCH", k, "report:", v, "recomputed:", got)
         print(f"check: {n - len(bad)} of {n} report values reproduced"); sys.exit(1 if bad else 0)
 

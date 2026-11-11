@@ -121,3 +121,11 @@ Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.m
 - The Terra run is call by call but its scores come from Jev, since the Codex command line does not expose token probabilities. Codex's own evaluation of that run (`results/wu_graph_terra/codex_results.txt`) reports 101 correct for the reasons-only graph where `analyze.py` gets 100; the other variants agree.
 - The Haiku run is not call by call: each snippet's arguments were written in one pass, and the Haiku scores are stated probabilities with about 15 distinct values.
 - Four professors appear in the 150 snippets, and one of them in 110.
+
+## Robustness checks
+
+Computed by the "Robustness" block of `scripts/analyze.py` and stored under `robustness` in `results/report_numbers.json`.
+
+- One professor accounts for 110 of the 150 rebuilt snippets. On the 40 snippets with the other three professors, Jev scores 77.5%, 85.0% and 85.0% at the three context lengths, Terra 77.5% and Sonnet 70.0%.
+- The first of the two speakers to talk is the professor in 83 of 150 snippets, the same as the majority label.
+- At the original span Jev is correct in 85.9% of snippets where the professor is A and 52.3% where the professor is B (balanced accuracy 69.1%, AUC 0.79). With 60 extra segments per side the two are 89.4% and 89.2%. Sonnet: 71.8% and 81.5%.

@@ -539,6 +539,56 @@
    "auc": 0.872
   }
  },
+ "robustness": {
+  "most_frequent_professor_snippets": 110,
+  "other_professors_snippets": 40,
+  "other_professors_A_share": 52.5,
+  "first_speaker_is_professor": 83,
+  "professor_is_A": 85,
+  "professor_is_B": 65,
+  "jev_same_span": {
+   "most_frequent_professor": 69.1,
+   "other_professors": 77.5,
+   "other_professors_correct": 31,
+   "when_professor_is_A": 85.9,
+   "when_professor_is_B": 52.3
+  },
+  "jev_pm15": {
+   "most_frequent_professor": 84.5,
+   "other_professors": 85.0,
+   "other_professors_correct": 34,
+   "when_professor_is_A": 88.2,
+   "when_professor_is_B": 80.0
+  },
+  "jev_pm60": {
+   "most_frequent_professor": 90.9,
+   "other_professors": 85.0,
+   "other_professors_correct": 34,
+   "when_professor_is_A": 89.4,
+   "when_professor_is_B": 89.2
+  },
+  "sonnet_same_span": {
+   "most_frequent_professor": 78.2,
+   "other_professors": 70.0,
+   "other_professors_correct": 28,
+   "when_professor_is_A": 71.8,
+   "when_professor_is_B": 81.5
+  },
+  "terra_same_span": {
+   "most_frequent_professor": 70.9,
+   "other_professors": 77.5,
+   "other_professors_correct": 31,
+   "when_professor_is_A": 74.1,
+   "when_professor_is_B": 70.8
+  },
+  "wu_graph_terra_jev_same_span": {
+   "most_frequent_professor": 68.2,
+   "other_professors": 82.5,
+   "other_professors_correct": 33,
+   "when_professor_is_A": 84.7,
+   "when_professor_is_B": 55.4
+  }
+ },
  "paired": {
   "Jev professor: rebuilt same span vs released": {
    "wins": 52,

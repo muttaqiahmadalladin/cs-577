@@ -24,7 +24,7 @@ It runs the eight steps below in order and stops at the first failure. On a lapt
 | 2 | `build_dataset.py --check` | The committed dataset is regenerated exactly from the sources | `committed dataset reproduced exactly` |
 | 3 | `build_dataset.py` | Writes `work/rows.json`, `work/fixed_index.json`, `work/contexts.jsonl` | `wrote ... icsi_rebuilt_snippets.jsonl and work files ...` |
 | 4 | `convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | `wrote ... snippets.jsonl and ... rules.txt` |
-| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 46 of 46 report values reproduced` |
+| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 60 of 60 report values reproduced` |
 | 6 | `grounded_extension.py` | The grounded extension results | four result lines |
 | 7 | `grounded_policy_search.py` | The 288-policy search with held-out selection | `chosen in ... splits` lines |
 | 8 | `data_differences.py` | The per-snippet differences in `data/released_vs_rebuilt.csv` and the report's appendix table | `151 released snippets; 150 in the rebuilt set; ...` |
