@@ -129,3 +129,11 @@ Computed by the "Robustness" block of `scripts/analyze.py` and stored under `rob
 - One professor accounts for 110 of the 150 rebuilt snippets. On the 40 snippets with the other three professors, Jev scores 77.5%, 85.0% and 85.0% at the three context lengths, Terra 77.5% and Sonnet 70.0%.
 - The first of the two speakers to talk is the professor in 83 of 150 snippets, the same as the majority label.
 - At the original span Jev is correct in 85.9% of snippets where the professor is A and 52.3% where the professor is B (balanced accuracy 69.1%, AUC 0.79). With 60 extra segments per side the two are 89.4% and 89.2%. Sonnet: 71.8% and 81.5%.
+
+## Running another model (GLM)
+
+`scripts/run_glm.sh` reruns the argument experiments with a Z.ai GLM model: `probe` (2 snippets), `run` (all 150), `score`.
+It calls `wu_pipeline.py` with `--out glm_run`, `LLM_LOGPROBS=0` and `reasoning_effort=low` (GLM-5.3 always reasons and
+does not return token probabilities, so the printed answer is used), then `score_run.py`, which prints the Table 3 rows
+for that model and writes `results/glm_run/`. `score_run.py --run <folder> --name <model>` works for any
+`wu_pipeline.py` run. Keys are read from `ZAI_API_KEY` and `TYPESAFE_API_KEY` in the environment only.

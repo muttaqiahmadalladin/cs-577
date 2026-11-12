@@ -14,11 +14,16 @@ Environment:
   LLM_MODEL         default gpt-3.5-turbo               (Purdue: gemma4:26b-a4b)
   LLM_WORKERS       parallel snippets, default 6        (Purdue: 1)
   LLM_MIN_INTERVAL  seconds between calls, default 0    (Purdue: 3.2)
+  LLM_LOGPROBS      1 (default) asks for token probabilities; 0 for models that do not return them or that
+                    always reason before answering (the printed answer is used instead)
+  LLM_MAX_TOKENS    output cap when LLM_LOGPROBS=0 (default: none)
+  LLM_EXTRA_JSON    JSON object merged into every chat request, for example '{"reasoning_effort": "low"}'
   TYPESAFE_API_KEY  for the jev stage
 
   python3 wu_pipeline.py --stages gen,zero,jev            # main run
   python3 wu_pipeline.py --stages gen,zero,jev,llm        # also Wu's own scoring (144 more calls per snippet)
   python3 wu_pipeline.py --limit 2 --stages gen,zero,jev  # probe two snippets first
+  python3 wu_pipeline.py --out glm_run --stages gen,zero,jev   # keep a second model's run in its own folder (see run_glm.sh)
 Standard library only.
 """
 import argparse, ast, json, math, os, re, sys, threading, time, urllib.error, urllib.request
@@ -37,6 +42,9 @@ LLM_BASE = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1").rstrip("/
 LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-3.5-turbo")
 WORKERS = int(os.environ.get("LLM_WORKERS", "6"))
 MIN_INTERVAL = float(os.environ.get("LLM_MIN_INTERVAL", "0"))
+USE_LOGPROBS = os.environ.get("LLM_LOGPROBS", "1") != "0"
+MAX_TOKENS = int(os.environ.get("LLM_MAX_TOKENS", "0"))
+EXTRA = json.loads(os.environ.get("LLM_EXTRA_JSON", "{}"))
 JEV_URL = os.environ.get("TYPESAFE_URL", "https://api.typesafe.ai/v1/systemone")
 JEV_MODEL = os.environ.get("JEV_MODEL", "jev-latest")
 
@@ -78,9 +86,14 @@ def http_json(url, payload, key, tries=7):
 
 def chat(prompt, logprobs=False):
     payload = {"model": LLM_MODEL, "messages": [{"role": "user", "content": prompt}]}
-    if logprobs: payload.update(logprobs=True, top_logprobs=5, max_tokens=4, temperature=0)
-    resp = http_json(LLM_BASE + "/chat/completions", payload, os.environ["LLM_API_KEY"])
-    choice = resp["choices"][0]; text = (choice["message"].get("content") or "").strip()
+    if logprobs and USE_LOGPROBS: payload.update(logprobs=True, top_logprobs=5, max_tokens=4, temperature=0)
+    elif MAX_TOKENS: payload["max_tokens"] = MAX_TOKENS
+    payload.update(EXTRA)
+    for attempt in range(3):   # a reasoning model can spend its whole budget thinking and return no answer; retry, never fill in
+        resp = http_json(LLM_BASE + "/chat/completions", payload, os.environ["LLM_API_KEY"])
+        choice = resp["choices"][0]; text = (choice["message"].get("content") or "").strip()
+        if text: break
+    else: raise RuntimeError(f"empty answer from {LLM_MODEL} three times (finish_reason {choice.get('finish_reason')}); raise LLM_MAX_TOKENS")
     if not logprobs: return text
     lp = (choice.get("logprobs") or {}).get("content") or []
     top = {t["token"].strip().lower(): math.exp(t["logprob"]) for t in (lp[0]["top_logprobs"] if lp else [])}
@@ -91,8 +104,8 @@ def prob(top, text, yes, no):
     """P(yes) from first-token probabilities; falls back to the printed answer if the API gives none."""
     y = sum(p for t, p in top.items() if t == yes); n = sum(p for t, p in top.items() if t == no)
     if y + n > 0: return y / (y + n)
-    t = text.strip().lower()
-    return 0.99 if t.startswith(yes) else 0.01 if t.startswith(no) else 0.5
+    m = re.search(rf"\b({re.escape(yes)}|{re.escape(no)})\b", text.strip().lower())   # first standalone yes/no (or A/B) in the printed answer
+    return 0.5 if not m else 0.99 if m.group(1) == yes else 0.01
 
 
 def load_templates():
@@ -145,7 +158,9 @@ def gen_snippet(rec, T):
 
 def zero_snippet(rec):
     text, top = chat(ZERO_SHOT.format(conversation=conversation(rec["state"]["turns"])), logprobs=True)
-    return {"id": rec["id"], "model": LLM_MODEL, "answer": text, "p_A": prob(top, text, "a", "b")}
+    m = re.search(r"\b([AB])\b", text)   # case-sensitive, so the article "a" is not read as an answer
+    p_a = prob(top, text, "a", "b") if top else 0.5 if not m else 0.99 if m.group(1) == "A" else 0.01
+    return {"id": rec["id"], "model": LLM_MODEL, "answer": text, "p_A": p_a}
 
 
 def llm_score_snippet(rec, gen, T):
@@ -221,11 +236,11 @@ def run_stage(name, recs, fn, workers):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--stages", default="gen,zero,jev"); ap.add_argument("--limit", type=int)
-    ap.add_argument("--cond", default="fixed"); ap.add_argument("--reuse-claude-arguments", action="store_true"); args = ap.parse_args(); stages = args.stages.split(",")
+    ap.add_argument("--cond", default="fixed"); ap.add_argument("--out", default="wu_run", help="output folder under work/"); ap.add_argument("--reuse-claude-arguments", action="store_true"); args = ap.parse_args(); stages = args.stages.split(",")
     recs = [json.loads(l) for l in (HERE / "contexts.jsonl").read_text().splitlines() if l.strip()]
     recs = [r for r in recs if r["cond"] == args.cond][: args.limit]
     global OUT
-    if args.cond != "fixed": OUT = HERE / f"wu_run_{args.cond}"
+    OUT = HERE / (args.out if args.cond == "fixed" else f"{args.out}_{args.cond}")
     OUT.mkdir(exist_ok=True)
     if {"gen", "zero", "llm"} & set(stages) and not os.environ.get("LLM_API_KEY"): sys.exit("Set LLM_API_KEY first.")
     if "jev" in stages and not os.environ.get("TYPESAFE_API_KEY"): sys.exit("Set TYPESAFE_API_KEY first.")
