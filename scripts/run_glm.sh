@@ -18,6 +18,10 @@
 #
 # GLM-5.3 always reasons before answering and rejects thinking.type=disabled, so the requests set reasoning_effort=low
 # and leave room for the reasoning tokens. Override with GLM_MODEL, GLM_EFFORT, GLM_WORKERS if needed.
+#
+# Through OpenRouter instead of Z.ai (same model, one key for many providers):
+#   export ZAI_API_KEY=<OpenRouter key>  GLM_BASE_URL=https://openrouter.ai/api/v1  GLM_MODEL=z-ai/glm-5.3
+#   export GLM_EXTRA_JSON='{"reasoning": {"effort": "low"}}'
 set -euo pipefail
 cd "$(dirname "$0")/.."
 : "${ZAI_API_KEY:?Set ZAI_API_KEY first (export ZAI_API_KEY=...). Do not write the key into any file.}"
@@ -25,7 +29,7 @@ export LLM_API_KEY="$ZAI_API_KEY"
 export LLM_BASE_URL="${GLM_BASE_URL:-https://api.z.ai/api/paas/v4}"
 export LLM_MODEL="${GLM_MODEL:-glm-5.3}"
 export LLM_LOGPROBS=0 LLM_MAX_TOKENS=4096
-export LLM_EXTRA_JSON="{\"reasoning_effort\": \"${GLM_EFFORT:-low}\"}"
+if [ -n "${GLM_EXTRA_JSON:-}" ]; then export LLM_EXTRA_JSON="$GLM_EXTRA_JSON"; else export LLM_EXTRA_JSON="{\"reasoning_effort\": \"${GLM_EFFORT:-low}\"}"; fi
 export LLM_WORKERS="${GLM_WORKERS:-4}"
 RUN=glm_run
 STAGES=gen,zero,jev; [ "${GLM_OWN_SCORES:-0}" = 1 ] && STAGES=$STAGES,llm
