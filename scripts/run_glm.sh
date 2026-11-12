@@ -24,8 +24,13 @@
 #   export GLM_EXTRA_JSON='{"reasoning": {"effort": "low"}}'
 set -euo pipefail
 cd "$(dirname "$0")/.."
-: "${ZAI_API_KEY:?Set ZAI_API_KEY first (export ZAI_API_KEY=...). Do not write the key into any file.}"
-export LLM_API_KEY="$ZAI_API_KEY"
+ask() {   # prompt for a missing key without echoing it; never written to disk
+  local var=$1 label=$2
+  if [ -z "${!var:-}" ]; then read -r -s -p "Paste your $label key, then Enter: " "$var"; echo; export "$var"; fi
+  [ -n "${!var:-}" ] || { echo "No $label key given."; exit 1; }
+}
+if [ "${1:-}" = probe ] || [ "${1:-}" = run ]; then ask ZAI_API_KEY "Z.ai (or OpenRouter)"; ask TYPESAFE_API_KEY "TypeSafe Jev"; fi
+export LLM_API_KEY="${ZAI_API_KEY:-unused}"
 export LLM_BASE_URL="${GLM_BASE_URL:-https://api.z.ai/api/paas/v4}"
 export LLM_MODEL="${GLM_MODEL:-glm-5.3}"
 export LLM_LOGPROBS=0 LLM_MAX_TOKENS=4096
@@ -41,7 +46,6 @@ fi
 
 case "${1:-}" in
   probe)
-    : "${TYPESAFE_API_KEY:?Set TYPESAFE_API_KEY first.}"
     python3 scripts/wu_pipeline.py --out ${RUN}_probe --limit 2 --stages gen,zero,jev
     python3 - <<'PY'
 import json
@@ -53,7 +57,6 @@ print("  direct answer        :", repr(z["answer"]), "-> p_A", z["p_A"])
 PY
     ;;
   run)
-    : "${TYPESAFE_API_KEY:?Set TYPESAFE_API_KEY first.}"
     python3 scripts/wu_pipeline.py --out $RUN --stages $STAGES
     python3 scripts/wu_pipeline.py --out $RUN --cond ctx15 --stages zero
     python3 scripts/wu_pipeline.py --out $RUN --cond ctx60 --stages zero

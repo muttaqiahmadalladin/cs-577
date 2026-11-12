@@ -34,7 +34,7 @@ class Record:
 class CacheReader(pickle.Unpickler):
     def find_class(self, module, name):
         if module == "obj.conversation" and name in {"Conversation", "Aspect", "Reason", "Rebuttal"}: return Record
-        if module in {"numpy.core.multiarray", "numpy._core.multiarray"} and name == "scalar": return np._core.multiarray.scalar
+        if module in {"numpy.core.multiarray", "numpy._core.multiarray"} and name == "scalar": return getattr(np, "_core", None).multiarray.scalar if hasattr(np, "_core") else np.core.multiarray.scalar   # numpy 2 and numpy 1
         if module == "numpy" and name == "dtype": return np.dtype
         raise pickle.UnpicklingError(f"Unsupported global in cache: {module}.{name}")
 
