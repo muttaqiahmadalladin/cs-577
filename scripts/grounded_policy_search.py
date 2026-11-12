@@ -18,7 +18,8 @@ Selection protocol: meetings are split at random into a development half and a t
 development accuracy is chosen and scored on the test half, next to the direct Jev question on the same test half.
 This is repeated over many splits, so the reported gain does not come from picking a policy on the snippets it is scored on.
 
-  python3 scripts/grounded_policy_search.py
+  python3 scripts/grounded_policy_search.py                 # Haiku arguments, Jev scores
+  python3 scripts/grounded_policy_search.py --run glm_run   # any run written by score_run.py
 """
 import itertools, json, random, statistics
 from pathlib import Path
@@ -55,7 +56,12 @@ def decide(ans, policy):
 def main():
     data = [json.loads(l) for l in open(ROOT / "data" / "icsi_rebuilt_snippets.jsonl")]
     gold = {d["id"]: d["professor"] for d in data}; meeting = {d["id"]: d["meeting"] for d in data}; ids = list(gold)
-    jev = {d["id"]: d["answers"] for d in map(json.loads, open(RUN / "jev_scores.jsonl"))}
+    import argparse
+    ap = argparse.ArgumentParser(); ap.add_argument("--run", help="folder under results/ with jev_scores.jsonl (default: wu_graph_claude)"); args = ap.parse_args()
+    SRC = ROOT / "results" / args.run if args.run else RUN
+    jev = {d["id"]: d["answers"] for d in map(json.loads, open(SRC / "jev_scores.jsonl"))}
+    ids = [i for i in ids if i in jev]
+    if len(ids) < len(gold): print(f"note: only {len(ids)} of {len(gold)} snippets have scores in {SRC.name}")
     a4 = {d["id"]: d["answers"] for d in map(json.loads, open(ROOT / "results" / "jev_arm4.jsonl")) if d["cond"] == "fixed"}
     direct = {i: ("A" if a4[i]["professor_A"] >= a4[i]["professor_B"] else "B") == gold[i] for i in ids}
     res = {p: {i: decide(jev[i], p) for i in ids} for p in POLICIES}
@@ -63,7 +69,7 @@ def main():
     full = sorted(POLICIES, key=lambda p: -sum(ok[p].values()))
     print(f"{len(POLICIES)} policies. Accuracy on all 150 (optimistic, selected on the same snippets): best {sum(ok[full[0]].values())}, median {sorted(sum(v.values()) for v in ok.values())[len(POLICIES)//2]}, worst {sum(ok[full[-1]].values())}; Jev direct {sum(direct.values())}")
     for p in full[:5]:
-        r = res[p]; print(f"   {sum(ok[p].values())}/150  {p}  reasons IN {sum(v[1] for v in r.values())}/3600, decided without tie-break {sum(v[2] for v in r.values())}")
+        r = res[p]; print(f"   {sum(ok[p].values())}/{len(ids)}  {p}  reasons IN {sum(v[1] for v in r.values())}/3600, decided without tie-break {sum(v[2] for v in r.values())}")
     rng = random.Random(2026); meetings = sorted(set(meeting.values())); gains, chosen, tests, dtests = [], {}, [], []
     for _ in range(500):
         rng.shuffle(meetings); dev_m = set(meetings[: len(meetings) // 2])
@@ -78,7 +84,7 @@ def main():
     for p, n in top: print(f"   chosen in {n} splits: {p}")
     json.dump(dict(policies=len(POLICIES), best_full=dict(policy=list(map(str, full[0])), correct=sum(ok[full[0]].values())), direct_full=sum(direct.values()),
                    split_selection=dict(mean_test=statistics.mean(tests), mean_direct=statistics.mean(dtests), mean_gain=statistics.mean(gains), gain_95=[q[12], q[487]], ahead=sum(g > 0 for g in gains), splits=500),
-                   most_chosen=[dict(policy=list(map(str, p)), splits=n) for p, n in top]), open(RUN / "grounded_policy_search.json", "w"), indent=1)
+                   most_chosen=[dict(policy=list(map(str, p)), splits=n) for p, n in top]), open(SRC / "grounded_policy_search.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

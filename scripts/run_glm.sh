@@ -61,6 +61,8 @@ PY
     ;;
   score)
     python3 scripts/score_run.py --run $RUN --name "$LLM_MODEL"
+    echo; echo "Soft grounded policies (288), selected on half of the meetings and scored on the other half:"
+    python3 scripts/grounded_policy_search.py --run $RUN
     ;;
   *) echo "usage: bash scripts/run_glm.sh probe|run|score"; exit 2 ;;
 esac
