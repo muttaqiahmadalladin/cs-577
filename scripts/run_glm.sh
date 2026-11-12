@@ -48,7 +48,9 @@ case "${1:-}" in
   probe)
     python3 scripts/wu_pipeline.py --out ${RUN}_probe --limit 2 --stages gen,zero,jev
     python3 - <<'PY'
-import json
+import json, os, sys
+if not os.path.exists("work/glm_run_probe/gen/0.json"):
+    sys.exit("\nThe probe did not finish. The reason is in the lines above that say FAILED. Paste those lines.")
 g = json.load(open("work/glm_run_probe/gen/0.json")); z = json.load(open("work/glm_run_probe/zero/0.json"))
 print("\nProbe looks like this. Check that the reasons are real sentences about the conversation and the answer names A or B.")
 print("  reasons for A (style):", g["aspects"]["style"]["reasons"]["A"])

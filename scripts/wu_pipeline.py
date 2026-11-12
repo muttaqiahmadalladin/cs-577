@@ -76,7 +76,8 @@ def http_json(url, payload, key, tries=7):
                 return json.loads(r.read())
         except urllib.error.HTTPError as e:
             detail = e.read().decode(errors="replace")[:600]
-            if e.code in (400, 408, 409, 429, 500, 502, 503, 504) and attempt < tries - 1 and not (e.code == 400 and "model" in detail.lower()):
+            fatal = (e.code == 400 and "model" in detail.lower()) or any(w in detail.lower() for w in ("balance", "insufficient", "quota", "1113", "unauthorized", "invalid api key"))
+            if e.code in (400, 408, 409, 429, 500, 502, 503, 504) and attempt < tries - 1 and not fatal:
                 time.sleep(min(90, 2 ** attempt * 2)); continue
             raise RuntimeError(f"HTTP {e.code} from {url}: {detail}")
         except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
