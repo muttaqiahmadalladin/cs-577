@@ -247,6 +247,10 @@ As a soft alternative to the labelling, we follow \citet{freedman2025argllm} and
 The claim's strength is computed with the DF-QuAD or the Quadratic Energy semantics, over a flat graph or one grouped by aspect, from a prior of 0.5 or of the direct Jev answer, and A is predicted when it exceeds 0.5.
 All eight variants are reported.
 
+\paragraph{Debate with a judge.}
+Following the debate protocol of \citet{khan2024debating}, GLM-5.3 reads the conversation together with its own twelve reasons for each speaker, each followed by its rebuttal, and then decides.
+Every snippet is judged twice, with A's case first and with B's case first.
+
 \paragraph{Statistics.}
 Paired comparisons use the exact McNemar test.
 Intervals come from a bootstrap that resamples whole meetings.
@@ -331,6 +335,11 @@ A search over 288 grounded policies, with the policy chosen on half of the meeti
 
 Gradual semantics do not change this.
 Over the eight variants the claim-strength decision scores 68.7 to 72.7\% with Terra's arguments, 69.3 to 72.0\% with GLM's and 70.0 to 74.0\% with Haiku's, and none of the 24 results differs from the direct Jev question (smallest $p=0.34$).
+
+Letting the model read the arguments does not help either.
+As a judge of its own arguments GLM-5.3 scores 67.3\% with A's case first and 69.3\% with B's case first, against 73.3\% when asked directly (18 wins to 27 losses, $p=0.23$, and 22 to 28, $p=0.48$).
+It gives the same answer in both orders for 117 of 150 snippets and is correct in 86 of those; order matters little, but the judge answers A in 215 of 300 judgments.
+Taking the direct answer when the two orders disagree gives 75.3\% (17 to 14, $p=0.72$).
 
 Combining judgments, in contrast to combining arguments, may help: a majority vote of the four direct answers (GLM, Terra, Sonnet and Jev, ties to Jev) scores 77.3\%, against 71.3\% for Jev alone (15 wins to 6 losses, $p=0.078$).
 

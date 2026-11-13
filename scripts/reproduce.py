@@ -16,6 +16,7 @@ Steps
   9. score_run.py --run glm_run   rescore the stored GLM-5.3 run and compare with results/glm_run/results.json
  10. grounded_policy_search.py --run glm_run   the 288-policy search over the GLM arguments
  11. qbaf.py                   gradual argumentation (QBAF) over the stored arguments, and the vote of direct answers
+ 12. judge_run.py --score      rescore the stored debate-with-judge answers of GLM-5.3
 
 No step calls a model. Model outputs are read from results/. Exit status is non-zero if any step fails.
 """
@@ -25,7 +26,7 @@ from pathlib import Path
 S = Path(__file__).resolve().parent
 STEPS = [["get_sources.py"], ["build_dataset.py", "--check"], ["build_dataset.py"], ["convert_released_cache.py"],
          ["analyze.py", "--check"], ["grounded_extension.py"], ["grounded_policy_search.py"], ["data_differences.py"],
-         ["score_run.py", "--run", "glm_run", "--name", "glm-5.3"], ["grounded_policy_search.py", "--run", "glm_run"], ["qbaf.py"]]
+         ["score_run.py", "--run", "glm_run", "--name", "glm-5.3"], ["grounded_policy_search.py", "--run", "glm_run"], ["qbaf.py"], ["judge_run.py", "--run", "glm_run", "--name", "glm-5.3", "--score"]]
 for i, step in enumerate(STEPS, 1):
     print(f"\n=== step {i} of {len(STEPS)}: {' '.join(step)} ===", flush=True)
     if subprocess.run([sys.executable, str(S / step[0]), *step[1:]], cwd=S).returncode: sys.exit(f"step {i} failed")

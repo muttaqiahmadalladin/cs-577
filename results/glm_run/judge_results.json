@@ -1,0 +1,53 @@
+{
+ "Judge, A's case first": {
+  "correct": 101,
+  "n": 150,
+  "accuracy": 67.3,
+  "vs_model_direct": {
+   "wins": 18,
+   "losses": 27,
+   "mcnemar_p": 0.23269319190831084
+  },
+  "vs_jev_direct": {
+   "wins": 21,
+   "losses": 27,
+   "mcnemar_p": 0.4708790136217118
+  }
+ },
+ "Judge, B's case first": {
+  "correct": 104,
+  "n": 150,
+  "accuracy": 69.3,
+  "vs_model_direct": {
+   "wins": 22,
+   "losses": 28,
+   "mcnemar_p": 0.47988766169832786
+  },
+  "vs_jev_direct": {
+   "wins": 19,
+   "losses": 22,
+   "mcnemar_p": 0.755228657504631
+  }
+ },
+ "Judge, both orders (disagreements to direct)": {
+  "correct": 113,
+  "n": 150,
+  "accuracy": 75.3,
+  "vs_model_direct": {
+   "wins": 17,
+   "losses": 14,
+   "mcnemar_p": 0.720100131817162
+  },
+  "vs_jev_direct": {
+   "wins": 24,
+   "losses": 18,
+   "mcnemar_p": 0.44079906734259566
+  }
+ },
+ "order": {
+  "same_answer_both_orders": 117,
+  "answered_first_side": 131,
+  "of": 300,
+  "correct_when_orders_agree": 86
+ }
+}

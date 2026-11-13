@@ -155,3 +155,10 @@ semantics, flat or grouped by aspect, with a prior of 0.5 or the direct Jev answ
 are reported in `results/qbaf_results.json`; none is selected on the test set. Range: 68.7% to 74.0%, none different
 from the direct Jev question (71.3%) by the paired test. Reference without arguments: a majority vote of the GLM, Terra,
 Sonnet and Jev direct answers scores 77.3% (15 wins to 6 losses against Jev alone, p=0.078). Not yet in the report.
+
+## Debate with a judge (GLM-5.3), 2026-11-13
+
+`scripts/judge_run.py` (`bash scripts/run_glm.sh judge`): GLM-5.3 reads the conversation and its own 12 reasons per
+side with their rebuttals, then answers A or B; each snippet is judged in both orders. Answers are in
+`results/glm_run/judge.jsonl`. A's case first 67.3%, B's case first 69.3%, against 73.3% asked directly; same answer in
+both orders for 117 of 150 (86 correct); the judge answers A in 215 of 300 judgments.
