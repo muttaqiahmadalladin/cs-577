@@ -4,11 +4,12 @@
 Reads work/<run>/ (gen, zero, jev and optionally llm) and work/<run>_ctx15, work/<run>_ctx60 (zero only), and prints the
 same rows as Table 3 of the report for that model: the model asked directly, the three variants of the Wu factor graph,
 the sum of reason scores, and the grounded extension under both attack relations. Every row is compared with always
-answering A and with the direct Jev question (results/jev_arm4.jsonl) by the exact McNemar test.
+answering A and with the direct Jev question at the same context length (results/jev_arm4.jsonl) by the exact McNemar test.
 
   python3 scripts/score_run.py --run glm_run --name "GLM-5.3"
 
-Writes results/<run>/ (arguments.jsonl, jev_scores.jsonl, zero_shot*.jsonl, results.json) so the run can be committed.
+With no work/<run>/ folder it rescores the committed results/<run>/ files instead, which is how reproduce.py checks a
+stored run. Writes results/<run>/ (arguments.jsonl, jev_scores.jsonl, zero_shot*.jsonl, results.json) so the run can be committed.
 """
 import argparse, json, math
 from pathlib import Path
@@ -20,8 +21,10 @@ from grounded_extension import decide, strengths_jev
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def load(d):
-    return {f.stem: json.loads(f.read_text()) for f in sorted(d.glob("*.json"))} if d.exists() else {}
+def load(d, stored=None):
+    """One JSON per snippet from a work folder; if that is absent, the committed results/<run>/<stored>.jsonl."""
+    if d.exists(): return {f.stem: json.loads(f.read_text()) for f in sorted(d.glob("*.json"))}
+    return {r["id"]: r for r in jsonl(stored)} if stored and stored.exists() else {}
 
 
 def graph_rows(J, mode, own=None):
@@ -47,12 +50,14 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--run", default="glm_run"); ap.add_argument("--name", default="GLM"); a = ap.parse_args()
     W = ROOT / "work"; run = W / a.run; out = ROOT / "results" / a.run; out.mkdir(parents=True, exist_ok=True)
     D = jsonl(ROOT / "data" / "icsi_rebuilt_snippets.jsonl"); gold_of = {d["id"]: d["professor"] for d in D}
-    rules = (W / "rules.txt").read_text()
-    jev_direct = {d["id"]: d["answers"] for d in jsonl(ROOT / "results" / "jev_arm4.jsonl") if d["cond"] == "fixed"}
+    rules = (W / "rules.txt").read_text()   # written by convert_released_cache.py
+    jev_all = {c: {d["id"]: d["answers"] for d in jsonl(ROOT / "results" / "jev_arm4.jsonl") if d["cond"] == c} for c in ("fixed", "ctx15", "ctx60")}
+    jev_direct = jev_all["fixed"]
     R = {}
 
-    def row(label, pred, ids):
-        """pred: dict id -> 'A'/'B'. Reports on the ids present; says so if any of the 150 are missing."""
+    def row(label, pred, ids, jev_direct=jev_direct):
+        """pred: dict id -> 'A'/'B'. Reports on the ids present; says so if any of the 150 are missing.
+        jev_direct: the direct Jev answers at the same context length as pred."""
         ids = [i for i in ids if i in pred]
         if not ids: return
         gold = np.array([gold_of[i] == "A" for i in ids]); ok = np.array([pred[i] == gold_of[i] for i in ids])
@@ -66,15 +71,16 @@ def main():
     print(f"{a.name}: {len(all_ids)} rebuilt snippets, always A is correct in {sum(v == 'A' for v in gold_of.values())}, Jev direct in "
           f"{sum((jev_direct[i]['professor_A'] >= jev_direct[i]['professor_B']) == (gold_of[i] == 'A') for i in all_ids)}")
     for cond, tag in (("", "original span"), ("_ctx15", "15 extra segments"), ("_ctx60", "60 extra segments")):
-        Z = load(W / (a.run + cond) / "zero")
+        Z = load(W / (a.run + cond) / "zero", out / f"zero_shot{cond}.jsonl")
         if not Z: continue
         undecided = [i for i, z in Z.items() if z["p_A"] == 0.5]
         if undecided: print(f"  note: {len(undecided)} answers named neither A nor B ({tag}); they are counted as A")
-        row(f"{a.name} asked directly, {tag}", {i: "A" if z["p_A"] >= 0.5 else "B" for i, z in Z.items()}, all_ids)
-        with open(out / f"zero_shot{cond}.jsonl", "w") as f:
-            for i in all_ids:
-                if i in Z: f.write(json.dumps(Z[i]) + "\n")
-    G, J, OWN = load(run / "gen"), {i: d["answers"] for i, d in load(run / "jev").items()}, {i: d["aspects"] for i, d in load(run / "llm").items()}
+        row(f"{a.name} asked directly, {tag}", {i: "A" if z["p_A"] >= 0.5 else "B" for i, z in Z.items()}, all_ids, jev_all[cond[1:] or "fixed"])
+        if (W / (a.run + cond) / "zero").exists():
+            with open(out / f"zero_shot{cond}.jsonl", "w") as f:
+                for i in all_ids:
+                    if i in Z: f.write(json.dumps(Z[i]) + "\n")
+    G, J, OWN = load(run / "gen", out / "arguments.jsonl"), {i: d["answers"] for i, d in load(run / "jev", out / "jev_scores.jsonl").items()}, {i: d["aspects"] for i, d in load(run / "llm", out / "own_scores.jsonl").items()}
     if J:
         for mode, nm in (("reasons", "reasons only"), ("rr", "reasons + rebuttals"), ("all", "all relations")):
             row(f"Wu graph, {nm} (Jev scores)", {i: xor(*graph_rows(J[i], mode), rules) for i in J}, all_ids)
@@ -87,11 +93,17 @@ def main():
         for mode, nm in (("reasons", "reasons only"), ("rr", "reasons + rebuttals"), ("all", "all relations")):
             row(f"Wu graph, {nm} ({a.name} scores)", {i: xor(*graph_rows(None, mode, OWN[i]), rules) for i in OWN}, all_ids)
     for name, src in (("arguments", G), ("jev_scores", {i: dict(id=i, answers=v) for i, v in J.items()}), ("own_scores", {i: dict(id=i, aspects=v) for i, v in OWN.items()})):
-        if src:
+        if src and run.exists():
             with open(out / f"{name}.jsonl", "w") as f:
                 for i in all_ids:
                     if i in src: f.write(json.dumps(src[i]) + "\n")
-    json.dump(dict(model=a.name, rows=R), open(out / "results.json", "w"), indent=1)
+    stored = out / "results.json"
+    if not run.exists() and stored.exists():   # rescoring committed files: report whether the stored numbers come back
+        old = json.loads(stored.read_text())["rows"]; same = sum(json.loads(json.dumps(R[k])) == old.get(k) for k in R)
+        print(f"check: {same} of {len(old)} stored rows reproduced")
+        if same != len(old) or len(R) != len(old): raise SystemExit(1)
+        return
+    json.dump(dict(model=a.name, rows=R), open(stored, "w"), indent=1)
     print(f"wrote results/{a.run}/")
 
 

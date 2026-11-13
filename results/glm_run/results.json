@@ -1,0 +1,146 @@
+{
+ "model": "glm-5.3",
+ "rows": {
+  "glm-5.3 asked directly, original span": {
+   "correct": 110,
+   "n": 150,
+   "accuracy": 73.3,
+   "vs_always_A": {
+    "wins": 49,
+    "losses": 24,
+    "mcnemar_p": 0.004626293921895511
+   },
+   "vs_jev_direct": {
+    "wins": 24,
+    "losses": 21,
+    "mcnemar_p": 0.765991824244793
+   }
+  },
+  "glm-5.3 asked directly, 15 extra segments": {
+   "correct": 111,
+   "n": 150,
+   "accuracy": 74.0,
+   "vs_always_A": {
+    "wins": 43,
+    "losses": 17,
+    "mcnemar_p": 0.0010657657791434353
+   },
+   "vs_jev_direct": {
+    "wins": 9,
+    "losses": 25,
+    "mcnemar_p": 0.00904118549078703
+   }
+  },
+  "glm-5.3 asked directly, 60 extra segments": {
+   "correct": 123,
+   "n": 150,
+   "accuracy": 82.0,
+   "vs_always_A": {
+    "wins": 49,
+    "losses": 11,
+    "mcnemar_p": 7.561280982396751e-07
+   },
+   "vs_jev_direct": {
+    "wins": 10,
+    "losses": 21,
+    "mcnemar_p": 0.07075554598122835
+   }
+  },
+  "Wu graph, reasons only (Jev scores)": {
+   "correct": 107,
+   "n": 150,
+   "accuracy": 71.3,
+   "vs_always_A": {
+    "wins": 38,
+    "losses": 16,
+    "mcnemar_p": 0.003838265880326097
+   },
+   "vs_jev_direct": {
+    "wins": 12,
+    "losses": 12,
+    "mcnemar_p": 1.0
+   }
+  },
+  "Wu graph, reasons + rebuttals (Jev scores)": {
+   "correct": 106,
+   "n": 150,
+   "accuracy": 70.7,
+   "vs_always_A": {
+    "wins": 37,
+    "losses": 16,
+    "mcnemar_p": 0.005486344876760141
+   },
+   "vs_jev_direct": {
+    "wins": 11,
+    "losses": 12,
+    "mcnemar_p": 1.0
+   }
+  },
+  "Wu graph, all relations (Jev scores)": {
+   "correct": 104,
+   "n": 150,
+   "accuracy": 69.3,
+   "vs_always_A": {
+    "wins": 35,
+    "losses": 16,
+    "mcnemar_p": 0.010973562899720513
+   },
+   "vs_jev_direct": {
+    "wins": 11,
+    "losses": 14,
+    "mcnemar_p": 0.6900379657745361
+   }
+  },
+  "Sum of reason scores, no graph (Jev scores)": {
+   "correct": 107,
+   "n": 150,
+   "accuracy": 71.3,
+   "vs_always_A": {
+    "wins": 38,
+    "losses": 16,
+    "mcnemar_p": 0.003838265880326097
+   },
+   "vs_jev_direct": {
+    "wins": 12,
+    "losses": 12,
+    "mcnemar_p": 1.0
+   }
+  },
+  "Grounded extension, proposed (Jev scores)": {
+   "correct": 107,
+   "n": 150,
+   "accuracy": 71.3,
+   "vs_always_A": {
+    "wins": 38,
+    "losses": 16,
+    "mcnemar_p": 0.003838265880326097
+   },
+   "vs_jev_direct": {
+    "wins": 12,
+    "losses": 12,
+    "mcnemar_p": 1.0
+   },
+   "decided_by_in_count": 0,
+   "reasons_in": 0,
+   "reasons_total": 3600
+  },
+  "Grounded extension, preference (Jev scores)": {
+   "correct": 101,
+   "n": 150,
+   "accuracy": 67.3,
+   "vs_always_A": {
+    "wins": 34,
+    "losses": 18,
+    "mcnemar_p": 0.03648340000835981
+   },
+   "vs_jev_direct": {
+    "wins": 10,
+    "losses": 16,
+    "mcnemar_p": 0.32693958282470703
+   },
+   "decided_by_in_count": 150,
+   "reasons_in": 1438,
+   "reasons_total": 3600
+  }
+ }
+}

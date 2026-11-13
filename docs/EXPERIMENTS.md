@@ -137,3 +137,12 @@ It calls `wu_pipeline.py` with `--out glm_run`, `LLM_LOGPROBS=0` and `reasoning_
 does not return token probabilities, so the printed answer is used), then `score_run.py`, which prints the Table 3 rows
 for that model and writes `results/glm_run/`. `score_run.py --run <folder> --name <model>` works for any
 `wu_pipeline.py` run. Keys are read from `ZAI_API_KEY` and `TYPESAFE_API_KEY` in the environment only.
+
+### GLM-5.3 results (run 2026-11-12)
+
+Stored in `results/glm_run/` and rescored by steps 9 and 10 of `reproduce.py`. Asked directly: 73.3% (original span),
+74.0% (15 extra segments), 82.0% (60 extra). Wu graph with Jev scores: 71.3% reasons only, 70.7% with rebuttals, 69.3%
+all relations. Grounded extension: 71.3% proposed relation (all decisions by the tie-break), 67.3% preference relation.
+Policy search: selected policy 67.1% against 71.5% for the direct Jev question, ahead in 41 of 500 splits.
+Notes: the direct answer is the letter GLM prints (no token probabilities); one rebuttal (snippet 122, coordination, B)
+came back empty and was scored as it was.

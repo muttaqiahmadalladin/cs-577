@@ -1,0 +1,150 @@
+{"id": "0", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "1", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "2", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "3", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "4", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "5", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "6", "model": "glm-5.3", "answer": "**A**\n\nIn this conversation, A appears to hold more power. A evaluates B's ideas (\"I think that's a good idea\"), asks checking questions about B's progress (\"Did - did you do that or...\"), and provides approval/validation for B's plans. B, on the other hand, seeks approval, justifies their plans, and reports on their work status, which is typical of a student/researcher speaking to an advisor or supervisor.", "p_A": 0.99}
+{"id": "7", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "8", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "9", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "10", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "11", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "12", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "13", "model": "glm-5.3", "answer": "**B**\n\nB is the speaker with more power in this conversation. B provides detailed technical expertise about the Gnu compatibility library and porting to different systems, demonstrating knowledge and authority on the topic. A, on the other hand, only gives brief acknowledgments (\"Yeah,\" \"Mm-hmm,\" \"Right\"), which is typical of a listener in a subordinate or less knowledgeable position.", "p_A": 0.01}
+{"id": "14", "model": "glm-5.3", "answer": "B\n\nB demonstrates more power in this conversation. While A proposes ideas (\"I was hoping to turn it into some kind of portable thing\"), B responds with authoritative knowledge about resource constraints (\"I know that space is really scarce... at least in C_S\") and effectively makes judgments about feasibility (\"might actually be very difficult\"). B's statements function as decisions or veto power over A's suggestions, while A's tentative speech patterns (\"Yeah, I mean,\" \"Uh,\" \"But. Um\") suggest deference. B appears to have control over the space/resources being discussed, giving them the more powerful position.", "p_A": 0.01}
+{"id": "15", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "16", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "17", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "18", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "19", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "20", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "21", "model": "glm-5.3", "answer": "**A**\n\nA holds more power in this conversation. A directs the conversation's agenda, sets priorities (\"given the pressure of time\"), and instructs the team on next steps (\"we wanna draw some conclusions... make some strong decisions\"), while B mostly agrees and defers.", "p_A": 0.99}
+{"id": "22", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "23", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "24", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "25", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "26", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "27", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "28", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "29", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "30", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "31", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "32", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "33", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "34", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "35", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "36", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "37", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "38", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "39", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "40", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "41", "model": "glm-5.3", "answer": "**B**\n\nB speaks at length, offering detailed suggestions and guidance (\"you'd wanna see... there should be some point...\"), while A mostly gives brief acknowledgments (\"Yeah,\" \"Mm-hmm. Right. Right.\"). This pattern suggests B is in a mentoring/advising role (such as a professor guiding a student), indicating B has more power in the conversation.", "p_A": 0.01}
+{"id": "42", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "43", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "44", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "45", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "46", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "47", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "48", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "49", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "50", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "51", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "53", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "54", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "55", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "56", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "57", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "58", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "59", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "60", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "61", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "62", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "63", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "64", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "65", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "66", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "67", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "68", "model": "glm-5.3", "answer": "B\n\nB demonstrates more expertise and control in this conversation, providing detailed technical information while A mostly asks clarifying questions and repeats back the information.", "p_A": 0.01}
+{"id": "69", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "70", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "71", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "72", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "73", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "74", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "75", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "76", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "77", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "78", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "79", "model": "glm-5.3", "answer": "A\n\nA dominates the conversation, explaining ideas at length while B mostly gives brief backchannel responses (\"Mm-hmm\"), indicating A is the more powerful/knowledgeable speaker.", "p_A": 0.99}
+{"id": "80", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "81", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "82", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "83", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "84", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "85", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "86", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "87", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "88", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "89", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "90", "model": "glm-5.3", "answer": "**A**\n\nSpeaker A is asking probing questions, checking on B's knowledge and progress (\"You don't know?\", \"you don't have a feeling for roughly how much it is?\"), which suggests a supervisor/interviewer role with more power in the conversation. B responds defensively and deferentially, explaining and justifying their work.", "p_A": 0.99}
+{"id": "91", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "92", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "93", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "94", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "95", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "96", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "97", "model": "glm-5.3", "answer": "B\n\nB appears to hold more power in this conversation. A is presenting/demonstrating technical work at length (explaining a module, walking through features), while B provides brief acknowledgments and then interrupts with corrective feedback (\"O_K, I'm sorry. You're - you're -\"), a pattern typical of a supervisor or reviewer evaluating a subordinate's work.", "p_A": 0.01}
+{"id": "98", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "99", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "100", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "101", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "102", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "103", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "104", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "105", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "106", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "107", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "108", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "109", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "110", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "111", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "112", "model": "glm-5.3", "answer": "B\n\nB is doing most of the explaining and presenting technical information, while A mainly gives acknowledgments and brief follow-up questions, indicating B has more authority in the conversation.", "p_A": 0.01}
+{"id": "113", "model": "glm-5.3", "answer": "**A**\n\nA is directing the conversation, assigning roles and responsibilities to others (e.g., \"Keith is going to worry about...,\" \"Johno has committed himself to being the parser wizard\"), while B mostly offers brief acknowledgments (\"Mm-hmm,\" \"Alright\"). This shows A holds the decision-making and organizational authority in the conversation.", "p_A": 0.99}
+{"id": "114", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "115", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "116", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "117", "model": "glm-5.3", "answer": "B\n\nB is explaining concepts and providing instruction, while A mostly gives brief acknowledgments (\"Yeah,\" \"Mmm,\" \"Right\"), indicating B is in a teaching or mentoring role with more power in this conversation.", "p_A": 0.01}
+{"id": "118", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "119", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "120", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "121", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "122", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "123", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "124", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "125", "model": "glm-5.3", "answer": "B\n\nIn this conversation, B appears to hold more power. While A is presenting their findings (likely a student or junior researcher), B responds by directing the technical approach\u2014suggesting what A should do with multi-condition training and explaining how models can be trained. A's brief acknowledgments (\"Yeah\") indicate deference to B's guidance, a pattern typical of an advisor-student or supervisor-employee dynamic.", "p_A": 0.01}
+{"id": "126", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "127", "model": "glm-5.3", "answer": "**A**\n\nA speaks with a more authoritative, advisory tone (e.g., \"But, you know, some problems are harder than others\"), while B mainly provides backchannel acknowledgments (\"Mm-hmm,\" \"Yeah\"), suggesting A holds more power in this conversation.", "p_A": 0.99}
+{"id": "128", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "129", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "130", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "131", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "132", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "133", "model": "glm-5.3", "answer": "B\n\nB demonstrates more power in this conversation. While A initiates the topic with a technical observation, it is B who provides the substantive, detailed response, explaining the reasoning behind the experimental design (trying LDA in place of the neural net to \"show a clear path\"). B appears to be the one with direct knowledge of and involvement in the work being discussed (having talked with Andreas about it), taking the role of the expert explaining the project's direction, while A mainly offers brief acknowledgments (\"Right\") and tentative conjectures (\"Though, maybe not\").", "p_A": 0.01}
+{"id": "134", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "135", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "136", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "137", "model": "glm-5.3", "answer": "**A**", "p_A": 0.99}
+{"id": "138", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "139", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "140", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "141", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "142", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "143", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "144", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "145", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "146", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "147", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "148", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "149", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "150", "model": "glm-5.3", "answer": "A", "p_A": 0.99}

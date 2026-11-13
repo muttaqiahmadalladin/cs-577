@@ -29,7 +29,7 @@ We trace all 151 released test snippets back to the ICSI Meeting Corpus and find
 We rebuild the snippets with speakers taken from the corpus.
 On the same words, a decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, where it scored 48.0\% on the released text, and it reaches 89.3\% with 60 segments of surrounding meeting.
 With the data rebuilt we revisit the method.
-The factor graph, rerun call by call with a current LLM, reaches 72.0\%, level with asking that LLM directly (72.7\%), and neither rebuttals, relation factors, nor Dung's grounded extension improve on a direct answer.
+The factor graph, rerun call by call with two current LLMs, reaches 72.0\% and 69.3\%, against 72.7\% and 73.3\% for asking those LLMs directly, and neither rebuttals, relation factors, nor Dung's grounded extension improve on a direct answer.
 Code, data and every model output are released, and one command regenerates the data and all reported numbers.
 \end{abstract}
 
@@ -49,7 +49,7 @@ Our contributions are:
 \setlength\itemsep{0pt}
 \item \textbf{A data finding.} In the released test file the displayed speakers and the labels disagree (Section~\ref{sec:data}). Under the reading of the speaker letters that makes the labels correct, 57.6\% of words are shown under the other speaker's letter.
 \item \textbf{A rebuilt test set.} We rebuild the 150 usable snippets from the corpus, at the original span and with longer context, with a builder that regenerates them from public sources (Section~\ref{sec:rebuilt}).
-\item \textbf{The task is feasible.} On the rebuilt snippets a decision model and two LLMs identify the professor in 71 to 76\% of cases from the same words, and in 89\% with more context (Section~\ref{sec:results}).
+\item \textbf{The task is feasible.} On the rebuilt snippets a decision model and three LLMs identify the professor in 71 to 76\% of cases from the same words, and in 89\% with more context (Section~\ref{sec:results}).
 \item \textbf{The argument graph does not add accuracy.} With clean data, the factor graph, its rebuttals and relations, and the grounded extension all land within about two points of a direct answer (Section~\ref{sec:graph}).
 \end{itemize}
 
@@ -146,14 +146,15 @@ The builder is deterministic and regenerates the set byte for byte from the thre
 \paragraph{Direct questions.}
 Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the rebuilt snippets were fixed before that data was built.}
 We ask ``Is speaker X the professor?'' for A and for B and predict the speaker with the higher probability.
-We also ask three LLMs which speaker has more power: GPT-6.1 Terra, Claude Haiku and Claude Sonnet.
+We also ask four LLMs which speaker has more power: GPT-6.1 Terra, GLM-5.3, Claude Haiku and Claude Sonnet.
 Two rules need no model: the speaker with more words, or with longer turns, is the professor.
 
 \paragraph{The factor graph of Wu et al.}
-We ran their method on the rebuilt snippets in two ways.
-In the first, GPT-6.1 Terra wrote the arguments call by call with their prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet), with tools disabled and no access to labels.
-In the second, Claude Haiku wrote all arguments for a snippet in one pass.
-Jev scored both sets: validity and grounding of each argument, whether each rebuttal counters its reason, and similarity and contradiction of reason pairs.
+We ran their method on the rebuilt snippets with three sets of arguments.
+For the first, GPT-6.1 Terra wrote the arguments call by call with their prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet), with tools disabled and no access to labels.
+GLM-5.3 wrote the second set through the same call-by-call pipeline.
+For the third, Claude Haiku wrote all arguments for a snippet in one pass.
+Jev scored all three sets: validity and grounding of each argument, whether each rebuttal counters its reason, and similarity and contradiction of reason pairs.
 A separate Haiku instance also scored the Haiku arguments.
 Their rule file and weights (reason 20, rebuttal 18) do the inference, solved exactly as an integer program, in the three variants of the paper: reasons only, with rebuttals, and with all relations.
 The same solver reproduces the published 54.3\% on the released cache (82 of 151).
@@ -214,6 +215,7 @@ Its Brier score is 0.189 at the original span against 0.246 for the base rate, a
 More context helps.
 With 15 extra segments per side Jev reaches 84.7\% (30 wins to 10 losses against the original span, $p=0.002$), and with 60 it reaches 89.3\% with a Brier score of 0.095.
 The word-count rules do not improve with context, so the gain is not explained by the professor simply talking more.
+GLM-5.3 asked directly gains less: 73.3\%, 74.0\% and 82.0\% at the three lengths, below Jev at $\pm$15 (9 wins to 25 losses, $p=0.009$) and not distinguishable from it at $\pm$60 (10 to 21, $p=0.07$).
 
 \subsection{Does the argument graph help?}
 \label{sec:graph}
@@ -226,6 +228,7 @@ The word-count rules do not improve with context, so the gain is not explained b
 Args. & Scores & Dir. & Reas. & +Reb. & All & Gr. \\
 \midrule
 Terra & Jev & 72.7 & 66.7 & 72.0 & 72.0 & 70.0 \\
+GLM & Jev & 73.3 & 71.3 & 70.7 & 69.3 & 67.3 \\
 Haiku & Jev & 68.0 & 73.3 & 70.0 & 70.0 & 73.3 \\
 Haiku & Haiku & 68.0 & 68.7 & 67.3 & 68.0 & 64.7 \\
 \bottomrule
@@ -237,19 +240,21 @@ Haiku & Haiku & 68.0 & 68.7 & 67.3 & 68.0 & 64.7 \\
 Table~\ref{tab:graph} gives the argument-based methods.
 With Terra's arguments and Jev's scores the full factor graph reaches 72.0\%.
 That is level with Terra asked directly (72.7\%, 14 wins to 15 losses) and with the direct Jev question (14 to 13).
+With GLM's arguments it reaches 69.3\%, against 73.3\% for GLM asked directly (18 wins to 24 losses, $p=0.44$).
 With Haiku's arguments it reaches 70.0\% under Jev's scores and 68.0\% under Haiku's, against 68.0\% for Haiku asked directly.
 
-The parts of the graph do not behave consistently across the two sets of arguments.
-Rebuttals add 5.3 points with Terra's arguments (11 wins to 3 losses, $p=0.057$) and cost 3.3 points with Haiku's under the same scorer, and adding the relations changes accuracy in neither Jev-scored run.
-A plain sum of reason scores with no graph equals the reasons-only graph in all three rows.
+The parts of the graph do not behave consistently across the sets of arguments.
+Rebuttals add 5.3 points with Terra's arguments (11 wins to 3 losses, $p=0.057$), cost 3.3 points with Haiku's under the same scorer, and cost 0.7 with GLM's.
+Under Jev's scores, adding the relations changes nothing with Terra's or Haiku's arguments and costs 1.3 points with GLM's.
+A plain sum of reason scores with no graph equals the reasons-only graph in all four rows.
 The typed-statement graph tracks the direct Jev question at every context length (Table~\ref{tab:rebuilt}; 21 wins to 23 losses at the original span, $p=0.88$).
 
 The grounded extension tells the same story.
 Under the relation of our proposal no reason is ever \textsc{in}, so every decision is made by the tie-break.
-The preference relation gives a real decision on every snippet with Jev scores, at 70.0\% with Terra's arguments and 73.3\% with Haiku's.
-A search over 288 grounded policies, with the policy chosen on half of the meetings and scored on the other half, averages 69.7\% against 71.5\% for the direct question on the same halves (Appendix~\ref{sec:grounded}).
+The preference relation gives a real decision on every snippet with Jev scores, at 70.0\% with Terra's arguments, 67.3\% with GLM's and 73.3\% with Haiku's.
+A search over 288 grounded policies, with the policy chosen on half of the meetings and scored on the other half, averages 69.7\% against 71.5\% for the direct question on the same halves, and 67.1\% over GLM's arguments (Appendix~\ref{sec:grounded}).
 
-The best single result at the original span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$).
+The best single result at the original span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$); GLM asked directly is also level with Jev (24 to 21, $p=0.77$).
 We find no evidence that structured argumentation over generated reasons adds accuracy on this task.
 With 150 snippets a difference of a few points would not be detectable.
 
@@ -275,14 +280,15 @@ The questions used on the rebuilt snippets were written before that data existed
 Our observations about the released file have not been confirmed with its authors, and we cannot tell from public materials whether the experiments in \citet{wu2025power} used the released text.
 We did not run a human study, so we cannot say how people perform on the rebuilt snippets.
 
-Neither rerun of the factor graph uses the original model.
-The Terra run follows the pipeline call by call, but the text comes from GPT-6.1 Terra and the scores from Jev, because the command-line interface we used does not expose token probabilities.
+No rerun of the factor graph uses the original model.
+The Terra and GLM runs follow the pipeline call by call, but the text comes from GPT-6.1 Terra or GLM-5.3 and the scores from Jev, because neither interface we used exposes token probabilities.
+GLM-5.3 reasons before every answer, and its direct answer is the letter it prints; one of its 3,600 rebuttals came back empty and was scored as it was.
 The Haiku run wrote each snippet's arguments in one pass, and its Haiku scores are stated probabilities with about 15 distinct values.
 We did not rerun GPT-3.5 or the quote-filter experiments on the rebuilt snippets.
 
 The test set is small and comes from one corpus of research meetings with four professors.
 With 60 extra segments a model can use cues that a six-turn excerpt lacks, including how others address the two speakers.
-Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed; the two LLM baselines give similar accuracy at the original span.
+Jev is a proprietary model in early access whose training and calibration claims are not peer reviewed; the LLM baselines give similar accuracy at the original span.
 
 \section{Reproducibility}
 
@@ -389,6 +395,8 @@ Arguments & Scores & Relation & Accuracy (\%) & Decided by \textsc{in} count & R
 \midrule
 Terra & Jev & proposed & 66.7 & 0 of 150 & 0 of 3,600 \\
 Terra & Jev & preference & 70.0 & 150 of 150 & 1,504 of 3,600 \\
+GLM & Jev & proposed & 71.3 & 0 of 150 & 0 of 3,600 \\
+GLM & Jev & preference & 67.3 & 150 of 150 & 1,438 of 3,600 \\
 Haiku & Jev & proposed & 73.3 & 0 of 150 & 0 of 3,600 \\
 Haiku & Jev & preference & 73.3 & 150 of 150 & 1,517 of 3,600 \\
 Haiku & Haiku & proposed & 68.7 & 0 of 150 & 0 of 3,600 \\
@@ -405,5 +413,6 @@ They vary the strength of a reason (three definitions) and of a rebuttal (three 
 Meetings were split at random into a development half and a test half; the best development policy was scored on the test half next to the direct Jev question on the same half.
 Over 500 splits the selected policy averages 69.7\% and the direct question 71.5\%; the selected policy is ahead in 133 of 500 splits (mean difference $-1.8$ points, middle 95\% of splits $-11.2$ to $+3.8$).
 On all 150 snippets the policies range from 82 to 111 correct with a median of 99, against 107 for the direct question.
+The same search over GLM's arguments gives 67.1\% for the selected policy against 71.5\%, ahead in 41 of 500 splits, with policies ranging from 89 to 108 correct.
 
 \end{document}

@@ -1,0 +1,150 @@
+{"id": "0", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "1", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "2", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "3", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "4", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "5", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "6", "model": "glm-5.3", "answer": "**A**\n\nSpeaker A demonstrates more power in this conversation. A explains concepts at length, evaluates and approves B's ideas (\"that's a good idea,\" \"it's a great idea\"), and asks leading questions about work B and others are doing\u2014patterns consistent with a senior advisor or project lead. B, by contrast, seeks validation for proposed work, defers to A's judgments, and acknowledges gaps in own knowledge (\"I don't know enough about it\").", "p_A": 0.99}
+{"id": "7", "model": "glm-5.3", "answer": "A\n\nB is the student reporting progress and seeking guidance, while... actually, the speaker seeking help and guidance here is A, so the more powerful figure (the advisor) is B. Therefore the answer is:\n\n**B**", "p_A": 0.99}
+{"id": "8", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "9", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "10", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "11", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "12", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "13", "model": "glm-5.3", "answer": "**A**\n\nA drives the conversation's agenda \u2014 setting deadlines (\"we wanna have all these pieces together... by the end of the month\"), defining what the demo needs to include, and coordinating others' contributions. Other speakers defer to A's plan and confirm details with A.", "p_A": 0.99}
+{"id": "14", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "15", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "16", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "17", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "18", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "19", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "20", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "21", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "22", "model": "glm-5.3", "answer": "**A**\n\nSpeaker A demonstrates higher power in this conversation. A speaks more authoritatively, dominates the floor with longer explanations, offers guidance and \"generic thoughts\" framed as advice, and evaluates B's thinking (\"You've been thinking about this problem for a long time... you stopped thinking about it for a long time\"). This suggests a mentor/advisor relationship, with A positioned as the senior researcher guiding the discussion.", "p_A": 0.99}
+{"id": "23", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "24", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "25", "model": "glm-5.3", "answer": "**A**\n\nIn this conversation, A demonstrates more power. A controls the direction of the discussion, asking evaluative questions (\"Was that experiment done?\"), framing the interpretation of results, setting research priorities, and even imposing rules (\"without changing the scripts for H_T_K, which is the rule here\"). B and C mainly respond to A's prompts, report results, and defer to A's framing of what should be tried next.", "p_A": 0.99}
+{"id": "26", "model": "glm-5.3", "answer": "**A**\n\nA directs the conversation, summarizes decisions, assigns tasks (\u201cyou could get those going while Dave is creating waveforms\u201d), and closes discussion points, showing higher authority.", "p_A": 0.99}
+{"id": "27", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "28", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "29", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "30", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "31", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "32", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "33", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "34", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "35", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "36", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "37", "model": "glm-5.3", "answer": "A\n\nSpeaker A functions as a supervisor or senior researcher: they direct the discussion (\"What are they going to do...?\", \"But again, you're more or less doing what they were doing, right?\"), evaluate B's work, and control the flow of the meeting, while B mostly reports and defers.", "p_A": 0.99}
+{"id": "38", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "39", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "40", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "41", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "42", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "43", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "44", "model": "glm-5.3", "answer": "B\n\nB dominates this research meeting by directing the technical discussion, questioning results, offering extensive feedback and suggestions, while A mostly gives brief acknowledgments (\"Mm-hmm\", \"O_K\").", "p_A": 0.01}
+{"id": "45", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "46", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "47", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "48", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "49", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "50", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "51", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "53", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "54", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "55", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "56", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "57", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "58", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "59", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "60", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "61", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "62", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "63", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "64", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "65", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "66", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "67", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "68", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "69", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "70", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "71", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "72", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "73", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "74", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "75", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "76", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "77", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "78", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "79", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "80", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "81", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "82", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "83", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "84", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "85", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "86", "model": "glm-5.3", "answer": "B\n\nB is the one explaining, teaching, and correcting others throughout the conversation, indicating a position of authority or expertise relative to the other speakers.", "p_A": 0.01}
+{"id": "87", "model": "glm-5.3", "answer": "**A**\n\nA directs the conversation, asks probing questions, restates and verifies B's explanations, and decides the focus of the discussion (e.g., \"let's focus on them then\"), indicating A holds more power (likely a supervisor or senior researcher), while B explains and responds.", "p_A": 0.99}
+{"id": "88", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "89", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "90", "model": "glm-5.3", "answer": "**A**\n\nIn this conversation, A appears to have more power. A directs the discussion, asks probing questions (\"You don't know?\", \"What's the average length?\"), sets expectations for what analyses should be done, and takes the floor repeatedly even when others try to interject (e.g., talking over F, then yielding with \"go ahead\"). B, by contrast, responds defensively and defers to A's requests, promising to do more analysis. This dynamic suggests A is in a supervisory or leadership role, while B is a subordinate reporting on their work.", "p_A": 0.99}
+{"id": "91", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "92", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "93", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "94", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "95", "model": "glm-5.3", "answer": "**A**\n\nIn this conversation, A appears to hold more power. A explains the underlying rationale and hypotheses behind the group's research approach (e.g., why combining discriminative and non-discriminative features matters), provides historical context and technical judgment, and evaluates/validates B's proposals (\"that's a good idea\"). B, by contrast, is asking questions, seeking approval, deferring to A's expertise (\"I don't know enough about it\"), and positioning their own work relative to A's guidance.", "p_A": 0.99}
+{"id": "96", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "97", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "98", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "99", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "100", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "101", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "102", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "103", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "104", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "105", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "106", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "107", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "108", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "109", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "110", "model": "glm-5.3", "answer": "**B**\n\nB functions as a senior advisor or supervisor in this conversation. While A presents and explains their experimental work, B provides higher-level interpretations, guidance, and directions (e.g., suggesting how to combine knowledge sources, proposing the second-stream neural network approach, and framing research priorities like \"that's certainly a high hope\"). A defers to B's suggestions and seeks to align their plans with them, indicating B holds more power in the relationship.", "p_A": 0.01}
+{"id": "111", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "112", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "113", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "114", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "115", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "116", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "117", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "118", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "119", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "120", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "121", "model": "glm-5.3", "answer": "A\n\nA is the one explaining, correcting, and directing the technical discussion, while B asks questions and defers to A's explanations.", "p_A": 0.99}
+{"id": "122", "model": "glm-5.3", "answer": "A\n\nA is the professor/advisor directing the meeting, giving guidance and steering the discussion, while B (and C) are students responding to A's direction.", "p_A": 0.99}
+{"id": "123", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "124", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "125", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "126", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "127", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "128", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "129", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "130", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "131", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "132", "model": "glm-5.3", "answer": "A\n\nA appears to lead the meeting (setting the agenda, directing the discussion), indicating more power in this conversation.", "p_A": 0.99}
+{"id": "133", "model": "glm-5.3", "answer": "A\n\nSpeaker A demonstrates more power in this conversation. A explains the underlying reasoning and hypotheses behind the research approach (e.g., why discriminative training can fail, Stephane's idea, the feature combination logic), evaluates and endorses B's proposed experiments (\"that's a good idea\"), recalls prior technical discussions, and provides historical context and expert judgment (e.g., the critique of neural net practices in the eighties). B and D largely respond to, seek validation from, and defer to A's assessments, positioning A as the senior advisor or supervisor in this research discussion.", "p_A": 0.99}
+{"id": "134", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "135", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "136", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "137", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "138", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "139", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "140", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "141", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "142", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "143", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "144", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "145", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "146", "model": "glm-5.3", "answer": "B", "p_A": 0.01}
+{"id": "147", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "148", "model": "glm-5.3", "answer": "A\n\nA directs the conversation, explains technical points, assigns next steps, and controls turn-taking, while B mainly reports updates and agrees \u2014 indicating A is in a higher power position (e.g., supervising role).", "p_A": 0.99}
+{"id": "149", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
+{"id": "150", "model": "glm-5.3", "answer": "A", "p_A": 0.99}
