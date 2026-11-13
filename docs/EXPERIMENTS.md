@@ -146,3 +146,12 @@ all relations. Grounded extension: 71.3% proposed relation (all decisions by the
 Policy search: selected policy 67.1% against 71.5% for the direct Jev question, ahead in 41 of 500 splits.
 Notes: the direct answer is the letter GLM prints (no token probabilities); one rebuttal (snippet 122, coordination, B)
 came back empty and was scored as it was.
+
+## Gradual argumentation (QBAF), 2026-11-13
+
+`scripts/qbaf.py` builds a quantitative bipolar argumentation framework per snippet from the stored arguments and Jev
+scores, in the style of ArgLLM (Freedman et al., AAAI 2025), and evaluates the claim with DF-QuAD and Quadratic Energy
+semantics, flat or grouped by aspect, with a prior of 0.5 or the direct Jev answer. All 8 variants times 3 argument sets
+are reported in `results/qbaf_results.json`; none is selected on the test set. Range: 68.7% to 74.0%, none different
+from the direct Jev question (71.3%) by the paired test. Reference without arguments: a majority vote of the GLM, Terra,
+Sonnet and Jev direct answers scores 77.3% (15 wins to 6 losses against Jev alone, p=0.078). Not yet in the report.

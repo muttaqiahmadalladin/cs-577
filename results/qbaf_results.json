@@ -1,0 +1,227 @@
+{
+ "Terra|DF-QuAD|flat|0.5": {
+  "correct": 108,
+  "accuracy": 72.0,
+  "vs_jev_direct": {
+   "wins": 14,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|DF-QuAD|flat|jev": {
+  "correct": 106,
+  "accuracy": 70.7,
+  "vs_jev_direct": {
+   "wins": 2,
+   "losses": 3,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|DF-QuAD|aspect|0.5": {
+  "correct": 108,
+  "accuracy": 72.0,
+  "vs_jev_direct": {
+   "wins": 14,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|DF-QuAD|aspect|jev": {
+  "correct": 109,
+  "accuracy": 72.7,
+  "vs_jev_direct": {
+   "wins": 12,
+   "losses": 10,
+   "mcnemar_p": 0.8318119049072266
+  }
+ },
+ "Terra|QE|flat|0.5": {
+  "correct": 106,
+  "accuracy": 70.7,
+  "vs_jev_direct": {
+   "wins": 12,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|QE|flat|jev": {
+  "correct": 107,
+  "accuracy": 71.3,
+  "vs_jev_direct": {
+   "wins": 8,
+   "losses": 8,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|QE|aspect|0.5": {
+  "correct": 108,
+  "accuracy": 72.0,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 12,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Terra|QE|aspect|jev": {
+  "correct": 103,
+  "accuracy": 68.7,
+  "vs_jev_direct": {
+   "wins": 3,
+   "losses": 7,
+   "mcnemar_p": 0.34375
+  }
+ },
+ "GLM|DF-QuAD|flat|0.5": {
+  "correct": 107,
+  "accuracy": 71.3,
+  "vs_jev_direct": {
+   "wins": 12,
+   "losses": 12,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|DF-QuAD|flat|jev": {
+  "correct": 104,
+  "accuracy": 69.3,
+  "vs_jev_direct": {
+   "wins": 3,
+   "losses": 6,
+   "mcnemar_p": 0.5078125
+  }
+ },
+ "GLM|DF-QuAD|aspect|0.5": {
+  "correct": 107,
+  "accuracy": 71.3,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|DF-QuAD|aspect|jev": {
+  "correct": 106,
+  "accuracy": 70.7,
+  "vs_jev_direct": {
+   "wins": 8,
+   "losses": 9,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|QE|flat|0.5": {
+  "correct": 107,
+  "accuracy": 71.3,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|QE|flat|jev": {
+  "correct": 108,
+  "accuracy": 72.0,
+  "vs_jev_direct": {
+   "wins": 10,
+   "losses": 9,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|QE|aspect|0.5": {
+  "correct": 107,
+  "accuracy": 71.3,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 13,
+   "mcnemar_p": 1.0
+  }
+ },
+ "GLM|QE|aspect|jev": {
+  "correct": 106,
+  "accuracy": 70.7,
+  "vs_jev_direct": {
+   "wins": 6,
+   "losses": 7,
+   "mcnemar_p": 1.0
+  }
+ },
+ "Haiku|DF-QuAD|flat|0.5": {
+  "correct": 109,
+  "accuracy": 72.7,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 11,
+   "mcnemar_p": 0.8388197422027588
+  }
+ },
+ "Haiku|DF-QuAD|flat|jev": {
+  "correct": 105,
+  "accuracy": 70.0,
+  "vs_jev_direct": {
+   "wins": 1,
+   "losses": 3,
+   "mcnemar_p": 0.625
+  }
+ },
+ "Haiku|DF-QuAD|aspect|0.5": {
+  "correct": 110,
+  "accuracy": 73.3,
+  "vs_jev_direct": {
+   "wins": 14,
+   "losses": 11,
+   "mcnemar_p": 0.6900379657745361
+  }
+ },
+ "Haiku|DF-QuAD|aspect|jev": {
+  "correct": 110,
+  "accuracy": 73.3,
+  "vs_jev_direct": {
+   "wins": 10,
+   "losses": 7,
+   "mcnemar_p": 0.629058837890625
+  }
+ },
+ "Haiku|QE|flat|0.5": {
+  "correct": 111,
+  "accuracy": 74.0,
+  "vs_jev_direct": {
+   "wins": 12,
+   "losses": 8,
+   "mcnemar_p": 0.5034446716308594
+  }
+ },
+ "Haiku|QE|flat|jev": {
+  "correct": 109,
+  "accuracy": 72.7,
+  "vs_jev_direct": {
+   "wins": 9,
+   "losses": 7,
+   "mcnemar_p": 0.803619384765625
+  }
+ },
+ "Haiku|QE|aspect|0.5": {
+  "correct": 111,
+  "accuracy": 74.0,
+  "vs_jev_direct": {
+   "wins": 13,
+   "losses": 9,
+   "mcnemar_p": 0.5234670639038086
+  }
+ },
+ "Haiku|QE|aspect|jev": {
+  "correct": 105,
+  "accuracy": 70.0,
+  "vs_jev_direct": {
+   "wins": 2,
+   "losses": 4,
+   "mcnemar_p": 0.6875
+  }
+ },
+ "ensemble|majority of GLM, Terra, Sonnet, Jev (ties to Jev)": {
+  "correct": 116,
+  "accuracy": 77.3,
+  "vs_jev_direct": {
+   "wins": 15,
+   "losses": 6,
+   "mcnemar_p": 0.0783538818359375
+  }
+ }
+}
