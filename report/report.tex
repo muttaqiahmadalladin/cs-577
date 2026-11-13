@@ -104,6 +104,7 @@ The paper suggests abstract argumentation \citep{dung1995acceptability} as a lat
 \paragraph{Related work.}
 Earlier work predicts power from word choice, accommodation and thread structure with supervised models \citep{danescu2012echoes,prabhakaran2014power}, and \citet{ziems2024css} find that zero-shot LLMs often trail such models on social science tasks, power among them.
 \citet{sanayei2025debates} find that LLMs only moderately match argumentation-theoretic semantics when asked to judge debate graphs.
+\citet{freedman2025argllm} compute decisions from LLM-written arguments with gradual semantics and report accuracy comparable to chain-of-thought prompting, and \citet{smit2024mad} find that multi-agent debate does not reliably beat self-consistency or ensembling.
 
 \section{The released test set}
 \label{sec:data}
@@ -241,6 +242,11 @@ In the relation of our proposal every rebuttal attacks its reason and opposing r
 In a preference-based relation an attack succeeds only if the attacker is at least as strong as its target.
 Appendix~\ref{sec:grounded} gives details.
 
+\paragraph{Gradual argumentation.}
+As a soft alternative to the labelling, we follow \citet{freedman2025argllm} and build a quantitative bipolar argumentation framework for the claim ``A has more power'': reasons for A support it, reasons for B attack it, and each rebuttal attacks its reason, with the same strengths as base scores.
+The claim's strength is computed with the DF-QuAD or the Quadratic Energy semantics, over a flat graph or one grouped by aspect, from a prior of 0.5 or of the direct Jev answer, and A is predicted when it exceeds 0.5.
+All eight variants are reported.
+
 \paragraph{Statistics.}
 Paired comparisons use the exact McNemar test.
 Intervals come from a bootstrap that resamples whole meetings.
@@ -322,6 +328,11 @@ The grounded extension tells the same story.
 Under the relation of our proposal no reason is ever \textsc{in}, so every decision is made by the tie-break.
 The preference relation gives a real decision on every snippet with Jev scores, at 70.0\% with Terra's arguments, 67.3\% with GLM's and 73.3\% with Haiku's.
 A search over 288 grounded policies, with the policy chosen on half of the meetings and scored on the other half, averages 69.7\% against 71.5\% for the direct question on the same halves, and 67.1\% over GLM's arguments (Appendix~\ref{sec:grounded}).
+
+Gradual semantics do not change this.
+Over the eight variants the claim-strength decision scores 68.7 to 72.7\% with Terra's arguments, 69.3 to 72.0\% with GLM's and 70.0 to 74.0\% with Haiku's, and none of the 24 results differs from the direct Jev question (smallest $p=0.34$).
+
+Combining judgments, in contrast to combining arguments, may help: a majority vote of the four direct answers (GLM, Terra, Sonnet and Jev, ties to Jev) scores 77.3\%, against 71.3\% for Jev alone (15 wins to 6 losses, $p=0.078$).
 
 The best single result at the original span is a stronger model asked directly (Sonnet, 76.0\%), which is not distinguishable from Jev (27 wins to 20 losses, $p=0.38$) or from Terra (15 to 10, $p=0.42$); GLM asked directly is also level with Jev (24 to 21, $p=0.77$).
 We find no evidence that structured argumentation over generated reasons adds accuracy on this task.

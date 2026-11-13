@@ -6,6 +6,7 @@
 #   bash scripts/run_glm.sh probe # 2 snippets end to end, a few cents: do this first
 #   bash scripts/run_glm.sh run   # all 150 snippets; safe to rerun, finished snippets are skipped
 #   bash scripts/run_glm.sh score # print the table and write results/glm_run/
+#   bash scripts/run_glm.sh judge # debate with a judge over the stored arguments (add a number to try a few first)
 #
 # What "run" does:
 #   1. GLM writes the arguments with Wu's templates, one request per summary, reason list and rebuttal (36 per snippet)
@@ -69,5 +70,10 @@ PY
     echo; echo "Soft grounded policies (288), selected on half of the meetings and scored on the other half:"
     python3 scripts/grounded_policy_search.py --run $RUN
     ;;
-  *) echo "usage: bash scripts/run_glm.sh probe|run|score"; exit 2 ;;
+  judge)   # debate with a judge over the stored GLM arguments: 2 requests per snippet, needs only the Z.ai key
+    ask ZAI_API_KEY "Z.ai (or OpenRouter)"; export LLM_API_KEY="$ZAI_API_KEY"
+    [ -f results/$RUN/arguments.jsonl ] || { echo "results/$RUN/arguments.jsonl is missing: git pull first"; exit 1; }
+    python3 scripts/judge_run.py --run $RUN --name "$LLM_MODEL" ${2:+--limit $2}
+    ;;
+  *) echo "usage: bash scripts/run_glm.sh probe|run|score|judge"; exit 2 ;;
 esac
