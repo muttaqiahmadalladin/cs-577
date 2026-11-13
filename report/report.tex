@@ -19,15 +19,33 @@
   Jiwon Kim$^{*}$ \\
   Purdue University}
 
+% =====================================================================
+% HOW TO READ THE COMMENTS IN THIS FILE
+% This version merges two drafts. Wherever a co-author's wording was
+% changed, the original is kept right above the new text in a block that
+% starts "Co-author draft, kept for reference", followed by a one-line
+% note saying why. Nothing was deleted. Places where the co-author's text
+% or idea was adopted are marked "Adopted from co-author draft".
+% To restore any original, uncomment it and remove the text below it.
+% =====================================================================
+
 \begin{document}
 \maketitle
 \begingroup\renewcommand{\thefootnote}{$*$}\footnotetext{These authors contributed equally.}\endgroup
 
 \begin{abstract}
-\citet{wu2025power} ask which of two speakers in a six-turn meeting excerpt is the professor, and report that people, GPT-3.5, and a factor graph over LLM-written arguments all score near 50\%.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% \citet{wu2025power} ask which of two speakers in a six-turn meeting excerpt is the professor, evaluating classification accuracy of phd students, GPT-3.5, and a factor graph over LLM-written arguments all score near 50\%.
+% \citet{wu2025power} conducts a classification task to identify which of the two speakers in a six-turn meeting excerpt is the professor and student. Their classification accuracy using phd students, GPT-3.5, and an XOR factor graph over LLM-written arguments respectively all scored nearly 50\%. We trace all 151 released test snippets back to the ICSI Meeting Corpus and found that their displayed speaker letters and their labels disagree: under the reading of the letters that makes the labels correct, 57.6\% of the words are shown under the other speaker's letter.
+% We successfully rebuilt the snippets with speakers taken from the corpus.
+% On the corrected speech, a decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, where it scored 48.0\% on the released text, and it reaches 89.3\% with 60 segments of surrounding meeting.
+% With the data rebuilt we revisit the method.
+% The factor graph, rerun call by call with their predefined LLM, scored a classifcation accuracy of 72.0\%, level with asking that LLM directly (72.7\%), and neither rebuttals, relation factors, nor Dung's grounded extension improve on a direct answer.
+% ---- Note: the two opening sentences said the same thing, so one is kept, with 'PhD judges' and 'XOR factor graph' taken from this draft. 'Their predefined LLM' was changed because the rerun uses current models (Terra, GLM-5.3), not Wu's GPT-3.5. GLM numbers added after the 2026-11-12 run ----
+\citet{wu2025power} ask which of two speakers in a six-turn meeting excerpt is the professor, and report that PhD judges, GPT-3.5, and an XOR factor graph over LLM-written arguments all score near 50\%.
 We trace all 151 released test snippets back to the ICSI Meeting Corpus and find that their displayed speaker letters and their labels disagree: under the reading of the letters that makes the labels correct, 57.6\% of the words are shown under the other speaker's letter.
 We rebuild the snippets with speakers taken from the corpus.
-On the same words, a decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, where it scored 48.0\% on the released text, and it reaches 89.3\% with 60 segments of surrounding meeting.
+On the corrected speech, a decision model (Jev) identifies the professor in 71.3\% of 150 snippets against a 56.7\% majority baseline, where it scored 48.0\% on the released text, and it reaches 89.3\% with 60 segments of surrounding meeting.
 With the data rebuilt we revisit the method.
 The factor graph, rerun call by call with two current LLMs, reaches 72.0\% and 69.3\%, against 72.7\% and 73.3\% for asking those LLMs directly, and neither rebuttals, relation factors, nor Dung's grounded extension improve on a direct answer.
 Code, data and every model output are released, and one command regenerates the data and all reported numbers.
@@ -40,26 +58,47 @@ Can a model tell who holds power in a conversation from a few turns?
 They report 46.3\% accuracy for six PhD judges, 49.0\% for GPT-3.5 on the excerpt alone, and 54.3\% for their method, a factor graph over LLM-written reasons and rebuttals.
 The picture is of a task that is close to impossible at this length, on which structured argumentation gives a small gain.
 
-This project began as an attempt to improve that method.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% This project began as an attempt to improve classification accuracy and exceed accuracy when guessing the majority class which nearly every baseline struggled to surpass.
+% ---- Note: idea adopted (name the majority baseline as the bar), sentence shortened ----
+This project began as an attempt to improve that method and to beat the majority-class baseline, which none of the published systems clearly exceeds.
 We proposed quote-checked arguments and Dung's grounded extension \citep{dung1995acceptability} in place of the factor graph, and found that neither helped and that nothing we tried on the released test set beat the majority label.
-Looking for the reason, we traced the released snippets back to the corpus.
-Our contributions are:
+% ---- Co-author draft, kept for reference (not deleted) ----
+% We analyzed potential causes for the poor accuracy results by tracing the released snippets back to the corpus, and made minor adjustments to our initial proposal by proposing using a system one model. To summarize, our contributions are three-fold:
+% ---- Note: adopted, lightly edited. 'Three-fold' is kept and the list below now has three items to match ----
+We analyzed potential causes for the poor accuracy by tracing the released snippets back to the corpus, and adjusted our proposal by adding a System One decision model.
+To summarize, our contributions are three-fold:
 
+% ---- Co-author draft, kept for reference (not deleted) ----
+% \item \textbf{Correcting and adjusting the test set:} \newline
+% In the released test file from \cite{wu2025power} many labels of speakers to the corresponding speech are incorrect (Section~\ref{sec:data}). Under the reading of the speaker letters that makes the labels correct, 57.6\% of the dialogue are shown under the other speaker's labeling.
+% We rebuild the 150 usable snippets from the corpus, at the original span and with longer context, with a builder that regenerates them from public sources (Section~\ref{sec:rebuilt}).
+% \item \textbf{Replacing the Decision Model} On the rebuilt snippets a decision model and two LLMs identify the professor ranging from 71- 76\% of cases from the same speech. We were able to increase the accuracy up to 89\% with more speech between the two speakers. With clean data, the factor graph, its rebuttals and relations, and the grounded extension all land within about two points of a direct answer (Section~\ref{sec:graph}).
+% ---- Note: the first item is adopted (data finding and rebuilt set merged into one, with this title). The second item is split in two, because 'the task is feasible' and 'the graph adds no accuracy' are separate claims and the second is a main result that the title 'Replacing the Decision Model' hid. 'About two points' became 'no improvement' since GLM's graph is 4 points below its direct answer ----
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item \textbf{A data finding.} In the released test file the displayed speakers and the labels disagree (Section~\ref{sec:data}). Under the reading of the speaker letters that makes the labels correct, 57.6\% of words are shown under the other speaker's letter.
-\item \textbf{A rebuilt test set.} We rebuild the 150 usable snippets from the corpus, at the original span and with longer context, with a builder that regenerates them from public sources (Section~\ref{sec:rebuilt}).
-\item \textbf{The task is feasible.} On the rebuilt snippets a decision model and three LLMs identify the professor in 71 to 76\% of cases from the same words, and in 89\% with more context (Section~\ref{sec:results}).
-\item \textbf{The argument graph does not add accuracy.} With clean data, the factor graph, its rebuttals and relations, and the grounded extension all land within about two points of a direct answer (Section~\ref{sec:graph}).
+% Adopted from co-author draft: title and the merge of the data finding with the rebuilt set.
+\item \textbf{Correcting and adjusting the test set.} In the released test file of \citet{wu2025power} the displayed speakers and the labels disagree (Section~\ref{sec:data}). Under the reading of the speaker letters that makes the labels correct, 57.6\% of the words are shown under the other speaker's letter. We rebuild the 150 usable snippets from the corpus, at the original span and with longer context, with a builder that regenerates them from public sources (Section~\ref{sec:rebuilt}).
+\item \textbf{The task is feasible.} On the rebuilt snippets a decision model and three LLMs identify the professor in 71 to 76\% of cases from the same speech, and accuracy rises to 89\% with more of the surrounding meeting (Section~\ref{sec:results}).
+\item \textbf{The argument graph does not add accuracy.} With clean data, the factor graph, its rebuttals and relations, and the grounded extension do not improve on a direct answer for any of three argument-writing models (Section~\ref{sec:graph}).
 \end{itemize}
 
 \section{Background}
 
 \paragraph{The method of Wu et al.}
-For each of four aspects (style, content, coordination, engagement) an LLM summarizes the conversation, writes three reasons why A has more power and three why B does, and writes a rebuttal to each reason.
-The LLM's yes/no token probabilities score each argument for validity and grounding, in the manner of \citet{kassner2023rationality}.
-A factor graph then chooses one speaker: a reason and its rebuttal cannot both hold, a speaker has power exactly when one of their reasons holds, and exactly one speaker has power.
-Inference uses AD3 \citep{martins2011augmented}.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% For each of four aspects (style, content, coordination, engagement) 2 LLMs summarizes the conversation, writes three reasons why A has more power and three why B does, and writes a rebuttal to each reason.
+% For each of the reason, another LLM is assigned to evaluate the validity and grounding. Rebuttals likewise are also assessed for their validity, which follows \cite{kassner2023rationality}'s methodology for evaluating statements.
+% 
+% After retrieving reasons, rebuttals, and computing the respective scores, a factor graph can be constructd. The factor graph enables to see the strength of relationships between one reason and another reason, contrasting the method of independently verifying a reason iteratively. The factor graph is then solved with an AD3 algorithm that assigns the speaker with a probability between 0 and 1. In the end, the speaker with the higher probability is outputted as a prediction to whoever has the greater "power" in the dialogue.
+% ---- Note: structure and explanation adopted (two paragraphs, and why a graph is used instead of judging each reason alone). Two facts corrected against Wu et al.: one model (GPT-3.5) writes and scores everything, not two or three LLMs; and the graph output is a 0/1 choice of speaker under the XOR rule rather than a probability per speaker ----
+% Adopted from co-author draft: the two-paragraph explanation below.
+For each of four aspects (style, content, coordination, engagement) an LLM (GPT-3.5) summarizes the conversation, writes three reasons why A has more power and three why B does, and writes a rebuttal to each reason.
+The same LLM then evaluates each reason and each rebuttal for validity and grounding through its yes/no token probabilities, following the method of \citet{kassner2023rationality} for scoring statements.
+
+Once the reasons, rebuttals and scores are in hand, a factor graph is built over them.
+The graph lets the strength of one reason bear on another, in contrast to verifying each reason independently: a reason and its rebuttal cannot both hold, a speaker has power exactly when one of their reasons holds, and exactly one speaker has power.
+The graph is solved with the AD3 algorithm \citep{martins2011augmented}, and the speaker it selects is the prediction of who has more power in the dialogue.
 The paper suggests abstract argumentation \citep{dung1995acceptability} as a later formalization.
 
 \paragraph{Related work.}
@@ -71,7 +110,7 @@ Earlier work predicts power from word choice, accommodation and thread structure
 
 \paragraph{Sources.}
 The released test set is the file \texttt{meeting.csv} of \citet{wu2025power}: 151 rows, each with a conversation between speakers A and B and a label naming the higher-power speaker.\footnote{\url{https://github.com/kandicew/social-reasoning}, commit \texttt{fed11b6}, \texttt{data/meeting.csv}.}
-Speaker A is the label in 83 rows, so always answering A scores 55.0\%.
+Speaker A is the label in 83 rows, so always answering A scores an accuracy of 55.0\%.   % Adopted from co-author draft
 The snippets come from the ICSI Meeting Corpus.
 We use its original MRT transcripts, in which every segment carries a start time, a participant ID and the transcribed text, and its participant metadata, which records each participant's education level.\footnote{\url{https://groups.inf.ed.ac.uk/ami/icsi/download}: \texttt{ICSI\_original\_transcripts.zip} and \texttt{ICSI\_core\_NXT.zip} (\texttt{speakers.xml}), distributed under CC BY 4.0.}
 
@@ -103,7 +142,7 @@ B & professor & Yeah. \\
 \end{table}
 
 \paragraph{Displayed speakers against corpus speakers.}
-In the released text each displayed turn ends with the first segment of the next corpus speaker.
+In the released text, each displayed turn ends with the first segment of the next corpus speaker.
 In Table~\ref{tab:example} the turn shown under A contains the professor's remarks and then the other participant's ``Mm-hmm.''
 A letter therefore does not stand for one participant throughout a snippet, and there are two ways to read it.
 
@@ -145,28 +184,58 @@ The builder is deterministic and regenerates the set byte for byte from the thre
 
 \paragraph{Direct questions.}
 Jev is a decision model that returns a probability for each typed yes/no question about a supplied state.\footnote{TypeSafe AI, \texttt{jev-1.14.0}, \url{https://docs.typesafe.ai}. The questions used on the rebuilt snippets were fixed before that data was built.}
-We ask ``Is speaker X the professor?'' for A and for B and predict the speaker with the higher probability.
-We also ask four LLMs which speaker has more power: GPT-6.1 Terra, GLM-5.3, Claude Haiku and Claude Sonnet.
-Two rules need no model: the speaker with more words, or with longer turns, is the professor.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% We ask ``Is speaker X the professor?'' for A and for B, and predict the speaker with the highest probability as the professor.
+% We also ask three LLMs which speaker has more power as baselines: GPT-6.1 Terra, Claude Haiku and Claude Sonnet. Additionally, we also used 2 pre-defined rules to determine which speaker has more power without a model: 1.) the speaker with more words is the professor, 2.) The speaker that has longer turns is the professor.
+% ---- Note: adopted, including the numbered rules and calling the LLMs baselines. GLM-5.3 added as a fourth LLM ----
+We ask ``Is speaker X the professor?'' for A and for B, and predict the speaker with the higher probability as the professor.
+We also ask four LLMs which speaker has more power as baselines: GPT-6.1 Terra, GLM-5.3, Claude Haiku and Claude Sonnet.
+Additionally, we use two predefined rules that need no model: (1) the speaker with more words is the professor, and (2) the speaker with longer turns is the professor.
 
 \paragraph{The factor graph of Wu et al.}
 We ran their method on the rebuilt snippets with three sets of arguments.
-For the first, GPT-6.1 Terra wrote the arguments call by call with their prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet), with tools disabled and no access to labels.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% We ran their method on the rebuilt snippets in two ways.
+% For the first method, GPT-6.1 Terra wrote the arguments call by call with its prompt templates: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet). Terra performed these actions with tools disabled and no access to the labels.
+% As for the second method, Claude Haiku wrote all arguments for a snippet in one pass.
+% ---- Note: sentence split adopted. 'Its prompt templates' became 'the prompt templates of Wu et al.' because the templates are theirs, not Terra's. 'Two ways' became three because GLM-5.3 was added ----
+For the first, GPT-6.1 Terra wrote the arguments call by call with the prompt templates of \citet{wu2025power}: one independent request for each aspect summary, each list of three reasons, and each rebuttal (36 requests per snippet).
+Terra performed these actions with tools disabled and no access to the labels.
 GLM-5.3 wrote the second set through the same call-by-call pipeline.
 For the third, Claude Haiku wrote all arguments for a snippet in one pass.
 Jev scored all three sets: validity and grounding of each argument, whether each rebuttal counters its reason, and similarity and contradiction of reason pairs.
 A separate Haiku instance also scored the Haiku arguments.
 Their rule file and weights (reason 20, rebuttal 18) do the inference, solved exactly as an integer program, in the three variants of the paper: reasons only, with rebuttals, and with all relations.
-The same solver reproduces the published 54.3\% on the released cache (82 of 151).
+% ---- Co-author draft, kept for reference (not deleted) ----
+% For both methods, we incorporate the AD3 algorithm and they both reproduce the published 54.3\% on the released cache (82 of 151).
+% ---- Note: we do not run AD3. Our code solves the same graph exactly as an integer program (PuLP/CBC), and it is that solver, applied to Wu's cached GPT-3.5 scores, that reproduces 54.3%. Saying AD3 here would not match the released code ----
+We solve the graph exactly in place of the approximate AD3 solver, and the same solver reproduces the published 54.3\% on the released cache (82 of 151).
 
 \paragraph{Typed-statement factor graph.}
-We also keep their graph and replace the generated text.
+For this method, we keep the same factor graph and replace the generated text.   % Adopted from co-author draft
 For each aspect we wrote three yes/no statements, such as ``Does speaker X evaluate speaker Y's work?''.
 Jev's probability for a statement about X is the weight of a reason for X, and the same statement about the other speaker is its rebuttal.
 One call with 24 questions replaces the generation and scoring calls for 48 arguments per snippet.
 
 \paragraph{Grounded extension.}
-Over the same 24 reasons and 24 rebuttals we compute Dung's grounded labelling, in which an argument is \textsc{in} when all its attackers are \textsc{out} and \textsc{out} when some attacker is \textsc{in}, and predict the speaker with more \textsc{in} reasons.
+% ---- Co-author draft, kept for reference (not deleted) ----
+% Using the same 24 reasons and 24 rebuttals that were generated, we incorporate Dung's grounded labeling over the factor graph. Dung's grounded labeling is a framework that draws conclusions from information with nodes attacking other neighboring nodes. The grounded labeling assigns each argument to one of the three labels by the following protocol:
+% \begin{itemize}
+% \item A node is classified as \textsc{in} when every nodes attacking it are classified as \textsc{out}. Another case of a \textsc{in} classification is when the node has no neighbors at all.
+% \item A node is classified as \textsc{out} when there exists at least one attacking node whose label is \textsc{in}.
+% \item For every other node that is not classified as \textsc{in} or \textsc{out}, it is classified as an \textsc{undec}. Additionally if a node has one of its attackers be classified as \textsc{undec}, it is also classified as \textsc{undec}.
+% (the prediction rule, strengths and relations followed here, inside the list, before \end{itemize})
+% ---- Note: the bulleted protocol is adopted. Changes: the grounded labelling replaces the factor graph, it is not run over it; 'no neighbors' became 'no attackers' (a node can attack others and still be IN); the last clause of the third bullet was dropped because a node with an UNDEC attacker and an IN attacker is OUT; and \end{itemize} moved up so the prediction rule is not part of the third bullet ----
+% Adopted from co-author draft: the introduction of the framework and the bulleted protocol.
+Using the same 24 reasons and 24 rebuttals, we replace the factor graph with Dung's grounded labelling.
+It is a framework that draws conclusions from arguments that attack one another, and it assigns each argument one of three labels:
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item An argument is \textsc{in} when every argument attacking it is \textsc{out}. An argument with no attackers is therefore \textsc{in}.
+\item An argument is \textsc{out} when at least one of its attackers is \textsc{in}.
+\item Every other argument is undecided (\textsc{undec}).
+\end{itemize}
+After the labelling, the speaker with more \textsc{in} reasons is predicted as the one with more power.
 A reason has strength $P(\textrm{valid})\cdot P(\textrm{grounded})$ and a rebuttal $P(\textrm{counters its reason})\cdot P(\textrm{grounded})$.
 In the relation of our proposal every rebuttal attacks its reason and opposing reasons attack each other.
 In a preference-based relation an attack succeeds only if the attacker is at least as strong as its target.
