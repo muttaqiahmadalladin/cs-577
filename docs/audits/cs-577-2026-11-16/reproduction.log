@@ -1,0 +1,222 @@
+
+=== step 1 of 12: get_sources.py ===
+downloading meeting.csv
+ok       meeting.csv  d405654d402c0e7bca37f0732b6005aff70297aeadf7c6e0fa83c1d4e371b286
+downloading all_obj.pkl
+ok       all_obj.pkl  e4be3c7c6a3543a77ad07eddde44bfa42f6e58fa6a4bf47df53ea9e894f1e318
+downloading rules.txt
+ok       rules.txt  5a88f4a5298fcd1fc8d30736bdcb2fba30cb47cc0bafcb7f68c9d12aea3addde
+downloading icsi_mrt.zip
+ok       icsi_mrt.zip  9db98ebdd61a085b4f45f24f46e9c9f6c6f26c3c9cd41643a3b9e74362c85de7
+downloading icsi_core_nxt.zip
+ok       icsi_core_nxt.zip  cf4860245b9ca9c9ed11a66e5a74cfea2a99a686a52f7580aa0a6bc2225895a9
+
+=== step 2 of 12: build_dataset.py --check ===
+released snippets located: 151; rebuilt set: 150; professor is A in 85; labels equal to released: 142; letters kept from released: 128
+committed dataset reproduced exactly
+
+=== step 3 of 12: build_dataset.py ===
+released snippets located: 151; rebuilt set: 150; professor is A in 85; labels equal to released: 142; letters kept from released: 128
+wrote /Users/krish/workspace-ai/projects/GitHub/nlp_research/data/audit-sources/cs-577-2026-11-16-reproduction/data/icsi_rebuilt_snippets.jsonl and work files in /Users/krish/workspace-ai/projects/GitHub/nlp_research/data/audit-sources/cs-577-2026-11-16-reproduction/work
+
+=== step 4 of 12: convert_released_cache.py ===
+wrote /Users/krish/workspace-ai/projects/GitHub/nlp_research/data/audit-sources/cs-577-2026-11-16-reproduction/work/snippets.jsonl and /Users/krish/workspace-ai/projects/GitHub/nlp_research/data/audit-sources/cs-577-2026-11-16-reproduction/work/rules.txt
+
+=== step 5 of 12: analyze.py --check ===
+Table 1. Released snippets (151)
+  Always A                                        83/151 =  55.0%   vs always A: +0/-0 p=1
+  XOR graph, cached GPT-3.5 scores                82/151 =  54.3%   vs always A: +36/-37 p=1
+  Jev, is X the professor                         72/151 =  47.7%   vs always A: +26/-37 p=0.21   AUC 0.433
+  XOR graph, Jev scores                           76/151 =  50.3%   vs always A: +29/-36 p=0.46
+  Preference grounded, cached scores              79/151 =  52.3%   vs always A: +44/-48 p=0.75
+  Preference grounded, Jev scores                 71/151 =  47.0%   vs always A: +27/-39 p=0.18
+  Typed-statement graph (Jev)                     77/151 =  51.0%   vs always A: +36/-42 p=0.57
+  (Grounded extension as proposed, the quote filter and Gemma 4 zero-shot are results of KrishMay05/nlp_research.)
+
+Data section. Released text against ICSI participant IDs
+  released_snippets: 151
+  located_exactly_once: 151
+  meetings: 45
+  one_to_one_with_one_professor: 128
+  label_names_professor_under_last_line_reading: 128
+  words_under_other_letter: 7596
+  words_total: 13185
+  percent_words_under_other_letter: 57.6
+  snippets_majority_of_words_under_other_letter: 73
+  label_names_letter_with_most_professor_words: 69
+
+Table 2. Same 150 snippets, released text and labels
+  More words                                      69/150 =  46.0%   vs always A: +31/-45 p=0.14   AUC 0.436
+  Jev, professor                                  72/150 =  48.0%   vs always A: +26/-37 p=0.21   AUC 0.436
+  Jev, more power                                 72/150 =  48.0%   vs always A: +25/-36 p=0.2   AUC 0.436
+  Typed-statement graph                           77/150 =  51.3%   vs always A: +36/-42 p=0.57
+
+Table 2. rebuilt, same span
+  More words                                     100/150 =  66.7%   vs always A: +44/-29 p=0.1   AUC 0.72
+  Longer turns                                   102/150 =  68.0%   vs always A: +43/-26 p=0.053   AUC 0.726
+  Jev, professor                                 107/150 =  71.3%   vs always A: +34/-12 p=0.0016   AUC 0.79
+  Jev, more power                                106/150 =  70.7%   vs always A: +33/-12 p=0.0025   AUC 0.774
+  Typed-statement graph                          105/150 =  70.0%   vs always A: +44/-24 p=0.021
+
+Table 2. rebuilt, 15 extra segments per side
+  More words                                      99/150 =  66.0%   vs always A: +46/-32 p=0.14   AUC 0.74
+  Longer turns                                   104/150 =  69.3%   vs always A: +45/-26 p=0.032   AUC 0.749
+  Jev, professor                                 127/150 =  84.7%   vs always A: +52/-10 p=5.7e-08   AUC 0.911
+  Jev, more power                                119/150 =  79.3%   vs always A: +44/-10 p=3.4e-06   AUC 0.88
+  Typed-statement graph                          121/150 =  80.7%   vs always A: +53/-17 p=1.9e-05
+
+Table 2. rebuilt, 60 extra segments per side
+  More words                                     103/150 =  68.7%   vs always A: +45/-27 p=0.044   AUC 0.767
+  Longer turns                                   100/150 =  66.7%   vs always A: +45/-30 p=0.11   AUC 0.761
+  Jev, professor                                 134/150 =  89.3%   vs always A: +58/-9 p=6.8e-10   AUC 0.957
+  Jev, more power                                132/150 =  88.0%   vs always A: +54/-7 p=4.3e-10   AUC 0.942
+  Typed-statement graph                          136/150 =  90.7%   vs always A: +58/-7 p=4.3e-11
+
+Table 3. Wu factor graph on the rebuilt same-span text, by who wrote and who scored the arguments
+  Wu graph, reasons only (Terra arguments, Jev scores) 100/150 =  66.7%   vs always A: +32/-17 p=0.044
+  Wu graph, reasons + rebuttals (Terra arguments, Jev scores) 108/150 =  72.0%   vs always A: +36/-13 p=0.0014
+  Wu graph, all relations (Terra arguments, Jev scores) 108/150 =  72.0%   vs always A: +36/-13 p=0.0014
+  Sum of reason scores, no graph (Terra arguments, Jev scores) 100/150 =  66.7%   vs always A: +32/-17 p=0.044   AUC 0.754
+  Wu graph, reasons only (Haiku arguments, Jev scores) 110/150 =  73.3%   vs always A: +36/-11 p=0.00035
+  Wu graph, reasons + rebuttals (Haiku arguments, Jev scores) 105/150 =  70.0%   vs always A: +36/-16 p=0.0078
+  Wu graph, all relations (Haiku arguments, Jev scores) 105/150 =  70.0%   vs always A: +36/-16 p=0.0078
+  Sum of reason scores, no graph (Haiku arguments, Jev scores) 110/150 =  73.3%   vs always A: +36/-11 p=0.00035   AUC 0.801
+  Wu graph, reasons only (Haiku arguments, Haiku scores) 103/150 =  68.7%   vs always A: +46/-28 p=0.047
+  Wu graph, reasons + rebuttals (Haiku arguments, Haiku scores) 101/150 =  67.3%   vs always A: +44/-28 p=0.076
+  Wu graph, all relations (Haiku arguments, Haiku scores) 102/150 =  68.0%   vs always A: +45/-28 p=0.06
+  Sum of reason scores, no graph (Haiku arguments, Haiku scores) 103/150 =  68.7%   vs always A: +46/-28 p=0.047   AUC 0.732
+  Terra zero-shot                                109/150 =  72.7%   vs always A: +46/-22 p=0.0049
+  Haiku zero-shot                                102/150 =  68.0%   vs always A: +43/-26 p=0.053   AUC 0.757
+  Sonnet zero-shot                               114/150 =  76.0%   vs always A: +53/-24 p=0.0013   AUC 0.872
+
+Robustness. Rebuilt snippets
+  most_frequent_professor_snippets: 110
+  other_professors_snippets: 40
+  other_professors_A_share: 52.5
+  first_speaker_is_professor: 83
+  professor_is_A: 85
+  professor_is_B: 65
+  jev_same_span: {'most_frequent_professor': 69.1, 'other_professors': 77.5, 'other_professors_correct': 31, 'when_professor_is_A': 85.9, 'when_professor_is_B': 52.3}
+  jev_pm15: {'most_frequent_professor': 84.5, 'other_professors': 85.0, 'other_professors_correct': 34, 'when_professor_is_A': 88.2, 'when_professor_is_B': 80.0}
+  jev_pm60: {'most_frequent_professor': 90.9, 'other_professors': 85.0, 'other_professors_correct': 34, 'when_professor_is_A': 89.4, 'when_professor_is_B': 89.2}
+  sonnet_same_span: {'most_frequent_professor': 78.2, 'other_professors': 70.0, 'other_professors_correct': 28, 'when_professor_is_A': 71.8, 'when_professor_is_B': 81.5}
+  terra_same_span: {'most_frequent_professor': 70.9, 'other_professors': 77.5, 'other_professors_correct': 31, 'when_professor_is_A': 74.1, 'when_professor_is_B': 70.8}
+  wu_graph_terra_jev_same_span: {'most_frequent_professor': 68.2, 'other_professors': 82.5, 'other_professors_correct': 33, 'when_professor_is_A': 84.7, 'when_professor_is_B': 55.4}
+
+Paired comparisons (wins / losses for the first method, exact McNemar p)
+  Jev professor: rebuilt same span vs released               +52/-17  p=2.9e-05
+  Typed graph: rebuilt same span vs released                 +53/-25  p=0.002
+  Jev professor: 15 extra vs same span                       +30/-10  p=0.0022
+  Jev professor: 60 extra vs same span                       +35/-8  p=4.2e-05
+  Typed graph vs Jev professor, same span                    +21/-23  p=0.88
+  Wu graph (Terra, Jev; all) vs Terra zero-shot              +14/-15  p=1
+  Wu graph (Terra, Jev): all relations vs reasons only       +11/-3  p=0.057
+  Wu graph (Terra, Jev; all) vs Jev professor                +14/-13  p=1
+  Terra zero-shot vs Jev professor                           +24/-22  p=0.88
+  Wu graph (Haiku, Jev; all) vs Jev professor                +12/-14  p=0.85
+  Wu graph (Haiku, Jev): all relations vs reasons only       +3/-8  p=0.23
+  Wu graph (Haiku, Haiku; all) vs Haiku zero-shot            +8/-8  p=1
+  Wu graph (Haiku, Haiku): all relations vs reasons only     +6/-7  p=1
+  Sonnet zero-shot vs Wu graph (Haiku, Haiku; all)           +21/-9  p=0.043
+  Sonnet zero-shot vs Jev professor                          +27/-20  p=0.38
+  Sonnet zero-shot vs Terra zero-shot                        +15/-10  p=0.42
+
+wrote results/report_numbers.json
+check: 60 of 60 report values reproduced
+
+=== step 6 of 12: grounded_extension.py ===
+150 snippets; always A is correct in 85
+proposed   Terra arguments, Jev scores    100/150 = 66.7%  vs always A +32/-17 p=0.0444  decided by IN count: 0 (correct 0)  reasons IN 0/3600, undecided 0
+preference Terra arguments, Jev scores    105/150 = 70.0%  vs always A +33/-13 p=0.00453  decided by IN count: 150 (correct 105)  reasons IN 1504/3600, undecided 0
+proposed   Haiku arguments, Jev scores    110/150 = 73.3%  vs always A +36/-11 p=0.000346  decided by IN count: 0 (correct 0)  reasons IN 0/3600, undecided 0
+preference Haiku arguments, Jev scores    110/150 = 73.3%  vs always A +35/-10 p=0.000247  decided by IN count: 150 (correct 110)  reasons IN 1517/3600, undecided 0
+proposed   Haiku arguments, Haiku scores  103/150 = 68.7%  vs always A +46/-28 p=0.0474  decided by IN count: 0 (correct 0)  reasons IN 0/3600, undecided 0
+preference Haiku arguments, Haiku scores  97/150 = 64.7%  vs always A +46/-34 p=0.219  decided by IN count: 141 (correct 92)  reasons IN 849/3600, undecided 0
+
+=== step 7 of 12: grounded_policy_search.py ===
+288 policies. Accuracy on all 150 (optimistic, selected on the same snippets): best 111, median 99, worst 82; Jev direct 107
+   111/150  ('rv*rg', 'ba*bg', 0.5, 'none', 'count')  reasons IN 3495/3600, decided without tie-break 60
+   111/150  ('rv*rg', 'bg', 0.7, 'pref', 'count')  reasons IN 1447/3600, decided without tie-break 150
+   111/150  ('rv*rg', 'bg', 0.7, 'pref', 'strength')  reasons IN 1447/3600, decided without tie-break 150
+   110/150  ('rv*rg', 'ba*bg', 'pref', 'pref', 'count')  reasons IN 1517/3600, decided without tie-break 150
+   110/150  ('rv*rg', 'ba*bg', 'pref', 'pref', 'strength')  reasons IN 1517/3600, decided without tie-break 150
+
+Selection on a development half of meetings, scored on the other half (500 splits):
+   selected policy, test accuracy: mean 69.7%   Jev direct on the same test halves: mean 71.5%
+   gain over direct: mean -1.8 points, middle 95% of splits -11.2 to +3.8; selected policy ahead in 133 of 500 splits
+   chosen in 140 splits: ('rv*rg', 'ba*bg', 0.5, 'none', 'count')
+   chosen in 84 splits: ('rv*rg', 'ba*bg', 'pref', 'pref', 'count')
+   chosen in 50 splits: ('rv*rg', 'bg', 0.7, 'pref', 'count')
+
+=== step 8 of 12: data_differences.py ===
+151 released snippets; 150 in the rebuilt set; letters kept in 128, reassigned in 22; label differs in 8; misplaced words 7596 of 13185 over 128 snippets; snippets with any misplaced word: 121; with none: 7
+
+=== step 9 of 12: score_run.py --run glm_run --name glm-5.3 ===
+glm-5.3: 150 rebuilt snippets, always A is correct in 85, Jev direct in 107
+  glm-5.3 asked directly, original span        110/150 =  73.3%   vs always A +49/-24 p=0.0046   vs Jev direct +24/-21 p=0.77
+  glm-5.3 asked directly, 15 extra segments    111/150 =  74.0%   vs always A +43/-17 p=0.0011   vs Jev direct +9/-25 p=0.009
+  glm-5.3 asked directly, 60 extra segments    123/150 =  82.0%   vs always A +49/-11 p=7.6e-07   vs Jev direct +10/-21 p=0.071
+  Wu graph, reasons only (Jev scores)          107/150 =  71.3%   vs always A +38/-16 p=0.0038   vs Jev direct +12/-12 p=1
+  Wu graph, reasons + rebuttals (Jev scores)   106/150 =  70.7%   vs always A +37/-16 p=0.0055   vs Jev direct +11/-12 p=1
+  Wu graph, all relations (Jev scores)         104/150 =  69.3%   vs always A +35/-16 p=0.011   vs Jev direct +11/-14 p=0.69
+  Sum of reason scores, no graph (Jev scores)  107/150 =  71.3%   vs always A +38/-16 p=0.0038   vs Jev direct +12/-12 p=1
+  Grounded extension, proposed (Jev scores)    107/150 =  71.3%   vs always A +38/-16 p=0.0038   vs Jev direct +12/-12 p=1
+  Grounded extension, preference (Jev scores)  101/150 =  67.3%   vs always A +34/-18 p=0.036   vs Jev direct +10/-16 p=0.33
+check: 9 of 9 stored rows reproduced
+
+=== step 10 of 12: grounded_policy_search.py --run glm_run ===
+288 policies. Accuracy on all 150 (optimistic, selected on the same snippets): best 108, median 101, worst 89; Jev direct 107
+   108/150  ('rv*rg', 'ba*bg', 'pref', 'none', 'strength')  reasons IN 1839/3600, decided without tie-break 150
+   108/150  ('rv*rg', 'ba*bg', 0.7, 'similar', 'strength')  reasons IN 3044/3600, decided without tie-break 150
+   108/150  ('rv*rg', 'bg', 0.7, 'none', 'strength')  reasons IN 2597/3600, decided without tie-break 150
+   107/150  ('rv*rg', 'ba*bg', 'pref', 'similar', 'count')  reasons IN 1636/3600, decided without tie-break 148
+   107/150  ('rv*rg', 'ba*bg', 'pref', 'similar', 'strength')  reasons IN 1636/3600, decided without tie-break 150
+
+Selection on a development half of meetings, scored on the other half (500 splits):
+   selected policy, test accuracy: mean 67.1%   Jev direct on the same test halves: mean 71.5%
+   gain over direct: mean -4.4 points, middle 95% of splits -11.9 to +2.4; selected policy ahead in 41 of 500 splits
+   chosen in 91 splits: ('rv*rg', 'ba*bg', 'pref', 'none', 'strength')
+   chosen in 60 splits: ('rv*rg', 'ba', 0.7, 'none', 'count')
+   chosen in 53 splits: ('rg', 'bg', 0.7, 'pref', 'count')
+
+=== step 11 of 12: qbaf.py ===
+150 snippets; always A 85; Jev direct 107
+
+arguments semantics structure prior       correct   vs Jev direct
+Terra     DF-QuAD  flat      0.5         108/150 = 72.0%   +14/-13 p=1
+Terra     DF-QuAD  flat      Jev direct  106/150 = 70.7%   +2/-3 p=1
+Terra     DF-QuAD  by aspect 0.5         108/150 = 72.0%   +14/-13 p=1
+Terra     DF-QuAD  by aspect Jev direct  109/150 = 72.7%   +12/-10 p=0.83
+Terra     QE       flat      0.5         106/150 = 70.7%   +12/-13 p=1
+Terra     QE       flat      Jev direct  107/150 = 71.3%   +8/-8 p=1
+Terra     QE       by aspect 0.5         108/150 = 72.0%   +13/-12 p=1
+Terra     QE       by aspect Jev direct  103/150 = 68.7%   +3/-7 p=0.34
+
+GLM       DF-QuAD  flat      0.5         107/150 = 71.3%   +12/-12 p=1
+GLM       DF-QuAD  flat      Jev direct  104/150 = 69.3%   +3/-6 p=0.51
+GLM       DF-QuAD  by aspect 0.5         107/150 = 71.3%   +13/-13 p=1
+GLM       DF-QuAD  by aspect Jev direct  106/150 = 70.7%   +8/-9 p=1
+GLM       QE       flat      0.5         107/150 = 71.3%   +13/-13 p=1
+GLM       QE       flat      Jev direct  108/150 = 72.0%   +10/-9 p=1
+GLM       QE       by aspect 0.5         107/150 = 71.3%   +13/-13 p=1
+GLM       QE       by aspect Jev direct  106/150 = 70.7%   +6/-7 p=1
+
+Haiku     DF-QuAD  flat      0.5         109/150 = 72.7%   +13/-11 p=0.84
+Haiku     DF-QuAD  flat      Jev direct  105/150 = 70.0%   +1/-3 p=0.62
+Haiku     DF-QuAD  by aspect 0.5         110/150 = 73.3%   +14/-11 p=0.69
+Haiku     DF-QuAD  by aspect Jev direct  110/150 = 73.3%   +10/-7 p=0.63
+Haiku     QE       flat      0.5         111/150 = 74.0%   +12/-8 p=0.5
+Haiku     QE       flat      Jev direct  109/150 = 72.7%   +9/-7 p=0.8
+Haiku     QE       by aspect 0.5         111/150 = 74.0%   +13/-9 p=0.52
+Haiku     QE       by aspect Jev direct  105/150 = 70.0%   +2/-4 p=0.69
+
+Reference, no arguments: majority vote of GLM, Terra, Sonnet and Jev direct answers (ties to Jev)  116/150 = 77.3%   vs Jev direct +15/-6 p=0.078
+
+=== step 12 of 12: judge_run.py --run glm_run --name glm-5.3 --score ===
+glm-5.3: 150 of 150 snippets judged; glm-5.3 asked directly 110, Jev direct 107
+  Judge, A's case first                        101/150 =  67.3%   vs glm-5.3 direct +18/-27 p=0.23   vs Jev direct +21/-27 p=0.47
+  Judge, B's case first                        104/150 =  69.3%   vs glm-5.3 direct +22/-28 p=0.48   vs Jev direct +19/-22 p=0.76
+  Judge, both orders (disagreements to direct) 113/150 =  75.3%   vs glm-5.3 direct +17/-14 p=0.72   vs Jev direct +24/-18 p=0.44
+  same answer in both orders: 117/150 (correct in 86 of those); chose the side presented first in 131 of 300 judgments
+
+All steps passed.
