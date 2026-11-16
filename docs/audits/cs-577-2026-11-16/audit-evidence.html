@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Independent checks of the positive findings</title>
+<style>
+html,body{margin:0;color:var(--foreground);font-family:var(--font-sans,system-ui);font-size:14px}
+#audit-effects{display:grid;gap:16px}
+#audit-effects h3,#audit-effects p{margin:0;font-size:inherit;font-weight:400}
+#audit-effects h3{font-weight:500}
+#audit-effects .caption{color:var(--muted-foreground);font-size:12px}
+#audit-effects .row{display:grid;gap:4px}
+#audit-effects .label{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px}
+#audit-effects .value{font-variant-numeric:tabular-nums}
+#audit-effects svg{display:block;width:100%;height:24px;overflow:visible}
+#audit-effects .grid{stroke:var(--border);stroke-width:1}
+#audit-effects .effect{stroke:var(--chart-1);stroke-width:3}
+#audit-effects .point{fill:var(--chart-1)}
+#audit-effects .axis{display:flex;justify-content:space-between;color:var(--muted-foreground);font-size:12px}
+</style>
+</head>
+<body>
+<section id="audit-effects" aria-label="Independent meeting-bootstrap checks of four positive findings">
+<h3>Positive findings that survive the audit</h3>
+<div class="row"><div class="label"><p>Speaker repair · 128 unchanged-label cases</p><p class="value">+21.1 pp <span class="caption">[9.6, 32.7]</span></p></div><svg role="img" aria-label="Speaker repair: gain 21.1 percentage points; 95 percent meeting-bootstrap interval 9.6 to 32.7 points"><line class="grid" x1="0%" x2="100%" y1="12" y2="12"/><line class="effect" x1="24%" x2="81.75%" y1="12" y2="12"/><circle class="point" cx="52.75%" cy="12" r="5"/></svg></div>
+<div class="row"><div class="label"><p>Rebuilt Jev vs always A · 150 cases</p><p class="value">+14.7 pp <span class="caption">[6.5, 22.1]</span></p></div><svg role="img" aria-label="Rebuilt Jev versus always A: gain 14.7 percentage points; interval 6.5 to 22.1"><line class="grid" x1="0%" x2="100%" y1="12" y2="12"/><line class="effect" x1="16.25%" x2="55.25%" y1="12" y2="12"/><circle class="point" cx="36.75%" cy="12" r="5"/></svg></div>
+<div class="row"><div class="label"><p>15 extra segments per side vs same span</p><p class="value">+13.3 pp <span class="caption">[6.0, 20.6]</span></p></div><svg role="img" aria-label="15 extra segments per side: gain 13.3 percentage points; interval 6.0 to 20.6"><line class="grid" x1="0%" x2="100%" y1="12" y2="12"/><line class="effect" x1="15%" x2="51.5%" y1="12" y2="12"/><circle class="point" cx="33.25%" cy="12" r="5"/></svg></div>
+<div class="row"><div class="label"><p>60 extra segments per side vs same span</p><p class="value">+18.0 pp <span class="caption">[9.9, 25.7]</span></p></div><svg role="img" aria-label="60 extra segments per side: gain 18.0 percentage points; interval 9.9 to 25.7"><line class="grid" x1="0%" x2="100%" y1="12" y2="12"/><line class="effect" x1="24.75%" x2="64.25%" y1="12" y2="12"/><circle class="point" cx="45%" cy="12" r="5"/></svg></div>
+<div><div class="axis" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span></div><p class="caption">Accuracy difference, percentage points · dots: estimates; lines: 95% intervals</p></div>
+<p class="caption">100,000 whole-meeting resamples, seed 2026. Context contrasts use all 150 rebuilt cases. Estimates condition on this small ICSI speaker population.</p>
+</section>
+</body>
+</html>
