@@ -1,0 +1,1259 @@
+{
+  "judge_order": {
+    "changed": 33,
+    "changed_ids": [
+      "0",
+      "3",
+      "5",
+      "7",
+      "14",
+      "15",
+      "17",
+      "27",
+      "28",
+      "34",
+      "35",
+      "40",
+      "41",
+      "42",
+      "43",
+      "46",
+      "53",
+      "60",
+      "61",
+      "62",
+      "77",
+      "85",
+      "89",
+      "92",
+      "98",
+      "102",
+      "103",
+      "107",
+      "108",
+      "126",
+      "134",
+      "142",
+      "148"
+    ],
+    "total": 150
+  },
+  "objective_ties": {
+    "glm_jev/all": [],
+    "glm_jev/all_triple_rebuttal": [],
+    "glm_jev/contradiction_only": [],
+    "glm_jev/reasons": [],
+    "glm_jev/reasons_product_round": [],
+    "glm_jev/rr": [],
+    "glm_jev/similarity_only": [],
+    "haiku_haiku/all": [],
+    "haiku_haiku/contradiction_only": [],
+    "haiku_haiku/reasons": [],
+    "haiku_haiku/reasons_product_round": [],
+    "haiku_haiku/rr": [],
+    "haiku_haiku/similarity_only": [],
+    "haiku_jev/all": [],
+    "haiku_jev/all_triple_rebuttal": [],
+    "haiku_jev/contradiction_only": [],
+    "haiku_jev/reasons": [],
+    "haiku_jev/reasons_product_round": [],
+    "haiku_jev/rr": [],
+    "haiku_jev/similarity_only": [],
+    "terra_jev/all": [],
+    "terra_jev/all_triple_rebuttal": [],
+    "terra_jev/contradiction_only": [],
+    "terra_jev/reasons": [],
+    "terra_jev/reasons_product_round": [
+      "142"
+    ],
+    "terra_jev/rr": [],
+    "terra_jev/similarity_only": []
+  },
+  "paired_comparisons": {
+    "direct/jev minus baseline/always_A": {
+      "difference_pp": 14.666667,
+      "losses": 12,
+      "meeting_bootstrap_95_pp": [
+        6.710291,
+        21.985816
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 34
+    },
+    "direct/jev_ctx15 minus direct/jev": {
+      "difference_pp": 13.333333,
+      "losses": 10,
+      "meeting_bootstrap_95_pp": [
+        5.969902,
+        20.634921
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 30
+    },
+    "direct/jev_ctx60 minus direct/jev": {
+      "difference_pp": 18.0,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        9.941327,
+        25.694444
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 35
+    },
+    "ensemble/majority_ties_jev minus direct/glm": {
+      "difference_pp": 4.0,
+      "losses": 9,
+      "meeting_bootstrap_95_pp": [
+        -0.854701,
+        8.823529
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 15
+    },
+    "ensemble/majority_ties_jev minus direct/jev": {
+      "difference_pp": 6.0,
+      "losses": 6,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        11.321069
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 15
+    },
+    "ensemble/majority_ties_jev minus direct/sonnet": {
+      "difference_pp": 1.333333,
+      "losses": 12,
+      "meeting_bootstrap_95_pp": [
+        -6.015264,
+        8.241758
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "ensemble/majority_ties_jev minus direct/terra": {
+      "difference_pp": 4.666667,
+      "losses": 9,
+      "meeting_bootstrap_95_pp": [
+        -2.326036,
+        10.958904
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 16
+    },
+    "glm_jev/all minus direct/glm": {
+      "difference_pp": -4.0,
+      "losses": 24,
+      "meeting_bootstrap_95_pp": [
+        -10.897436,
+        2.985075
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 18
+    },
+    "glm_jev/all minus direct/jev": {
+      "difference_pp": -2.0,
+      "losses": 14,
+      "meeting_bootstrap_95_pp": [
+        -7.383172,
+        3.703704
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 11
+    },
+    "glm_jev/all minus glm_jev/reasons": {
+      "difference_pp": -2.0,
+      "losses": 7,
+      "meeting_bootstrap_95_pp": [
+        -6.25,
+        2.816901
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 4
+    },
+    "glm_jev/all minus glm_jev/rr": {
+      "difference_pp": -1.333333,
+      "losses": 2,
+      "meeting_bootstrap_95_pp": [
+        -3.191489,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "glm_jev/all_triple_rebuttal minus glm_jev/all": {
+      "difference_pp": 2.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        4.237417
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 3
+    },
+    "glm_jev/contradiction_only minus glm_jev/rr": {
+      "difference_pp": -1.333333,
+      "losses": 2,
+      "meeting_bootstrap_95_pp": [
+        -3.191489,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "glm_jev/reason_sum minus glm_jev/reasons": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "glm_jev/reasons minus direct/glm": {
+      "difference_pp": -2.0,
+      "losses": 21,
+      "meeting_bootstrap_95_pp": [
+        -9.79021,
+        4.895105
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 18
+    },
+    "glm_jev/reasons minus direct/jev": {
+      "difference_pp": 0.0,
+      "losses": 12,
+      "meeting_bootstrap_95_pp": [
+        -5.780466,
+        5.263158
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 12
+    },
+    "glm_jev/rr minus direct/glm": {
+      "difference_pp": -2.666667,
+      "losses": 22,
+      "meeting_bootstrap_95_pp": [
+        -9.722222,
+        4.242747
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 18
+    },
+    "glm_jev/rr minus direct/jev": {
+      "difference_pp": -0.666667,
+      "losses": 12,
+      "meeting_bootstrap_95_pp": [
+        -6.097561,
+        4.761905
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 11
+    },
+    "glm_jev/rr minus glm_jev/reasons": {
+      "difference_pp": -0.666667,
+      "losses": 6,
+      "meeting_bootstrap_95_pp": [
+        -4.321659,
+        3.571429
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 5
+    },
+    "glm_jev/similarity_only minus glm_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "glm_jev/strongest_survivor minus glm_jev/all": {
+      "difference_pp": -2.0,
+      "losses": 7,
+      "meeting_bootstrap_95_pp": [
+        -7.633588,
+        2.424612
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 4
+    },
+    "haiku_haiku/all minus direct/haiku": {
+      "difference_pp": 0.0,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        -4.43038,
+        4.929577
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 8
+    },
+    "haiku_haiku/all minus direct/jev": {
+      "difference_pp": -3.333333,
+      "losses": 28,
+      "meeting_bootstrap_95_pp": [
+        -11.905156,
+        5.714741
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 23
+    },
+    "haiku_haiku/all minus haiku_haiku/reasons": {
+      "difference_pp": -0.666667,
+      "losses": 7,
+      "meeting_bootstrap_95_pp": [
+        -4.635762,
+        4.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 6
+    },
+    "haiku_haiku/all minus haiku_haiku/rr": {
+      "difference_pp": 0.666667,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        2.205882
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 1
+    },
+    "haiku_haiku/contradiction_only minus haiku_haiku/rr": {
+      "difference_pp": 0.666667,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        2.205882
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 1
+    },
+    "haiku_haiku/reason_sum minus haiku_haiku/reasons": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_haiku/reasons minus direct/haiku": {
+      "difference_pp": 0.666667,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        -4.166667,
+        5.479452
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 9
+    },
+    "haiku_haiku/reasons minus direct/jev": {
+      "difference_pp": -2.666667,
+      "losses": 29,
+      "meeting_bootstrap_95_pp": [
+        -11.678832,
+        6.122762
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 25
+    },
+    "haiku_haiku/rr minus direct/haiku": {
+      "difference_pp": -0.666667,
+      "losses": 9,
+      "meeting_bootstrap_95_pp": [
+        -5.109489,
+        4.444798
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 8
+    },
+    "haiku_haiku/rr minus direct/jev": {
+      "difference_pp": -4.0,
+      "losses": 29,
+      "meeting_bootstrap_95_pp": [
+        -12.582897,
+        5.172414
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 23
+    },
+    "haiku_haiku/rr minus haiku_haiku/reasons": {
+      "difference_pp": -1.333333,
+      "losses": 7,
+      "meeting_bootstrap_95_pp": [
+        -5.0,
+        3.030303
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 5
+    },
+    "haiku_haiku/similarity_only minus haiku_haiku/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_haiku/strongest_survivor minus haiku_haiku/all": {
+      "difference_pp": -2.666667,
+      "losses": 11,
+      "meeting_bootstrap_95_pp": [
+        -6.976744,
+        1.360544
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 7
+    },
+    "haiku_jev/all minus direct/haiku": {
+      "difference_pp": 2.0,
+      "losses": 11,
+      "meeting_bootstrap_95_pp": [
+        -5.645161,
+        9.604791
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "haiku_jev/all minus direct/jev": {
+      "difference_pp": -1.333333,
+      "losses": 14,
+      "meeting_bootstrap_95_pp": [
+        -7.586207,
+        4.054447
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 12
+    },
+    "haiku_jev/all minus haiku_jev/reasons": {
+      "difference_pp": -3.333333,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        -8.130533,
+        0.675676
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 3
+    },
+    "haiku_jev/all minus haiku_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_jev/all_triple_rebuttal minus haiku_jev/all": {
+      "difference_pp": 2.0,
+      "losses": 1,
+      "meeting_bootstrap_95_pp": [
+        -0.735294,
+        5.228758
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 4
+    },
+    "haiku_jev/contradiction_only minus haiku_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_jev/reason_sum minus haiku_jev/reasons": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_jev/reasons minus direct/haiku": {
+      "difference_pp": 5.333333,
+      "losses": 12,
+      "meeting_bootstrap_95_pp": [
+        -1.935484,
+        12.637521
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 20
+    },
+    "haiku_jev/reasons minus direct/jev": {
+      "difference_pp": 2.0,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        -2.395813,
+        6.164384
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 11
+    },
+    "haiku_jev/rr minus direct/haiku": {
+      "difference_pp": 2.0,
+      "losses": 11,
+      "meeting_bootstrap_95_pp": [
+        -5.645161,
+        9.604791
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "haiku_jev/rr minus direct/jev": {
+      "difference_pp": -1.333333,
+      "losses": 14,
+      "meeting_bootstrap_95_pp": [
+        -7.586207,
+        4.054447
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 12
+    },
+    "haiku_jev/rr minus haiku_jev/reasons": {
+      "difference_pp": -3.333333,
+      "losses": 8,
+      "meeting_bootstrap_95_pp": [
+        -8.130533,
+        0.675676
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 3
+    },
+    "haiku_jev/similarity_only minus haiku_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "haiku_jev/strongest_survivor minus haiku_jev/all": {
+      "difference_pp": 3.333333,
+      "losses": 5,
+      "meeting_bootstrap_95_pp": [
+        -2.239227,
+        8.843537
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 10
+    },
+    "judge/A_first minus direct/glm": {
+      "difference_pp": -6.0,
+      "losses": 27,
+      "meeting_bootstrap_95_pp": [
+        -13.768116,
+        0.746269
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 18
+    },
+    "judge/A_first minus direct/jev": {
+      "difference_pp": -4.0,
+      "losses": 27,
+      "meeting_bootstrap_95_pp": [
+        -12.5,
+        4.3105
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 21
+    },
+    "judge/A_first minus judge/B_first": {
+      "difference_pp": -2.0,
+      "losses": 18,
+      "meeting_bootstrap_95_pp": [
+        -10.071942,
+        6.43322
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 15
+    },
+    "judge/B_first minus direct/glm": {
+      "difference_pp": -4.0,
+      "losses": 28,
+      "meeting_bootstrap_95_pp": [
+        -13.103448,
+        4.678853
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 22
+    },
+    "judge/B_first minus direct/jev": {
+      "difference_pp": -2.0,
+      "losses": 22,
+      "meeting_bootstrap_95_pp": [
+        -9.868421,
+        5.298139
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 19
+    },
+    "judge/disagreement_to_direct minus direct/glm": {
+      "difference_pp": 2.0,
+      "losses": 14,
+      "meeting_bootstrap_95_pp": [
+        -4.575163,
+        7.927334
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 17
+    },
+    "judge/disagreement_to_direct minus direct/jev": {
+      "difference_pp": 4.0,
+      "losses": 18,
+      "meeting_bootstrap_95_pp": [
+        -3.816915,
+        11.538462
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 24
+    },
+    "terra_jev/all minus direct/jev": {
+      "difference_pp": 0.666667,
+      "losses": 13,
+      "meeting_bootstrap_95_pp": [
+        -4.285714,
+        5.882353
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "terra_jev/all minus direct/terra": {
+      "difference_pp": -0.666667,
+      "losses": 15,
+      "meeting_bootstrap_95_pp": [
+        -7.94702,
+        6.521739
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "terra_jev/all minus terra_jev/reasons": {
+      "difference_pp": 5.333333,
+      "losses": 3,
+      "meeting_bootstrap_95_pp": [
+        1.219512,
+        10.9375
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 11
+    },
+    "terra_jev/all minus terra_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "terra_jev/all_triple_rebuttal minus terra_jev/all": {
+      "difference_pp": 0.0,
+      "losses": 1,
+      "meeting_bootstrap_95_pp": [
+        -1.935484,
+        1.93564
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 1
+    },
+    "terra_jev/contradiction_only minus terra_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "terra_jev/reason_sum minus terra_jev/reasons": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "terra_jev/reasons minus direct/jev": {
+      "difference_pp": -4.666667,
+      "losses": 14,
+      "meeting_bootstrap_95_pp": [
+        -10.25641,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 7
+    },
+    "terra_jev/reasons minus direct/terra": {
+      "difference_pp": -6.0,
+      "losses": 21,
+      "meeting_bootstrap_95_pp": [
+        -14.814815,
+        2.013423
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 12
+    },
+    "terra_jev/rr minus direct/jev": {
+      "difference_pp": 0.666667,
+      "losses": 13,
+      "meeting_bootstrap_95_pp": [
+        -4.285714,
+        5.882353
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "terra_jev/rr minus direct/terra": {
+      "difference_pp": -0.666667,
+      "losses": 15,
+      "meeting_bootstrap_95_pp": [
+        -7.94702,
+        6.521739
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 14
+    },
+    "terra_jev/rr minus terra_jev/reasons": {
+      "difference_pp": 5.333333,
+      "losses": 3,
+      "meeting_bootstrap_95_pp": [
+        1.219512,
+        10.9375
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 11
+    },
+    "terra_jev/similarity_only minus terra_jev/rr": {
+      "difference_pp": 0.0,
+      "losses": 0,
+      "meeting_bootstrap_95_pp": [
+        0.0,
+        0.0
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 0
+    },
+    "terra_jev/strongest_survivor minus terra_jev/all": {
+      "difference_pp": -2.0,
+      "losses": 10,
+      "meeting_bootstrap_95_pp": [
+        -7.142857,
+        2.666667
+      ],
+      "meetings": 45,
+      "resamples": 10000,
+      "seed": 2026,
+      "snippets": 150,
+      "wins": 7
+    }
+  },
+  "rows": {
+    "baseline/always_A": {
+      "accuracy_pp": 56.666667,
+      "correct": 85,
+      "n": 150
+    },
+    "direct/glm": {
+      "accuracy_pp": 73.333333,
+      "correct": 110,
+      "n": 150
+    },
+    "direct/haiku": {
+      "accuracy_pp": 68.0,
+      "correct": 102,
+      "n": 150
+    },
+    "direct/jev": {
+      "accuracy_pp": 71.333333,
+      "correct": 107,
+      "n": 150
+    },
+    "direct/jev_ctx15": {
+      "accuracy_pp": 84.666667,
+      "correct": 127,
+      "n": 150
+    },
+    "direct/jev_ctx60": {
+      "accuracy_pp": 89.333333,
+      "correct": 134,
+      "n": 150
+    },
+    "direct/sonnet": {
+      "accuracy_pp": 76.0,
+      "correct": 114,
+      "n": 150
+    },
+    "direct/terra": {
+      "accuracy_pp": 72.666667,
+      "correct": 109,
+      "n": 150
+    },
+    "ensemble/majority_ties_jev": {
+      "accuracy_pp": 77.333333,
+      "correct": 116,
+      "n": 150
+    },
+    "glm_jev/all": {
+      "accuracy_pp": 69.333333,
+      "correct": 104,
+      "n": 150
+    },
+    "glm_jev/all_triple_rebuttal": {
+      "accuracy_pp": 71.333333,
+      "correct": 107,
+      "n": 150
+    },
+    "glm_jev/contradiction_only": {
+      "accuracy_pp": 69.333333,
+      "correct": 104,
+      "n": 150
+    },
+    "glm_jev/reason_sum": {
+      "accuracy_pp": 71.333333,
+      "correct": 107,
+      "n": 150
+    },
+    "glm_jev/reasons": {
+      "accuracy_pp": 71.333333,
+      "correct": 107,
+      "n": 150
+    },
+    "glm_jev/reasons_product_round": {
+      "accuracy_pp": 71.333333,
+      "correct": 107,
+      "n": 150
+    },
+    "glm_jev/rr": {
+      "accuracy_pp": 70.666667,
+      "correct": 106,
+      "n": 150
+    },
+    "glm_jev/similarity_only": {
+      "accuracy_pp": 70.666667,
+      "correct": 106,
+      "n": 150
+    },
+    "glm_jev/strongest_survivor": {
+      "accuracy_pp": 67.333333,
+      "correct": 101,
+      "n": 150
+    },
+    "haiku_haiku/all": {
+      "accuracy_pp": 68.0,
+      "correct": 102,
+      "n": 150
+    },
+    "haiku_haiku/contradiction_only": {
+      "accuracy_pp": 68.0,
+      "correct": 102,
+      "n": 150
+    },
+    "haiku_haiku/reason_sum": {
+      "accuracy_pp": 68.666667,
+      "correct": 103,
+      "n": 150
+    },
+    "haiku_haiku/reasons": {
+      "accuracy_pp": 68.666667,
+      "correct": 103,
+      "n": 150
+    },
+    "haiku_haiku/reasons_product_round": {
+      "accuracy_pp": 68.666667,
+      "correct": 103,
+      "n": 150
+    },
+    "haiku_haiku/rr": {
+      "accuracy_pp": 67.333333,
+      "correct": 101,
+      "n": 150
+    },
+    "haiku_haiku/similarity_only": {
+      "accuracy_pp": 67.333333,
+      "correct": 101,
+      "n": 150
+    },
+    "haiku_haiku/strongest_survivor": {
+      "accuracy_pp": 65.333333,
+      "correct": 98,
+      "n": 150
+    },
+    "haiku_jev/all": {
+      "accuracy_pp": 70.0,
+      "correct": 105,
+      "n": 150
+    },
+    "haiku_jev/all_triple_rebuttal": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "haiku_jev/contradiction_only": {
+      "accuracy_pp": 70.0,
+      "correct": 105,
+      "n": 150
+    },
+    "haiku_jev/reason_sum": {
+      "accuracy_pp": 73.333333,
+      "correct": 110,
+      "n": 150
+    },
+    "haiku_jev/reasons": {
+      "accuracy_pp": 73.333333,
+      "correct": 110,
+      "n": 150
+    },
+    "haiku_jev/reasons_product_round": {
+      "accuracy_pp": 73.333333,
+      "correct": 110,
+      "n": 150
+    },
+    "haiku_jev/rr": {
+      "accuracy_pp": 70.0,
+      "correct": 105,
+      "n": 150
+    },
+    "haiku_jev/similarity_only": {
+      "accuracy_pp": 70.0,
+      "correct": 105,
+      "n": 150
+    },
+    "haiku_jev/strongest_survivor": {
+      "accuracy_pp": 73.333333,
+      "correct": 110,
+      "n": 150
+    },
+    "judge/A_first": {
+      "accuracy_pp": 67.333333,
+      "correct": 101,
+      "n": 150
+    },
+    "judge/B_first": {
+      "accuracy_pp": 69.333333,
+      "correct": 104,
+      "n": 150
+    },
+    "judge/disagreement_to_direct": {
+      "accuracy_pp": 75.333333,
+      "correct": 113,
+      "n": 150
+    },
+    "terra_jev/all": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "terra_jev/all_triple_rebuttal": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "terra_jev/contradiction_only": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "terra_jev/reason_sum": {
+      "accuracy_pp": 66.666667,
+      "correct": 100,
+      "n": 150
+    },
+    "terra_jev/reasons": {
+      "accuracy_pp": 66.666667,
+      "correct": 100,
+      "n": 150
+    },
+    "terra_jev/reasons_product_round": {
+      "accuracy_pp": 67.333333,
+      "correct": 101,
+      "n": 150
+    },
+    "terra_jev/rr": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "terra_jev/similarity_only": {
+      "accuracy_pp": 72.0,
+      "correct": 108,
+      "n": 150
+    },
+    "terra_jev/strongest_survivor": {
+      "accuracy_pp": 70.0,
+      "correct": 105,
+      "n": 150
+    }
+  },
+  "status": "retrospective exploratory; not preregistered; no equivalence test",
+  "terra_reason_quantization_sensitivity": {
+    "explanation": "The audit product-round approximation has a 112.8/112.8 tie (564 hundredths each) and chooses A:101. Literal historical exp(logs) changes two half-cent roundings, giving A112.6/B113.0 and B:100. The audit tie-only explanation does not hold for the literal implemented weights. Historical artifacts/assertions remain unchanged.",
+    "gold": "A",
+    "historical_CBC_prediction": "B",
+    "historical_correct": 100,
+    "id": "142",
+    "literal_exp_logs": {
+      "conditional_objectives": {
+        "A": 112.6,
+        "B": 113.0
+      },
+      "correct": 100,
+      "prediction": "B"
+    },
+    "product_round": {
+      "conditional_objectives": {
+        "A": 112.8,
+        "B": 112.8
+      },
+      "correct": 101,
+      "prediction": "A"
+    }
+  },
+  "triple_rebuttal_sensitivity": {
+    "glm_jev": {
+      "changed_ids": [
+        "35",
+        "60",
+        "109"
+      ],
+      "correct": 107
+    },
+    "haiku_jev": {
+      "changed_ids": [
+        "4",
+        "27",
+        "74",
+        "93",
+        "98"
+      ],
+      "correct": 108
+    },
+    "terra_jev": {
+      "changed_ids": [
+        "74",
+        "110"
+      ],
+      "correct": 108
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "agreement_counts": {
+    "FLD": 31,
+    "FMD": 34,
+    "MLD": 54,
+    "MMD": 56
+  },
+  "ami_license": "CC BY 4.0 in archive LICENCE.txt",
+  "annotated_minutes": 285.65,
+  "archive_internal_readme_title": "AMI Manual Annotations release 1.7",
+  "archive_version_note": "download filename is 1.6.2; internal README says release 1.7; pinned SHA256 identifies bytes",
+  "citation_links": [
+    "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/DOME_documentation.pdf",
+    "https://groups.inf.ed.ac.uk/ami/corpus/",
+    "https://groups.inf.ed.ac.uk/ami/download/"
+  ],
+  "dataset": "DOME M1 + AMI manual transcripts",
+  "documentation_discrepancy": "current linked M1 files have 58 windows; PDF describes 125; no missing release verified",
+  "documentation_windows": 125,
+  "downloaded_windows": 58,
+  "eligibility_drops": 0,
+  "eligibility_rule": "All four cameras must map to participants and existing word files; zero words is permitted silence",
+  "limitations": [
+    "Only five independent participant groups; pair/window counts are not independent sample sizes.",
+    "DOME raters used audio/video; text-only inputs may omit cues underlying gold ranks.",
+    "DOME standalone redistribution license remains unverified; raw labels and derived text stay ignored locally.",
+    "Role metadata is omitted from model inputs; words spoken in meetings remain unchanged."
+  ],
+  "local_export_sha256": {
+    "diagnostic_windows.jsonl": "68247a608e3e10cd20fd7f7e1befa64e503d60ffcc42724fc97f939feb838eae",
+    "dominance_pairs.jsonl": "986a4912364fc75fbb46c2fffa104c4d162cbe12b6bf049ea8a63faf8ef9444e",
+    "pair_inputs.jsonl": "69e0da728ab8ce2a41c79215a401a433e29df1b6883b05c04e39a471b52b3ce2",
+    "primary_windows.jsonl": "391e1d3f40122322238acfe824be743b9946310a55c7044adea3b061ab1b89ab",
+    "text_evaluable_pairs.jsonl": "84baa03744236271ee430e2046d84dba9695bcbb230e51d0660e791f23bc5f81"
+  },
+  "mapping_all_validated": true,
+  "meeting_count": 11,
+  "pair_label_counts": {
+    "A": 51,
+    "B": 51
+  },
+  "participant_count": 20,
+  "participant_disjoint": true,
+  "primary_pairs": 102,
+  "primary_windows": 34,
+  "purpose": "small benchmark/calibration candidate; no model training or validation performance established",
+  "schema_version": 1,
+  "secondary_subset_rule": "Predeclared lexical coverage: all four participants have at least one non-punctuation word in the window",
+  "session_group_count": 5,
+  "source_word_exclusions": {
+    "non_word_events": 2802
+  },
+  "sources": {
+    "ami": {
+      "actual_sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+      "filename": "ami_public_manual_1.6.2.zip",
+      "sha256": "b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/ami_public_manual_1.6.2.zip"
+    },
+    "flags": {
+      "actual_sha256": "1b596e64f5329da5376582478b5455161589419e68f93a4abf9c215f56315454",
+      "filename": "dome_dataset_M1.csv",
+      "sha256": "1b596e64f5329da5376582478b5455161589419e68f93a4abf9c215f56315454",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/dome_dataset_M1.csv"
+    },
+    "rankings": {
+      "actual_sha256": "32ad863958306e85f02fa96b6a0da73c3b9aa6f49f667415d85a23dad4b91c17",
+      "filename": "dome_annotations_M1.csv",
+      "sha256": "32ad863958306e85f02fa96b6a0da73c3b9aa6f49f667415d85a23dad4b91c17",
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusAnnotations/dome_annotations_M1.csv"
+    }
+  },
+  "split": {
+    "component_count": 5,
+    "components": [
+      [
+        "IS1000"
+      ],
+      [
+        "IS1008"
+      ],
+      [
+        "IS1006"
+      ],
+      [
+        "IS1001"
+      ],
+      [
+        "IS1003"
+      ]
+    ],
+    "group_to_split": {
+      "IS1000": "dev",
+      "IS1001": "train",
+      "IS1003": "train",
+      "IS1006": "train",
+      "IS1008": "test"
+    },
+    "rule": "sha256(sorted group IDs joined by |); first=dev, second=test, remainder=train",
+    "status": "ready"
+  },
+  "split_counts": {
+    "dev": {
+      "groups": 1,
+      "pairs": 12,
+      "primary_windows": 4,
+      "text_evaluable_pairs": 12,
+      "text_evaluable_windows": 4,
+      "windows": 5
+    },
+    "test": {
+      "groups": 1,
+      "pairs": 33,
+      "primary_windows": 11,
+      "text_evaluable_pairs": 24,
+      "text_evaluable_windows": 8,
+      "windows": 19
+    },
+    "train": {
+      "groups": 3,
+      "pairs": 57,
+      "primary_windows": 19,
+      "text_evaluable_pairs": 54,
+      "text_evaluable_windows": 18,
+      "windows": 34
+    }
+  },
+  "target": "multimodally human-perceived dominance; not professor identity, institutional role, or evidence-support validity",
+  "text_coverage_excluded_windows": 4,
+  "text_evaluable_pairs": 90,
+  "text_evaluable_windows": 30
+}

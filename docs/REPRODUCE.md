@@ -1,6 +1,6 @@
 # Reproducing this project
 
-There are three levels. Levels 1 and 2 are fully deterministic and need no API key. Level 3 re-collects model outputs and cannot be bit-for-bit reproducible, because it depends on hosted models.
+There are three levels. Levels 1 and 2 rebuild data and replay stored answers without an API key. Level 3 re-collects model outputs and cannot be bit-for-bit reproducible, because it depends on hosted models. Numerical replay does not recover undocumented historical collection settings.
 
 ## Requirements
 
@@ -16,7 +16,7 @@ pip install -r requirements.txt
 python3 scripts/reproduce.py
 ```
 
-It runs the eight steps below in order and stops at the first failure. On a laptop it takes a few minutes, most of it in the integer programs of step 5.
+It runs the twelve steps below in order and stops at the first failure. On a laptop it takes a few minutes, most of it in the integer programs.
 
 | Step | Command | What it proves | Expected last line |
 | --- | --- | --- | --- |
@@ -24,10 +24,16 @@ It runs the eight steps below in order and stops at the first failure. On a lapt
 | 2 | `build_dataset.py --check` | The committed dataset is regenerated exactly from the sources | `committed dataset reproduced exactly` |
 | 3 | `build_dataset.py` | Writes `work/rows.json`, `work/fixed_index.json`, `work/contexts.jsonl` | `wrote ... icsi_rebuilt_snippets.jsonl and work files ...` |
 | 4 | `convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | `wrote ... snippets.jsonl and ... rules.txt` |
-| 5 | `analyze.py --check` | Every table entry and paired test in the report is recomputed from `results/` | `check: 60 of 60 report values reproduced` |
-| 6 | `grounded_extension.py` | The grounded extension results | four result lines |
+| 5 | `analyze.py --check` | The main analyses are recomputed from `results/`; 60 selected values are asserted | `check: 60 of 60 report values reproduced` |
+| 6 | `grounded_extension.py` | The Terra/Haiku grounded extension results | six result lines |
 | 7 | `grounded_policy_search.py` | The 288-policy search with held-out selection | `chosen in ... splits` lines |
 | 8 | `data_differences.py` | The per-snippet differences in `data/released_vs_rebuilt.csv` and the report's appendix table | `151 released snippets; 150 in the rebuilt set; ...` |
+| 9 | `score_run.py --run glm_run --name glm-5.3` | The stored GLM direct, graph and grounded rows | `wrote results/glm_run/` |
+| 10 | `grounded_policy_search.py --run glm_run` | The policy search over GLM arguments | `chosen in ... splits` lines |
+| 11 | `qbaf.py` | The gradual-semantics variants and direct-answer vote | majority-vote result line |
+| 12 | `judge_run.py --run glm_run --name glm-5.3 --score` | The stored GLM judge answers and order agreement | order-agreement result line |
+
+Commands in this table run from `scripts/` inside the runner. For manual invocation from the repository root, prefix each with `python3 scripts/`.
 
 ## Level 1: the data, from public sources
 
@@ -50,20 +56,48 @@ The first three come from `kandicew/social-reasoning` at commit `fed11b69765b4a3
 
 `build_dataset.py` is described step by step in [DATA.md](DATA.md). It is a pure function of `meeting.csv` and the two archives: no randomness, no model, no network.
 
-## Level 2: every number, from the committed model outputs
+## Level 2: numerical replay from the committed model outputs
 
 ```bash
 python3 scripts/convert_released_cache.py
 python3 scripts/analyze.py --check
 python3 scripts/grounded_extension.py
 python3 scripts/grounded_policy_search.py
+python3 scripts/data_differences.py
+python3 scripts/score_run.py --run glm_run --name glm-5.3
+python3 scripts/grounded_policy_search.py --run glm_run
+python3 scripts/qbaf.py
+python3 scripts/judge_run.py --run glm_run --name glm-5.3 --score
 ```
 
-`analyze.py` reads the model answers in `results/` and recomputes the report's tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it compares 46 values with the ones printed in the report.
+`analyze.py` reads the model answers in `results/` and recomputes the original main tables, paired tests, bootstrap interval, Brier scores and per-professor accuracy, then writes `results/report_numbers.json`. With `--check` it asserts 60 selected values. The remaining runner steps recompute supplemental analyses, but do not assert every corresponding LaTeX value. The [audit replay](audits/cs-577-2026-11-16/reproduction-verification.json) passed all twelve steps and left all 369 tracked files byte-identical to the pinned checkout.
 
-Fixed seeds: the meeting-level bootstrap uses seed 2026 with 10,000 resamples, and the policy search uses seed 2026 with 500 splits. The integer programs are solved exactly, so the graph predictions do not depend on solver randomness.
+Fixed seeds: the original meeting-level bootstrap uses seed 2026 with 10,000 resamples, and the policy search uses seed 2026 with 500 splits. The historical weight calculation is `multiplier * round(exp(log(max(v,1e-6)) + log(max(g,1e-6))), 2)`, with multiplier 20 for reasons or 18 for rebuttals. At floating-point half-cent boundaries, `round(exp(sum(logs)), 2)` and `round(v*g, 2)` are not interchangeable.
+
+For Terra reasons-only ID 142, the literal historical computation gives A=112.6 and B=113.0, so B wins and the result is 100/150. The direct-product rounding sensitivity gives A=B=112.8 and 101/150 when ties go to A. The first audit's tie-only explanation used the latter approximation; it does not describe the historical implemented weights. The earlier saved evaluator's exact arithmetic is undocumented. The original tables retain 100, and the primary Jev-scored full graphs remain 108/105/104 correct.
 
 Three rows of the report's Table 1 are not recomputed here because they are results of [KrishMay05/nlp_research](https://github.com/KrishMay05/nlp_research): the grounded extension as proposed (69 of 151), the quote filter (64 of 151) and Gemma 4 zero-shot (66 of 151). That repository documents how to rerun them.
+
+The earlier logistic-regression range also lacks an input-to-output reproduction here. The released-data quote-filter result remains historical; the old arguments and annotations refer to that representation and are not a clean-data rerun.
+
+### Audit checks and separate post-audit evaluation
+
+The committed audit checks can be rerun without hosted models:
+
+```bash
+python3 docs/audits/cs-577-2026-11-16/statistics/verify_statistics.py .
+python3 docs/audits/cs-577-2026-11-16/implementation/checks.py .
+```
+
+The statistics check uses 100,000 whole-meeting bootstrap resamples (seed 2026). It verifies the unchanged-letter/gold attribution comparison: 63 to 90 correct on 128 snippets, 42 wins and 15 losses, gain 21.1 points and 95% interval +9.6 to +32.7. These intervals are conditional on the sampled meetings and four professors. See the [audit](audits/cs-577-2026-11-16/AUDIT.md) for the majority-mapping correction and graph restrictions.
+
+`scripts/post_audit_evaluation.py` is a separate evaluation of the saved answers, preserving the literal historical quantization and adding deterministic ties to A, conditional objectives, paired meeting intervals and prediction-level provenance in `results/post_audit/`. The separately named `reasons_product_round` sensitivity uses direct-product rounding. Run it from the repository root:
+
+```bash
+python3 scripts/post_audit_evaluation.py
+```
+
+Its values are separate from the historical tables and sixty assertions. Its manifest records the evaluation formulas and input hashes; unknown historical model versions remain unknown. No new hosted-model or clean-data quote-filter result follows from replaying stored outputs.
 
 ## Level 3: re-collecting the model outputs
 
@@ -77,8 +111,8 @@ python3 scripts/jev_collect.py --dry-run
 python3 scripts/jev_collect.py --arms 1,2,3,4
 ```
 
-- Every response we used reports model `jev-1.14.0`. Set `JEV_MODEL` to pin a version; the default is `jev-latest`.
-- All four arms together are about 3 million input tokens, well under one US dollar at the launch price.
+- The direct-arm responses record model `jev-1.14.0`. Set `JEV_MODEL` to request a version; the default is `jev-latest`. The exported GLM argument-score rows omit the resolved scorer version; the audit cannot recover it from those rows.
+- The historical four-arm run used about 3 million input tokens; current costs and version availability must be checked before collection.
 - Each request body is saved under `work/payloads/`.
 - The script overwrites nothing: it skips snippets already present in `results/jev_arm*.jsonl`. Move those files aside to collect from scratch.
 
@@ -104,7 +138,7 @@ Snippets were shuffled with seed 577 before batching. Each output was checked fo
 
 ### The Terra run (the original pipeline, call by call, through the Codex command line)
 
-`scripts/wu_codex_pipeline.py` produced `results/wu_graph_terra/`. It needs the Codex CLI signed in with a ChatGPT account and `TYPESAFE_API_KEY`. Put it in a folder next to `contexts.jsonl` (from `work/`) and run:
+`scripts/wu_codex_pipeline.py` is the committed Terra collection script. It needs the Codex CLI signed in with a ChatGPT account and `TYPESAFE_API_KEY`. The historical invocation placed it next to `contexts.jsonl` (from `work/`):
 
 ```bash
 export TYPESAFE_API_KEY=...
@@ -112,7 +146,9 @@ python3 wu_codex_pipeline.py --limit 2      # probe
 python3 wu_codex_pipeline.py                # stages gen, zero, jev
 ```
 
-Each prompt is sent as its own `codex exec` session, ephemeral, read-only and with tools disabled, in an empty directory, using the prompt templates downloaded from the pinned commit of the original repository. Our run used model `gpt-6.1-terra` with no reasoning effort, 5,546 requests, and `jev-1.14.0` for scoring. The settings and hashes of that run are in `results/wu_graph_terra/manifest.json`, `transport_settings.json` and `provenance.json`. Hosted models are not deterministic, so a rerun will not give identical text.
+Each prompt is sent as its own `codex exec` session, ephemeral, read-only and with tools disabled, in an empty directory. The saved settings report model `gpt-6.1-terra` with no reasoning effort, 5,546 requests, and `jev-1.14.0` for scoring. The settings and hashes are in `results/wu_graph_terra/manifest.json`, `transport_settings.json` and `provenance.json`.
+
+At audit time the template loader required a historical `work/speaker-audit/upstream` tree rather than downloading the templates. The archived executed-script hash differs from the committed script, and the original `evaluation.json` referenced by `codex_results.txt` is absent. Repairs for future collection do not recover those missing historical artifacts. The manifest also gives a triple-product rebuttal formula, while the primary evaluation uses countering x grounding; the alternative changes IDs 74 and 110 while preserving 108 correct. Treat any new collection and evaluation as a separately manifested run, and preserve the executed scripts. Hosted models will not reproduce identical text.
 
 ### The same pipeline against any OpenAI-compatible API
 

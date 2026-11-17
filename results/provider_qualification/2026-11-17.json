@@ -1,0 +1,43 @@
+{
+  "provider": "nous",
+  "base_url": "https://inference-api.nousresearch.com/v1",
+  "requested_model": "google/gemma-4-26b-a4b-it",
+  "catalog_access": true,
+  "generation_access": true,
+  "requests_attempted": 1,
+  "scope": "synthetic qualification only; not a study outcome",
+  "http_status": 200,
+  "served_model": "google/gemma-4-26b-a4b-it",
+  "usage": {
+    "prompt_tokens": 83,
+    "completion_tokens": 33,
+    "total_tokens": 116,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    },
+    "cost": 1.737e-05,
+    "cost_details": {
+      "source": "openrouter_list",
+      "floor_applied": false,
+      "rate_source": "openrouter_catalog"
+    }
+  },
+  "quote_schema_valid": true,
+  "synthetic_response": {
+    "quote": "Let us start with the experiment plan.",
+    "evidence_speaker": "A",
+    "supports": true,
+    "attribution_correct": true
+  },
+  "date": "2026-11-17",
+  "record_type": "synthetic_provider_qualification",
+  "interpretation": "Generation and JSON object availability verified on a synthetic prompt; this is not human validation or an experiment result."
+}

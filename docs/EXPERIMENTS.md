@@ -1,6 +1,6 @@
 # Experiments
 
-All accuracy numbers are for the task "which of A and B is the professor". Paired tests are exact McNemar tests; intervals for differences come from a bootstrap that resamples whole meetings (seed 2026).
+Accuracy is evaluated against institutional professor/non-professor labels, a proxy for power rather than independent behavioral judgments. Jev is asked about professor status; the direct LLM prompts ask about power, so these prompts are not fully harmonized. Paired tests are exact McNemar tests; their independence assumption does not account for snippets sharing a meeting. Whole-meeting bootstrap intervals (seed 2026) address meeting clustering conditional on these four professors, not generalization to new professors.
 
 ## Inputs
 
@@ -26,16 +26,20 @@ All accuracy numbers are for the task "which of A and B is the professor". Paire
 | Jev scores for Claude arguments | Rebuilt same-span text. Validity and grounding for each Claude-written argument, whether each rebuttal counters its reason, similarity and contradiction for reason pairs (168 questions per snippet) | `results/wu_graph_claude/jev_scores.jsonl` |
 | Claude zero-shot | "Which of A or B has more power", with a stated probability, by Haiku and by Sonnet subagents | `results/wu_graph_claude/zero_haiku/`, `zero_sonnet/` |
 
-Jev is TypeSafe AI's decision model (`jev-1.14.0` in every response). Every question's wording is in one block at the top of `scripts/jev_collect.py`. The instructions given to the Claude subagents are the three `INSTRUCTIONS_*.md` files in `results/wu_graph_claude/`; none of the subagents had access to labels.
+Jev is TypeSafe AI's decision model. The direct-arm outputs and the Terra/Haiku argument score files record `jev-1.14.0`; all 150 exported GLM score rows omit the resolved scorer version, so it is unknown from those rows. Every direct-arm question's wording is in one block at the top of `scripts/jev_collect.py`. The instructions given to the Claude subagents are the three `INSTRUCTIONS_*.md` files in `results/wu_graph_claude/`; none of the subagents had access to labels.
 
 ## Methods
 
 - **Direct question.** Predict the speaker with the higher Jev probability for "Is speaker X the professor?".
-- **XOR factor graph.** The factor graph of Wu et al.: their rule file, reason weight 20, rebuttal weight 18, solved exactly as an integer program (PuLP with CBC). The implementation is `quote_power.inference.xor` in KrishMay05/nlp_research.
+- **XOR factor graph.** The factor graph of Wu et al.: their rule file, reason weight 20, rebuttal weight 18, solved exactly as an integer program (PuLP with CBC) in `scripts/factor_graph.py`, adapted from `quote_power.inference.xor` in KrishMay05/nlp_research.
 - **Typed-statement factor graph.** The same graph with the generated text replaced by 12 fixed yes/no statements, three per aspect. Jev's probability for a statement about X weights a reason for X; the same statement about the other speaker is its rebuttal. Relation variables are unused.
 - **Grounded extension.** Dung's grounded labelling over reasons and rebuttals. See the section below. On the rebuilt snippets it is `scripts/grounded_extension.py`; the earlier runs on the released snippets are in `scripts/exploratory/`.
-- **Wu graph on the rebuilt snippets.** The XOR factor graph over generated arguments, in the three variants of the paper: reasons only, reasons plus rebuttals, all relations. Three combinations are reported: Terra arguments with Jev scores, Haiku arguments with Jev scores, and Haiku arguments with Haiku scores. A reason's weight uses P(valid) x P(grounded). A rebuttal's weight uses P(counters its reason) x P(grounded) under Jev, and P(valid) x P(grounded) under Haiku.
+- **Wu graph on the rebuilt snippets.** The XOR factor graph over generated arguments, in the three variants of the paper: reasons only, reasons plus rebuttals, all relations. Four combinations are reported: Terra, GLM or Haiku arguments with Jev scores, and Haiku arguments with Haiku scores. A reason's weight uses P(valid) x P(grounded). A rebuttal's weight uses P(counters its reason) x P(grounded) under Jev, and P(valid) x P(grounded) under Haiku. The literal computation is `round(exp(log(max(v,1e-6)) + log(max(g,1e-6))), 2)`, then multiplication by 20 or 18; this is not interchangeable with `round(v*g, 2)` at floating-point half-cent boundaries. Released-arm Jev rescoring instead uses rebuttal validity x countering; it is a different scoring condition.
 - **Word-count rules.** "Whoever says more words" and "whoever has longer turns" is the professor.
+
+The inherited cross-speaker similarity factors are redundant: speaker XOR and OROUT imply `reason_A + reason_B <= 1`, so `reason_A + reason_B + similarity <= 2` is automatically satisfied even in the LP relaxation. Each nonnegative similarity variable contributes the same constant to either speaker's objective. A similarity ablation cannot test whether useful similarity reasoning helps. Within-speaker contradictions remain active: they change the GLM result from 106 correct with rebuttals to 104 with all relations. Reasons-only inference reduces to comparing sums of quantized reason strengths, subject to ties.
+
+The evaluated implementations show no demonstrated reliable improvement over direct questioning. They do not establish equivalence: Haiku/Jev reasons-only and preference-grounded each score 73.3%, versus 68.0% for direct Haiku, and Terra rebuttals add eight correct cases. These point estimates and the small sample limit the negative conclusion.
 
 ## Grounded extension: method
 
@@ -57,6 +61,8 @@ The preference relation is preference-based argumentation in the sense of Amgoud
 **Decision.** Predict the speaker with more IN reasons. Ties go to the speaker with the larger sum of reason strengths, then to A. Both tie rules come from the proposal.
 
 **Why the proposed relation is degenerate.** No argument attacks a rebuttal, so every rebuttal is IN and every reason is OUT. Even if weak rebuttals are removed, a reason for A and a reason for B that attack each other form a two-cycle, which the grounded labelling leaves UNDECIDED. Either way no reason is IN, and the decision is made entirely by the tie-break, that is, by the sum of reason strengths. The preference relation breaks both problems because at most one direction of each attack succeeds.
+
+**Preference relation reduction.** In all 450 Jev-scored Terra/Haiku/GLM cases, grounded prediction equals choosing the side of the strongest reason whose rebuttal does not defeat it. A survivor exists in every stored case. This preserves the reported grounded results but limits what they establish about richer argument interaction; see the [independent implementation check](audits/cs-577-2026-11-16/implementation/verification.json).
 
 **Results on the 150 rebuilt snippets (same span).**
 
@@ -92,6 +98,8 @@ To avoid choosing a policy on the snippets it is scored on, meetings are split a
 
 The selected policy is ahead of the direct question in 133 of 500 splits (mean difference -1.8 points, middle 95% of splits -11.2 to +3.8). On all 150 snippets the policies range from 82 to 111 correct (median 99) against 107 for the direct question; the 111 is the optimistic, same-data maximum. Output: `results/wu_graph_claude/grounded_policy_search.json`.
 
+Development and test meetings are disjoint within each split. The 500 splits overlap and reuse an already explored dataset; they are internal validation of this policy family, not 500 independent experiments or fresh confirmation of the earlier choices.
+
 ## Scripts
 
 | Script | Purpose | Needs |
@@ -101,7 +109,7 @@ The selected policy is ahead of the direct question in 133 of 500 splits (mean d
 | `scripts/build_dataset.py` | Builds the dataset and the work files (`rows.json`, `fixed_index.json`, `contexts.jsonl`) | standard library |
 | `scripts/convert_released_cache.py` | Converts the released argument cache to `work/snippets.jsonl` | numpy |
 | `scripts/factor_graph.py` | The XOR factor graph as an exact integer program | PuLP |
-| `scripts/analyze.py` | Recomputes every table, paired test, interval and calibration number in the report; `--check` compares with the report | numpy, PuLP |
+| `scripts/analyze.py` | Recomputes the original main analyses; `--check` asserts 60 selected values | numpy, PuLP |
 | `scripts/grounded_extension.py` | Dung's grounded extension over the Claude arguments, with the proposed and preference relations | standard library |
 | `scripts/grounded_policy_search.py` | Search over 288 grounded policies with development and test splits by meeting | standard library |
 | `scripts/data_differences.py` | Writes `data/released_vs_rebuilt.csv` and the report's appendix table: every released snippet against the rebuilt set | standard library |
@@ -117,10 +125,13 @@ Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.m
 
 - The released file has no development split, and the runs on it were exploratory.
 - The questions used on the rebuilt snippets were fixed before that data was built, and each run was made once.
-- Only Jev, GPT-6.1 Terra and Claude models were run on the rebuilt snippets. GPT-3.5, Gemma and a human study were not.
-- The Terra run is call by call but its scores come from Jev, since the Codex command line does not expose token probabilities. Codex's own evaluation of that run (`results/wu_graph_terra/codex_results.txt`) reports 101 correct for the reasons-only graph where `analyze.py` gets 100; the other variants agree.
+- Jev, GPT-6.1 Terra, GLM-5.3 and Claude models were run on the rebuilt snippets. GPT-3.5, Gemma, the quote filter and a human study were not rerun there. The released-data quote-filter result remains a historical result on the malformed representation.
+- The Terra run is call by call but its scores come from Jev, since the Codex command line does not expose token probabilities. Codex's earlier evaluation (`results/wu_graph_terra/codex_results.txt`) reports 101 correct for reasons-only where `analyze.py` gets 100. For ID 142, the literal historical computation gives objectives A=112.6 and B=113.0, selecting B; direct-product rounding gives A=B=112.8 and selects A under an A tie policy. Thus quantization sensitivity, not a historical objective tie, explains how these counts can differ; the earlier evaluator's exact arithmetic is undocumented. The historical tables retain 100. The three primary Jev-scored full graphs remain 108/105/104 correct.
+- Terra's collection manifest describes rebuttal validity x grounding x countering, while the primary evaluation uses countering x grounding. The alternative formula changes predictions on IDs 74 and 110 while preserving 108 correct. The archived collection-script hash differs from the committed script, and at audit time the loader required a historical template path. Stored-answer replay and repairs to future collection cannot reconstruct the missing historical artifacts.
 - The Haiku run is not call by call: each snippet's arguments were written in one pass, and the Haiku scores are stated probabilities with about 15 distinct values.
-- Four professors appear in the 150 snippets, and one of them in 110.
+- Four professors appear in 110, 23, 15 and 2 snippets. Added context also adds third-party speech and possible role cues, so these results do not isolate a context mechanism or establish new-speaker performance.
+
+The separate `scripts/post_audit_evaluation.py` analysis writes to `results/post_audit/`, preserving the literal historical quantization and recording conditional objectives, deterministic ties to A and prediction-level provenance. The `reasons_product_round` sensitivity explicitly uses direct-product rounding. It does not replace the historical tables. Its outputs and rerun command are described in [REPRODUCE.md](REPRODUCE.md).
 
 ## Robustness checks
 
@@ -152,13 +163,13 @@ came back empty and was scored as it was.
 `scripts/qbaf.py` builds a quantitative bipolar argumentation framework per snippet from the stored arguments and Jev
 scores, in the style of ArgLLM (Freedman et al., AAAI 2025), and evaluates the claim with DF-QuAD and Quadratic Energy
 semantics, flat or grouped by aspect, with a prior of 0.5 or the direct Jev answer. All 8 variants times 3 argument sets
-are reported in `results/qbaf_results.json`; none is selected on the test set. Range: 68.7% to 74.0%, none different
-from the direct Jev question (71.3%) by the paired test. Reference without arguments: a majority vote of the GLM, Terra,
-Sonnet and Jev direct answers scores 77.3% (15 wins to 6 losses against Jev alone, p=0.078). Not yet in the report.
+are reported in `results/qbaf_results.json`; none is selected on the test set. Range: 68.7% to 74.0%; no paired comparison
+with the direct Jev question (71.3%) is significant. This does not establish equivalence. Reference without arguments: a majority vote of the GLM, Terra,
+Sonnet and Jev direct answers scores 77.3% (15 wins to 6 losses against Jev alone, p=0.078).
 
 ## Debate with a judge (GLM-5.3), 2026-11-13
 
 `scripts/judge_run.py` (`bash scripts/run_glm.sh judge`): GLM-5.3 reads the conversation and its own 12 reasons per
 side with their rebuttals, then answers A or B; each snippet is judged in both orders. Answers are in
 `results/glm_run/judge.jsonl`. A's case first 67.3%, B's case first 69.3%, against 73.3% asked directly; same answer in
-both orders for 117 of 150 (86 correct); the judge answers A in 215 of 300 judgments.
+both orders for 117 of 150 (86 correct), meaning predictions change on 33/150 snippets (22%); the judge answers A in 215 of 300 judgments. The three-correct-answer aggregate difference masks that decision instability. With one call per order, this cannot distinguish a causal order effect from generation variability; same-order repeated calls are needed. This static self-judging protocol does not cover iterative debate generally.

@@ -1,0 +1,17 @@
+{
+  "status": "preserved initial exploratory pilot",
+  "accepted_snippets": [
+    "112"
+  ],
+  "failed_snippet": "4",
+  "not_attempted": [
+    "54",
+    "56"
+  ],
+  "known_reported_cost_usd": 0.00209833,
+  "cost_is_lower_bound": true,
+  "reason": "Initial implementation omitted invalid-response usage; failed response was not retained and its billed cost is unknown. No value is fabricated. Subsequent collector accounts before validation and quarantines failures.",
+  "independent_human_validation": false,
+  "confirmation": false,
+  "active_direction": "External validated dataset requested; no further manual-labeling requirement."
+}

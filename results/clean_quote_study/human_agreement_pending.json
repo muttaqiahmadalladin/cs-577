@@ -1,0 +1,87 @@
+{
+  "n": 96,
+  "first_complete": 0,
+  "second_complete": 0,
+  "ready_for_human_conclusion": false,
+  "fields": {
+    "quote_present": {
+      "complete_pairs": 0,
+      "missing_pairs": 96,
+      "uncertain_pairs": 0,
+      "binary_pairs": 0,
+      "agreement_three_value": null,
+      "agreement_binary": null,
+      "cohen_kappa_three_value": null,
+      "disagreements": []
+    },
+    "attribution_correct": {
+      "complete_pairs": 0,
+      "missing_pairs": 96,
+      "uncertain_pairs": 0,
+      "binary_pairs": 0,
+      "agreement_three_value": null,
+      "agreement_binary": null,
+      "cohen_kappa_three_value": null,
+      "disagreements": []
+    },
+    "claim_supported": {
+      "complete_pairs": 0,
+      "missing_pairs": 96,
+      "uncertain_pairs": 0,
+      "binary_pairs": 0,
+      "agreement_three_value": null,
+      "agreement_binary": null,
+      "cohen_kappa_three_value": null,
+      "disagreements": []
+    },
+    "rebuttal_answers_reason": {
+      "complete_pairs": 0,
+      "missing_pairs": 48,
+      "uncertain_pairs": 0,
+      "binary_pairs": 0,
+      "agreement_three_value": null,
+      "agreement_binary": null,
+      "cohen_kappa_three_value": null,
+      "disagreements": []
+    },
+    "should_keep": {
+      "complete_pairs": 0,
+      "missing_pairs": 96,
+      "uncertain_pairs": 0,
+      "binary_pairs": 0,
+      "agreement_three_value": null,
+      "agreement_binary": null,
+      "cohen_kappa_three_value": null,
+      "disagreements": []
+    }
+  },
+  "independence": "distinct self-attested human IDs; organizer must verify actual independent people",
+  "uncertainty_policy": "uncertain is separate from binary disagreement and never adjudicated automatically",
+  "checker_coverage": {
+    "predictions_available": 48,
+    "sample_cases_with_prediction": 1,
+    "sample_cases_without_prediction": 95,
+    "sample_total": 96
+  },
+  "first_checker_errors": {
+    "compared": 0,
+    "human_keep": 0,
+    "human_reject": 0,
+    "false_rejections": 0,
+    "false_acceptances": 0,
+    "human_uncertain": 0
+  },
+  "second_checker_errors": {
+    "compared": 0,
+    "human_keep": 0,
+    "human_reject": 0,
+    "false_rejections": 0,
+    "false_acceptances": 0,
+    "human_uncertain": 0
+  },
+  "input_hashes": {
+    "first": "e045d9c8d67616cfda384a68aed15082671cf4b52acf7d173fbbfc1b021710f5",
+    "second": "108371157d454c789262fea99dc4a230dd120f23d9fc4f2ad2e51304943a2264",
+    "predictions": "ae5a2bec1dc2808bffb04f38ff3765204c6dcb8df1d1876a32f442144d6206da"
+  }
+}

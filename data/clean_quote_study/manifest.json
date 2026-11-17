@@ -1,0 +1,64 @@
+{
+  "study": "clean-quote-study-v1",
+  "status": "retrospective exploratory development; not prospective confirmation",
+  "seed": "clean-quote-study-v1-2026-11-17",
+  "n_snippets": 150,
+  "n_arguments": 7200,
+  "n_sample": 96,
+  "strata": "4 aspects x 2 kinds x 2 intended sides; 6 each for default96",
+  "collection_model": "gpt-6.1-terra",
+  "scorer_model": "jev-1.14.0",
+  "collection_fingerprint": "4a6076a447283a3503235bdd0c9d2fa46dfc13bc2cffafe8ad7ec3674e4b4980",
+  "inputs": {
+    "transcripts": {
+      "path": "data/icsi_rebuilt_snippets.jsonl",
+      "sha256": "81f864522d0b7cdd398149084706c45b4f4729a2e5feb24a41cbf6016763e7f3"
+    },
+    "arguments": {
+      "path": "results/wu_graph_terra/arguments.jsonl",
+      "sha256": "c6c379aeb5356acf9ecd1ea2962a2df85910f71eeeb33628f8857ce2ba2dbc83"
+    },
+    "scores": {
+      "path": "results/wu_graph_terra/jev_scores.jsonl",
+      "sha256": "01fda041881199d28281bcff43d1691dff930f76e70f2e7d941bbbd18a5eb9e9"
+    },
+    "collection_manifest": {
+      "path": "results/wu_graph_terra/manifest.json",
+      "sha256": "80ea6f967b2f3ff10d467032d175a360ede77e865acd1f346b104adfbd9e721d"
+    },
+    "collection_provenance": {
+      "path": "results/wu_graph_terra/provenance.json",
+      "sha256": "a5f7fa8062af3fadaa509f95a723254597a1f5de6471f65cc1cf854b4fd2d4ab"
+    },
+    "contexts": {
+      "path": "work/contexts.jsonl",
+      "sha256": "884dae5421ff4ed995c9bbc451b8058772e3c9dcf3b6a9e08e57683a778dece6"
+    },
+    "fixed_index": {
+      "path": "work/fixed_index.json",
+      "sha256": "d5b0429c9b96c1555500cae0a7b82b079749230bd89c82ddd7ad7c7af60d18bb"
+    },
+    "rules": {
+      "path": "sources/rules.txt",
+      "sha256": "5a88f4a5298fcd1fc8d30736bdcb2fba30cb47cc0bafcb7f68c9d12aea3addde"
+    }
+  },
+  "policy": {
+    "status": "retrospective exploratory development; not prospective confirmation",
+    "bank": "Terra clean same-span bank selected before filter evaluation",
+    "primary_rule": "speaker-bound verbatim contiguous quote AND claim support AND correct attribution; rebuttals also answer their paired reason",
+    "uncertainty": "uncertain in required quote/attribution/support (and rebuttal-answer) fields is rejected; holistic should_keep is an independent audit label, not a filter component; report both separately; no automatic adjudication",
+    "selection": "do not select thresholds, policies or checker capacity by final role-label accuracy",
+    "tie": "A when conditional objectives differ by at most 1e-9 objective units; shared post-audit evaluator",
+    "human_gate": "two independent human annotators; model/proxy judgments cannot satisfy this gate",
+    "confirmation_gate": "independent human evidence validation and genuinely fresh independently labeled participants/meetings plus a locked meaningful effect and precision target"
+  },
+  "blinding": "worksheet exports omit gold, professor field, participant IDs, model scores/predictions, model identities and audit notes; claim and unredacted transcript remain necessary evidence",
+  "annotation_status": "blank independent human worksheets; no evidence judgments fabricated",
+  "diagnostic_requests": 224,
+  "private_label_crosswalk": "work/clean_quote_study/private_answer_key.json (gitignored; never commit or supply to annotators)",
+  "fresh_meeting_candidates": 16,
+  "speaker_disjoint_candidates": 0,
+  "script_sha256": "0acbdf18c1a28010d8edbd2723393f2c4a38d5f69bcf9f136702a2069bf0ecd8",
+  "active_direction": "User requests already validated external dataset; manual worksheets retained as optional fallback only"
+}

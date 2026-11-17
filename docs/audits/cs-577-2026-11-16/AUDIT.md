@@ -4,6 +4,8 @@ Date: 2026-11-16. Repository: [muttaqiahmadalladin/cs-577](https://github.com/mu
 
 ## Verdict
 
+**Correction, 2026-11-17:** Exact implementation work supersedes the first audit's tie-only explanation of Terra ID142. Historical exp/log quantization gives different A/B objectives; direct-product rounding creates the tie. Section7 below and the [post-audit evaluation](../../research-followup/EVALUATION.md) contain the corrected finding. Original individual reviews and discussion records remain archived unchanged.
+
 **The released-data attribution defect and the improvement on corpus-rebuilt snippets survive this audit. The broader conclusions about argumentation need narrower wording and better controls.** We found a concrete error in the explanation of an alternative speaker mapping, inherited graph components that cannot test their advertised mechanism, and gaps in evaluation provenance. We found no critical arithmetic failure in the principal reported results.
 
 Three agents independently reviewed methodology/data, implementation, and statistics using separate contexts. After finishing their reports, they read one another's work, exchanged direct challenges, and revised their judgments. These are three AI reviews; they provide complementary scrutiny rather than independent human validation. First-pass reports remain unchanged so the changes of position are inspectable. Final severities below supersede their initial ratings.
@@ -68,9 +70,9 @@ The Terra collection script also depends on an undocumented historical template 
 
 Evidence: [manifest](https://github.com/muttaqiahmadalladin/cs-577/blob/2e0af7fe7a1dd2be01503c9fa62e7ebdf9a7deaa/results/wu_graph_terra/manifest.json), [current formula](https://github.com/muttaqiahmadalladin/cs-577/blob/2e0af7fe7a1dd2be01503c9fa62e7ebdf9a7deaa/scripts/analyze.py#L178), [collection path](https://github.com/muttaqiahmadalladin/cs-577/blob/2e0af7fe7a1dd2be01503c9fa62e7ebdf9a7deaa/scripts/wu_codex_pipeline.py#L327).
 
-### 7. Low: one tied ablation and the attribution contrast need explicit handling
+### 7. Low: quantization sensitivity and the attribution contrast need explicit handling
 
-Terra reasons-only ID **142** has equal quantized A/B objectives. CBC chooses B in the current run; an A tie policy produces the historical 101 rather than 100 correct. A comparison of the selected binary power variables does not specify a tie policy between alternative optimal solutions. Set a deterministic policy and archive the objectives. No speaker-level ties were found in the three principal Jev-scored full graphs; their 108/105/104 counts survive.
+The first audit's direct-product approximation gave Terra reasons-only ID **142** equal A/B objectives of112.8. Reproducing the actual historical `round(exp(log(v)+log(g)),2)` path instead gives **A112.6/B113.0**, selects B, and preserves100 correct. Direct-product rounding gives101 under ties-to-A. Floating-point half-cent boundaries make these operations noninterchangeable. This identifies a route to the100/101 discrepancy; the earlier evaluator's exact arithmetic remains undocumented. The claim that the historical implementation necessarily faced a tie is withdrawn. The separate post-audit evaluation declares both arithmetic and tie policy and verifies all450 primary full-graph predictions against historical CBC; their108/105/104 counts survive.
 
 The all-150 released/rebuilt contrast also recodes eight gold letters and reassigns letters in 22 examples. Describe it as combined reconstruction. Lead the cleaner attribution claim with the **128 cases preserving letters and gold**. Their improvement survives strongly; gold recoding does not explain it away. Request co-batching differs between conditions, whose possible effect is unmeasured.
 

@@ -27,6 +27,17 @@ def load(d, stored=None):
     return {r["id"]: r for r in jsonl(stored)} if stored and stored.exists() else {}
 
 
+def export_jev_record(snippet_id, record):
+    """Keep observed scorer provenance; never infer an absent model version."""
+    if record.get("id") != snippet_id:
+        raise ValueError("Jev record ID does not match its snippet")
+    result = dict(id=snippet_id, answers=record["answers"])
+    for key in ("model", "usage", "run_fingerprint", "requested_model", "request_sha256"):
+        if key in record:
+            result[key] = record[key]
+    return result
+
+
 def graph_rows(J, mode, own=None):
     """Same layout as analyze.py. Jev scores unless `own` (the model's own yes/no scores from the llm stage) is given."""
     args, rels = [], []
@@ -80,7 +91,10 @@ def main():
             with open(out / f"zero_shot{cond}.jsonl", "w") as f:
                 for i in all_ids:
                     if i in Z: f.write(json.dumps(Z[i]) + "\n")
-    G, J, OWN = load(run / "gen", out / "arguments.jsonl"), {i: d["answers"] for i, d in load(run / "jev", out / "jev_scores.jsonl").items()}, {i: d["aspects"] for i, d in load(run / "llm", out / "own_scores.jsonl").items()}
+    G = load(run / "gen", out / "arguments.jsonl")
+    jev_records = load(run / "jev", out / "jev_scores.jsonl")
+    J = {i: d["answers"] for i, d in jev_records.items()}
+    OWN = {i: d["aspects"] for i, d in load(run / "llm", out / "own_scores.jsonl").items()}
     if J:
         for mode, nm in (("reasons", "reasons only"), ("rr", "reasons + rebuttals"), ("all", "all relations")):
             row(f"Wu graph, {nm} (Jev scores)", {i: xor(*graph_rows(J[i], mode), rules) for i in J}, all_ids)
@@ -92,7 +106,7 @@ def main():
     if OWN:
         for mode, nm in (("reasons", "reasons only"), ("rr", "reasons + rebuttals"), ("all", "all relations")):
             row(f"Wu graph, {nm} ({a.name} scores)", {i: xor(*graph_rows(None, mode, OWN[i]), rules) for i in OWN}, all_ids)
-    for name, src in (("arguments", G), ("jev_scores", {i: dict(id=i, answers=v) for i, v in J.items()}), ("own_scores", {i: dict(id=i, aspects=v) for i, v in OWN.items()})):
+    for name, src in (("arguments", G), ("jev_scores", {i: export_jev_record(i, d) for i, d in jev_records.items()}), ("own_scores", {i: dict(id=i, aspects=v) for i, v in OWN.items()})):
         if src and run.exists():
             with open(out / f"{name}.jsonl", "w") as f:
                 for i in all_ids:

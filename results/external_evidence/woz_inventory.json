@@ -1,0 +1,29 @@
+{
+  "dataset": "MISeD WOZ",
+  "source_commit": "870d1aaf1063193d508e0224b86e011f921fd262",
+  "source_url": "https://raw.githubusercontent.com/google-research-datasets/MISeD/870d1aaf1063193d508e0224b86e011f921fd262/woz/woz.jsonl",
+  "sha256": "874a0e56339d2597953079f1f6c1ebb23816cf60dbc27febfad07aa366f81d3f",
+  "dialogs": 70,
+  "meetings": 35,
+  "dialog_turns": 700,
+  "turns_with_attribution": 617,
+  "attribution_range_records": 925,
+  "range_endpoint_key_shapes": {
+    "endIndex,startIndex": 876,
+    "endIndex": 46,
+    "": 3
+  },
+  "dome_session_overlap_meetings": [
+    "IS1003a",
+    "IS1003b",
+    "IS1003c",
+    "IS1003d"
+  ],
+  "dialogs_outside_all_dome_session_groups": 62,
+  "limits": [
+    "Fully manual dialogue/attribution data per original README, not dominance labels or validated unsupported negatives.",
+    "Some range endpoints are omitted in source JSON. This inventory does not assume their defaults or validate a conversion.",
+    "Exclude all DOME session groups before any evidence-checker training used for DOME evaluation.",
+    "No explicit license file in inspected original repository tree; source data not redistributed here."
+  ]
+}

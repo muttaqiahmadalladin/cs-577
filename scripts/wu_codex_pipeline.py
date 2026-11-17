@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # This is the script that produced results/wu_graph_terra/. It was adapted from wu_pipeline.py to send each prompt as an
 # independent `codex exec` session (see the second half of the file); the first half is the original API version it builds on.
-# It reads contexts.jsonl from its own folder. See docs/REPRODUCE.md.
+# It reads work/contexts.jsonl by default (WU_WORK_DIR overrides it). See docs/REPRODUCE.md.
 """Run the Wu et al. (NAACL 2025) argument pipeline on the rebuilt snippets.
 
 Stages (all resumable; rerun the same command after an interruption):
@@ -28,7 +28,7 @@ import argparse, ast, json, math, os, re, sys, threading, time, urllib.error, ur
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
+HERE = Path(os.environ.get("WU_WORK_DIR", str(Path(__file__).resolve().parent.parent / "work")))
 OUT = HERE / "wu_run"
 WU_RAW = "https://raw.githubusercontent.com/kandicew/social-reasoning/fed11b69765b4a398ce4a985adedfb65ec3098ab/"
 TEMPLATES = ["summary_template", "reason_template", "rebuttal_template", "validation_template", "grounding_template",
@@ -97,8 +97,9 @@ def prob(top, text, yes, no):
     return 0.99 if t.startswith(yes) else 0.01 if t.startswith(no) else 0.5
 
 
-def load_templates():
+def _download_templates():
     cache = OUT / "templates.json"
+    cache.parent.mkdir(parents=True, exist_ok=True)
     if cache.exists(): return json.loads(cache.read_text())
     def get(path):
         with urllib.request.urlopen(urllib.request.Request(WU_RAW + path, headers={"User-Agent": "Mozilla/5.0"}), timeout=60) as r:
@@ -325,12 +326,8 @@ def prob(top,text,yes,no):
 
 
 def load_templates():
-    root=HERE.parents[2]/'work/speaker-audit/upstream'
-    T={n:(root/f'template/{n}.txt').read_text() for n in TEMPLATES}
-    source=(root/'code/prompts.py').read_text()
-    m=re.search(r'definition\s*=\s*(\{.*?\})\s*\n\s*\n',source,re.S)
-    T['definition']=ast.literal_eval(m.group(1))
-    return T
+    """Fetch templates from the pinned release, without a historical checkout."""
+    return _download_templates()
 
 
 def parse_reasons(text):
@@ -431,12 +428,14 @@ def main():
     T=load_templates()
     manifest={'model':LLM_MODEL,'transport':'codex-exec-chatgpt-v1','reasoning':REASONING,'jev_model':JEV_MODEL,
               'contexts_sha256':request_digest('fixed',allrecs),'templates_sha256':request_digest('wu-templates',T),
+              'executed_pipeline_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'scoring':'Jev validity*grounding; rebuttal validity*grounding*countering; native relation probabilities',
               'rules_commit':'fed11b69765b4a398ce4a985adedfb65ec3098ab','independent_sessions':True}
     RUN_FINGERPRINT=request_digest('experiment',manifest);manifest['run_fingerprint']=RUN_FINGERPRINT
     mp=OUT/'manifest.json'
     if mp.exists() and json.loads(mp.read_text())!=manifest:raise RuntimeError('Manifest mismatch; use a new output folder')
     atomic_json(mp,manifest);atomic_json(OUT/'templates.json',T)
+    (OUT/'executed_pipeline.py').write_bytes(Path(__file__).read_bytes())
     atomic_json(OUT/'codex_answer_schema.json',{'type':'object','properties':{'answer':{'type':'string'}},'required':['answer'],'additionalProperties':False})
     if (OUT/'usage.jsonl').exists():
         rows=[json.loads(s) for s in (OUT/'usage.jsonl').read_text().splitlines()]

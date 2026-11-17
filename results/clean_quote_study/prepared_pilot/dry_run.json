@@ -1,0 +1,17 @@
+{
+  "requested_model": "google/gemma-4-26b-a4b-it",
+  "base_url": "https://inference-api.nousresearch.com/v1",
+  "max_requests": 4,
+  "selected_ids": [
+    "112",
+    "4",
+    "54",
+    "56"
+  ],
+  "dry_run": true,
+  "requests": [],
+  "actual_usd_reported": 0.0,
+  "max_cost_usd": 0.25,
+  "cost_limit": "reported-cost stop after each response; one request can cross limit; no unsupported preflight cost estimate",
+  "status": "prepared"
+}
