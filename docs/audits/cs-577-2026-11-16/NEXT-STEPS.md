@@ -1,6 +1,8 @@
 # Next steps after the independent CS-577 audit
 
-Based on the [consolidated audit](AUDIT.md) and completed peer discussion, 2026-11-16. This is a proposed execution plan; the external repository and existing experiment code have not been edited. Steps marked “new collection” require future model outputs or human annotations.
+Based on the [consolidated audit](AUDIT.md) and completed peer discussion, 2026-11-16.
+
+**Execution status (2026-11-17):** The report repairs, deterministic post-audit evaluation, clean-bank quote-study harness, and external human-validated datasets (DOME + AMI for conversational dominance; Google BEGIN for evidence attribution) have been implemented on this branch. See [IMPLEMENTATION-PLAN.md](../../research-followup/IMPLEMENTATION-PLAN.md), [EVALUATION.md](../../research-followup/EVALUATION.md), [VALIDATED-DATASET.md](../../research-followup/VALIDATED-DATASET.md), and [CLEAN-STUDY.md](../../research-followup/CLEAN-STUDY.md). The original 2026-11-16 plan is preserved below.
 
 ## 1. Repair the current report using existing evidence
 

@@ -117,9 +117,13 @@ Development and test meetings are disjoint within each split. The 500 splits ove
 | `scripts/wu_codex_pipeline.py` | The script that produced the Terra run: the original pipeline call by call through the Codex command line, then Jev scoring | Codex CLI signed in, `TYPESAFE_API_KEY` |
 | `scripts/wu_pipeline.py` | Call-by-call version of the original pipeline for any OpenAI-compatible API, with Jev or LLM scoring | API keys |
 | `scripts/check_against_released.py` | Prints a released snippet next to corpus participant IDs, and summary counts | standard library |
+| `scripts/post_audit_evaluation.py` | Deterministic post-audit evaluation, simple baselines, paired meeting bootstrap intervals and provenance (`results/post_audit/`) | numpy |
+| `scripts/clean_quote_study.py` | Clean-bank alignment, stratified human worksheets, bounded quote-checker collection and paired filter evaluation | numpy |
+| `scripts/dome_dataset.py` | Pinned importer and participant-disjoint builder for DOME + AMI human dominance labels (`results/external_dome/`) | standard library |
+| `scripts/begin_dataset.py` | Pinned importer and calibration evaluator for Google's BEGIN human dialogue-grounding benchmark (`results/external_begin/`) | standard library |
 | `scripts/exploratory/` | Earlier runs on the released snippets. They read files from KrishMay05/nlp_research (`KRISH_REPO`) and are kept as a record, not as part of the reproduction | |
 
-Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.md).
+Step-by-step instructions and expected outputs are in [REPRODUCE.md](REPRODUCE.md), [EVALUATION.md](research-followup/EVALUATION.md), [VALIDATED-DATASET.md](research-followup/VALIDATED-DATASET.md) and [CLEAN-STUDY.md](research-followup/CLEAN-STUDY.md).
 
 ## Caveats that apply to every number
 

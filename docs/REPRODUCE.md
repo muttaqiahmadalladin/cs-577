@@ -95,9 +95,13 @@ The statistics check uses 100,000 whole-meeting bootstrap resamples (seed 2026).
 
 ```bash
 python3 scripts/post_audit_evaluation.py
+python3 scripts/post_audit_evaluation.py --check
+python3 scripts/dome_dataset.py fetch && python3 scripts/dome_dataset.py build
+python3 scripts/begin_dataset.py fetch-build
+python3 -m unittest discover -s tests -v
 ```
 
-Its values are separate from the historical tables and sixty assertions. Its manifest records the evaluation formulas and input hashes; unknown historical model versions remain unknown. No new hosted-model or clean-data quote-filter result follows from replaying stored outputs.
+Its values are separate from the historical tables and sixty assertions. Its manifest records the evaluation formulas and input hashes; unknown historical model versions remain unknown. No new hosted-model or clean-data quote-filter result follows from replaying stored outputs. See [EVALUATION.md](research-followup/EVALUATION.md), [VALIDATED-DATASET.md](research-followup/VALIDATED-DATASET.md) and [CLEAN-STUDY.md](research-followup/CLEAN-STUDY.md) for details.
 
 ## Level 3: re-collecting the model outputs
 

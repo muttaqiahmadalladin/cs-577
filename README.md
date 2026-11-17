@@ -40,6 +40,10 @@ Claude Sonnet asked directly scores 76.0%. The evaluated argument pipelines show
 - [docs/REPRODUCE.md](docs/REPRODUCE.md): how to regenerate the data and recompute the supported results, step by step.
 - [docs/DATA.md](docs/DATA.md): the dataset, its sources, how it is built, and its schema.
 - [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md): every run, method and script, with caveats.
+- [docs/audits/cs-577-2026-11-16/AUDIT.md](docs/audits/cs-577-2026-11-16/AUDIT.md) and [NEXT-STEPS.md](docs/audits/cs-577-2026-11-16/NEXT-STEPS.md): the three-reviewer independent audit and follow-up plan.
+- [docs/research-followup/EVALUATION.md](docs/research-followup/EVALUATION.md): deterministic post-audit evaluation, paired meeting intervals and simple baselines.
+- [docs/research-followup/VALIDATED-DATASET.md](docs/research-followup/VALIDATED-DATASET.md) and [EXTERNAL-DATASET-REVIEW.md](docs/research-followup/EXTERNAL-DATASET-REVIEW.md): external human-validated dominance (DOME + AMI) and evidence-grounding (Google BEGIN) benchmarks.
+- [docs/research-followup/CLEAN-STUDY.md](docs/research-followup/CLEAN-STUDY.md): clean-bank quote-filter study harness and fresh-speaker corpus inventory.
 
 ## Quick start
 
