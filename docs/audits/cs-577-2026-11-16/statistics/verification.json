@@ -1,0 +1,339 @@
+{
+  "meetings": {
+    "Bro025": 1,
+    "Bro008": 5,
+    "Bro003": 2,
+    "Bmr029": 3,
+    "Bed004": 6,
+    "Bro005": 9,
+    "Bro027": 8,
+    "Bmr015": 2,
+    "Bro013": 2,
+    "Bmr001": 2,
+    "Bed011": 3,
+    "Bro011": 1,
+    "Bmr025": 2,
+    "Bmr006": 6,
+    "Bmr009": 5,
+    "Bmr014": 1,
+    "Bmr005": 3,
+    "Bro004": 6,
+    "Bro026": 5,
+    "Bro017": 15,
+    "Bmr008": 2,
+    "Bro007": 4,
+    "Bed014": 2,
+    "Bro023": 5,
+    "Bro018": 6,
+    "Bmr024": 3,
+    "Bro014": 2,
+    "Bro016": 4,
+    "Bro028": 4,
+    "Bed009": 3,
+    "Bro010": 3,
+    "Bmr023": 1,
+    "Bro024": 2,
+    "Bro012": 3,
+    "Bed010": 2,
+    "Bmr010": 1,
+    "Bed005": 2,
+    "Bed008": 3,
+    "Bmr007": 2,
+    "Bro019": 3,
+    "Bed002": 2,
+    "Bmr026": 1,
+    "Bro022": 1,
+    "Bmr016": 1,
+    "Bmr013": 1
+  },
+  "professors": {
+    "me013": 110,
+    "me010": 23,
+    "mn049": 15,
+    "mn058": 2
+  },
+  "label_changes": [
+    "3",
+    "15",
+    "47",
+    "79",
+    "88",
+    "111",
+    "119",
+    "121"
+  ],
+  "comparisons": [
+    {
+      "name": "fixed versus released",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 107,
+      "b_correct": 72,
+      "wins": 52,
+      "losses": 17,
+      "exact_mcnemar": 2.9304321745456655e-05,
+      "delta_pp": 23.333,
+      "meeting_bootstrap_95_pp": [
+        12.658,
+        33.526
+      ]
+    },
+    {
+      "name": "fixed versus released, letters kept",
+      "n": 128,
+      "meetings": 43,
+      "a_correct": 90,
+      "b_correct": 63,
+      "wins": 42,
+      "losses": 15,
+      "exact_mcnemar": 0.00046000500864878946,
+      "delta_pp": 21.094,
+      "meeting_bootstrap_95_pp": [
+        9.6,
+        32.667
+      ]
+    },
+    {
+      "name": "fixed versus released, labels unchanged",
+      "n": 142,
+      "meetings": 45,
+      "a_correct": 102,
+      "b_correct": 69,
+      "wins": 48,
+      "losses": 15,
+      "exact_mcnemar": 3.760612132541752e-05,
+      "delta_pp": 23.239,
+      "meeting_bootstrap_95_pp": [
+        12.409,
+        33.577
+      ]
+    },
+    {
+      "name": "fixed versus always A",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 107,
+      "b_correct": 85,
+      "wins": 34,
+      "losses": 12,
+      "exact_mcnemar": 0.0016414913408482334,
+      "delta_pp": 14.667,
+      "meeting_bootstrap_95_pp": [
+        6.504,
+        22.078
+      ]
+    },
+    {
+      "name": "ctx15 versus fixed",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 127,
+      "b_correct": 107,
+      "wins": 30,
+      "losses": 10,
+      "exact_mcnemar": 0.0022214337732293643,
+      "delta_pp": 13.333,
+      "meeting_bootstrap_95_pp": [
+        5.96,
+        20.635
+      ]
+    },
+    {
+      "name": "ctx60 versus fixed",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 134,
+      "b_correct": 107,
+      "wins": 35,
+      "losses": 8,
+      "exact_mcnemar": 4.1934157934520044e-05,
+      "delta_pp": 18.0,
+      "meeting_bootstrap_95_pp": [
+        9.929,
+        25.735
+      ]
+    },
+    {
+      "name": "judge A-first versus GLM direct",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 101,
+      "b_correct": 110,
+      "wins": 18,
+      "losses": 27,
+      "exact_mcnemar": 0.23269319190831084,
+      "delta_pp": -6.0,
+      "meeting_bootstrap_95_pp": [
+        -13.636,
+        0.746
+      ]
+    },
+    {
+      "name": "judge B-first versus GLM direct",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 104,
+      "b_correct": 110,
+      "wins": 22,
+      "losses": 28,
+      "exact_mcnemar": 0.47988766169832786,
+      "delta_pp": -4.0,
+      "meeting_bootstrap_95_pp": [
+        -13.274,
+        4.624
+      ]
+    },
+    {
+      "name": "judge A-first versus B-first",
+      "n": 150,
+      "meetings": 45,
+      "a_correct": 101,
+      "b_correct": 104,
+      "wins": 15,
+      "losses": 18,
+      "exact_mcnemar": 0.7283324808813632,
+      "delta_pp": -2.0,
+      "meeting_bootstrap_95_pp": [
+        -10.191,
+        6.289
+      ]
+    }
+  ],
+  "fixed_by_professor": {
+    "me010": {
+      "n": 23,
+      "correct": 18
+    },
+    "me013": {
+      "n": 110,
+      "correct": 76
+    },
+    "mn049": {
+      "n": 15,
+      "correct": 11
+    },
+    "mn058": {
+      "n": 2,
+      "correct": 2
+    }
+  },
+  "ctx15_by_professor": {
+    "me010": {
+      "n": 23,
+      "correct": 19
+    },
+    "me013": {
+      "n": 110,
+      "correct": 93
+    },
+    "mn049": {
+      "n": 15,
+      "correct": 13
+    },
+    "mn058": {
+      "n": 2,
+      "correct": 2
+    }
+  },
+  "ctx60_by_professor": {
+    "me010": {
+      "n": 23,
+      "correct": 19
+    },
+    "me013": {
+      "n": 110,
+      "correct": 100
+    },
+    "mn049": {
+      "n": 15,
+      "correct": 13
+    },
+    "mn058": {
+      "n": 2,
+      "correct": 2
+    }
+  },
+  "coverage": {
+    "results/jev_arm1.jsonl": {
+      "rows": 151,
+      "unique_keys": 151,
+      "ids": 151
+    },
+    "results/jev_arm4.jsonl": {
+      "rows": 450,
+      "unique_keys": 450,
+      "ids": 150
+    },
+    "results/glm_run/zero_shot.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    },
+    "results/glm_run/judge.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    },
+    "results/wu_graph_terra/zero_shot.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    },
+    "results/wu_graph_terra/jev_scores.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    },
+    "results/glm_run/jev_scores.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    },
+    "results/wu_graph_claude/jev_scores.jsonl": {
+      "rows": 150,
+      "unique_keys": 150,
+      "ids": 150
+    }
+  },
+  "judge_order_disagreement_ids": [
+    "0",
+    "3",
+    "5",
+    "7",
+    "14",
+    "15",
+    "17",
+    "27",
+    "28",
+    "34",
+    "35",
+    "40",
+    "41",
+    "42",
+    "43",
+    "46",
+    "53",
+    "60",
+    "61",
+    "62",
+    "77",
+    "85",
+    "89",
+    "92",
+    "98",
+    "102",
+    "103",
+    "107",
+    "108",
+    "126",
+    "134",
+    "142",
+    "148"
+  ],
+  "relabelled_case_summary": {
+    "n": 8,
+    "original_predictions_released_gold": 3,
+    "original_predictions_rebuilt_gold": 5,
+    "rebuilt_predictions_rebuilt_gold": 5
+  }
+}

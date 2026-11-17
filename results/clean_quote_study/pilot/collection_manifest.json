@@ -1,0 +1,49 @@
+{
+  "requested_model": "google/gemma-4-26b-a4b-it",
+  "base_url": "https://inference-api.nousresearch.com/v1",
+  "max_requests": 4,
+  "selected_ids": [
+    "112",
+    "4",
+    "54",
+    "56"
+  ],
+  "dry_run": false,
+  "requests": [
+    {
+      "snippet_id": "112",
+      "request_sha256": "9c94af9bd31b03e817e632bc39889264c9d791befa155ce2676aa217c33e1dc8",
+      "cached": false,
+      "response_id": "gen-1794941532-CUzOJUf6X9fna2V2k8m3",
+      "served_model": "google/gemma-4-26b-a4b-it",
+      "usage": {
+        "prompt_tokens": 4413,
+        "completion_tokens": 5263,
+        "total_tokens": 9676,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        },
+        "cost": 0.00209833,
+        "cost_details": {
+          "source": "openrouter_cost_floor",
+          "floor_applied": true,
+          "rate_source": "openrouter_catalog"
+        }
+      },
+      "reported_cost_usd": 0.00209833,
+      "elapsed_seconds": 58.771
+    }
+  ],
+  "actual_usd_reported": 0.00209833,
+  "max_cost_usd": 0.25,
+  "cost_limit": "reported-cost stop after each response; one request can cross limit; no unsupported preflight cost estimate",
+  "status": "stopped_invalid_answer_not_cached"
+}

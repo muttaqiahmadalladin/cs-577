@@ -1,0 +1,53 @@
+{
+  "fields": [
+    "argument_id",
+    "snippet_id",
+    "aspect",
+    "kind",
+    "intended_side",
+    "claim",
+    "paired_reason",
+    "transcript_json",
+    "annotator_id",
+    "annotator_type",
+    "quote",
+    "quote_speaker",
+    "quote_present",
+    "attribution_correct",
+    "claim_supported",
+    "rebuttal_answers_reason",
+    "should_keep",
+    "comment"
+  ],
+  "judgments": {
+    "quote_present": [
+      "no",
+      "uncertain",
+      "yes"
+    ],
+    "attribution_correct": [
+      "no",
+      "uncertain",
+      "yes"
+    ],
+    "claim_supported": [
+      "no",
+      "uncertain",
+      "yes"
+    ],
+    "rebuttal_answers_reason": [
+      "no",
+      "uncertain",
+      "yes"
+    ],
+    "should_keep": [
+      "no",
+      "uncertain",
+      "yes"
+    ]
+  },
+  "quote": "copy a nonempty contiguous verbatim span from one turn, without adding/removing punctuation; quote_speaker identifies the actual speaker, which may differ from intended side",
+  "source": "two independent humans; set annotator_type=human and unique annotator_id; no prefilled judgments",
+  "reason_only": "rebuttal_answers_reason may remain blank on reason rows",
+  "uncertain": "a valid completed judgment, not a binary no"
+}

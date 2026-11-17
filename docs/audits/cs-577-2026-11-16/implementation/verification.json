@@ -1,0 +1,134 @@
+{
+  "wu_graph_terra": {
+    "rows": 150,
+    "models": {
+      "jev-1.14.0": 150
+    },
+    "reasons": {
+      "correct_ties_A": 101,
+      "speaker_objective_ties": [
+        "142"
+      ],
+      "correct_range": [
+        100,
+        101
+      ]
+    },
+    "rr": {
+      "correct_ties_A": 108,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        108,
+        108
+      ]
+    },
+    "all": {
+      "correct_ties_A": 108,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        108,
+        108
+      ]
+    },
+    "triple_product": {
+      "correct": 108,
+      "changed_ids": [
+        "110",
+        "74"
+      ]
+    },
+    "correct_inherited_pair": {
+      "correct": 108,
+      "changed_ids": []
+    },
+    "grounded_equals_strongest_survivor": 150
+  },
+  "wu_graph_claude": {
+    "rows": 150,
+    "models": {
+      "jev-1.14.0": 150
+    },
+    "reasons": {
+      "correct_ties_A": 110,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        110,
+        110
+      ]
+    },
+    "rr": {
+      "correct_ties_A": 105,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        105,
+        105
+      ]
+    },
+    "all": {
+      "correct_ties_A": 105,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        105,
+        105
+      ]
+    },
+    "triple_product": {
+      "correct": 108,
+      "changed_ids": [
+        "27",
+        "4",
+        "74",
+        "93",
+        "98"
+      ]
+    },
+    "correct_inherited_pair": {
+      "correct": 105,
+      "changed_ids": []
+    },
+    "grounded_equals_strongest_survivor": 150
+  },
+  "glm_run": {
+    "rows": 150,
+    "models": {
+      "null": 150
+    },
+    "reasons": {
+      "correct_ties_A": 107,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        107,
+        107
+      ]
+    },
+    "rr": {
+      "correct_ties_A": 106,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        106,
+        106
+      ]
+    },
+    "all": {
+      "correct_ties_A": 104,
+      "speaker_objective_ties": [],
+      "correct_range": [
+        104,
+        104
+      ]
+    },
+    "triple_product": {
+      "correct": 107,
+      "changed_ids": [
+        "35",
+        "60",
+        "109"
+      ]
+    },
+    "correct_inherited_pair": {
+      "correct": 104,
+      "changed_ids": []
+    },
+    "grounded_equals_strongest_survivor": 150
+  }
+}

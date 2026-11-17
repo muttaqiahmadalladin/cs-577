@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/muttaqiahmadalladin/cs-577",
+  "commit": "2e0af7fe7a1dd2be01503c9fa62e7ebdf9a7deaa",
+  "date": "2026-11-16",
+  "source_checkout_clean": true,
+  "reproduction_command": "<nlp_research>/.venv/bin/python scripts/reproduce.py",
+  "reproduction_directory": "/Users/krish/workspace-ai/projects/GitHub/nlp_research/data/audit-sources/cs-577-2026-11-16-reproduction",
+  "reproduction_log_sha256": "f879749bda9a88a79e087ad25fa69d0baaf2facf40ce19e425731a53abdf4001",
+  "completed_steps": 12,
+  "all_steps_passed": true,
+  "report_check_passed": true,
+  "rebuilt_dataset_exact": true,
+  "tracked_file_count": 369,
+  "tracked_files_changed_by_reproduction": [],
+  "input_sha256": {
+    "all_obj.pkl": "e4be3c7c6a3543a77ad07eddde44bfa42f6e58fa6a4bf47df53ea9e894f1e318",
+    "icsi_core_nxt.zip": "cf4860245b9ca9c9ed11a66e5a74cfea2a99a686a52f7580aa0a6bc2225895a9",
+    "icsi_mrt.zip": "9db98ebdd61a085b4f45f24f46e9c9f6c6f26c3c9cd41643a3b9e74362c85de7",
+    "meeting.csv": "d405654d402c0e7bca37f0732b6005aff70297aeadf7c6e0fa83c1d4e371b286",
+    "rules.txt": "5a88f4a5298fcd1fc8d30736bdcb2fba30cb47cc0bafcb7f68c9d12aea3addde"
+  },
+  "qualification": "Replays stored outputs; does not establish hosted-model regenerability or that every written claim is covered by assertions."
+}

@@ -1,0 +1,1575 @@
+{
+  "meetings_total": 75,
+  "meetings_used": 45,
+  "meetings_unused": 30,
+  "participants_total": 60,
+  "participants_same_span_used": 22,
+  "participants_expanded_used": 30,
+  "participants_new_vs_same_span": 38,
+  "participants_new_vs_expanded": 30,
+  "professors_total": 7,
+  "professors_seen": [
+    "me010",
+    "me013",
+    "mn049",
+    "mn058"
+  ],
+  "professors_new": [
+    "fe041",
+    "fn043",
+    "me032"
+  ],
+  "new_professor_meetings": {
+    "fe041": [
+      "Buw001"
+    ],
+    "fn043": [
+      "Buw001"
+    ],
+    "me032": [
+      "Buw001"
+    ]
+  },
+  "new_professor_nonprofessor_neighbors_unseen": {
+    "fe041": [
+      "me908"
+    ],
+    "fn043": [
+      "me908"
+    ],
+    "me032": [
+      "me908"
+    ]
+  },
+  "new_professor_known_nonprofessor_unseen": {
+    "fe041": [],
+    "fn043": [],
+    "me032": []
+  },
+  "fresh_meeting_candidate_windows": 16,
+  "fresh_candidate_meetings": [
+    "Bed015",
+    "Bed016",
+    "Bed017",
+    "Bmr011",
+    "Bmr012",
+    "Bmr018",
+    "Bmr019",
+    "Bmr020",
+    "Bmr022",
+    "Bmr027",
+    "Bmr028",
+    "Bmr031",
+    "Bro015",
+    "Bro021",
+    "Bsr001",
+    "Buw001"
+  ],
+  "all_speaker_disjoint_eligible_windows": 0,
+  "focal_disjoint_eligible_windows": 0,
+  "professor_disjoint_shared_nonprofessor_candidates": 2,
+  "professor_disjoint_candidate_ids": [
+    "fresh-Buw001-00345",
+    "fresh-Buw001-00075"
+  ],
+  "eligibility": "30 consecutive segments, 100 words, exactly one professor in span and known nonprofessor; >=3 segments each focal speaker; starts on 15-segment grid; at most one nonoverlapping selected window per unused meeting",
+  "confirmation_blocker": "No additional professor co-occurs in an unused meeting with an unseen independently labeled nonprofessor. New professor IDs all occur only in Buw001 with seen participants and one unseen participant lacking education. Acquiring new labeled participants/corpus is required for a speaker-disjoint confirmatory study.",
+  "membership_reference": "expanded ±60 participant set, conservative relative to same-span membership",
+  "corpus_hashes": {
+    "icsi_mrt.zip": "9db98ebdd61a085b4f45f24f46e9c9f6c6f26c3c9cd41643a3b9e74362c85de7",
+    "icsi_core_nxt.zip": "cf4860245b9ca9c9ed11a66e5a74cfea2a99a686a52f7580aa0a6bc2225895a9"
+  },
+  "meetings": [
+    {
+      "meeting": "Bdb001",
+      "segments": 1151,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me018",
+        "mn017"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed002",
+      "segments": 1429,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe004",
+        "me003",
+        "me010",
+        "me011",
+        "me012",
+        "mn015"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed003",
+      "segments": 1650,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fe016",
+        "me003",
+        "me012",
+        "mn015"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed004",
+      "segments": 1030,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe016",
+        "fe046",
+        "fe903",
+        "me003",
+        "me010",
+        "me012",
+        "mn015"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [
+        "fe903"
+      ],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed005",
+      "segments": 1434,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe004",
+        "me003",
+        "me010",
+        "me012",
+        "mn015",
+        "mn036"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed006",
+      "segments": 1383,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fe046",
+        "me003",
+        "me012",
+        "me045",
+        "mn015",
+        "mn036"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed008",
+      "segments": 1803,
+      "previously_used_meeting": true,
+      "participants": [
+        "me003",
+        "me010",
+        "me012",
+        "me045",
+        "mn015"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed009",
+      "segments": 1331,
+      "previously_used_meeting": true,
+      "participants": [
+        "me003",
+        "me010",
+        "me012",
+        "mn015",
+        "mn036",
+        "mn047",
+        "mn048"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed010",
+      "segments": 1153,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe004",
+        "me003",
+        "me010",
+        "me012",
+        "me045",
+        "mn015",
+        "mn036"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed011",
+      "segments": 1181,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe004",
+        "fe046",
+        "fn050",
+        "me010",
+        "me045",
+        "mn015",
+        "mn036"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed012",
+      "segments": 1008,
+      "previously_used_meeting": false,
+      "participants": [
+        "fn050",
+        "me003",
+        "me012",
+        "mn015"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed013",
+      "segments": 1467,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fn050",
+        "me003",
+        "me045",
+        "mn015"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed014",
+      "segments": 1281,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe004",
+        "fn050",
+        "me003",
+        "me010",
+        "me045",
+        "mn015"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed015",
+      "segments": 1537,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fn050",
+        "me003",
+        "me010",
+        "me045",
+        "mn015"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed016",
+      "segments": 1027,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fe016",
+        "fe046",
+        "fe901",
+        "fn050",
+        "me003",
+        "me010",
+        "me045",
+        "mn015",
+        "xe902"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [
+        "fe901",
+        "xe902"
+      ],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bed017",
+      "segments": 757,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe004",
+        "fn050",
+        "me003",
+        "me010",
+        "mn015",
+        "mn059"
+      ],
+      "professors": [
+        "me010"
+      ],
+      "new_participants_vs_expanded": [
+        "mn059"
+      ],
+      "known_nonprofessors_new": [
+        "mn059"
+      ]
+    },
+    {
+      "meeting": "Bmr001",
+      "segments": 917,
+      "previously_used_meeting": true,
+      "participants": [
+        "me011",
+        "me013",
+        "me025"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr002",
+      "segments": 2094,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "me011",
+        "me022",
+        "me025"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr003",
+      "segments": 2229,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "me011",
+        "me022",
+        "me025",
+        "me028",
+        "me904"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "me028",
+        "me904"
+      ],
+      "known_nonprofessors_new": [
+        "me028"
+      ]
+    },
+    {
+      "meeting": "Bmr005",
+      "segments": 1580,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr006",
+      "segments": 2494,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "me018",
+        "mn005"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr007",
+      "segments": 2057,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr008",
+      "segments": 2305,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "me018",
+        "mn005"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr009",
+      "segments": 2184,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "mn005"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr010",
+      "segments": 1464,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe905",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "fe905"
+      ],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr011",
+      "segments": 1617,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr012",
+      "segments": 1305,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn009",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "mn009"
+      ],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr013",
+      "segments": 1540,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr014",
+      "segments": 1146,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "me011",
+        "me013",
+        "me018",
+        "mn009",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "mn009"
+      ],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr015",
+      "segments": 1397,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn005",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr016",
+      "segments": 1737,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr018",
+      "segments": 1509,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr019",
+      "segments": 1658,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me026",
+        "mn005",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr020",
+      "segments": 1567,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr021",
+      "segments": 927,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "me001",
+        "me011",
+        "me018",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr022",
+      "segments": 1396,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "me018",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr023",
+      "segments": 1506,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me013",
+        "me018",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr024",
+      "segments": 2111,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "me051",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bmr025",
+      "segments": 1006,
+      "previously_used_meeting": true,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "me022",
+        "mn014"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr026",
+      "segments": 1096,
+      "previously_used_meeting": true,
+      "participants": [
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bmr027",
+      "segments": 1281,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "me051",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bmr028",
+      "segments": 1704,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "me051",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bmr029",
+      "segments": 1115,
+      "previously_used_meeting": true,
+      "participants": [
+        "me013",
+        "me018",
+        "me026",
+        "me051",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bmr030",
+      "segments": 800,
+      "previously_used_meeting": false,
+      "participants": [
+        "me001",
+        "me011",
+        "me018",
+        "me051",
+        "mn014"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bmr031",
+      "segments": 1405,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me001",
+        "me011",
+        "me013",
+        "me018",
+        "me051",
+        "mn014",
+        "mn017"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me051"
+      ],
+      "known_nonprofessors_new": [
+        "me051"
+      ]
+    },
+    {
+      "meeting": "Bns001",
+      "segments": 2409,
+      "previously_used_meeting": false,
+      "participants": [
+        "fn083",
+        "me011",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "fn083",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ],
+      "known_nonprofessors_new": [
+        "fn083",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ]
+    },
+    {
+      "meeting": "Bns002",
+      "segments": 2273,
+      "previously_used_meeting": false,
+      "participants": [
+        "me011",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn040",
+        "mn082"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn040",
+        "mn082"
+      ],
+      "known_nonprofessors_new": [
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn040",
+        "mn082"
+      ]
+    },
+    {
+      "meeting": "Bns003",
+      "segments": 1579,
+      "previously_used_meeting": false,
+      "participants": [
+        "fn083",
+        "me011",
+        "me907",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "fn083",
+        "me907",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ],
+      "known_nonprofessors_new": [
+        "fn083",
+        "mn021",
+        "mn030",
+        "mn035",
+        "mn081",
+        "mn082"
+      ]
+    },
+    {
+      "meeting": "Bro003",
+      "segments": 1837,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me011",
+        "me013",
+        "me018",
+        "me026",
+        "me034",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro004",
+      "segments": 1758,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me011",
+        "me013",
+        "me018",
+        "me026",
+        "me034",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro005",
+      "segments": 1656,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me011",
+        "me013",
+        "me026",
+        "me034",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro007",
+      "segments": 867,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro008",
+      "segments": 561,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro010",
+      "segments": 1003,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro011",
+      "segments": 1179,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro012",
+      "segments": 1250,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro013",
+      "segments": 810,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro014",
+      "segments": 1228,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro015",
+      "segments": 256,
+      "previously_used_meeting": false,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro016",
+      "segments": 1087,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro017",
+      "segments": 1193,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me018",
+        "mn007",
+        "mn049"
+      ],
+      "professors": [
+        "mn049"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro018",
+      "segments": 1396,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro019",
+      "segments": 1311,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro021",
+      "segments": 1141,
+      "previously_used_meeting": false,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro022",
+      "segments": 950,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro023",
+      "segments": 1325,
+      "previously_used_meeting": true,
+      "participants": [
+        "me013",
+        "me018",
+        "me026",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro024",
+      "segments": 1828,
+      "previously_used_meeting": true,
+      "participants": [
+        "fn002",
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007",
+        "mn052",
+        "mn058"
+      ],
+      "professors": [
+        "me013",
+        "mn058"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro025",
+      "segments": 747,
+      "previously_used_meeting": true,
+      "participants": [
+        "me006",
+        "me013",
+        "me018",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro026",
+      "segments": 1305,
+      "previously_used_meeting": true,
+      "participants": [
+        "me006",
+        "me013",
+        "me018",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro027",
+      "segments": 1745,
+      "previously_used_meeting": true,
+      "participants": [
+        "me013",
+        "me018",
+        "mn007",
+        "mn052"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bro028",
+      "segments": 1417,
+      "previously_used_meeting": true,
+      "participants": [
+        "me006",
+        "me013",
+        "me018",
+        "me026",
+        "mn007"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [],
+      "known_nonprofessors_new": []
+    },
+    {
+      "meeting": "Bsr001",
+      "segments": 2100,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "me011",
+        "me013",
+        "me025",
+        "me055",
+        "me056",
+        "mn038",
+        "mn057"
+      ],
+      "professors": [
+        "me013"
+      ],
+      "new_participants_vs_expanded": [
+        "me055",
+        "me056",
+        "mn038",
+        "mn057"
+      ],
+      "known_nonprofessors_new": [
+        "me055",
+        "me056",
+        "mn038",
+        "mn057"
+      ]
+    },
+    {
+      "meeting": "Btr001",
+      "segments": 2379,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me011",
+        "me070"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me070"
+      ],
+      "known_nonprofessors_new": [
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me070"
+      ]
+    },
+    {
+      "meeting": "Btr002",
+      "segments": 2728,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me011",
+        "me070"
+      ],
+      "professors": [],
+      "new_participants_vs_expanded": [
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me070"
+      ],
+      "known_nonprofessors_new": [
+        "fe066",
+        "fe067",
+        "fe068",
+        "fe069",
+        "me070"
+      ]
+    },
+    {
+      "meeting": "Buw001",
+      "segments": 1888,
+      "previously_used_meeting": false,
+      "participants": [
+        "fe008",
+        "fe016",
+        "fe041",
+        "fn043",
+        "me011",
+        "me013",
+        "me022",
+        "me025",
+        "me032",
+        "me908"
+      ],
+      "professors": [
+        "fe041",
+        "fn043",
+        "me013",
+        "me032"
+      ],
+      "new_participants_vs_expanded": [
+        "fe041",
+        "fn043",
+        "me032",
+        "me908"
+      ],
+      "known_nonprofessors_new": []
+    }
+  ]
+}

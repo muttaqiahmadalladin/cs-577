@@ -1,0 +1,764 @@
+{
+  "baseline/always_A": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['baseline/always_A']",
+    "value_pointer": "results/post_audit/summary.json#/rows/baseline~1always_A"
+  },
+  "direct/glm": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/glm']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1glm"
+  },
+  "direct/haiku": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/haiku']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1haiku"
+  },
+  "direct/jev": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/jev']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1jev"
+  },
+  "direct/jev_ctx15": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/jev_ctx15']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1jev_ctx15"
+  },
+  "direct/jev_ctx60": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/jev_ctx60']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1jev_ctx60"
+  },
+  "direct/sonnet": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/sonnet']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1sonnet"
+  },
+  "direct/terra": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['direct/terra']",
+    "value_pointer": "results/post_audit/summary.json#/rows/direct~1terra"
+  },
+  "ensemble/majority_ties_jev": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['ensemble/majority_ties_jev']",
+    "value_pointer": "results/post_audit/summary.json#/rows/ensemble~1majority_ties_jev"
+  },
+  "external_original_rows": [
+    {
+      "accuracy_pp": 45.7,
+      "correct": 69,
+      "immutable_prediction_artifact": "not available in this checkout",
+      "kind": "external original result; not recomputed by this runner",
+      "label": "Grounded extension, as proposed",
+      "n": 151,
+      "quoted_by": "report/report.tex released-data table",
+      "source": "https://github.com/KrishMay05/nlp_research"
+    },
+    {
+      "accuracy_pp": 42.4,
+      "correct": 64,
+      "immutable_prediction_artifact": "not available in this checkout",
+      "kind": "external original result; not recomputed by this runner",
+      "label": "XOR graph with quote filter",
+      "n": 151,
+      "quoted_by": "report/report.tex released-data table",
+      "source": "https://github.com/KrishMay05/nlp_research"
+    },
+    {
+      "accuracy_pp": 43.7,
+      "correct": 66,
+      "immutable_prediction_artifact": "not available in this checkout",
+      "kind": "external original result; not recomputed by this runner",
+      "label": "Gemma 4 zero-shot",
+      "n": 151,
+      "quoted_by": "report/report.tex released-data table",
+      "source": "https://github.com/KrishMay05/nlp_research"
+    }
+  ],
+  "glm_jev/all": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/all']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1all"
+  },
+  "glm_jev/all_triple_rebuttal": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/all_triple_rebuttal']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1all_triple_rebuttal"
+  },
+  "glm_jev/contradiction_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/contradiction_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1contradiction_only"
+  },
+  "glm_jev/reason_sum": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/reason_sum']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1reason_sum"
+  },
+  "glm_jev/reasons": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/reasons']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1reasons"
+  },
+  "glm_jev/reasons_product_round": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/reasons_product_round']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1reasons_product_round"
+  },
+  "glm_jev/rr": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/rr']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1rr"
+  },
+  "glm_jev/similarity_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/similarity_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1similarity_only"
+  },
+  "glm_jev/strongest_survivor": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['glm_jev/strongest_survivor']",
+    "value_pointer": "results/post_audit/summary.json#/rows/glm_jev~1strongest_survivor"
+  },
+  "haiku_haiku/all": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/all']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1all"
+  },
+  "haiku_haiku/contradiction_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/contradiction_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1contradiction_only"
+  },
+  "haiku_haiku/reason_sum": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/reason_sum']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1reason_sum"
+  },
+  "haiku_haiku/reasons": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/reasons']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1reasons"
+  },
+  "haiku_haiku/reasons_product_round": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/reasons_product_round']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1reasons_product_round"
+  },
+  "haiku_haiku/rr": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/rr']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1rr"
+  },
+  "haiku_haiku/similarity_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/similarity_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1similarity_only"
+  },
+  "haiku_haiku/strongest_survivor": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_haiku/strongest_survivor']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_haiku~1strongest_survivor"
+  },
+  "haiku_jev/all": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/all']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1all"
+  },
+  "haiku_jev/all_triple_rebuttal": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/all_triple_rebuttal']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1all_triple_rebuttal"
+  },
+  "haiku_jev/contradiction_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/contradiction_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1contradiction_only"
+  },
+  "haiku_jev/reason_sum": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/reason_sum']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1reason_sum"
+  },
+  "haiku_jev/reasons": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/reasons']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1reasons"
+  },
+  "haiku_jev/reasons_product_round": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/reasons_product_round']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1reasons_product_round"
+  },
+  "haiku_jev/rr": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/rr']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1rr"
+  },
+  "haiku_jev/similarity_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/similarity_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1similarity_only"
+  },
+  "haiku_jev/strongest_survivor": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['haiku_jev/strongest_survivor']",
+    "value_pointer": "results/post_audit/summary.json#/rows/haiku_jev~1strongest_survivor"
+  },
+  "historical_original_sixty_assertions": [
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 82,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/XOR graph, cached GPT-3.5 scores/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 72,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/Jev, is X the professor/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 76,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/XOR graph, Jev scores/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 79,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/Preference grounded, cached scores/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 71,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/Preference grounded, Jev scores/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 77,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_151/Typed-statement graph (Jev)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 69,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_150/More words/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 72,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_150/Jev, professor/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 72,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_150/Jev, more power/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 77,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/released_150/Typed-statement graph/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 100,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/More words/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 102,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Longer turns/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 107,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Jev, professor/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 106,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Jev, more power/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 105,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Typed-statement graph/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 99,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx15/More words/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 104,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx15/Longer turns/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 127,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx15/Jev, professor/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 119,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx15/Jev, more power/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 121,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx15/Typed-statement graph/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 103,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx60/More words/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 100,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx60/Longer turns/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 134,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx60/Jev, professor/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 132,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx60/Jev, more power/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 136,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_ctx60/Typed-statement graph/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 100,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons only (Terra arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 108,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons + rebuttals (Terra arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 108,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, all relations (Terra arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 110,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons only (Haiku arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 105,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons + rebuttals (Haiku arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 105,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, all relations (Haiku arguments, Jev scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 103,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons only (Haiku arguments, Haiku scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 101,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, reasons + rebuttals (Haiku arguments, Haiku scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 102,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Wu graph, all relations (Haiku arguments, Haiku scores)/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 109,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Terra zero-shot/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 102,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Haiku zero-shot/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:226",
+      "command": "python scripts/analyze.py --check",
+      "expected": 114,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/wu_graph/Sonnet zero-shot/correct"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 151,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/located_exactly_once"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 45,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/meetings"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 128,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/one_to_one_with_one_professor"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 128,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/label_names_professor_under_last_line_reading"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 7596,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/words_under_other_letter"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 13185,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/words_total"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 73,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/snippets_majority_of_words_under_other_letter"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:236",
+      "command": "python scripts/analyze.py --check",
+      "expected": 69,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/data_audit/label_names_letter_with_most_professor_words"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 110,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/most_frequent_professor_snippets"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 83,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/first_speaker_is_professor"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 77.5,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_same_span/other_professors"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 85.0,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_pm15/other_professors"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 85.0,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_pm60/other_professors"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 85.9,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_same_span/when_professor_is_A"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 52.3,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_same_span/when_professor_is_B"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 89.4,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_pm60/when_professor_is_A"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 89.2,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/jev_pm60/when_professor_is_B"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 70.0,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/sonnet_same_span/other_professors"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 77.5,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/terra_same_span/other_professors"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 71.8,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/sonnet_same_span/when_professor_is_A"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:242",
+      "command": "python scripts/analyze.py --check",
+      "expected": 81.5,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/robustness/sonnet_same_span/when_professor_is_B"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:combined interval/Brier/top-fifth assertion",
+      "command": "python scripts/analyze.py --check",
+      "expected": {
+        "accuracy_most_confident_fifth": 93.3,
+        "brier": 0.189,
+        "meeting_bootstrap_95": [
+          6.7,
+          22.0
+        ]
+      },
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Jev, professor"
+    },
+    {
+      "assertion_source": "scripts/analyze.py:AUC assertion",
+      "command": "python scripts/analyze.py --check",
+      "expected": 0.79,
+      "status": "historical asserted value; new runner maps provenance but does not rerun historical analysis",
+      "value_pointer": "results/report_numbers.json#/rebuilt_fixed/Jev, professor/auc"
+    }
+  ],
+  "historical_report_values": {
+    "artifact": "results/report_numbers.json",
+    "assertions": "scripts/analyze.py --check retains original sixty asserted values",
+    "command": "python scripts/reproduce.py",
+    "kind": "historical reproduction; independent of this new evaluation",
+    "warning": "Historical exp(logs) weights choose B on reason-only ID142; product-round sensitivity ties and chooses A. Do not substitute post-audit outputs into those tables without relabeling."
+  },
+  "judge/A_first": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['judge/A_first']",
+    "value_pointer": "results/post_audit/summary.json#/rows/judge~1A_first"
+  },
+  "judge/B_first": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['judge/B_first']",
+    "value_pointer": "results/post_audit/summary.json#/rows/judge~1B_first"
+  },
+  "judge/disagreement_to_direct": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['judge/disagreement_to_direct']",
+    "value_pointer": "results/post_audit/summary.json#/rows/judge~1disagreement_to_direct"
+  },
+  "other_historical_supplements": {
+    "commands": [
+      "python scripts/grounded_extension.py",
+      "python scripts/grounded_policy_search.py",
+      "python scripts/data_differences.py",
+      "python scripts/score_run.py --run glm_run --name glm-5.3",
+      "python scripts/grounded_policy_search.py --run glm_run",
+      "python scripts/qbaf.py",
+      "python scripts/judge_run.py --run glm_run --score"
+    ],
+    "limitation": "These scripts compute their documented artifacts; not every prose number is an asserted end-to-end reproduction. Historical logistic-regression range has no local input-to-output reproduction."
+  },
+  "terra_jev/all": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/all']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1all"
+  },
+  "terra_jev/all_triple_rebuttal": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/all_triple_rebuttal']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1all_triple_rebuttal"
+  },
+  "terra_jev/contradiction_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/contradiction_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1contradiction_only"
+  },
+  "terra_jev/reason_sum": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/reason_sum']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1reason_sum"
+  },
+  "terra_jev/reasons": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/reasons']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1reasons"
+  },
+  "terra_jev/reasons_product_round": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/reasons_product_round']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1reasons_product_round"
+  },
+  "terra_jev/rr": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/rr']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1rr"
+  },
+  "terra_jev/similarity_only": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/similarity_only']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1similarity_only"
+  },
+  "terra_jev/strongest_survivor": {
+    "command": "python scripts/post_audit_evaluation.py",
+    "kind": "computed from immutable saved outputs",
+    "prediction_pointer": "results/post_audit/predictions.jsonl:methods['terra_jev/strongest_survivor']",
+    "value_pointer": "results/post_audit/summary.json#/rows/terra_jev~1strongest_survivor"
+  }
+}

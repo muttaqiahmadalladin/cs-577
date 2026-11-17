@@ -1,0 +1,17 @@
+{
+  "same_majority_participant_for_both_letters": 86,
+  "distinct_majorities": 42,
+  "label_names_professor_among_distinct": 33,
+  "word_count_example": {
+    "0": {
+      "A": {
+        "me013": 86,
+        "mn007": 5
+      },
+      "B": {
+        "me013": 4,
+        "mn007": 3
+      }
+    }
+  }
+}

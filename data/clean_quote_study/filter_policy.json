@@ -1,0 +1,10 @@
+{
+  "status": "retrospective exploratory development; not prospective confirmation",
+  "bank": "Terra clean same-span bank selected before filter evaluation",
+  "primary_rule": "speaker-bound verbatim contiguous quote AND claim support AND correct attribution; rebuttals also answer their paired reason",
+  "uncertainty": "uncertain in required quote/attribution/support (and rebuttal-answer) fields is rejected; holistic should_keep is an independent audit label, not a filter component; report both separately; no automatic adjudication",
+  "selection": "do not select thresholds, policies or checker capacity by final role-label accuracy",
+  "tie": "A when conditional objectives differ by at most 1e-9 objective units; shared post-audit evaluator",
+  "human_gate": "two independent human annotators; model/proxy judgments cannot satisfy this gate",
+  "confirmation_gate": "independent human evidence validation and genuinely fresh independently labeled participants/meetings plus a locked meaningful effect and precision target"
+}

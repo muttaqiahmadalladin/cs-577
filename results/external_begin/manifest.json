@@ -1,0 +1,220 @@
+{
+  "citation": "https://aclanthology.org/2022.tacl-1.62/",
+  "commit": "6e65f0d5a1ed1b9574643a7640ff1678d4e979b5",
+  "commit_verified_via": "https://api.github.com/repos/google/BEGIN-dataset/commits/main",
+  "counts": {
+    "dev": {
+      "cmu-dog": {
+        "fully_attributable": 59,
+        "generic": 79,
+        "not_fully_attributable": 278
+      },
+      "topicalchat": {
+        "fully_attributable": 74,
+        "generic": 2,
+        "not_fully_attributable": 307
+      },
+      "wow": {
+        "fully_attributable": 180,
+        "not_fully_attributable": 250
+      }
+    },
+    "test": {
+      "cmu-dog": {
+        "fully_attributable": 508,
+        "generic": 657,
+        "not_fully_attributable": 2442
+      },
+      "topicalchat": {
+        "fully_attributable": 677,
+        "generic": 40,
+        "not_fully_attributable": 3128
+      },
+      "wow": {
+        "fully_attributable": 1392,
+        "generic": 6,
+        "not_fully_attributable": 2209
+      }
+    }
+  },
+  "dataset": "google/BEGIN-dataset",
+  "duplicate_row_ids": 0,
+  "duplicates": {
+    "dev": {
+      "conflicting_label_groups": 0,
+      "duplicate_content_groups": 0,
+      "extra_duplicate_rows": 0
+    },
+    "test": {
+      "conflicting_label_groups": 0,
+      "duplicate_content_groups": 2,
+      "extra_duplicate_rows": 2
+    }
+  },
+  "empty_message_rows": {
+    "dev": {
+      "cmu-dog": 2,
+      "topicalchat": 0,
+      "wow": 0
+    },
+    "test": {
+      "cmu-dog": 6,
+      "topicalchat": 1,
+      "wow": 0
+    }
+  },
+  "evidence_decisions": {
+    "fully_attributable": "supported",
+    "generic": "abstain",
+    "not_fully_attributable": "not_fully_supported"
+  },
+  "exact_dev_test_overlap": {
+    "input": {
+      "dev_rows_matching_test": 0,
+      "shared_unique_hashes": 0,
+      "test_rows_matching_dev": 0
+    },
+    "knowledge": {
+      "dev_rows_matching_test": 1098,
+      "shared_unique_hashes": 496,
+      "test_rows_matching_dev": 7290
+    },
+    "knowledge_message": {
+      "dev_rows_matching_test": 157,
+      "shared_unique_hashes": 157,
+      "test_rows_matching_dev": 158
+    },
+    "response": {
+      "dev_rows_matching_test": 75,
+      "shared_unique_hashes": 65,
+      "test_rows_matching_dev": 201
+    }
+  },
+  "intended_use": {
+    "dev": "calibration only",
+    "test": "held-out evaluation after freezing calibration"
+  },
+  "invalid_rows": 0,
+  "label_map": {
+    "Fully attributable": "fully_attributable",
+    "Generic": "generic",
+    "Not fully attributable": "not_fully_attributable"
+  },
+  "limits": [
+    "BEGIN measures response attribution to background knowledge, not dominance.",
+    "No speaker-specific evidence, quote/rebuttal, or cross-meeting validation labels.",
+    "Exact source-material overlap is reported; published splits are not assumed independent.",
+    "Raw TSV and converted examples are not redistributed."
+  ],
+  "local_export_sha256": {
+    "dev.jsonl": "e895c9f15f40f596570cd9d44a58ce032999f92e5a09c6b10240cd209de9097b",
+    "pilot_gold.jsonl": "0a23fe04740b4f537983c7939792e4d56b15cae3882f404223c13f689edad499",
+    "pilot_requests.jsonl": "83f7a5e68eba714f15b81d9bdb135fc9e30fc2a8c953278aaf01473f07cf5b88",
+    "test.jsonl": "89712121dd57d4a5dc902934006a2b1436887dd457fd2aa455b3f6a774aa0a4b"
+  },
+  "pilot": {
+    "domains": {
+      "cmu-dog": 6,
+      "topicalchat": 4,
+      "wow": 2
+    },
+    "labels": {
+      "fully_attributable": 4,
+      "generic": 4,
+      "not_fully_attributable": 4
+    },
+    "limit": 12,
+    "model_calls": 0,
+    "prompt_sha256": "bb65daf7630e8baf0d2bd717dbe3f476f1d8f82b9a869e8818133603bead8beb",
+    "seed": "begin-dev-pilot-v1",
+    "selected_ids_sha256": "b586c240ba4f5c9d731e53c866fdb352284436176c7480fbb49421f257995131",
+    "selection": "hash order within label/domain; round-robin domains",
+    "selection_split": "dev"
+  },
+  "published_training_split": false,
+  "schema_version": 1,
+  "source_schema": [
+    "model_name",
+    "data_source",
+    "knowledge",
+    "message",
+    "response",
+    "begin_label"
+  ],
+  "sources": {
+    "LICENSE": {
+      "bytes": 107,
+      "sha256": "cd97aa30978e6090d3af8fccd93c880da19889f52de065c256538479ae1a057f",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/LICENSE"
+    },
+    "README.md": {
+      "bytes": 3110,
+      "sha256": "1b01c90e6ac4ad2ac573b25cd7716f8e8dc6a7f4970c3ecc59275e30f00b539a",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/README.md"
+    },
+    "cmu-dog/LICENSE": {
+      "bytes": 18566,
+      "sha256": "5cae4a69c3c71bfec6251130e2a413bcaea051467f9805c2580dcf771a76361f",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/cmu-dog/LICENSE"
+    },
+    "cmu-dog/NOTICE": {
+      "bytes": 2626,
+      "sha256": "b8dcafc36b2f61facc33512c323e44b44da5c461e501ed580b3bc90ef23a9079",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/cmu-dog/NOTICE"
+    },
+    "cmu-dog/begin_dev_cmu.tsv": {
+      "bytes": 531393,
+      "sha256": "9482294df23cf08a976773ca73203b84f7178534ecab1a206eaade365e97071c",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/cmu-dog/begin_dev_cmu.tsv"
+    },
+    "cmu-dog/begin_test_cmu.tsv": {
+      "bytes": 4607833,
+      "sha256": "34aa4a138554d924318112a5b34d628a6382ace84d1b27acbc84a0275479b7af",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/cmu-dog/begin_test_cmu.tsv"
+    },
+    "topicalchat/LICENSE": {
+      "bytes": 11349,
+      "sha256": "94b1f359428afa5c7d1f3230e0cb4a5d51be6c9be12c2249e2b33e8fc489eba3",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/topicalchat/LICENSE"
+    },
+    "topicalchat/NOTICE": {
+      "bytes": 11980,
+      "sha256": "543150a8b878961db87ae6c4a4055c4b7199253eaafbbadb67558716a25aebd9",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/topicalchat/NOTICE"
+    },
+    "topicalchat/begin_dev_tc.tsv": {
+      "bytes": 656931,
+      "sha256": "d799a8cb3635de41b7f284dcfc872544ddeadcbae0c2ffd684270cce671f7711",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/topicalchat/begin_dev_tc.tsv"
+    },
+    "topicalchat/begin_test_tc.tsv": {
+      "bytes": 6505089,
+      "sha256": "11c81832ae08b1958169edf286dc517597fd45941470e87cd1ccc31719cd11f5",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/topicalchat/begin_test_tc.tsv"
+    },
+    "wow/LICENSE": {
+      "bytes": 18566,
+      "sha256": "5cae4a69c3c71bfec6251130e2a413bcaea051467f9805c2580dcf771a76361f",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/wow/LICENSE"
+    },
+    "wow/NOTICE": {
+      "bytes": 19286,
+      "sha256": "3206f4c41ec756667ee8cd0300fd6114fc5bfb370799b46cdf9d3050fcc9a938",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/wow/NOTICE"
+    },
+    "wow/begin_dev_wow.tsv": {
+      "bytes": 147417,
+      "sha256": "2ebfc95a1ff267e12dcce3250da4d158e1811c62e9e1a0d56f110efc9ace0178",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/wow/begin_dev_wow.tsv"
+    },
+    "wow/begin_test_wow.tsv": {
+      "bytes": 1241097,
+      "sha256": "d5c106a42042c3abd481563f1157e07c95c107dbcdf67f23564d874e8a4d6e7e",
+      "url": "https://raw.githubusercontent.com/google/BEGIN-dataset/6e65f0d5a1ed1b9574643a7640ff1678d4e979b5/wow/begin_test_wow.tsv"
+    }
+  },
+  "totals": {
+    "dev": 1229,
+    "test": 11059
+  }
+}

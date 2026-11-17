@@ -26,8 +26,8 @@ Step 2 gives, for every line of every released snippet, the ICSI participant who
 
 - In the released text each displayed turn ends with the first segment of the next corpus speaker. A letter therefore does not stand for one participant throughout a snippet.
 - **Reading 1: a letter is the speaker of the last line of its turns.** The letters then map one-to-one onto the two participants in 128 snippets with exactly one professor, and the released label names the professor in 128 of 128. Under this reading 7,596 of 13,185 words (57.6%) are displayed under the other participant's letter, and in 73 of the 128 snippets more than half of the words are.
-- **Reading 2: a letter is whoever says most of the words shown under it.** The text is then mostly attributed correctly, and the released label names the letter carrying most of the professor's words in 69 of the 128 snippets.
-- Under either reading the displayed text and the labels disagree in about half of the snippets.
+- **Majority-speaker mapping is ambiguous.** Assigning each letter to whoever says most of its words maps both A and B to the same participant in 86 of these 128 snippets. It therefore does not usually identify two distinct people. In snippet 0, A contains 86 professor words and five non-professor words; B contains four professor words and three non-professor words. Both majorities are the professor.
+- **A different statistic: where the professor's words appear.** The released gold letter carries more of the professor's words in 69 of the 128 snippets. This valid count does not measure whether a majority-speaker mapping names the professor correctly. The 57.6% figure remains valid conditional on the last-line mapping above.
 - In the other 23 snippets a letter covers two participants (22) or only one participant speaks (1).
 
 What this does and does not establish:
@@ -37,9 +37,11 @@ What this does and does not establish:
 - We do not know whether the paper's human judges saw this text, or whether the paper's numbers were computed from this file.
 - These observations have not yet been confirmed with the authors of the released file.
 
-Every number above is recomputed by `python3 scripts/analyze.py --check` (the "Data section" block) and can be inspected row by row with `python3 scripts/check_against_released.py --show <row>`. Example, row 0 (meeting Bro025, line 1858 of `Bro025.mrt`): the professor's question "do you have any way of assessing how well or how poorly the noise estimation is currently doing?" is displayed under A, and the released label is B.
+The original counts are recomputed by `python3 scripts/analyze.py --check` (the "Data section" block) and can be inspected row by row with `python3 scripts/check_against_released.py --show <row>`. The majority-mapping correction and example counts are in the [audit spot-check](audits/cs-577-2026-11-16/methodology-spot-check.json). Example, row 0 (meeting Bro025, line 1858 of `Bro025.mrt`): the professor's question "do you have any way of assessing how well or how poorly the noise estimation is currently doing?" is displayed under A, and the released label is B.
 
 The rebuilt set uses reading 1 for its letters (step 4), which is why 142 of its 150 labels equal the released labels.
+
+For the attribution sensitivity comparison, the 128 snippets that retain letters also retain their gold labels. Direct Jev improves from 63/128 on released text to 90/128 on rebuilt text, with 42 wins and 15 losses. The gain is 21.1 percentage points, with a 95% whole-meeting bootstrap interval of +9.6 to +32.7 points (100,000 resamples, seed 2026; [audit evidence](audits/cs-577-2026-11-16/statistics/verification.json)). The full 150-case contrast combines speech reconstruction with 22 letter reassignments and eight label changes. The question batches also differ between conditions; their possible effect was not measured.
 
 ### Per-snippet differences
 
@@ -80,8 +82,10 @@ One JSON object per line:
 
 - 150 snippets from 45 meetings; the professor is A in 85 (56.7%).
 - 142 labels equal the released label; 8 differ.
-- Four professors appear; one is the professor in 110 snippets.
+- Four professors appear in 110, 23, 15 and 2 snippets respectively.
 - The other focal speaker's education in `speakers.xml` is PhD in 117 snippets, Grad in 30 and Postdoc in 3.
+
+Professor/non-professor is an institutional-role label used as a proxy for power. There are no independent behavioral-power annotations. Meeting-level uncertainty describes these sampled meetings and professors, not generalization to new professors. Longer context adds third-party speech in 115/150 windows at ±15 and 148/150 at ±60, so its effect combines more text, more participants and possible role cues.
 
 ## Licence
 
