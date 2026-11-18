@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or the rebuilt snippets, please cite it as below."
+title: "Who Said What? Speaker Attribution in a Conversational Power Benchmark"
+abstract: "Code, rebuilt ICSI snippets and model outputs for a re-examination of the released test set of Wu et al. (NAACL 2025), with experiments on factor graphs, Dung's grounded extension, gradual argumentation and direct questions."
+type: software
+authors:
+  - given-names: Muttaqi Ahmad
+    family-names: Alladin
+    affiliation: Purdue University
+  - given-names: Krish
+    family-names: Patel
+    affiliation: Purdue University
+  - given-names: Jiwon
+    family-names: Kim
+    affiliation: Purdue University
+repository-code: "https://github.com/muttaqiahmadalladin/cs-577"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-17"
