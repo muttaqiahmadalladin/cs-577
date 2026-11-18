@@ -159,7 +159,8 @@ Appendix~\ref{sec:appendix} lists every snippet.
 \paragraph{What we can and cannot conclude.}
 The cached GPT-3.5 arguments in the release were generated from this text: the conversation stored with each cached snippet is identical to the corresponding row of \texttt{meeting.csv} for all 151.
 The code that built the snippets from the corpus is not in the public repository, so we cannot say which step produced the mismatch.
-We do not know whether the human judges of \citet{wu2025power} saw the same text, or whether the numbers in their paper were computed from this file.
+Run on these cached arguments, our exact solver reproduces the published factor-graph accuracy of 54.3\% (82 of 151), so that result was computed on this text.
+We cannot tell from public materials what text the human judges of \citet{wu2025power} were shown.
 We have not yet confirmed these observations with the authors.
 
 \paragraph{Consequence.}
@@ -366,7 +367,8 @@ The order of work was exploratory.
 The mismatch in the released file was found, and the rebuilt set constructed, after many runs on the released file, which has no development split.
 The questions used on the rebuilt snippets were written before that data existed, and each run was made once.
 
-Our observations about the released file have not been confirmed with its authors, and we cannot tell from public materials whether the experiments in \citet{wu2025power} used the released text.
+Our observations about the released file have not been confirmed with its authors.
+The published factor-graph result is reproduced exactly from arguments generated on the released text, but we cannot tell from public materials what text the human judges in \citet{wu2025power} saw.
 We did not run a human study, so we cannot say how people perform on the rebuilt snippets.
 
 No rerun of the factor graph uses the original model.

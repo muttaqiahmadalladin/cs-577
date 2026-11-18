@@ -34,7 +34,8 @@ What this does and does not establish:
 
 - The cached GPT-3.5 arguments in the release were generated from this text: the conversation stored with each cached snippet equals the corresponding row of `meeting.csv` for all 151 (`convert_released_cache.py` asserts this).
 - The code that built the snippets is not in the public repository, so the step that produced the mismatch is unknown.
-- We do not know whether the paper's human judges saw this text, or whether the paper's numbers were computed from this file.
+- Our solver, run on those cached arguments, reproduces the paper's published factor-graph accuracy of 54.3% exactly (82 of 151), so that number was computed on this text.
+- We do not know what text the paper's human judges saw.
 - These observations have not yet been confirmed with the authors of the released file.
 
 Every number above is recomputed by `python3 scripts/analyze.py --check` (the "Data section" block) and can be inspected row by row with `python3 scripts/check_against_released.py --show <row>`. Example, row 0 (meeting Bro025, line 1858 of `Bro025.mrt`): the professor's question "do you have any way of assessing how well or how poorly the noise estimation is currently doing?" is displayed under A, and the released label is B.

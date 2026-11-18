@@ -34,7 +34,7 @@ Argument-based methods on the same span, by who wrote and who scored the argumen
 
 Claude Sonnet asked directly scores 76.0%. In no row does the full graph differ significantly from asking the model directly (largest gap: GLM-5.3, 69.3% against 73.3%, p = 0.44). Gradual argumentation (68.7% to 74.0% over 24 variants) and a debate judged by GLM-5.3 (67.3% and 69.3%) give the same picture. A majority vote of four direct answers scores 77.3% (p = 0.078 against Jev alone).
 
-The observations about the released file have not yet been confirmed with the authors of Wu et al.
+The released cached GPT-3.5 arguments were generated on the mismatched text of `meeting.csv`, and our solver run on them reproduces the published 54.3% factor-graph result exactly (82 of 151), so that result was computed on this text. We cannot tell what text the human judges saw. These observations have not yet been confirmed with the authors of Wu et al.
 
 ## Documentation
 
