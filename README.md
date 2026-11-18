@@ -1,5 +1,7 @@
 # CS 577 project: conversational power in ICSI meeting excerpts
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24327838.svg)](https://doi.org/10.5281/zenodo.24327838)
+
 Muttaqi Ahmad Alladin\*, Krish Patel\*, Jiwon Kim\* (Purdue University)
 
 \* These authors contributed equally.

@@ -13,6 +13,7 @@ authors:
   - given-names: Jiwon
     family-names: Kim
     affiliation: Purdue University
+doi: "10.5281/zenodo.24327838"
 repository-code: "https://github.com/muttaqiahmadalladin/cs-577"
 license: MIT
 version: "1.0.0"
