@@ -26,10 +26,13 @@ Argument-based methods on the same span, by who wrote and who scored the argumen
 | Arguments | Scores | Model asked directly | Wu graph, reasons only | + rebuttals | all relations | Grounded extension (preference) |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | GPT-6.1 Terra, call by call | Jev | 72.7% | 66.7% | 72.0% | 72.0% | 70.0% |
+| GLM-5.3, call by call | Jev | 73.3% | 71.3% | 70.7% | 69.3% | 67.3% |
 | Claude Haiku, one pass | Jev | 68.0% | 73.3% | 70.0% | 70.0% | 73.3% |
 | Claude Haiku, one pass | Haiku | 68.0% | 68.7% | 67.3% | 68.0% | 64.7% |
 
-Claude Sonnet asked directly scores 76.0%. In every row the full graph is within about two points of asking a model directly.
+Claude Sonnet asked directly scores 76.0%. In no row does the full graph differ significantly from asking the model directly (largest gap: GLM-5.3, 69.3% against 73.3%, p = 0.44). Gradual argumentation (68.7% to 74.0% over 24 variants) and a debate judged by GLM-5.3 (67.3% and 69.3%) give the same picture. A majority vote of four direct answers scores 77.3% (p = 0.078 against Jev alone).
+
+The observations about the released file have not yet been confirmed with the authors of Wu et al.
 
 ## Documentation
 
