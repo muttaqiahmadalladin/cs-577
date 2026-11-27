@@ -1,0 +1,265 @@
+{
+  "dataset": "scotus_ot2026",
+  "earliest_allowed_publication": "2026-10-01",
+  "argument_dates": [
+    "2026-10-05",
+    "2026-11-10"
+  ],
+  "parameters": {
+    "MIN_TURNS": 4,
+    "MAX_TURNS": 6,
+    "MIN_EACH": 2,
+    "MIN_WORDS": 40,
+    "contexts": {
+      "pm15": 15,
+      "pm60": 60
+    },
+    "seed": 2026,
+    "dev_cases": 3
+  },
+  "pypdf_version": "6.4.0",
+  "totals": {
+    "snippets": 333,
+    "justice_is_A": 166,
+    "cases": 13,
+    "justice_advocate_pairs": 262
+  },
+  "dev": {
+    "snippets": 70,
+    "justice_is_A": 36,
+    "cases": 3,
+    "justice_advocate_pairs": 55
+  },
+  "test": {
+    "snippets": 263,
+    "justice_is_A": 130,
+    "cases": 10,
+    "justice_advocate_pairs": 207
+  },
+  "justices_as_focal": {
+    "CHIEF JUSTICE ROBERTS": 9,
+    "JUSTICE ALITO": 21,
+    "JUSTICE BARRETT": 42,
+    "JUSTICE GORSUCH": 45,
+    "JUSTICE JACKSON": 54,
+    "JUSTICE KAGAN": 47,
+    "JUSTICE KAVANAUGH": 47,
+    "JUSTICE SOTOMAYOR": 45,
+    "JUSTICE THOMAS": 23
+  },
+  "leak_check_masked": {
+    "same_span": {
+      "current_justice_title": 0,
+      "vocative_chief": 0,
+      "your_honor": 0,
+      "court_opening": 0,
+      "vocative_counsel": 0,
+      "participant_surnames": 0
+    },
+    "all_windows": {
+      "current_justice_title": 0,
+      "vocative_chief": 0,
+      "your_honor": 0,
+      "court_opening": 0,
+      "vocative_counsel": 0,
+      "participant_surnames": 0
+    }
+  },
+  "leak_examples": [],
+  "cases": {
+    "25-170": {
+      "case": "Suncor Energy (U.S.A.) Inc. v. Commissioners of Boulder County",
+      "argument_date": "2026-10-05",
+      "split": "test",
+      "file": "25-170_8m58.pdf",
+      "sha256": "0c6229f061b9fcca318510ce5d14092d1ab8be2834e4b9cd3c4d81ef1d0ce806",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-170_8m58.pdf",
+      "turns": 427,
+      "snippets": 29,
+      "advocates_from_appearances": [
+        "KANNON K. SHANMUGAM",
+        "SARAH M. HARRIS",
+        "KEVIN K. RUSSELL"
+      ]
+    },
+    "25-735": {
+      "case": "Johnson v. United States Congress",
+      "argument_date": "2026-10-05",
+      "split": "dev",
+      "file": "25-735_ca7d.pdf",
+      "sha256": "c18f48073b16551db5c6d57491c58ce28ab0f0a3ad949b75395a5efa9a13e71a",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-735_ca7d.pdf",
+      "turns": 334,
+      "snippets": 28,
+      "advocates_from_appearances": [
+        "JEFFREY W. CHEN",
+        "KEVIN J. BARBER"
+      ]
+    },
+    "25-498": {
+      "case": "Anderson v. Intel Corp. Investment Policy Committee",
+      "argument_date": "2026-10-06",
+      "split": "test",
+      "file": "25-498_febh.pdf",
+      "sha256": "2b20823a10f6287e5f1c7abc8cbc184de27a779691d743ad5cb0aeb577bc263f",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-498_febh.pdf",
+      "turns": 243,
+      "snippets": 20,
+      "advocates_from_appearances": [
+        "MATTHEW W.H. WESSLER",
+        "CHARLES L. McCLOUD",
+        "AIMEE BROWN"
+      ]
+    },
+    "25-579": {
+      "case": "Department of Air Force v. Prutehi Guahan",
+      "argument_date": "2026-10-07",
+      "split": "test",
+      "file": "25-579_e29g.pdf",
+      "sha256": "1a976672721672ba69912af6edb3750de10fcbc7c95bb2e4920a58126fd87554",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-579_e29g.pdf",
+      "turns": 370,
+      "snippets": 31,
+      "advocates_from_appearances": [
+        "SOPAN JOSHI",
+        "CAROLINE A. FLYNN"
+      ]
+    },
+    "25-5343": {
+      "case": "Beaird v. United States",
+      "argument_date": "2026-10-13",
+      "split": "test",
+      "file": "25-5343_4g15.pdf",
+      "sha256": "d09a6377e76d58516ddf83b18fc82acd960bbcdc362bdafd9c3381e75675e3a8",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-5343_4g15.pdf",
+      "turns": 496,
+      "snippets": 31,
+      "advocates_from_appearances": [
+        "KEVIN JOEL PAGE",
+        "ERIC J. FEIGIN",
+        "ANTHONY J. DICK"
+      ]
+    },
+    "25-459": {
+      "case": "Salazar v. Paramount Global",
+      "argument_date": "2026-10-14",
+      "split": "test",
+      "file": "25-459_i425.pdf",
+      "sha256": "4b885a9c729446bdd059f516765c9b32ff0981523a0db1244bd4c87db71cb8da",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-459_i425.pdf",
+      "turns": 286,
+      "snippets": 29,
+      "advocates_from_appearances": [
+        "JOSHUA I. HAMMACK",
+        "PAUL D. CLEMENT"
+      ]
+    },
+    "25-5930": {
+      "case": "Maxwell v. Dinis",
+      "argument_date": "2026-11-02",
+      "split": "dev",
+      "file": "25-5930_bqmd.pdf",
+      "sha256": "18424043431d967a999f3896e833f2df7c0af09d3c99a604146c893b204f9ddb",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-5930_bqmd.pdf",
+      "turns": 209,
+      "snippets": 19,
+      "advocates_from_appearances": [
+        "MASHA G. HANSFORD",
+        "KEVIN J. BARBER",
+        "BRIAN W. BARNES"
+      ]
+    },
+    "25-352": {
+      "case": "Younge v. Fulton Judicial Circuit Dist. Attorney's Office",
+      "argument_date": "2026-11-02",
+      "split": "dev",
+      "file": "25-352_i32j.pdf",
+      "sha256": "aee7c5972dcfbe816838367bd4e343d2c6aac9d4e7933f987db337f9828552b8",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-352_i32j.pdf",
+      "turns": 272,
+      "snippets": 23,
+      "advocates_from_appearances": [
+        "ERIC SCHNAPPER",
+        "STEPHEN J. PETRANY"
+      ]
+    },
+    "25-581": {
+      "case": "St. Mary Catholic Parish v. Roy",
+      "argument_date": "2026-11-03",
+      "split": "test",
+      "file": "25-581_6j36.pdf",
+      "sha256": "9c79db107eace0476da7c88fc3d768b3b800e239127ff81b866cb5a74bf916ad",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-581_6j36.pdf",
+      "turns": 428,
+      "snippets": 30,
+      "advocates_from_appearances": [
+        "NICHOLAS R. REAVES",
+        "SARAH M. HARRIS",
+        "HELEN NORTON"
+      ]
+    },
+    "25-1003": {
+      "case": "Guerrero v. Johnson",
+      "argument_date": "2026-11-04",
+      "split": "test",
+      "file": "25-1003_c9dh.pdf",
+      "sha256": "903cca6f1e8b3c3ea162aafcaea736840f12fd033a13ae56da749a85c1627ac4",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-1003_c9dh.pdf",
+      "turns": 197,
+      "snippets": 18,
+      "advocates_from_appearances": [
+        "WILLIAM R. PETERSON",
+        "EMILY M. FERGUSON",
+        "JEREMY SCHEPERS"
+      ]
+    },
+    "25-417": {
+      "case": "Nielsen v. Watanabe",
+      "argument_date": "2026-11-09",
+      "split": "test",
+      "file": "25-417_b81g.pdf",
+      "sha256": "3eb1a8b279ae88cc16272aab46dd1a3e628eb0f6d2f6126aec90bf0912683e61",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-417_b81g.pdf",
+      "turns": 349,
+      "snippets": 26,
+      "advocates_from_appearances": [
+        "LUCAS M. WALKER",
+        "VIVEK SURI",
+        "JOSHUA M. WESNESKI"
+      ]
+    },
+    "25-159": {
+      "case": "Hoffmann v. WBI Energy Transmission, Inc.",
+      "argument_date": "2026-11-09",
+      "split": "test",
+      "file": "25-159_5hdk.pdf",
+      "sha256": "f8367b974dd48db0754ba1d195c72ebc2f5720905e5f8da1f7915617e910ca98",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-159_5hdk.pdf",
+      "turns": 196,
+      "snippets": 18,
+      "advocates_from_appearances": [
+        "ROBERT J. McNAMARA",
+        "PAUL W. HUGHES",
+        "ZOE A. JACOBY"
+      ]
+    },
+    "25-966": {
+      "case": "Department of Labor v. Sun Valley Orchards, LLC",
+      "argument_date": "2026-11-10",
+      "split": "test",
+      "file": "25-966_c07d.pdf",
+      "sha256": "4ce300f24747646e17bcc23f126d90ccfeedc0329641d7a7de5f67f919633429",
+      "url": "https://www.supremecourt.gov/oral_arguments/argument_transcripts/2026/25-966_c07d.pdf",
+      "turns": 383,
+      "snippets": 31,
+      "advocates_from_appearances": [
+        "SARAH M. HARRIS",
+        "ROBERT E. JOHNSON"
+      ]
+    }
+  },
+  "files": {
+    "snippets_raw.jsonl": "7b6a99037e41d06aee459faf7a3dc1d441aa016b36b4ff17f0b2dd912a43b24d",
+    "snippets_masked.jsonl": "f0b406446668ecfcfb103a97f9b672b0e8b195d517740d178971577914f3e5dd"
+  }
+}
