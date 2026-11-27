@@ -36,31 +36,72 @@ Claude Sonnet asked directly scores 76.0%. In no row does the full graph differ 
 
 The released cached GPT-3.5 arguments were generated on the mismatched text of `meeting.csv`, and our solver run on them reproduces the published 54.3% factor-graph result exactly (82 of 151), so that result was computed on this text. We cannot tell what text the human judges saw. These observations have not yet been confirmed with the authors of Wu et al.
 
+## Post-Cutoff SCOTUS OT2026 Dataset & Perturbation Suite
+
+To test whether zero-shot power prediction on ICSI relies on pretraining exposure or fragile punctuation/label cues, we construct a fresh post-training-cutoff dataset of **333 non-overlapping role-masked dyadic excerpts** from all 13 October--November 2026 U.S. Supreme Court oral argument transcripts (`2026-10-05` to `2026-11-10`) and evaluate three open/API models across 30 experimental arms ($6{,}993$ snippet judgments; see [docs/SCOTUS_DATA.md](docs/SCOTUS_DATA.md) and Section 4.1 of [report/report.pdf](report/report.pdf)):
+
+| Dataset / Condition | Gemma-4-26B | Llama-3.3-70B | GPT-4o-mini |
+| --- | ---: | ---: | ---: |
+| **ICSI-150 Rebuilt** (`clean`) — Acc / MCC | 64.0% / +.290 | 64.0% / +.273 | 62.0% / +.256 |
+| **ICSI-150** (`no_commas`) — Acc (Flip%) | 66.7% (6.7%) | 66.7% (2.7%) | 62.0% (5.3%) |
+| **ICSI-150** (`extra_commas`) — Acc (Flip%) | 66.7% (6.7%) | 64.7% (3.3%) | 60.0% (3.3%) |
+| **ICSI-150** (`no_disfluencies`) — Acc (Flip%) | 66.7% (4.0%) | 67.3% (3.3%) | 61.3% (6.0%) |
+| **ICSI-150** (`letter_swap`) — Acc (Flip%) | 71.3% (11.3%) | 66.7% (9.3%) | 64.7% (14.7%) |
+| **SCOTUS-333 OT2026** (`masked` post-cutoff) — Acc / MCC | **66.7%** / **+.336** | 50.2% / +.004 | 45.9% / -.081 |
+| **SCOTUS-263** (`masked test` split) — Acc / Macro-$F_1$ | **65.4%** / **65.2%** | 49.4% / 48.6% | 44.9% / 44.8% |
+| **SCOTUS-333** (`raw` unmasked titles) — Acc (Flip%) | **72.1%** (16.8%) | 50.8% (36.6%) | 49.2% (21.3%) |
+| **SCOTUS-333** (`masked no_commas`) — Acc (Flip%) | 65.8% (13.5%) | 50.5% (32.7%) | 47.7% (21.0%) |
+| **SCOTUS-333** (`masked extra_commas`) — Acc (Flip%) | 68.5% (12.0%) | 46.8% (35.7%) | 46.5% (24.0%) |
+| **SCOTUS-333** (`masked letter_swap`) — Acc (Flip%) | 66.4% (24.9%) | 50.8% (41.4%) | 49.5% (40.2%) |
+
 ## Documentation
 
 - [docs/REPRODUCE.md](docs/REPRODUCE.md): how to regenerate the data and every number, step by step.
-- [docs/DATA.md](docs/DATA.md): the dataset, its sources, how it is built, and its schema.
+- [docs/DATA.md](docs/DATA.md): the ICSI dataset, its sources, how it is built, and its schema.
+- [docs/SCOTUS_DATA.md](docs/SCOTUS_DATA.md): the post-cutoff SCOTUS OT2026 dataset, role/identity masking rules, leak verification, perturbations, and two-class precision/recall/MCC evaluator.
 - [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md): every run, method and script, with caveats.
 
-## Quick start
+## Environment Setup & Quick Start (`uv` / `setup.sh`)
+
+For the grading container (`nvidia/13.1.2-cudnn-devel-ubuntu24.04` with `uv` installed) or local macOS/Linux:
 
 ```bash
-pip install -r requirements.txt
+# 1. Create and populate the virtual environment (.venv) using uv
+bash setup.sh
+source .venv/bin/activate
+
+# 2. Reproduce the ICSI dataset and all 60 core report values from committed outputs (no API key needed)
 python3 scripts/reproduce.py
+
+# 3. Rebuild/verify the post-cutoff SCOTUS OT2026 dataset and check byte-for-byte identity + zero identity leaks
+python3 scripts/build_scotus_dataset.py --check
+
+# 4. Recompute all 30-arm Nous evaluation, perturbation, and two-class Precision/Recall/F1/MCC tables from cached predictions
+python3 scripts/run_scotus_and_perturbations.py --score-only
+
+# 5. Run the unit test suite
+python3 -m unittest discover -s tests -v
 ```
 
-This downloads the public sources and checks their SHA-256, rebuilds the dataset and confirms it matches the committed file byte for byte, and recomputes every number in the report from the committed model outputs (`check: 60 of 60 report values reproduced`). It calls no model and needs no API key.
+To re-query the Nous API live across all 30 arms ($6{,}993$ snippet evaluations, $\sim\$0.88$ total API cost):
+
+```bash
+NOUS_API_KEY="sk-..." python3 scripts/run_scotus_and_perturbations.py
+```
 
 ## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `report/` | LaTeX source and PDF |
-| `data/` | `icsi_rebuilt_snippets.jsonl`, and `released_vs_rebuilt.csv` (every released snippet against the rebuilt set) |
-| `results/` | Every model answer and the computed numbers (`report_numbers.json`) |
-| `scripts/` | Dataset builder, collection and analysis code |
+| `setup.sh` | One-command `uv` virtual environment setup script |
+| `report/` | ACL `[preprint]` LaTeX source (`report.tex`) and compiled PDF (`report.pdf`) |
+| `data/` | `icsi_rebuilt_snippets.jsonl`, `released_vs_rebuilt.csv`, and `scotus_ot2026/` (`snippets_masked.jsonl`, `snippets_raw.jsonl`, `manifest.json`) |
+| `results/` | Every model answer (`results/*.jsonl`, `results/nous_eval/predictions/`) and computed summaries (`report_numbers.json`, `results/nous_eval/summary.json`) |
+| `scripts/` | Dataset builders (`build_icsi_dataset.py`, `build_scotus_dataset.py`), perturbation/metrics utility (`perturb_and_metrics.py`), evaluation runners, and `reproduce.py` |
+| `tests/` | Unit tests for dataset integrity, leak verification, perturbations, and metric reproduction |
 | `docs/` | Data and experiment documentation |
 
 ## Licences
 
-Code: MIT. The dataset is derived from the ICSI Meeting Corpus (CC BY 4.0). The released snippets of Wu et al. are downloaded at build time and not redistributed. Jev is a proprietary model from TypeSafe AI.
+Code: MIT. The ICSI dataset is derived from the ICSI Meeting Corpus (CC BY 4.0). The SCOTUS OT2026 dataset is derived from public-domain U.S. Supreme Court oral argument transcripts (`17 U.S.C. § 105`). The released snippets of Wu et al. are downloaded at build time and not redistributed. Jev is a proprietary model from TypeSafe AI.
+

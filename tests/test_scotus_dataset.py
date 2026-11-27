@@ -75,6 +75,24 @@ class TestScotusDataset(unittest.TestCase):
         self.assertAlmostEqual(m["class_A"]["recall"], 2 / 3)
         self.assertAlmostEqual(m["class_B"]["recall"], 0.0)
 
+    def test_nous_eval_30_arms_and_report_numbers(self):
+        summary_path = ROOT / "results" / "nous_eval" / "summary.json"
+        self.assertTrue(summary_path.exists())
+        s = json.loads(summary_path.read_text(encoding="utf-8"))
+        self.assertEqual(set(s["models"].keys()), {"gemma-4-26b", "llama-3.3-70b", "gpt-4o-mini"})
+        for m in s["models"]:
+            self.assertEqual(len(s["models"][m]["arms"]), 10)
+        g_scotus = s["models"]["gemma-4-26b"]["arms"]["scotus_masked"]
+        self.assertEqual(g_scotus["n"], 333)
+        self.assertAlmostEqual(round(g_scotus["accuracy"] * 100, 1), 66.7)
+        self.assertAlmostEqual(round(g_scotus["mcc"], 3), 0.336)
+        self.assertAlmostEqual(round(g_scotus["dev"]["accuracy"] * 100, 1), 71.4)
+        self.assertAlmostEqual(round(g_scotus["test"]["accuracy"] * 100, 1), 65.4)
+
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+
